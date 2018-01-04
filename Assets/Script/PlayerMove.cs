@@ -11,11 +11,14 @@ public class PlayerMove : MonoBehaviour
     Direction playerDir;
     SpriteRenderer spRenderer;
     Vector3 oldPos;
+    bool isMove = false;
+    Animator animaitor;
 
     void Start ()
     {
         playerDir = Direction.Left;
         spRenderer = GetComponent<SpriteRenderer>();
+        animaitor = GetComponent<Animator>();
         oldPos = transform.position;
     }
 	
@@ -37,6 +40,16 @@ public class PlayerMove : MonoBehaviour
         {
             moveVec.x += 1;
         }
+
+        if (moveVec.x == 0)
+        {
+            isMove = false;
+        }
+        else
+        {
+            isMove = true;
+        }
+        animaitor.SetBool("isMove", isMove);
 
         transform.Translate(moveVec * speed * Time.deltaTime);
     }
