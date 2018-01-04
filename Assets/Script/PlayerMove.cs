@@ -10,25 +10,49 @@ public class PlayerMove : MonoBehaviour
 
     Direction playerDir;
     SpriteRenderer spRenderer;
+    Vector3 oldPos;
 
     void Start ()
     {
         playerDir = Direction.Left;
         spRenderer = GetComponent<SpriteRenderer>();
+        oldPos = transform.position;
     }
 	
 	void Update ()
     {
-		if(Input.GetKey(KeyCode.LeftArrow))
+        InputAndMove();
+        SetDirection();
+    }
+
+    void InputAndMove()
+    {
+        Vector3 moveVec = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
-            playerDir = Direction.Left;
+            moveVec.x -= 1;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
+            moveVec.x += 1;
+        }
+
+        transform.Translate(moveVec * speed * Time.deltaTime);
+    }
+
+    void SetDirection()
+    {
+        if (transform.position.x > oldPos.x)
+        {
             playerDir = Direction.Right;
         }
+        if (transform.position.x < oldPos.x)
+        {
+            playerDir = Direction.Left;
+        }
+        oldPos = transform.position;
+
 
         if (playerDir == Direction.Left)
         {

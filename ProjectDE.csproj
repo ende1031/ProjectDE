@@ -81,6 +81,7 @@
     <Compile Include="Assets\Script\BGMove.cs" />
     <Compile Include="Assets\Script\CamaraSetting.cs" />
     <Compile Include="Assets\Script\CameraMove.cs" />
+    <Compile Include="Assets\Script\Inventory.cs" />
     <Compile Include="Assets\Script\Manager.cs" />
     <Compile Include="Assets\Script\PlayerMove.cs" />
   </ItemGroup>
