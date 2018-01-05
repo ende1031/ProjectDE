@@ -10,14 +10,4 @@ public class CamaraSetting : MonoBehaviour
     {
         Screen.SetResolution((int)ScreenSize.x, (int)ScreenSize.y, false);
     }
-
-    void Start ()
-    {
-		
-	}
-	
-	void Update ()
-    {
-		
-	}
 }

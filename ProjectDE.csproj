@@ -81,8 +81,12 @@
     <Compile Include="Assets\Script\BGMove.cs" />
     <Compile Include="Assets\Script\CamaraSetting.cs" />
     <Compile Include="Assets\Script\CameraMove.cs" />
+    <Compile Include="Assets\Script\FadeManager.cs" />
+    <Compile Include="Assets\Script\Grid.cs" />
+    <Compile Include="Assets\Script\InteractionIcon.cs" />
     <Compile Include="Assets\Script\Inventory.cs" />
-    <Compile Include="Assets\Script\Manager.cs" />
+    <Compile Include="Assets\Script\Plant.cs" />
+    <Compile Include="Assets\Script\PlayerGather.cs" />
     <Compile Include="Assets\Script\PlayerMove.cs" />
     <Compile Include="Assets\Script\Title.cs" />
   </ItemGroup>

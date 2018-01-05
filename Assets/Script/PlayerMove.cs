@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     Vector3 oldPos;
     bool isMove = false;
     Animator animaitor;
+    bool isMovePossible = true;
 
     void Start ()
     {
@@ -24,8 +25,17 @@ public class PlayerMove : MonoBehaviour
 	
 	void Update ()
     {
-        InputAndMove();
-        SetDirection();
+        if (isMovePossible == true)
+        {
+            InputAndMove();
+            SetDirection();
+        }
+
+        //테스트용 코드
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            print(Grid.instance.PlayerGrid());
+        }
     }
 
     void InputAndMove()
@@ -75,5 +85,10 @@ public class PlayerMove : MonoBehaviour
         {
             spRenderer.flipX = true;
         }
+    }
+
+    public void SetMovePossible(bool possibility)
+    {
+        isMovePossible = possibility;
     }
 }
