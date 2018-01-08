@@ -9,6 +9,7 @@ public class Plant : MonoBehaviour
 
     public bool isGatherPossible;
     public string plantName = "StickPlant";
+    public int GatherAnimationType = 1;
 
     void Start ()
     {
@@ -18,10 +19,21 @@ public class Plant : MonoBehaviour
         if(plantName == "StickPlant")
         {
             isGatherPossible = true;
+            GatherAnimationType = 1;
         }
     }
-	
-	void Update ()
+
+    public void GetItem()
+    {
+        switch (plantName)
+        {
+            case "StickPlant":
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick);
+                break;
+        }
+    }
+
+    void Update ()
     {
 		
 	}
@@ -39,16 +51,6 @@ public class Plant : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
-        }
-    }
-
-    public void GetItem()
-    {
-        switch(plantName)
-        {
-            case "StickPlant":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick);
-                break;
         }
     }
 }

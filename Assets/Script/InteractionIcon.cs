@@ -6,13 +6,17 @@ using UnityEngine.UI;
 public class InteractionIcon : MonoBehaviour
 {
     //아이콘 이름
-    public enum Icon
+    public enum Icon //아이콘 추가시 수정할 부분
     {
         Gather,
+        Input,
+        Sleep,
         Temp
     };
 
-    GameObject GatherIcon;
+    GameObject GatherIcon; //아이콘 추가시 수정할 부분
+    GameObject InputIcon;
+    GameObject SleepIcon;
     GameObject TempIcon;
 
     List<Icon> displayedIconList = new List<Icon>();
@@ -22,23 +26,37 @@ public class InteractionIcon : MonoBehaviour
 
     void Start ()
     {
-        GatherIcon = transform.Find("Gather").gameObject;
+        GatherIcon = transform.Find("Gather").gameObject; //아이콘 추가시 수정할 부분
+        InputIcon = transform.Find("Input").gameObject;
+        SleepIcon = transform.Find("Sleep").gameObject;
         TempIcon = transform.Find("Suicide").gameObject;
 
-        iconDictionary[Icon.Gather] = GatherIcon;
+        iconDictionary[Icon.Gather] = GatherIcon; //아이콘 추가시 수정할 부분
+        iconDictionary[Icon.Input] = InputIcon;
+        iconDictionary[Icon.Sleep] = SleepIcon;
         iconDictionary[Icon.Temp] = TempIcon;
     }
-	
-	void Update ()
+
+    void HideAllIcons()
+    {
+        GatherIcon.SetActive(false); //아이콘 추가시 수정할 부분
+        InputIcon.SetActive(false);
+        SleepIcon.SetActive(false);
+        TempIcon.SetActive(false);
+    }
+
+    void Update ()
     {
         // 테스트용 코드
+        
+        /*
         if (Input.GetKeyUp(KeyCode.Q))
         {
             AddIcon(Icon.Gather);
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
-            AddIcon(Icon.Temp);
+            AddIcon(Icon.Input);
         }
         if (Input.GetKeyUp(KeyCode.E))
         {
@@ -46,14 +64,9 @@ public class InteractionIcon : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.R))
         {
-            DeleteIcon(Icon.Temp);
+            DeleteIcon(Icon.Input);
         }
-    }
-
-    void HideAllIcons()
-    {
-        GatherIcon.SetActive(false);
-        TempIcon.SetActive(false);
+        */
     }
 
     public void AddIcon(Icon ico)
@@ -83,9 +96,9 @@ public class InteractionIcon : MonoBehaviour
             for(int i = 0; i < displayedIconList.Count; i++ )
             {
                 iconDictionary[displayedIconList[i]].SetActive(true);
-                Vector3 temp = GetComponent<RectTransform>().position;
+                Vector3 temp = transform.position;
                 temp.x = temp.x + ( -iconSpace * (displayedIconList.Count - 1) + iconSpace * 2 * i);
-                iconDictionary[displayedIconList[i]].GetComponent<RectTransform>().position = temp;
+                iconDictionary[displayedIconList[i]].transform.position = temp;
             }
         }
     }
