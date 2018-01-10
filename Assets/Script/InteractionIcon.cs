@@ -11,29 +11,47 @@ public class InteractionIcon : MonoBehaviour
         Gather,
         Input,
         Sleep,
+        Portal,
+        Use,
+        Delete,
         Temp
     };
 
     GameObject GatherIcon; //아이콘 추가시 수정할 부분
     GameObject InputIcon;
     GameObject SleepIcon;
+    GameObject PortalIcon;
+    GameObject UseIcon;
+    GameObject DelIcon;
     GameObject TempIcon;
 
     List<Icon> displayedIconList = new List<Icon>();
     Dictionary<Icon, GameObject> iconDictionary = new Dictionary<Icon, GameObject>();
 
+    GameObject Inventory;
+
     float iconSpace = 0.4f;
+
+    bool isInventoryOpen = false;
 
     void Start ()
     {
+        Inventory = GameObject.Find("Inventory");
+
         GatherIcon = transform.Find("Gather").gameObject; //아이콘 추가시 수정할 부분
         InputIcon = transform.Find("Input").gameObject;
         SleepIcon = transform.Find("Sleep").gameObject;
+        PortalIcon = transform.Find("Portal").gameObject;
+        UseIcon = transform.Find("Use").gameObject;
+        DelIcon = transform.Find("Delete").gameObject;
         TempIcon = transform.Find("Suicide").gameObject;
 
         iconDictionary[Icon.Gather] = GatherIcon; //아이콘 추가시 수정할 부분
         iconDictionary[Icon.Input] = InputIcon;
         iconDictionary[Icon.Sleep] = SleepIcon;
+        iconDictionary[Icon.Portal] = PortalIcon;
+        iconDictionary[Icon.Use] = UseIcon;
+        iconDictionary[Icon.Delete] = DelIcon;
         iconDictionary[Icon.Temp] = TempIcon;
     }
 
@@ -42,31 +60,35 @@ public class InteractionIcon : MonoBehaviour
         GatherIcon.SetActive(false); //아이콘 추가시 수정할 부분
         InputIcon.SetActive(false);
         SleepIcon.SetActive(false);
+        PortalIcon.SetActive(false);
+        UseIcon.SetActive(false);
+        DelIcon.SetActive(false);
         TempIcon.SetActive(false);
     }
 
     void Update ()
     {
-        // 테스트용 코드
-        
-        /*
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Inventory.GetComponent<Inventory>().isInventoryActive == true && isInventoryOpen == false)
         {
-            AddIcon(Icon.Gather);
+            isInventoryOpen = true;
+            HideAllIcons();
+            return;
         }
-        if (Input.GetKeyUp(KeyCode.W))
+        if(isInventoryOpen == true)
         {
-            AddIcon(Icon.Input);
+            if(Inventory.GetComponent<Inventory>().isInventoryActive == false)
+            {
+                isInventoryOpen = false;
+                RefreshIcons();
+                return;
+            }
         }
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            DeleteIcon(Icon.Gather);
-        }
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            DeleteIcon(Icon.Input);
-        }
-        */
+    }
+
+    void DeleteAllIcons()
+    {
+        displayedIconList.Clear();
+        RefreshIcons();
     }
 
     public void AddIcon(Icon ico)

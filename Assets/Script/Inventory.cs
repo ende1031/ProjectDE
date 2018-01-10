@@ -16,23 +16,26 @@ public class Inventory : MonoBehaviour
         public int count;
     }
 
-    //아이템 이름
     public enum Item
     {
-        Stick,
+        Stick, //아이템 추가시 수정할 부분
         RedStick,
         Board
     };
 
-    GameObject[] itemSlot = new GameObject[6];
+    GameObject[] itemSlot = new GameObject[7];
     List<ItemInfo> Items = new List<ItemInfo>();
+    GameObject Cursor;
 
-    //아이템 스프타이트
-    public Sprite StickSp;
+    GameObject player = null;
+
+    public Sprite StickSp; //아이템 추가시 수정할 부분
     public Sprite RedStickSp;
 
-    //아이템 이름에 따라 스프라이트 설정
-    void SetItemSprite(GameObject slot, Item itemName)
+    public bool isInventoryActive = false;
+    int selectedIndex = 0;
+
+    void SetItemSprite(GameObject slot, Item itemName) //아이템 추가시 수정할 부분
     {
         if (itemName == Item.Stick)
             slot.GetComponent<Image>().sprite = StickSp;
@@ -40,16 +43,37 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Image>().sprite = RedStickSp;
     }
 
+    void DisplayItemMenu()
+    {
+        if(Items.Count <= selectedIndex)
+        {
+            return;
+        }
+
+        switch (Items[selectedIndex].name) //아이템 추가시 수정할 부분
+        {
+            case Item.Stick:
+            case Item.RedStick:
+                //버리기, 사용하기, 설치하기 등
+                break;
+            case Item.Board:
+                //버리기, 사용하기, 설치하기 등
+                break;
+        }
+    }
+
     void Start ()
     {
+        Cursor = transform.Find("Cursor").gameObject;
         itemSlot[0] = transform.Find("Item1").gameObject;
         itemSlot[1] = transform.Find("Item2").gameObject;
         itemSlot[2] = transform.Find("Item3").gameObject;
         itemSlot[3] = transform.Find("Item4").gameObject;
         itemSlot[4] = transform.Find("Item5").gameObject;
         itemSlot[5] = transform.Find("Item6").gameObject;
-        
-        for(int i=0; i<6; i++)
+        itemSlot[6] = transform.Find("Item7").gameObject;
+
+        for (int i=0; i<7; i++)
         {
             itemSlot[i].SetActive(false);
         }
@@ -59,27 +83,62 @@ public class Inventory : MonoBehaviour
 	
 	void Update ()
     {
-        DisplayItem();
+        if(player == null)
+        {
+            player = GameObject.Find("Player");
+        }
+        else
+        {
+            DisplayItem();
 
-        // 테스트용 코드
-        /*
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            GetItem(Item.Stick);
+            if (Input.GetKeyUp(KeyCode.A) && isInventoryActive == false)
+            {
+                OpenInventory();
+            }
+            else if (Input.GetKeyUp(KeyCode.A) && isInventoryActive == true)
+            {
+                CloseInventory();
+            }
+
+            if(isInventoryActive == true)
+            {
+                MoveCursor();
+                DisplayItemMenu();
+            }
         }
-        if (Input.GetKeyUp(KeyCode.X))
+    }
+
+    void OpenInventory()
+    {
+        if (player.GetComponent<PlayerMove>().GetMovePossible() == true)
         {
-            GetItem(Item.RedStick);
+            isInventoryActive = true;
+            Cursor.SetActive(true);
+            player.GetComponent<PlayerMove>().SetMovePossible(false);
         }
-        if (Input.GetKeyUp(KeyCode.C))
+    }
+
+    void CloseInventory()
+    {
+        isInventoryActive = false;
+        Cursor.SetActive(false);
+        player.GetComponent<PlayerMove>().SetMovePossible(true);
+    }
+
+    void MoveCursor()
+    {
+        Vector3 temp = Cursor.transform.position;
+        temp.x = transform.position.x - 63 * 3 + selectedIndex * 63;
+        Cursor.transform.position = temp;
+
+        if (Input.GetKeyUp(KeyCode.LeftArrow) && selectedIndex > 0)
         {
-            DeleteItem(Item.Stick);
+            selectedIndex--;
         }
-        if (Input.GetKeyUp(KeyCode.V))
+        if (Input.GetKeyUp(KeyCode.RightArrow) && selectedIndex < 6)
         {
-            DeleteItem(Item.RedStick);
+            selectedIndex++;
         }
-        */
     }
 
     void DisplayItem()
@@ -95,7 +154,7 @@ public class Inventory : MonoBehaviour
         }
 
         //빈칸 아이템 안보이게
-        for(int i = 5; i >= Items.Count; i--)
+        for(int i = 6; i >= Items.Count; i--)
         {
             itemSlot[i].SetActive(false);
         }
@@ -104,7 +163,7 @@ public class Inventory : MonoBehaviour
     //아이템 획득에 실패하면 false를 반환
     public bool GetItem(Item itemName)
     {
-        if (Items.Count < 6)
+        if (Items.Count < 7)
         {
             int? temp = isContains(itemName);
             if(temp.HasValue)

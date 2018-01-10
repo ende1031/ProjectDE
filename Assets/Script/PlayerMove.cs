@@ -32,10 +32,12 @@ public class PlayerMove : MonoBehaviour
         }
 
         //테스트용 코드
+        /*
         if (Input.GetKeyUp(KeyCode.A))
         {
             print(Grid.instance.PlayerGrid());
         }
+        */
     }
 
     void InputAndMove()
@@ -90,5 +92,15 @@ public class PlayerMove : MonoBehaviour
     public void SetMovePossible(bool possibility)
     {
         isMovePossible = possibility;
+
+        if (possibility == false)
+        {
+            animaitor.SetBool("isMove", false);
+        }
+    }
+
+    public bool GetMovePossible()
+    {
+        return isMovePossible;
     }
 }

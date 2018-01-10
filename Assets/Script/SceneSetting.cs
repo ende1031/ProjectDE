@@ -11,6 +11,10 @@ public class SceneSetting : MonoBehaviour
 
     bool isSetPos = false;
 
+
+    //테스트용 코드
+    //public GameObject tempFacility;
+
     void Start ()
     {
         player = GameObject.Find("Player");
@@ -24,7 +28,18 @@ public class SceneSetting : MonoBehaviour
             SetPlayerPosition(playerPosition);
             isSetPos = true;
         }
-	}
+
+        //테스트용 코드
+        /*
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            //print(Grid.instance.PlayerGrid());
+            Vector3 tempPos = Grid.instance.GridToPos(Grid.instance.PlayerGrid());
+            tempPos.z = 0.1f;
+            Instantiate(tempFacility, tempPos, transform.rotation);
+        }
+        */
+    }
 
     void SetPlayerPosition(float pos)
     {

@@ -40,7 +40,7 @@ public class Plant : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && isGatherPossible)
+        if (other.gameObject.tag == "Player" && isGatherPossible && Inventory.GetComponent<Inventory>().isInventoryActive == false)
         {
             InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Gather);
         }
@@ -48,7 +48,7 @@ public class Plant : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && Inventory.GetComponent<Inventory>().isInventoryActive == false)
         {
             InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
         }

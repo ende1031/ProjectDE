@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Plant
   - Facility
+  - Portal
   layers:
   - Default
   - TransparentFX

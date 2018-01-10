@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    GameObject Inventory;
+
     Animator animaitor;
     bool isGather01;
 
@@ -13,13 +15,17 @@ public class PlayerInteraction : MonoBehaviour
     void Start ()
     {
         animaitor = GetComponent<Animator>();
+        Inventory = GameObject.Find("Inventory");
     }
 	
 	void Update ()
     {
         if(isTrigger)
         {
-            Interaction();
+            if (Inventory.GetComponent<Inventory>().isInventoryActive == false)
+            {
+                Interaction();
+            }
         }
     }
 
@@ -30,7 +36,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target.gameObject.tag == "Plant")
         {
-            if (Input.GetKeyUp(KeyCode.S) && target.GetComponent<Plant>().isGatherPossible == true)
+            if (Input.GetKeyUp(KeyCode.Z) && target.GetComponent<Plant>().isGatherPossible == true)
             {
                 GatherAnimation(target.GetComponent<Plant>().GatherAnimationType);
             }
@@ -38,13 +44,21 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target.gameObject.tag == "Facility")
         {
-            if (Input.GetKeyUp(KeyCode.S))
+            if (Input.GetKeyUp(KeyCode.Z))
             {
                 target.GetComponent<Facility>().DeleteItem();
             }
-            if (Input.GetKeyUp(KeyCode.D))
+            if (Input.GetKeyUp(KeyCode.X))
             {
                 target.GetComponent<Facility>().Sleep();
+            }
+        }
+
+        if (target.gameObject.tag == "Portal")
+        {
+            if (Input.GetKeyUp(KeyCode.Z))
+            {
+                FadeManager.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName);
             }
         }
     }
