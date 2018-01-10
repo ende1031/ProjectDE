@@ -62,6 +62,7 @@ public class Inventory : MonoBehaviour
         DisplayItem();
 
         // 테스트용 코드
+        /*
         if (Input.GetKeyUp(KeyCode.Z))
         {
             GetItem(Item.Stick);
@@ -78,6 +79,7 @@ public class Inventory : MonoBehaviour
         {
             DeleteItem(Item.RedStick);
         }
+        */
     }
 
     void DisplayItem()

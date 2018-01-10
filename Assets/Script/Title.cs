@@ -19,6 +19,6 @@ public class Title : MonoBehaviour
 
     public void GameStart()
     {
-        FadeManager.instance.FadeAndLoadScene("Stage");
+        FadeManager.instance.FadeAndLoadScene("Stage01");
     }
 }
