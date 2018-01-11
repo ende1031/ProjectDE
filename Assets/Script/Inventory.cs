@@ -26,6 +26,9 @@ public class Inventory : MonoBehaviour
     GameObject[] itemSlot = new GameObject[7];
     List<ItemInfo> Items = new List<ItemInfo>();
     GameObject Cursor;
+    GameObject[] InventoryMenu = new GameObject[3];
+    GameObject[] InventoryMenuText = new GameObject[3];
+    GameObject[] GetEffect = new GameObject[7];
 
     GameObject player = null;
 
@@ -43,8 +46,12 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Image>().sprite = RedStickSp;
     }
 
-    void DisplayItemMenu()
+    void RefreshItemMenu()
     {
+        for(int i = 0; i<3; i++)
+        {
+            InventoryMenu[i].SetActive(false);
+        }
         if(Items.Count <= selectedIndex)
         {
             return;
@@ -53,11 +60,22 @@ public class Inventory : MonoBehaviour
         switch (Items[selectedIndex].name) //아이템 추가시 수정할 부분
         {
             case Item.Stick:
+                InventoryMenu[0].SetActive(true);
+                InventoryMenuText[0].GetComponent<Text>().text = "X : Remove";
+                InventoryMenu[1].SetActive(true);
+                InventoryMenuText[1].GetComponent<Text>().text = "ㅋ : Use";
+                break;
             case Item.RedStick:
-                //버리기, 사용하기, 설치하기 등
+                InventoryMenu[0].SetActive(true);
+                InventoryMenuText[0].GetComponent<Text>().text = "C : 먹기";
+                InventoryMenu[1].SetActive(true);
+                InventoryMenuText[1].GetComponent<Text>().text = "X : 마시기";
+                InventoryMenu[2].SetActive(true);
+                InventoryMenuText[2].GetComponent<Text>().text = "Z : 발차기";
                 break;
             case Item.Board:
-                //버리기, 사용하기, 설치하기 등
+                InventoryMenu[0].SetActive(true);
+                InventoryMenuText[0].GetComponent<Text>().text = "Z : 먹기";
                 break;
         }
     }
@@ -65,20 +83,19 @@ public class Inventory : MonoBehaviour
     void Start ()
     {
         Cursor = transform.Find("Cursor").gameObject;
-        itemSlot[0] = transform.Find("Item1").gameObject;
-        itemSlot[1] = transform.Find("Item2").gameObject;
-        itemSlot[2] = transform.Find("Item3").gameObject;
-        itemSlot[3] = transform.Find("Item4").gameObject;
-        itemSlot[4] = transform.Find("Item5").gameObject;
-        itemSlot[5] = transform.Find("Item6").gameObject;
-        itemSlot[6] = transform.Find("Item7").gameObject;
+
+        for (int i = 0; i < 3; i++)
+        {
+            InventoryMenu[i] = Cursor.transform.Find("InvenMenu" + (i + 1)).gameObject;
+            InventoryMenuText[i] = InventoryMenu[i].transform.Find("Text").gameObject;
+        }
 
         for (int i=0; i<7; i++)
         {
+            itemSlot[i] = transform.Find("Item" + (i + 1)).gameObject;
+            GetEffect[i] = transform.Find("GetEffect" + (i + 1)).gameObject;
             itemSlot[i].SetActive(false);
         }
-
-        itemSlot[2].GetComponent<Image>().sprite = RedStickSp;
     }
 	
 	void Update ()
@@ -103,7 +120,6 @@ public class Inventory : MonoBehaviour
             if(isInventoryActive == true)
             {
                 MoveCursor();
-                DisplayItemMenu();
             }
         }
     }
@@ -112,9 +128,11 @@ public class Inventory : MonoBehaviour
     {
         if (player.GetComponent<PlayerMove>().GetMovePossible() == true)
         {
+            selectedIndex = 0;
             isInventoryActive = true;
             Cursor.SetActive(true);
             player.GetComponent<PlayerMove>().SetMovePossible(false);
+            RefreshItemMenu();
         }
     }
 
@@ -125,20 +143,41 @@ public class Inventory : MonoBehaviour
         player.GetComponent<PlayerMove>().SetMovePossible(true);
     }
 
+    void GetEffectOn(int index)
+    {
+        GetEffect[index].SetActive(true);
+    }
+
     void MoveCursor()
     {
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            if (selectedIndex > 0)
+            {
+                selectedIndex--;
+            }
+            else
+            {
+                selectedIndex = 6;
+            }
+            RefreshItemMenu();
+        }
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            if (selectedIndex < 6)
+            {
+                selectedIndex++;
+            }
+            else
+            {
+                selectedIndex = 0;
+            }
+            RefreshItemMenu();
+        }
+
         Vector3 temp = Cursor.transform.position;
         temp.x = transform.position.x - 63 * 3 + selectedIndex * 63;
         Cursor.transform.position = temp;
-
-        if (Input.GetKeyUp(KeyCode.LeftArrow) && selectedIndex > 0)
-        {
-            selectedIndex--;
-        }
-        if (Input.GetKeyUp(KeyCode.RightArrow) && selectedIndex < 6)
-        {
-            selectedIndex++;
-        }
     }
 
     void DisplayItem()
@@ -173,10 +212,12 @@ public class Inventory : MonoBehaviour
                     return false;
                 }
                 Items[(int)temp].count++;
+                GetEffectOn((int)temp);
             }
             else
             {
                 Items.Add(new ItemInfo(itemName, 1));
+                GetEffectOn(Items.Count - 1);
             }
             return true;
         }

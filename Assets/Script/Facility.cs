@@ -61,7 +61,10 @@ public class Facility : MonoBehaviour
         switch (facilityName)
         {
             case "TempFacility":
-                Inventory.GetComponent<Inventory>().DeleteItem(global::Inventory.Item.Stick);
+                if (Inventory.GetComponent<Inventory>().DeleteItem(global::Inventory.Item.Stick) == true)
+                {
+                    Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.RedStick);
+                }
                 break;
             case "EscapePod":
                 Inventory.GetComponent<Inventory>().DeleteItem(global::Inventory.Item.Stick);
