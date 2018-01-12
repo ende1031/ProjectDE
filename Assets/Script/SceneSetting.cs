@@ -7,13 +7,10 @@ public class SceneSetting : MonoBehaviour
     GameObject player;
     GameObject mainCamera;
 
+    public int sceneNum;
     public float playerPosition;
 
-    bool isSetPos = false;
-
-
-    //테스트용 코드
-    //public GameObject tempFacility;
+    bool isSet = false;
 
     void Start ()
     {
@@ -23,33 +20,62 @@ public class SceneSetting : MonoBehaviour
 	
 	void Update ()
     {
-		if(isSetPos == false)
+		if(isSet == false)
         {
-            SetPlayerPosition(playerPosition);
-            isSetPos = true;
+            isSet = true;
+            SetPlayerPosition(Grid.instance.GridToPos(FadeManager.instance.playerGrid));
+            switch(sceneNum)
+            {
+                case 0:
+                    SettingScene01();
+                    break;
+                case 1:
+                    SettingScene02();
+                    break;
+            }
         }
 
         //테스트용 코드
-        /*
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.S))
         {
-            //print(Grid.instance.PlayerGrid());
-            Vector3 tempPos = Grid.instance.GridToPos(Grid.instance.PlayerGrid());
-            tempPos.z = 0.1f;
-            Instantiate(tempFacility, tempPos, transform.rotation);
+            SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Facility", "TempFacility", Grid.instance.PlayerGrid()));
         }
-        */
     }
 
-    void SetPlayerPosition(float pos)
+    void SetPlayerPosition(Vector3 pos)
     {
         Vector3 playerPos = player.transform.position;
         Vector3 cameraPos = mainCamera.transform.position;
 
-        playerPos.x = pos;
-        cameraPos.x = pos;
+        playerPos.x = pos.x;
+        cameraPos.x = pos.x;
 
         player.transform.position = playerPos;
         mainCamera.transform.position = cameraPos;
+    }
+
+    void SettingScene01()
+    {
+        //맵에 기본적으로 설치되어있는 오브젝트.
+        //테스트 후엔 EscapePod, Portal등 파괴되지 않고 이동하지도 않는 오브젝트만 남기고 지울 것.
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Facility", "EscapePod", 3));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Facility", "TempFacility", 7));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 9));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 10));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Portal", "Stage02", 13, 13));
+
+        //맵이동시 삭제된 오브젝트를 다시 불러옴.
+        SceneObjectManager.instance.ReloadObject(0);
+    }
+
+    void SettingScene02()
+    {
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Facility", "TempFacility", 12));
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Facility", "TempFacility", 14));
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Plant", "StickPlant", 16));
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Plant", "StickPlant", 17));
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Portal", "Stage01", 13, 13));
+
+        SceneObjectManager.instance.ReloadObject(1);
     }
 }

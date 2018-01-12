@@ -12,6 +12,8 @@ public class FadeManager : MonoBehaviour
 
     public string startingSceneName = "Title"; //첫 씬 이름.
 
+    public int playerGrid = 5; //씬 로드 후 플레이어의 위치
+
     void Awake()
     {
         if (instance == null)
@@ -35,8 +37,9 @@ public class FadeManager : MonoBehaviour
     }
 
     //신 체인지 할때 이 함수를 불러올 것
-    public void FadeAndLoadScene(string sceneName)
+    public void FadeAndLoadScene(string sceneName, int moveAfterGrid = 0)
     {
+        playerGrid = moveAfterGrid;
         if (!isFading)
         {
             StartCoroutine(FadeAndSwitchScenes(sceneName));

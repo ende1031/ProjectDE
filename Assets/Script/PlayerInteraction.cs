@@ -58,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.Z))
             {
-                FadeManager.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName);
+                FadeManager.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
             }
         }
     }

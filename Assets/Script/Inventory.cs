@@ -262,4 +262,17 @@ public class Inventory : MonoBehaviour
         }
         return null;
     }
+
+    public bool HasItem(Item itemName, int count = 1)
+    {
+        foreach(ItemInfo i in Items)
+        {
+            if(i.name == itemName && i.count >= count)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 75649605}
   - component: {fileID: 75649604}
   - component: {fileID: 75649606}
+  - component: {fileID: 75649607}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -137,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeCanvasGroup: {fileID: 1948142579}
-  fadeDuration: 0.7
+  fadeDuration: 0.33
   startingSceneName: Title
 --- !u!4 &75649605
 Transform:
@@ -163,6 +164,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3281e60fc594b17499f65e5e0e52fe4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &75649607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 75649603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c323be5dbdb5a4ab8dbb27d759dcd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TempFacility: {fileID: 1059498077444446, guid: 732f88bd91e611241aa4beeb8e55f1e2,
+    type: 2}
+  EscapePod: {fileID: 1724880846875220, guid: 6f54b14597c45464fac855f7de8aaf93, type: 2}
+  StickPlant: {fileID: 1962487321500588, guid: 2168df4ebe7306c4fb664ba8e3f9fb3b, type: 2}
+  Portal: {fileID: 1768756399868750, guid: b0a0c9869ade5d74384781159a06efb6, type: 2}
 --- !u!1 &379345911
 GameObject:
   m_ObjectHideFlags: 0

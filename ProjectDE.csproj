@@ -91,6 +91,7 @@
     <Compile Include="Assets\Script\PlayerInteraction.cs" />
     <Compile Include="Assets\Script\PlayerMove.cs" />
     <Compile Include="Assets\Script\Portal.cs" />
+    <Compile Include="Assets\Script\SceneObjectManager.cs" />
     <Compile Include="Assets\Script\SceneSetting.cs" />
     <Compile Include="Assets\Script\SleepFade.cs" />
     <Compile Include="Assets\Script\Timer.cs" />

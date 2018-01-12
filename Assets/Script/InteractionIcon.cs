@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class InteractionIcon : MonoBehaviour
 {
-    //아이콘 이름
     public enum Icon //아이콘 추가시 수정할 부분
     {
         Gather,
