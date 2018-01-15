@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Title : MonoBehaviour
 {
+    GameObject UI;
 	void Start ()
     {
-		
-	}
+        UI = GameObject.Find("UI");
+        UI.SetActive(false);
+    }
 	
 	void Update ()
     {
@@ -19,6 +21,7 @@ public class Title : MonoBehaviour
 
     public void GameStart()
     {
+        UI.SetActive(true);
         FadeManager.instance.FadeAndLoadScene("Stage01");
     }
 }

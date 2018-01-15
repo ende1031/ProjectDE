@@ -79,23 +79,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\AnimationEvent.cs" />
-    <Compile Include="Assets\Script\BGMove.cs" />
-    <Compile Include="Assets\Script\CamaraSetting.cs" />
-    <Compile Include="Assets\Script\CameraMove.cs" />
-    <Compile Include="Assets\Script\Facility.cs" />
     <Compile Include="Assets\Script\FadeManager.cs" />
     <Compile Include="Assets\Script\Grid.cs" />
-    <Compile Include="Assets\Script\InteractionIcon.cs" />
-    <Compile Include="Assets\Script\Inventory.cs" />
-    <Compile Include="Assets\Script\Plant.cs" />
-    <Compile Include="Assets\Script\PlayerInteraction.cs" />
-    <Compile Include="Assets\Script\PlayerMove.cs" />
-    <Compile Include="Assets\Script\Portal.cs" />
+    <Compile Include="Assets\Script\Object\BGMove.cs" />
+    <Compile Include="Assets\Script\Object\CamaraSetting.cs" />
+    <Compile Include="Assets\Script\Object\CameraMove.cs" />
+    <Compile Include="Assets\Script\Object\Facility.cs" />
+    <Compile Include="Assets\Script\Object\Plant.cs" />
+    <Compile Include="Assets\Script\Object\PlayerInteraction.cs" />
+    <Compile Include="Assets\Script\Object\PlayerMove.cs" />
+    <Compile Include="Assets\Script\Object\Portal.cs" />
     <Compile Include="Assets\Script\SceneObjectManager.cs" />
     <Compile Include="Assets\Script\SceneSetting.cs" />
     <Compile Include="Assets\Script\SleepFade.cs" />
-    <Compile Include="Assets\Script\Timer.cs" />
     <Compile Include="Assets\Script\Title.cs" />
+    <Compile Include="Assets\Script\UI\EnergyGauge.cs" />
+    <Compile Include="Assets\Script\UI\HungerGauge.cs" />
+    <Compile Include="Assets\Script\UI\InteractionIcon.cs" />
+    <Compile Include="Assets\Script\UI\Inventory.cs" />
+    <Compile Include="Assets\Script\UI\OxygenGauge.cs" />
+    <Compile Include="Assets\Script\UI\Timer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
