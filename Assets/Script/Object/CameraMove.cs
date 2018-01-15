@@ -7,24 +7,41 @@ public class CameraMove : MonoBehaviour
     public float speed = 100;
     GameObject player;
 
-	void Start ()
+    GameObject LeftWall;
+    GameObject RightWall;
+
+    public float cameraMargin = 5.96f;
+
+    void Start ()
     {
         player = GameObject.Find("Player");
+        LeftWall = GameObject.Find("LeftWall");
+        RightWall = GameObject.Find("RightWall");
 
     }
 	
 	void Update ()
     {
-        if(player == null)
+        if(player == null || LeftWall == null || RightWall == null)
         {
             player = GameObject.Find("Player");
+            LeftWall = GameObject.Find("LeftWall");
+            RightWall = GameObject.Find("RightWall");
         }
-
-        if (player != null)
+        else
         {
-            Vector3 TempPos = transform.position;
-            TempPos.x += (TempPos.x - player.transform.position.x) / -15 * speed * Time.deltaTime;
-            transform.position = TempPos;
+            Vector3 tempPos = transform.position;
+
+            Vector3 targetPos = player.transform.position;
+
+            if (targetPos.x - LeftWall.transform.position.x < cameraMargin)
+                targetPos.x = LeftWall.transform.position.x + cameraMargin;
+            if (RightWall.transform.position.x - targetPos.x < cameraMargin)
+                targetPos.x = RightWall.transform.position.x - cameraMargin;
+
+
+            tempPos.x += (tempPos.x - targetPos.x) / -15 * speed * Time.deltaTime;
+            transform.position = tempPos;
         }
     }
 }

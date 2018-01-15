@@ -12,8 +12,8 @@ public class EnergyGauge : MonoBehaviour
 
     void Start ()
     {
-        gauge = transform.Find("Gauge").gameObject;
-        percent = transform.Find("PercentText").gameObject;
+        gauge = transform.Find("Energy_Gauge").gameObject;
+        percent = transform.Find("Energy_Percent").gameObject;
     }
 	
 	void Update ()

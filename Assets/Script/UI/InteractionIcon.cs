@@ -11,25 +11,19 @@ public class InteractionIcon : MonoBehaviour
         Input,
         Sleep,
         Portal,
-        Use,
-        Delete,
-        Temp
     };
 
     GameObject GatherIcon; //아이콘 추가시 수정할 부분
     GameObject InputIcon;
     GameObject SleepIcon;
     GameObject PortalIcon;
-    GameObject UseIcon;
-    GameObject DelIcon;
-    GameObject TempIcon;
 
     List<Icon> displayedIconList = new List<Icon>();
     Dictionary<Icon, GameObject> iconDictionary = new Dictionary<Icon, GameObject>();
 
     GameObject Inventory;
 
-    float iconSpace = 0.4f;
+    float iconSpace = 0.3f;
 
     bool isInventoryOpen = false;
 
@@ -41,17 +35,11 @@ public class InteractionIcon : MonoBehaviour
         InputIcon = transform.Find("Input").gameObject;
         SleepIcon = transform.Find("Sleep").gameObject;
         PortalIcon = transform.Find("Portal").gameObject;
-        UseIcon = transform.Find("Use").gameObject;
-        DelIcon = transform.Find("Delete").gameObject;
-        TempIcon = transform.Find("Suicide").gameObject;
 
         iconDictionary[Icon.Gather] = GatherIcon; //아이콘 추가시 수정할 부분
         iconDictionary[Icon.Input] = InputIcon;
         iconDictionary[Icon.Sleep] = SleepIcon;
         iconDictionary[Icon.Portal] = PortalIcon;
-        iconDictionary[Icon.Use] = UseIcon;
-        iconDictionary[Icon.Delete] = DelIcon;
-        iconDictionary[Icon.Temp] = TempIcon;
     }
 
     void HideAllIcons()
@@ -60,9 +48,6 @@ public class InteractionIcon : MonoBehaviour
         InputIcon.SetActive(false);
         SleepIcon.SetActive(false);
         PortalIcon.SetActive(false);
-        UseIcon.SetActive(false);
-        DelIcon.SetActive(false);
-        TempIcon.SetActive(false);
     }
 
     void Update ()

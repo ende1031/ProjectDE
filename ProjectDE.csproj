@@ -98,6 +98,7 @@
     <Compile Include="Assets\Script\UI\InteractionIcon.cs" />
     <Compile Include="Assets\Script\UI\Inventory.cs" />
     <Compile Include="Assets\Script\UI\OxygenGauge.cs" />
+    <Compile Include="Assets\Script\UI\PopupScroll.cs" />
     <Compile Include="Assets\Script\UI\Timer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

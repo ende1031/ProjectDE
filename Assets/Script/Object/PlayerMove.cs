@@ -15,12 +15,18 @@ public class PlayerMove : MonoBehaviour
     Animator animaitor;
     bool isMovePossible = true;
 
+    GameObject LeftWall;
+    GameObject RightWall;
+
     void Start ()
     {
         playerDir = Direction.Left;
         spRenderer = GetComponent<SpriteRenderer>();
         animaitor = GetComponent<Animator>();
         oldPos = transform.position;
+
+        LeftWall = GameObject.Find("LeftWall");
+        RightWall = GameObject.Find("RightWall");
     }
 	
 	void Update ()
@@ -64,6 +70,23 @@ public class PlayerMove : MonoBehaviour
         animaitor.SetBool("isMove", isMove);
 
         transform.Translate(moveVec * speed * Time.deltaTime);
+
+        RangeLimit();
+    }
+
+    void RangeLimit()
+    {
+        Vector3 temp = transform.position;
+        if (transform.position.x < LeftWall.transform.position.x + 0.5f)
+        {
+            temp.x = LeftWall.transform.position.x + 0.5f;
+            transform.position = temp;
+        }
+        else if (transform.position.x > RightWall.transform.position.x - 0.5f)
+        {
+            temp.x = RightWall.transform.position.x - 0.5f;
+            transform.position = temp;
+        }
     }
 
     void SetDirection()
