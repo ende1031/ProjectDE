@@ -20,26 +20,36 @@ public class InteractionIcon : MonoBehaviour
 
     List<Icon> displayedIconList = new List<Icon>();
     Dictionary<Icon, GameObject> iconDictionary = new Dictionary<Icon, GameObject>();
-
+    
+    GameObject IconBG;
     GameObject Inventory;
 
-    float iconSpace = 0.3f;
+    float iconSpace = 0.4f;
 
     bool isInventoryOpen = false;
 
     void Start ()
     {
+        LoadObjects();
+    }
+
+    void LoadObjects()
+    {
         Inventory = GameObject.Find("Inventory");
+        IconBG = transform.Find("IconBG").gameObject;
 
         GatherIcon = transform.Find("Gather").gameObject; //아이콘 추가시 수정할 부분
         InputIcon = transform.Find("Input").gameObject;
         SleepIcon = transform.Find("Sleep").gameObject;
         PortalIcon = transform.Find("Portal").gameObject;
 
-        iconDictionary[Icon.Gather] = GatherIcon; //아이콘 추가시 수정할 부분
-        iconDictionary[Icon.Input] = InputIcon;
-        iconDictionary[Icon.Sleep] = SleepIcon;
-        iconDictionary[Icon.Portal] = PortalIcon;
+        if (GatherIcon != null)
+        {
+            iconDictionary[Icon.Gather] = GatherIcon; //아이콘 추가시 수정할 부분
+            iconDictionary[Icon.Input] = InputIcon;
+            iconDictionary[Icon.Sleep] = SleepIcon;
+            iconDictionary[Icon.Portal] = PortalIcon;
+        }
     }
 
     void HideAllIcons()
@@ -55,6 +65,7 @@ public class InteractionIcon : MonoBehaviour
         if (Inventory.GetComponent<Inventory>().isInventoryActive == true && isInventoryOpen == false)
         {
             isInventoryOpen = true;
+            IconBG.SetActive(false);
             HideAllIcons();
             return;
         }
@@ -63,10 +74,13 @@ public class InteractionIcon : MonoBehaviour
             if(Inventory.GetComponent<Inventory>().isInventoryActive == false)
             {
                 isInventoryOpen = false;
+                IconBG.SetActive(true);
                 RefreshIcons();
                 return;
             }
         }
+
+        IconBGAlpha();
     }
 
     void DeleteAllIcons()
@@ -103,9 +117,37 @@ public class InteractionIcon : MonoBehaviour
             {
                 iconDictionary[displayedIconList[i]].SetActive(true);
                 Vector3 temp = transform.position;
-                temp.x = temp.x + ( -iconSpace * (displayedIconList.Count - 1) + iconSpace * 2 * i);
+                temp.x = temp.x + (-iconSpace * (displayedIconList.Count - 1) + iconSpace * 2 * i);
                 iconDictionary[displayedIconList[i]].transform.position = temp;
             }
         }
+    }
+
+    void IconBGAlpha()
+    {
+        Color temp = IconBG.GetComponent<SpriteRenderer>().color;
+        if (displayedIconList.Count > 0)
+        {
+            if(temp.a < 1)
+            {
+                temp.a += 3.0f * Time.deltaTime;
+            }
+            if (temp.a >= 1)
+            {
+                temp.a = 1;
+            }
+        }
+        else
+        {
+            if (temp.a > 0)
+            {
+                temp.a -= 3.0f * Time.deltaTime;
+            }
+            if (temp.a <= 0)
+            {
+                temp.a = 0;
+            }
+        }
+        IconBG.GetComponent<SpriteRenderer>().color = temp;
     }
 }
