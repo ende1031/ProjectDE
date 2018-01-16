@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneChanger : MonoBehaviour
+public class FadeManager : MonoBehaviour
 {
-    public static SceneChanger instance = null;
+    public static FadeManager instance = null;
     public CanvasGroup fadeCanvasGroup; //페이드인아웃 캔바스
     public float fadeDuration = 1f;
     private bool isFading;

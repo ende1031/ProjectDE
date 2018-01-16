@@ -22,6 +22,6 @@ public class Title : MonoBehaviour
     public void GameStart()
     {
         UI.SetActive(true);
-        FadeManager.instance.FadeAndLoadScene("Stage01");
+        SceneChanger.instance.FadeAndLoadScene("Stage01");
     }
 }

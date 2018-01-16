@@ -48,7 +48,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 target.GetComponent<Facility>().DeleteItem();
             }
-            if (Input.GetKeyUp(KeyCode.X))
+            if (Input.GetKeyUp(KeyCode.C))
             {
                 target.GetComponent<Facility>().Sleep();
             }
@@ -56,9 +56,9 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target.gameObject.tag == "Portal")
         {
-            if (Input.GetKeyUp(KeyCode.Z))
+            if (Input.GetKeyUp(KeyCode.X))
             {
-                FadeManager.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
+                SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
             }
         }
     }

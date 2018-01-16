@@ -24,7 +24,7 @@ public class InteractionIcon : MonoBehaviour
     GameObject IconBG;
     GameObject Inventory;
 
-    float iconSpace = 0.4f;
+    float iconSpace = 0.3f;
 
     bool isInventoryOpen = false;
 

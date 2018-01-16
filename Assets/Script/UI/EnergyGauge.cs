@@ -9,6 +9,8 @@ public class EnergyGauge : MonoBehaviour
     GameObject percent;
 
     public int amountOfEnergy = 100;
+    float realAmount = 100;
+    public float reduceSpeed = 1;
 
     void Start ()
     {
@@ -18,10 +20,16 @@ public class EnergyGauge : MonoBehaviour
 	
 	void Update ()
     {
+        Reduce();
         RangeLimit();
-
         DisplayText();
         DisplayGauge();
+    }
+
+    void Reduce()
+    {
+        realAmount -= reduceSpeed * Time.deltaTime;
+        amountOfEnergy = (int)realAmount;
     }
 
     void DisplayText()
@@ -31,18 +39,18 @@ public class EnergyGauge : MonoBehaviour
 
     void DisplayGauge()
     {
-        gauge.GetComponent<Image>().fillAmount = (float)amountOfEnergy / 100;
+        gauge.GetComponent<Image>().fillAmount = realAmount / 100;
     }
 
     void RangeLimit()
     {
-        if(amountOfEnergy > 100)
+        if(realAmount > 100)
         {
-            amountOfEnergy = 100;
+            realAmount = 100;
         }
-        else if(amountOfEnergy < 0)
+        else if(realAmount < 0)
         {
-            amountOfEnergy = 0;
+            realAmount = 0;
         }
     }
 }

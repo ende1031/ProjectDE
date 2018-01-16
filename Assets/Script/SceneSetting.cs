@@ -23,7 +23,7 @@ public class SceneSetting : MonoBehaviour
 		if(isSet == false)
         {
             isSet = true;
-            SetPlayerPosition(Grid.instance.GridToPos(FadeManager.instance.playerGrid));
+            SetPlayerPosition(Grid.instance.GridToPos(SceneChanger.instance.playerGrid));
             switch(sceneNum)
             {
                 case 0:

@@ -8,13 +8,13 @@ public class Facility : MonoBehaviour
 
     GameObject InteractionIcon;
     GameObject Inventory;
-    GameObject FadeOut;
+    GameObject Timer;
 
     void Start ()
     {
         InteractionIcon = GameObject.Find("InteractionIcon");
         Inventory = GameObject.Find("Inventory");
-        FadeOut = GameObject.Find("FadeOut");
+        Timer = GameObject.Find("Timer");
     }
 	
 	void Update ()
@@ -77,9 +77,9 @@ public class Facility : MonoBehaviour
         switch (facilityName)
         {
             case "EscapePod":
-                //작동중이던 시설 파괴, 심어놓은 농작물 최대성장
-                FadeOut.GetComponent<SleepFade>().Sleep();
-
+                // 0.3초쯤 뒤에? 작동중이던 시설 파괴, 심어놓은 농작물 최대성장
+                Timer.GetComponent<Timer>().ResetTimer();
+                SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
                 break;
         }
     }

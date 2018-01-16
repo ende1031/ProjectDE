@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class HungerGauge : MonoBehaviour
 {
-    public int amountOfHunger = 100;
+    public float amountOfHunger = 100;
+    public float reduceSpeed = 1;
 
     void Start ()
     {
@@ -14,13 +15,19 @@ public class HungerGauge : MonoBehaviour
 	
 	void Update ()
     {
-        DisplayGauge();
+        Reduce();
         RangeLimit();
+        DisplayGauge();
+    }
+
+    void Reduce()
+    {
+        amountOfHunger -= reduceSpeed * Time.deltaTime;
     }
 
     void DisplayGauge()
     {
-        GetComponent<Image>().fillAmount = (float)amountOfHunger / 100;
+        GetComponent<Image>().fillAmount = amountOfHunger / 100;
     }
 
     void RangeLimit()
