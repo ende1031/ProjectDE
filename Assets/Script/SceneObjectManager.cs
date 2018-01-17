@@ -20,19 +20,23 @@ public class SceneObjectManager : MonoBehaviour
             grid = g;
         }
 
-        public SceneObject(string t, string n, int g, int poGrid) //포탈용
+        public SceneObject(string t, string n, int g, int temp) //포탈용
         {
             type = t;
             name = n;
             grid = g;
-            portalAfterMoveGrid = poGrid;
+            portalAfterMoveGrid = temp;
+            plantState = temp;
         }
 
         public GameObject inGameObject;
         public string type; //"plant", "Facility" 등
         public string name; //"TempFacility", "EscapePod", "StickPlant" 등. Portal의 경우 이동하려는 씬의 이름
         public int grid;
+
         public int portalAfterMoveGrid;
+        public int plantState;
+        public float plantGrowthTimer;
     }
 
     static int maxSceneCount = 2; //씬 추가시 늘려줘야 됨
@@ -55,6 +59,8 @@ public class SceneObjectManager : MonoBehaviour
                     ob.inGameObject = Instantiate(StickPlant, tempPos, Quaternion.identity);
                     break;
             }
+            ob.inGameObject.GetComponent<Plant>().state = ob.plantState;
+            ob.inGameObject.GetComponent<Plant>().growthTimer = ob.plantGrowthTimer;
         }
         else if (ob.type == "Facility")
         {
@@ -99,6 +105,57 @@ public class SceneObjectManager : MonoBehaviour
         for(int i = 0; i < maxSceneCount; i++)
         {
             SObjects.Add(new List<SceneObject>());
+        }
+    }
+
+    void Update()
+    {
+        for (int i = 0; i < maxSceneCount; i++)
+        {
+            foreach (SceneObject ob in SObjects[i])
+            {
+                if (ob.type == "Plant")
+                {
+                    if (ob.inGameObject == null)
+                    {
+                        ob.plantGrowthTimer += Time.deltaTime;
+                    }
+                }
+            }
+        }
+    }
+
+    //맵이동시 오브젝트의 상태를 저장함.
+    public void SaveObject()
+    {
+        for (int i = 0; i < maxSceneCount; i++)
+        {
+            foreach (SceneObject ob in SObjects[i])
+            {
+                if (ob.type == "Plant")
+                {
+                    if (ob.inGameObject != null)
+                    {
+                        ob.plantState = ob.inGameObject.GetComponent<Plant>().state;
+                        ob.plantGrowthTimer = ob.inGameObject.GetComponent<Plant>().growthTimer;
+                    }
+                }
+            }
+        }
+    }
+
+    //잠자면 식물 최대성장, 건물파괴
+    public void SleepAfter()
+    {
+        for (int i = 0; i < maxSceneCount; i++)
+        {
+            foreach (SceneObject ob in SObjects[i])
+            {
+                if (ob.type == "Plant")
+                {
+                    ob.plantState = 1;
+                }
+            }
         }
     }
 

@@ -7,7 +7,7 @@ public class PlayerInteraction : MonoBehaviour
     GameObject Inventory;
 
     Animator animaitor;
-    bool isGather01;
+    bool isGather = false;
 
     bool isTrigger = false;
     GameObject target;
@@ -38,7 +38,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.Z) && target.GetComponent<Plant>().isGatherPossible == true)
             {
-                GatherAnimation(target.GetComponent<Plant>().GatherAnimationType);
+                GatherAnimation(target.GetComponent<Plant>().GatherAnimationType, true);
+                target.GetComponent<Plant>().GatherStart();
             }
         }
 
@@ -58,26 +59,18 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.X))
             {
+                SceneObjectManager.instance.SaveObject();
                 SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
             }
         }
     }
 
-    void GatherAnimation(int num)
+    void GatherAnimation(int num, bool onOff)
     {
-        switch (num)
-        {
-            case 1:
-                isGather01 = true;
-                animaitor.SetBool("isGather01", isGather01);
-                break;
-
-            default:
-                isGather01 = true;
-                animaitor.SetBool("isGather01", isGather01);
-                break;
-        }
-        GetComponent<PlayerMove>().SetMovePossible(false);
+        isGather = onOff;
+        animaitor.SetInteger("GatherType", num);
+        animaitor.SetBool("isGather", isGather);
+        GetComponent<PlayerMove>().SetMovePossible(!onOff);
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -97,10 +90,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (target == null)
             return;
-
-        isGather01 = false;
-        animaitor.SetBool("isGather01", isGather01);
-        GetComponent<PlayerMove>().SetMovePossible(true);
+        GatherAnimation(0, false);
         target.GetComponent<Plant>().GetItem();
     }
 }

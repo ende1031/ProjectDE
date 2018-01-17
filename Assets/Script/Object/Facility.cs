@@ -78,7 +78,9 @@ public class Facility : MonoBehaviour
         {
             case "EscapePod":
                 // 0.3초쯤 뒤에? 작동중이던 시설 파괴, 심어놓은 농작물 최대성장
+                SceneObjectManager.instance.SaveObject();
                 Timer.GetComponent<Timer>().ResetTimer();
+                SceneObjectManager.instance.SleepAfter();
                 SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
                 break;
         }

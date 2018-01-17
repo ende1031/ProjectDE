@@ -60,8 +60,8 @@ public class SceneSetting : MonoBehaviour
         //테스트 후엔 EscapePod, Portal등 파괴되지 않고 이동하지도 않는 오브젝트만 남기고 지울 것.
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Facility", "EscapePod", 3));
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Facility", "TempFacility", 7));
-        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 9));
-        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 10));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 9, 1));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 10, 1));
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Portal", "Stage02", 13, 13));
 
         //맵이동시 삭제된 오브젝트를 다시 불러옴.
@@ -72,8 +72,8 @@ public class SceneSetting : MonoBehaviour
     {
         SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Facility", "TempFacility", 12));
         SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Facility", "TempFacility", 14));
-        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Plant", "StickPlant", 16));
-        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Plant", "StickPlant", 17));
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Plant", "StickPlant", 16, 1));
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Plant", "StickPlant", 17, 1));
         SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Portal", "Stage01", 13, 13));
 
         SceneObjectManager.instance.ReloadObject(1);

@@ -95,6 +95,7 @@ public class Inventory : MonoBehaviour
             itemSlot[i] = transform.Find("Item" + (i + 1)).gameObject;
             GetEffect[i] = transform.Find("GetEffect" + (i + 1)).gameObject;
             itemSlot[i].SetActive(false);
+            GetEffect[i].SetActive(false);
         }
     }
 	
