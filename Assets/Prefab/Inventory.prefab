@@ -1011,6 +1011,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad7ca4f39342e24eb7f654a60de7438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FoodSp: {fileID: 21300000, guid: 78b52d80ff70df3468fd5e1dfb099467, type: 3}
+  OxygenSp: {fileID: 21300000, guid: bf363e182709e5a43b1367a1fea72f90, type: 3}
+  BatterySp: {fileID: 21300000, guid: 1372aff47e3a6344a8be734aa5dd5e85, type: 3}
   StickSp: {fileID: 21300000, guid: 199fe49851ebbc346ba98b23855f1829, type: 3}
   RedStickSp: {fileID: 21300000, guid: b63cd55acf45edf418bb77bb5da7da06, type: 3}
   isInventoryActive: 0

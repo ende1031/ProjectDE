@@ -18,7 +18,10 @@ public class Inventory : MonoBehaviour
 
     public enum Item
     {
-        Stick, //아이템 추가시 수정할 부분
+        Food, //아이템 추가시 수정할 부분
+        Oxygen,
+        Battery,
+        Stick,
         RedStick,
         Board
     };
@@ -32,7 +35,14 @@ public class Inventory : MonoBehaviour
 
     GameObject player = null;
 
-    public Sprite StickSp; //아이템 추가시 수정할 부분
+    GameObject OxygenUI;
+    GameObject HungerUI;
+    GameObject EnergyUI;
+
+    public Sprite FoodSp; //아이템 추가시 수정할 부분
+    public Sprite OxygenSp;
+    public Sprite BatterySp;
+    public Sprite StickSp;
     public Sprite RedStickSp;
 
     public bool isInventoryActive = false;
@@ -40,9 +50,15 @@ public class Inventory : MonoBehaviour
 
     void SetItemSprite(GameObject slot, Item itemName) //아이템 추가시 수정할 부분
     {
-        if (itemName == Item.Stick)
+        if (itemName == Item.Food)
+            slot.GetComponent<Image>().sprite = FoodSp;
+        else if (itemName == Item.Oxygen)
+            slot.GetComponent<Image>().sprite = OxygenSp;
+        else if (itemName == Item.Battery)
+            slot.GetComponent<Image>().sprite = BatterySp;
+        else if (itemName == Item.Stick)
             slot.GetComponent<Image>().sprite = StickSp;
-        if (itemName == Item.RedStick)
+        else if (itemName == Item.RedStick)
             slot.GetComponent<Image>().sprite = RedStickSp;
     }
 
@@ -59,12 +75,20 @@ public class Inventory : MonoBehaviour
 
         switch (Items[selectedIndex].name) //아이템 추가시 수정할 부분
         {
+            case Item.Food:
+            case Item.Oxygen:
+            case Item.Battery:
+                InventoryMenu[0].SetActive(true);
+                InventoryMenuText[0].GetComponent<Text>().text = "C : Remove";
+                InventoryMenu[1].SetActive(true);
+                InventoryMenuText[1].GetComponent<Text>().text = "Z : Use";
+                break;
+            
             case Item.Stick:
                 InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "X : Remove";
-                InventoryMenu[1].SetActive(true);
-                InventoryMenuText[1].GetComponent<Text>().text = "ㅋ : Use";
+                InventoryMenuText[0].GetComponent<Text>().text = "C : Remove";
                 break;
+
             case Item.RedStick:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "C : 먹기";
@@ -73,10 +97,58 @@ public class Inventory : MonoBehaviour
                 InventoryMenu[2].SetActive(true);
                 InventoryMenuText[2].GetComponent<Text>().text = "Z : 발차기";
                 break;
+
             case Item.Board:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "Z : 먹기";
                 break;
+        }
+    }
+
+    void InteractionItem() //아이템 추가시 수정할 부분
+    {
+        if (Items.Count <= selectedIndex)
+        {
+            return;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            switch (Items[selectedIndex].name)
+            {
+                case Item.Food:
+                    HungerUI.GetComponent<HungerGauge>().amountOfHunger += 30;
+                    DeleteItem(Items[selectedIndex].name);
+                    RefreshItemMenu();
+                    break;
+                case Item.Oxygen:
+                    OxygenUI.GetComponent<OxygenGauge>().amountOfOxygen += 30;
+                    DeleteItem(Items[selectedIndex].name);
+                    RefreshItemMenu();
+                    break;
+                case Item.Battery:
+                    EnergyUI.GetComponent<EnergyGauge>().amountOfEnergy += 30;
+                    DeleteItem(Items[selectedIndex].name);
+                    RefreshItemMenu();
+                    break;
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.X))
+        {
+
+        }
+        else if (Input.GetKeyUp(KeyCode.C))
+        {
+            switch (Items[selectedIndex].name)
+            {
+                case Item.Food:
+                case Item.Oxygen:
+                case Item.Battery:
+                case Item.Stick:
+                    DeleteItem(Items[selectedIndex].name);
+                    RefreshItemMenu();
+                    break;
+            }
         }
     }
 
@@ -97,6 +169,10 @@ public class Inventory : MonoBehaviour
             itemSlot[i].SetActive(false);
             GetEffect[i].SetActive(false);
         }
+
+        OxygenUI = GameObject.Find("Oxygen_Needle");
+        HungerUI = GameObject.Find("Hunger_Guage");
+        EnergyUI = GameObject.Find("LeftUI");
     }
 	
 	void Update ()
@@ -121,6 +197,7 @@ public class Inventory : MonoBehaviour
             if(isInventoryActive == true)
             {
                 MoveCursor();
+                InteractionItem();
             }
         }
     }
@@ -200,7 +277,8 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    //아이템 획득에 실패하면 false를 반환
+    //나중에 한번에 여러개 획득, 여러개 제거 만들기
+    //아이템 획득에 실패하면 false를 반환 
     public bool GetItem(Item itemName)
     {
         if (Items.Count < 7)

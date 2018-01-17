@@ -67,7 +67,9 @@ public class Facility : MonoBehaviour
                 }
                 break;
             case "EscapePod":
-                Inventory.GetComponent<Inventory>().DeleteItem(global::Inventory.Item.Stick);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Food);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Oxygen);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Battery);
                 break;
         }
     }
