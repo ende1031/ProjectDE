@@ -5,7 +5,8 @@ using UnityEngine;
 public class SceneObjectManager : MonoBehaviour
 {
     public static SceneObjectManager instance = null;
-    
+    GameObject UI;
+
     public GameObject TempFacility; //Prefab 추가시 수정할 부분
     public GameObject EscapePod;
     public GameObject StickPlant;
@@ -102,7 +103,10 @@ public class SceneObjectManager : MonoBehaviour
 
     void Start ()
     {
-        for(int i = 0; i < maxSceneCount; i++)
+        UI = GameObject.Find("UI");
+        UI.SetActive(false);
+
+        for (int i = 0; i < maxSceneCount; i++)
         {
             SObjects.Add(new List<SceneObject>());
         }
@@ -216,6 +220,14 @@ public class SceneObjectManager : MonoBehaviour
             {
                 InstantiateObject(ob);
             }
+        }
+    }
+
+    public void SetUIActive(bool a)
+    {
+        if (UI != null)
+        {
+            UI.SetActive(a);
         }
     }
 }

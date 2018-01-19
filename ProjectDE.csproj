@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\AnimationEvent.cs" />
-    <Compile Include="Assets\Script\FadeManager.cs" />
     <Compile Include="Assets\Script\Grid.cs" />
     <Compile Include="Assets\Script\Object\BGMove.cs" />
     <Compile Include="Assets\Script\Object\CamaraSetting.cs" />

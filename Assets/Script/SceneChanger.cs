@@ -3,15 +3,14 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class FadeManager : MonoBehaviour
+public class SceneChanger : MonoBehaviour
 {
-    public static FadeManager instance = null;
+    public static SceneChanger instance = null;
     public CanvasGroup fadeCanvasGroup; //페이드인아웃 캔바스
     public float fadeDuration = 1f;
     private bool isFading;
 
     public string startingSceneName = "Title"; //첫 씬 이름.
-
     public int playerGrid = 5; //씬 로드 후 플레이어의 위치
 
     void Awake()

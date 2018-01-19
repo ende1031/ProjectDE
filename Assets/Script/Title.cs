@@ -5,23 +5,72 @@ using UnityEngine;
 public class Title : MonoBehaviour
 {
     GameObject UI;
-	void Start ()
+    GameObject SelectCursor;
+
+    GameObject Logo;
+
+    int selectIndex = 0;
+
+    bool isCursorActive = false;
+
+    void Start ()
     {
         UI = GameObject.Find("UI");
-        UI.SetActive(false);
+        SelectCursor = GameObject.Find("Title_Select");
+        Logo = GameObject.Find("LogoCanvas");
     }
 	
 	void Update ()
     {
-        if (Input.GetKey(KeyCode.Return))
+        if (isCursorActive == true)
         {
-            GameStart();
+            if (Input.GetKeyUp(KeyCode.UpArrow) && selectIndex > 0)
+            {
+                selectIndex--;
+            }
+            if (Input.GetKeyUp(KeyCode.DownArrow) && selectIndex < 1)
+            {
+                selectIndex++;
+            }
+
+            Vector3 tempPos = SelectCursor.transform.position;
+
+            switch (selectIndex)
+            {
+                case 0:
+                    tempPos.x = 981.0f;
+                    tempPos.y = 290.0f;
+
+                    if (Input.GetKey(KeyCode.Return))
+                    {
+                        GameStart();
+                    }
+                    break;
+                case 1:
+                    tempPos.x = 1114.0f;
+                    tempPos.y = 190.0f;
+
+                    if (Input.GetKey(KeyCode.Return))
+                    {
+                        Application.Quit();
+                    }
+                    break;
+            }
+
+            SelectCursor.transform.position = tempPos;
+        }
+        else
+        {
+            if(Logo == null)
+            {
+                isCursorActive = true;
+            }
         }
     }
 
     public void GameStart()
     {
-        UI.SetActive(true);
+        SceneObjectManager.instance.SetUIActive(true);
         SceneChanger.instance.FadeAndLoadScene("Stage01");
     }
 }
