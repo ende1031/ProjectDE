@@ -53,6 +53,11 @@ public class OxygenGauge : MonoBehaviour
         }
     }
 
+    public void SetAmount(float amount)
+    {
+        amountOfOxygen += amount;
+    }
+
     void Reduce()
     {
         amountOfOxygen -= reduceSpeed * Time.deltaTime;

@@ -7,6 +7,7 @@ public class EnergyGauge : MonoBehaviour
 {
     GameObject gauge;
     GameObject percent;
+    GameObject gaugeLight;
 
     public float amountOfEnergy = 100;
     public float reduceSpeed = 1;
@@ -15,6 +16,7 @@ public class EnergyGauge : MonoBehaviour
     {
         gauge = transform.Find("Energy_Gauge").gameObject;
         percent = transform.Find("Energy_Percent").gameObject;
+        gaugeLight = transform.Find("Energy_Light").gameObject;
     }
 	
 	void Update ()
@@ -23,6 +25,7 @@ public class EnergyGauge : MonoBehaviour
         RangeLimit();
         DisplayText();
         DisplayGauge();
+        GaugeLight();
     }
 
     void Reduce()
@@ -32,12 +35,14 @@ public class EnergyGauge : MonoBehaviour
 
     void DisplayText()
     {
-        percent.GetComponent<Text>().text = (int)amountOfEnergy + "%";
+        float temp = Mathf.Round(amountOfEnergy);
+        percent.GetComponent<Text>().text = (int)temp + "%";
     }
 
     void DisplayGauge()
     {
         gauge.GetComponent<Image>().fillAmount = amountOfEnergy / 100;
+        gaugeLight.GetComponent<Image>().fillAmount = amountOfEnergy / 100;
     }
 
     void RangeLimit()
@@ -50,5 +55,37 @@ public class EnergyGauge : MonoBehaviour
         {
             amountOfEnergy = 0;
         }
+    }
+
+    public void SetAmount(float amount)
+    {
+        amountOfEnergy += amount;
+        if(amount > 0)
+        {
+            GaugeLightReset();
+        }
+    }
+
+    void GaugeLight()
+    {
+        Color tempColor = gaugeLight.GetComponent<Image>().color;
+
+        if(tempColor.a > 0)
+        {
+            tempColor.a -= 5.0f * Time.deltaTime;
+        }
+        if(tempColor.a <= 0)
+        {
+            tempColor.a = 0;
+        }
+
+        gaugeLight.GetComponent<Image>().color = tempColor;
+    }
+
+    void GaugeLightReset()
+    {
+        Color tempColor = gaugeLight.GetComponent<Image>().color;
+        tempColor.a = 1.0f;
+        gaugeLight.GetComponent<Image>().color = tempColor;
     }
 }

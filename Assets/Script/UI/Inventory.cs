@@ -117,17 +117,17 @@ public class Inventory : MonoBehaviour
             switch (Items[selectedIndex].name)
             {
                 case Item.Food:
-                    HungerUI.GetComponent<HungerGauge>().amountOfHunger += 30;
+                    HungerUI.GetComponent<HungerGauge>().SetAmount(30);
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
                 case Item.Oxygen:
-                    OxygenUI.GetComponent<OxygenGauge>().amountOfOxygen += 30;
+                    OxygenUI.GetComponent<OxygenGauge>().SetAmount(30);
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
                 case Item.Battery:
-                    EnergyUI.GetComponent<EnergyGauge>().amountOfEnergy += 30;
+                    EnergyUI.GetComponent<EnergyGauge>().SetAmount(30);
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
