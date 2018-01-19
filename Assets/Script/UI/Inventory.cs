@@ -277,25 +277,24 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    //나중에 한번에 여러개 획득, 여러개 제거 만들기
     //아이템 획득에 실패하면 false를 반환 
-    public bool GetItem(Item itemName)
+    public bool GetItem(Item itemName, int num = 1)
     {
         if (Items.Count < 7)
         {
             int? temp = isContains(itemName);
             if(temp.HasValue)
             {
-                if(Items[(int)temp].count >= 99)
+                if(Items[(int)temp].count + num > 99)
                 {
                     return false;
                 }
-                Items[(int)temp].count++;
+                Items[(int)temp].count += num;
                 GetEffectOn((int)temp);
             }
             else
             {
-                Items.Add(new ItemInfo(itemName, 1));
+                Items.Add(new ItemInfo(itemName, num));
                 GetEffectOn(Items.Count - 1);
             }
             return true;
@@ -307,19 +306,23 @@ public class Inventory : MonoBehaviour
     }
 
     //인벤토리에 없는 아이템을 소모하려 하면 false를 반환
-    public bool DeleteItem(Item itemName)
+    public bool DeleteItem(Item itemName, int num = 1)
     {
         int? temp = isContains(itemName);
 
         if(temp.HasValue)
         {
-            if(Items[(int)temp].count > 1)
+            if(Items[(int)temp].count - num >= 1)
             {
-                Items[(int)temp].count--;
+                Items[(int)temp].count -= num;
             }
-            else
+            else if(Items[(int)temp].count - num == 0)
             {
                 Items.RemoveAt((int)temp);
+            }
+            else if(Items[(int)temp].count - num < 0)
+            {
+                return false;
             }
             return true;
         }
@@ -342,6 +345,7 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
+    //갯수만큼 존재하면 true
     public bool HasItem(Item itemName, int count = 1)
     {
         foreach(ItemInfo i in Items)
@@ -353,5 +357,17 @@ public class Inventory : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int CountOfItem(Item itemName)
+    {
+        foreach (ItemInfo i in Items)
+        {
+            if (i.name == itemName)
+            {
+                return i.count;
+            }
+        }
+        return 0;
     }
 }

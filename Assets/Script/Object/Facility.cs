@@ -58,7 +58,7 @@ public class Facility : MonoBehaviour
 
     public void DeleteItem()
     {
-        switch (facilityName)
+        switch (facilityName) //테스트용 코드
         {
             case "TempFacility":
                 if (Inventory.GetComponent<Inventory>().DeleteItem(global::Inventory.Item.Stick) == true)
@@ -67,9 +67,9 @@ public class Facility : MonoBehaviour
                 }
                 break;
             case "EscapePod":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Food);
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Oxygen);
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Battery);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Food, 10);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Oxygen, 5);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Battery, 15);
                 break;
         }
     }
