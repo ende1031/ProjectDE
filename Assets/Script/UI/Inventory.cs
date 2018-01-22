@@ -22,8 +22,9 @@ public class Inventory : MonoBehaviour
         Oxygen,
         Battery,
         Stick,
-        RedStick,
-        Board
+        Board,
+        Hose,
+        Mass
     };
 
     GameObject[] itemSlot = new GameObject[7];
@@ -43,7 +44,9 @@ public class Inventory : MonoBehaviour
     public Sprite OxygenSp;
     public Sprite BatterySp;
     public Sprite StickSp;
-    public Sprite RedStickSp;
+    public Sprite BoardSp;
+    public Sprite HoseSp;
+    public Sprite MassSp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -58,8 +61,12 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Image>().sprite = BatterySp;
         else if (itemName == Item.Stick)
             slot.GetComponent<Image>().sprite = StickSp;
-        else if (itemName == Item.RedStick)
-            slot.GetComponent<Image>().sprite = RedStickSp;
+        else if (itemName == Item.Board)
+            slot.GetComponent<Image>().sprite = BoardSp;
+        else if (itemName == Item.Hose)
+            slot.GetComponent<Image>().sprite = HoseSp;
+        else if (itemName == Item.Mass)
+            slot.GetComponent<Image>().sprite = MassSp;
     }
 
     void RefreshItemMenu()
@@ -85,22 +92,20 @@ public class Inventory : MonoBehaviour
                 break;
             
             case Item.Stick:
+            case Item.Board:
+            case Item.Hose:
+            case Item.Mass:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "C : Remove";
                 break;
 
-            case Item.RedStick:
+            default:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "C : 먹기";
                 InventoryMenu[1].SetActive(true);
                 InventoryMenuText[1].GetComponent<Text>().text = "X : 마시기";
                 InventoryMenu[2].SetActive(true);
                 InventoryMenuText[2].GetComponent<Text>().text = "Z : 발차기";
-                break;
-
-            case Item.Board:
-                InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "Z : 먹기";
                 break;
         }
     }
@@ -145,6 +150,9 @@ public class Inventory : MonoBehaviour
                 case Item.Oxygen:
                 case Item.Battery:
                 case Item.Stick:
+                case Item.Board:
+                case Item.Hose:
+                case Item.Mass:
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
@@ -187,7 +195,10 @@ public class Inventory : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.A) && isInventoryActive == false)
             {
-                OpenInventory();
+                if(player.GetComponent<PlayerInteraction>().GetInteractionPossible() == true)
+                {
+                    OpenInventory();
+                }
             }
             else if (Input.GetKeyUp(KeyCode.A) && isInventoryActive == true)
             {

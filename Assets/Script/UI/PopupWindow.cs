@@ -6,18 +6,22 @@ using UnityEngine.UI;
 public class PopupWindow : MonoBehaviour
 {
     GameObject Inventory;
+    GameObject Player;
 
+    GameObject PopupBG;
     GameObject[] ScrollIndexItem = new GameObject[5];
     GameObject ScrollIndexCursor;
-
     GameObject ExplanationName;
     GameObject ExplanationText;
-
     GameObject[] MaterialsItem = new GameObject[6];
     GameObject[] MaterialsNum = new GameObject[6];
 
     int selectedIndex = 0;
     int displayedSelectedIndex = 0;
+
+    bool isPopupActive = false;
+
+    float openTimer = 0;
 
     Dictionary<global::Inventory.Item, Sprite> itemDictionary = new Dictionary<global::Inventory.Item, Sprite>();
 
@@ -51,59 +55,172 @@ public class PopupWindow : MonoBehaviour
     void Start ()
     {
         Inventory = GameObject.Find("Inventory");
+        PopupBG = transform.Find("PopupBG").gameObject;
+
         SetWindowObject();
         SetDictionary();
 
-        SetWindowItem();
+        SetWindowItem(); // 테스트용 코드
         RefreshWindow();
     }
 
     void SetWindowObject()
     {
-        GameObject temp = transform.Find("ScrollIndex").gameObject;
+        GameObject ScrollIndex = PopupBG.transform.Find("ScrollIndex").gameObject;
         for (int i = 0; i < 5; i++)
         {
-            ScrollIndexItem[i] = temp.transform.Find("Item" + (i + 1)).gameObject;
+            ScrollIndexItem[i] = ScrollIndex.transform.Find("Item" + (i + 1)).gameObject;
         }
-        ScrollIndexCursor = temp.transform.Find("Cursor").gameObject;
+        ScrollIndexCursor = ScrollIndex.transform.Find("Cursor").gameObject;
 
-        temp = transform.Find("Explanation").gameObject;
-        ExplanationName = temp.transform.Find("ItemName").gameObject;
-        ExplanationText = temp.transform.Find("ItemText").gameObject;
+        GameObject Explanation = PopupBG.transform.Find("Explanation").gameObject;
+        ExplanationName = Explanation.transform.Find("ItemName").gameObject;
+        ExplanationText = Explanation.transform.Find("ItemText").gameObject;
 
-        temp = transform.Find("MakingMaterials").gameObject;
+        GameObject MakingMaterials = PopupBG.transform.Find("MakingMaterials").gameObject;
         for (int i = 0; i < 6; i++)
         {
-            MaterialsItem[i] = temp.transform.Find("Item" + (i + 1)).gameObject;
+            MaterialsItem[i] = MakingMaterials.transform.Find("Item" + (i + 1)).gameObject;
             MaterialsNum[i] = MaterialsItem[i].transform.Find("Text").gameObject;
         }
     }
 
-    void SetDictionary()
+    void SetDictionary() //아이템 추가시 수정할 부분
     {
         itemDictionary[global::Inventory.Item.Food] = Inventory.GetComponent<Inventory>().FoodSp;
         itemDictionary[global::Inventory.Item.Oxygen] = Inventory.GetComponent<Inventory>().OxygenSp;
         itemDictionary[global::Inventory.Item.Battery] = Inventory.GetComponent<Inventory>().BatterySp;
         itemDictionary[global::Inventory.Item.Stick] = Inventory.GetComponent<Inventory>().StickSp;
-        itemDictionary[global::Inventory.Item.RedStick] = Inventory.GetComponent<Inventory>().RedStickSp;
+        itemDictionary[global::Inventory.Item.Board] = Inventory.GetComponent<Inventory>().BoardSp;
+        itemDictionary[global::Inventory.Item.Hose] = Inventory.GetComponent<Inventory>().HoseSp;
+        itemDictionary[global::Inventory.Item.Mass] = Inventory.GetComponent<Inventory>().MassSp;
     }
 
-    // 실질적으로 게임에 들어갈 목록을 짜는 부분
+    public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
+    {
+        switch (itemName)
+        {
+            case global::Inventory.Item.Battery:
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "멋진배터리", "배터리 중에서 가장 잘생긴 인기배터리이다.", global::Inventory.Item.Stick, 1));
+                break;
+            case global::Inventory.Item.Food:
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Food, "특제 계란후라이", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다.", global::Inventory.Item.Stick, 2));
+                break;
+            case global::Inventory.Item.Oxygen:
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Oxygen, "San-So", "괴식물 막대를 어떻게 가공하면 산소가 되는걸까?\n미래 우주의 기술은 놀랍다.", global::Inventory.Item.Stick, 2, global::Inventory.Item.Battery, 1));
+                break;
+            case global::Inventory.Item.Stick:
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Stick, "막대", "여기서 막대 만들 시간에 괴식물한테 채집하는게 이득이다.\n\n그렇다고 한다.", global::Inventory.Item.Battery, 1, global::Inventory.Item.Food, 3));
+                break;
+            case global::Inventory.Item.Board:
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Board, "판자", "판\n자\n다", global::Inventory.Item.Stick, 1, global::Inventory.Item.Food, 3));
+                break;
+            case global::Inventory.Item.Hose:
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Hose, "호스", "테스트용 호스", global::Inventory.Item.Stick, 7, global::Inventory.Item.Board, 5, global::Inventory.Item.Food, 7, global::Inventory.Item.Oxygen, 2));
+                break;
+            case global::Inventory.Item.Mass:
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Mass, "덩어리 M.A.S.S.", "테스트용으로 재료를 엄청나게 많게 설정했다.\n참고로 MASS는 고유명사임.", global::Inventory.Item.Stick, 73, global::Inventory.Item.Board, 10, global::Inventory.Item.Food, 57, global::Inventory.Item.Oxygen, 42, global::Inventory.Item.Battery, 91));
+                break;
+        }
+    }
+
     // 테스트용 코드
     void SetWindowItem()
     {
-        WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "멋진배터리", "배터리 중에서 가장 잘생긴 인기배터리이다.", global::Inventory.Item.Stick, 1, global::Inventory.Item.Food, 3));
-        WindowItemList.Add(new WindowItem(global::Inventory.Item.Food, "멋진계란후라이", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다.", global::Inventory.Item.Stick, 2));
-        WindowItemList.Add(new WindowItem(global::Inventory.Item.Oxygen, "산소같은너", "괴식물 막대를 어떻게 가공하면 산소가 되는걸까?\n미래 우주의 기술은 놀랍다.", global::Inventory.Item.Stick, 2, global::Inventory.Item.Battery, 1));
-        WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "멋진배터리2", "배터리 중에서 가장 잘생긴 인기배터리이다.2", global::Inventory.Item.Stick, 2, global::Inventory.Item.Food, 3));
-        WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "멋진배터리3", "배터리 중에서 가장 잘생긴 인기배터리이다.3", global::Inventory.Item.Stick, 3, global::Inventory.Item.Food, 1));
-        WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "멋진배터리4", "배터리 중에서 가장 잘생긴 인기배터리이다.4", global::Inventory.Item.Stick, 4, global::Inventory.Item.Food, 2));
-        WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "멋진배터리5", "배터리 중에서 가장 잘생긴 인기배터리이다.5", global::Inventory.Item.Stick, 5, global::Inventory.Item.Food, 3));
-        WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "멋진배터리6", "배터리 중에서 가장 잘생긴 인기배터리이다.6", global::Inventory.Item.Stick, 6, global::Inventory.Item.Food, 4));
-        WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "마지막", "배터리 중에서 가장 잘생긴 인기배터리이다.\n테스트 마지막 목록", global::Inventory.Item.Stick, 7, global::Inventory.Item.Food, 5));
+        AddItem(global::Inventory.Item.Battery);
+        AddItem(global::Inventory.Item.Oxygen);
+        AddItem(global::Inventory.Item.Food);
+        AddItem(global::Inventory.Item.Mass);
     }
 
     void Update ()
+    {
+        if(Player == null)
+        {
+            Player = GameObject.Find("Player");
+        }
+
+        if(isPopupActive == true)
+        {
+            if(openTimer <= 0.3f)
+            {
+                openTimer += Time.deltaTime;
+            }
+            else
+            {
+                MoveCursor();
+                if (Input.GetKeyUp(KeyCode.C))
+                {
+                    CloseWindow();
+                }
+                else if (Input.GetKeyUp(KeyCode.Z))
+                {
+                    MakeItem();
+                }
+            }
+        }
+    }
+
+    public void OpenWindow()
+    {
+        Player.GetComponent<PlayerMove>().SetMovePossible(false);
+        Player.GetComponent<PlayerInteraction>().SetInteractionPossible(false);
+        isPopupActive = true;
+        selectedIndex = 0;
+        displayedSelectedIndex = 0;
+        openTimer = 0;
+        RefreshWindow();
+        PopupBG.SetActive(true);
+    }
+
+    public void CloseWindow()
+    {
+        Player.GetComponent<PlayerMove>().SetMovePossible(true);
+        Player.GetComponent<PlayerInteraction>().SetInteractionPossible(true);
+        isPopupActive = false;
+        selectedIndex = 0;
+        displayedSelectedIndex = 0;
+        openTimer = 0;
+        MoveCursor();
+        RefreshWindow();
+        PopupBG.SetActive(false);
+    }
+
+    public void ClearItemList()
+    {
+        WindowItemList.Clear();
+    }
+
+    void MakeItem()
+    {
+        bool makePossible = true;
+        for(int i=0; i<6; i++)
+        {
+            if(WindowItemList[selectedIndex].materialNum[i] > 0)
+            {
+                if(Inventory.GetComponent<Inventory>().HasItem(WindowItemList[selectedIndex].material[i], WindowItemList[selectedIndex].materialNum[i]) == false)
+                {
+                    makePossible = false;
+                }
+            }
+        }
+
+        if(makePossible == true)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (WindowItemList[selectedIndex].materialNum[i] > 0)
+                {
+                    Inventory.GetComponent<Inventory>().DeleteItem(WindowItemList[selectedIndex].material[i], WindowItemList[selectedIndex].materialNum[i]);
+                }
+            }
+            Inventory.GetComponent<Inventory>().GetItem(WindowItemList[selectedIndex].name);
+            CloseWindow();
+        }
+
+    }
+
+    void MoveCursor()
     {
         if (Input.GetKeyUp(KeyCode.UpArrow) && selectedIndex > 0)
         {
@@ -116,10 +233,10 @@ public class PopupWindow : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.DownArrow) && selectedIndex < WindowItemList.Count - 1)
         {
-            selectedIndex++; //5
-            if(displayedSelectedIndex < 4)
+            selectedIndex++;
+            if (displayedSelectedIndex < 4)
             {
-                displayedSelectedIndex++; //4 
+                displayedSelectedIndex++;
             }
             RefreshWindow();
         }
@@ -131,7 +248,15 @@ public class PopupWindow : MonoBehaviour
     {
         for(int i=0; i<5; i++)
         {
-            ScrollIndexItem[i].GetComponent<Image>().sprite = itemDictionary[WindowItemList[i + selectedIndex - displayedSelectedIndex].name];
+            if(i < WindowItemList.Count)
+            {
+                ScrollIndexItem[i].SetActive(true);
+                ScrollIndexItem[i].GetComponent<Image>().sprite = itemDictionary[WindowItemList[i + selectedIndex - displayedSelectedIndex].name];
+            }
+            else
+            {
+                ScrollIndexItem[i].SetActive(false);
+            }
         }
         ExplanationName.GetComponent<Text>().text = WindowItemList[selectedIndex].itemName;
         ExplanationText.GetComponent<Text>().text = WindowItemList[selectedIndex].expText;

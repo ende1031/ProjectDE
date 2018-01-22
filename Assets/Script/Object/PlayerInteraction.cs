@@ -12,6 +12,8 @@ public class PlayerInteraction : MonoBehaviour
     bool isTrigger = false;
     GameObject target;
 
+    bool isInteractionPossible = true;
+
     void Start ()
     {
         animaitor = GetComponent<Animator>();
@@ -22,7 +24,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if(isTrigger)
         {
-            if (Inventory.GetComponent<Inventory>().isInventoryActive == false)
+            if (Inventory.GetComponent<Inventory>().isInventoryActive == false && isInteractionPossible == true)
             {
                 Interaction();
             }
@@ -36,7 +38,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target.gameObject.tag == "Plant")
         {
-            if (Input.GetKeyUp(KeyCode.Z) && target.GetComponent<Plant>().isGatherPossible == true)
+            if (Input.GetKeyDown(KeyCode.Z) && target.GetComponent<Plant>().isGatherPossible == true)
             {
                 GatherAnimation(target.GetComponent<Plant>().GatherAnimationType, true);
                 target.GetComponent<Plant>().GatherStart();
@@ -45,11 +47,11 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target.gameObject.tag == "Facility")
         {
-            if (Input.GetKeyUp(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-                target.GetComponent<Facility>().DeleteItem();
+                target.GetComponent<Facility>().OpenProductionWindow();
             }
-            if (Input.GetKeyUp(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 target.GetComponent<Facility>().Sleep();
             }
@@ -57,7 +59,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target.gameObject.tag == "Portal")
         {
-            if (Input.GetKeyUp(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.X))
             {
                 SceneObjectManager.instance.SaveObject();
                 SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
@@ -92,5 +94,15 @@ public class PlayerInteraction : MonoBehaviour
             return;
         GatherAnimation(0, false);
         target.GetComponent<Plant>().GetItem();
+    }
+
+    public void SetInteractionPossible(bool possibility)
+    {
+        isInteractionPossible = possibility;
+    }
+
+    public bool GetInteractionPossible()
+    {
+        return isInteractionPossible;
     }
 }

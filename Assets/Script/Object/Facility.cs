@@ -9,12 +9,14 @@ public class Facility : MonoBehaviour
     GameObject InteractionIcon;
     GameObject Inventory;
     GameObject Timer;
+    GameObject PopupWindow;
 
     void Start ()
     {
         InteractionIcon = GameObject.Find("InteractionIcon");
         Inventory = GameObject.Find("Inventory");
         Timer = GameObject.Find("Timer");
+        PopupWindow = GameObject.Find("PopupWindow");
     }
 	
 	void Update ()
@@ -56,6 +58,31 @@ public class Facility : MonoBehaviour
         }
     }
 
+    public void OpenProductionWindow()
+    {
+        switch (facilityName) //테스트용 코드
+        {
+            case "TempFacility":
+                PopupWindow.GetComponent<PopupWindow>().ClearItemList();
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Board);
+                PopupWindow.GetComponent<PopupWindow>().OpenWindow();
+                break;
+            case "EscapePod":
+                PopupWindow.GetComponent<PopupWindow>().ClearItemList();
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Stick);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Oxygen);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Hose);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Board);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Mass);
+                PopupWindow.GetComponent<PopupWindow>().OpenWindow();
+                break;
+        }
+    }
+
     public void DeleteItem()
     {
         switch (facilityName) //테스트용 코드
@@ -63,7 +90,7 @@ public class Facility : MonoBehaviour
             case "TempFacility":
                 if (Inventory.GetComponent<Inventory>().DeleteItem(global::Inventory.Item.Stick) == true)
                 {
-                    Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.RedStick);
+                    Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass);
                 }
                 break;
             case "EscapePod":

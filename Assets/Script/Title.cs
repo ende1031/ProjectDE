@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Title : MonoBehaviour
 {
-    GameObject UI;
     GameObject SelectCursor;
 
     GameObject Logo;
@@ -15,7 +14,6 @@ public class Title : MonoBehaviour
 
     void Start ()
     {
-        UI = GameObject.Find("UI");
         SelectCursor = GameObject.Find("Title_Select");
         Logo = GameObject.Find("LogoCanvas");
     }
@@ -24,11 +22,11 @@ public class Title : MonoBehaviour
     {
         if (isCursorActive == true)
         {
-            if (Input.GetKeyUp(KeyCode.UpArrow) && selectIndex > 0)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && selectIndex > 0)
             {
                 selectIndex--;
             }
-            if (Input.GetKeyUp(KeyCode.DownArrow) && selectIndex < 1)
+            if (Input.GetKeyDown(KeyCode.DownArrow) && selectIndex < 1)
             {
                 selectIndex++;
             }
@@ -41,7 +39,7 @@ public class Title : MonoBehaviour
                     tempPos.x = 981.0f;
                     tempPos.y = 290.0f;
 
-                    if (Input.GetKey(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return))
                     {
                         GameStart();
                     }
@@ -50,7 +48,7 @@ public class Title : MonoBehaviour
                     tempPos.x = 1114.0f;
                     tempPos.y = 190.0f;
 
-                    if (Input.GetKey(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return))
                     {
                         Application.Quit();
                     }
