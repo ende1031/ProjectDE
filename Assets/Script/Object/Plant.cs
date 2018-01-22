@@ -9,6 +9,8 @@ public class Plant : MonoBehaviour
 
     Animator animaitor;
 
+    int sceneNum;
+
     public bool isGatherPossible;
     public string plantName = "StickPlant";
     public int GatherAnimationType = 1;
@@ -19,6 +21,8 @@ public class Plant : MonoBehaviour
 
     void Start ()
     {
+        sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+
         InteractionIcon = GameObject.Find("InteractionIcon");
         Inventory = GameObject.Find("Inventory");
 
@@ -29,7 +33,10 @@ public class Plant : MonoBehaviour
         if (plantName == "StickPlant")
         {
             isGatherPossible = true;
-            GatherAnimationType = 2;
+        }
+        else if (plantName == "MassPlant")
+        {
+            isGatherPossible = true;
         }
     }
 
@@ -46,6 +53,13 @@ public class Plant : MonoBehaviour
         {
             case "StickPlant":
                 Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick);
+                break;
+            case "MassPlant":
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass);
+                SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
+                break;
+            case "BoardPlant":
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Board);
                 break;
         }
         isGatherPossible = false;
@@ -74,22 +88,30 @@ public class Plant : MonoBehaviour
 
     void Update ()
     {
-		if(state == 0 || state == 2)
+        if(plantName != "MassPlant")
+        {
+            Growth();
+        }
+    }
+
+    void Growth()
+    {
+        if (state == 0 || state == 2)
         {
             growthTimer += Time.deltaTime;
-            if(growthTimer >= growthTime)
+            if (growthTimer >= growthTime)
             {
                 growthTimer = 0;
                 state = 1;
-                animaitor.SetInteger("State", state);       
+                animaitor.SetInteger("State", state);
             }
         }
 
-        if(state == 1 && growthTimer != 0)
+        if (state == 1 && growthTimer != 0)
         {
             growthTimer = 0;
         }
-	}
+    }
 
     void OnTriggerStay2D(Collider2D other)
     {

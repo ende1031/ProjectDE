@@ -10,6 +10,8 @@ public class SceneObjectManager : MonoBehaviour
     public GameObject TempFacility; //Prefab 추가시 수정할 부분
     public GameObject EscapePod;
     public GameObject StickPlant;
+    public GameObject BoardPlant;
+    public GameObject MassPlant;
     public GameObject Portal;
 
     public class SceneObject
@@ -55,6 +57,12 @@ public class SceneObjectManager : MonoBehaviour
             {
                 case "StickPlant":
                     ob.inGameObject = Instantiate(StickPlant, tempPos, Quaternion.identity);
+                    break;
+                case "MassPlant":
+                    ob.inGameObject = Instantiate(MassPlant, tempPos, Quaternion.identity);
+                    break;
+                case "BoardPlant":
+                    ob.inGameObject = Instantiate(BoardPlant, tempPos, Quaternion.identity);
                     break;
                 default:
                     ob.inGameObject = Instantiate(StickPlant, tempPos, Quaternion.identity);

@@ -40,6 +40,11 @@ public class SceneSetting : MonoBehaviour
         {
             SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Facility", "TempFacility", Grid.instance.PlayerGrid()));
         }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "MassPlant", Grid.instance.PlayerGrid(), 1));
+        }
+
     }
 
     void SetPlayerPosition(Vector3 pos)
@@ -62,6 +67,8 @@ public class SceneSetting : MonoBehaviour
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Facility", "TempFacility", 7));
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 9, 1));
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 10, 1));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "BoardPlant", 11, 1));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "BoardPlant", 15, 1));
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Portal", "Stage02", 13, 13));
 
         //맵이동시 삭제된 오브젝트를 다시 불러옴.

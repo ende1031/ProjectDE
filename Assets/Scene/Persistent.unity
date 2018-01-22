@@ -513,6 +513,8 @@ MonoBehaviour:
     type: 2}
   EscapePod: {fileID: 1724880846875220, guid: 6f54b14597c45464fac855f7de8aaf93, type: 2}
   StickPlant: {fileID: 1962487321500588, guid: 2168df4ebe7306c4fb664ba8e3f9fb3b, type: 2}
+  BoardPlant: {fileID: 1713309569161114, guid: 808a858534c1ac2439e0925dcdffc967, type: 2}
+  MassPlant: {fileID: 1973922401690096, guid: 66b814dee91cd054b97b5993d8474763, type: 2}
   Portal: {fileID: 1768756399868750, guid: b0a0c9869ade5d74384781159a06efb6, type: 2}
 --- !u!1 &136986828
 GameObject:
