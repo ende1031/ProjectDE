@@ -51,6 +51,8 @@ public class Inventory : MonoBehaviour
     public bool isInventoryActive = false;
     int selectedIndex = 0;
 
+    Animator animaitor;
+
     void SetItemSprite(GameObject slot, Item itemName) //아이템 추가시 수정할 부분
     {
         if (itemName == Item.Food)
@@ -86,9 +88,9 @@ public class Inventory : MonoBehaviour
             case Item.Oxygen:
             case Item.Battery:
                 InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "C : Remove";
+                InventoryMenuText[0].GetComponent<Text>().text = "C : 버리기";
                 InventoryMenu[1].SetActive(true);
-                InventoryMenuText[1].GetComponent<Text>().text = "Z : Use";
+                InventoryMenuText[1].GetComponent<Text>().text = "Z : 사용하기";
                 break;
             
             case Item.Stick:
@@ -96,7 +98,7 @@ public class Inventory : MonoBehaviour
             case Item.Hose:
             case Item.Mass:
                 InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "C : Remove";
+                InventoryMenuText[0].GetComponent<Text>().text = "C : 버리기";
                 break;
 
             default:
@@ -162,6 +164,8 @@ public class Inventory : MonoBehaviour
 
     void Start ()
     {
+        animaitor = GetComponent<Animator>();
+
         Cursor = transform.Find("Cursor").gameObject;
 
         for (int i = 0; i < 3; i++)
@@ -217,9 +221,10 @@ public class Inventory : MonoBehaviour
     {
         if (player.GetComponent<PlayerMove>().GetMovePossible() == true)
         {
+            Cursor.SetActive(true);
+            animaitor.SetBool("isOpen", true);
             selectedIndex = 0;
             isInventoryActive = true;
-            Cursor.SetActive(true);
             player.GetComponent<PlayerMove>().SetMovePossible(false);
             RefreshItemMenu();
         }
@@ -227,6 +232,7 @@ public class Inventory : MonoBehaviour
 
     void CloseInventory()
     {
+        animaitor.SetBool("isOpen", false);
         isInventoryActive = false;
         Cursor.SetActive(false);
         player.GetComponent<PlayerMove>().SetMovePossible(true);

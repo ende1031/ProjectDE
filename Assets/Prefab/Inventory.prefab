@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 222848564569576468}
   - component: {fileID: 114428454599861740}
   - component: {fileID: 114420906523515516}
+  - component: {fileID: 95987759406900968}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -737,6 +738,23 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 22ff0b42743d6a44496820b22a518404, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95987759406900968
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1615635205325292}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44818f5bd0f3fdd4b92cc0caedf903bb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1089,7 +1107,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Z : Remove'
+  m_Text: "X : \uB358\uC9C0\uAE30"
 --- !u!114 &114525394820449748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1421,7 +1439,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'I : Use'
+  m_Text: "Z : \uC0AC\uC6A9\uD558\uAE30"
 --- !u!114 &114680872070230404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1742,7 +1760,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Z : Pneumonoultramicroscopicsilicovolcanoconiosis'
+  m_Text: "C : \uBC84\uB9AC\uAE30"
 --- !u!222 &222017277429053640
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -2022,7 +2040,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 261.92, y: 84.2}
+  m_SizeDelta: {x: 284, y: 84.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224174839252830274
 RectTransform:
@@ -2262,7 +2280,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 261.92, y: 84.2}
+  m_SizeDelta: {x: 284, y: 84.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224557430607331164
 RectTransform:
@@ -2408,7 +2426,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 261.92, y: 84.2}
+  m_SizeDelta: {x: 284, y: 84.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224800362277442150
 RectTransform:
@@ -2459,7 +2477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 55}
+  m_AnchoredPosition: {x: 0, y: 46}
   m_SizeDelta: {x: 544, y: 83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224934796407906316

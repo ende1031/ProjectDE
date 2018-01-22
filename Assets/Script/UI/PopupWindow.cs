@@ -20,6 +20,7 @@ public class PopupWindow : MonoBehaviour
     int displayedSelectedIndex = 0;
 
     bool isPopupActive = false;
+    Animator animaitor;
 
     float openTimer = 0;
 
@@ -56,6 +57,7 @@ public class PopupWindow : MonoBehaviour
     {
         Inventory = GameObject.Find("Inventory");
         PopupBG = transform.Find("PopupBG").gameObject;
+        animaitor = GetComponent<Animator>();
 
         SetWindowObject();
         SetDictionary();
@@ -171,6 +173,7 @@ public class PopupWindow : MonoBehaviour
         openTimer = 0;
         RefreshWindow();
         PopupBG.SetActive(true);
+        animaitor.SetBool("isOpen", true);
     }
 
     public void CloseWindow()
@@ -183,7 +186,8 @@ public class PopupWindow : MonoBehaviour
         openTimer = 0;
         MoveCursor();
         RefreshWindow();
-        PopupBG.SetActive(false);
+        //PopupBG.SetActive(false);
+        animaitor.SetBool("isOpen", false);
     }
 
     public void ClearItemList()
