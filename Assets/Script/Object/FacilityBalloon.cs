@@ -17,11 +17,12 @@ public class FacilityBalloon : MonoBehaviour
 
     float progress;
     public float timeToMake = 15; //초
-    public float progressTimer;
+    public float progressTimer = 15;
 
-    global::Inventory.Item makeItem; // 만드는 아이템
+    public global::Inventory.Item makeItem = global::Inventory.Item.Stick; // 만드는 아이템
     public bool isMake = false;
     public bool isMakeFinish = false;
+    public bool isLoadByManager = false;
 
     Dictionary<global::Inventory.Item, Sprite> itemDictionary = new Dictionary<global::Inventory.Item, Sprite>();
 
@@ -56,6 +57,23 @@ public class FacilityBalloon : MonoBehaviour
         {
             Timer();
         }
+        
+
+        if(isLoadByManager == true)
+        {
+            if (isMake == true)
+            {
+                Balloon.SetActive(true);
+            }
+            if (isMakeFinish == true)
+            {
+                Balloon.SetActive(true);
+            }
+            Item.GetComponent<SpriteRenderer>().sprite = itemDictionary[makeItem];
+            Item_back.GetComponent<SpriteRenderer>().sprite = itemDictionary[makeItem];
+            isLoadByManager = false;
+        }
+
         Display();
 
     }
@@ -87,7 +105,6 @@ public class FacilityBalloon : MonoBehaviour
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
-            //InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Gather);
             InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
             GetComponent<Facility>().DisplayIcon();
         }

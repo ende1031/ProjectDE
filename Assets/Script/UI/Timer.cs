@@ -10,8 +10,6 @@ public class Timer : MonoBehaviour
 
     Text timerText;
 
-    string tempZero = string.Empty;
-
     void Start ()
     {
         timerText = GetComponent<Text>();
@@ -27,16 +25,27 @@ public class Timer : MonoBehaviour
             time--;
         }
 
-        if(minute < 10)
+        string t;
+        string m;
+        if(time >= 10)
         {
-            tempZero = "0";
+            t = time.ToString();
         }
         else
         {
-            tempZero = string.Empty;
+            t = "0" + time;
         }
 
-        timerText.text = (int)time + " : " + tempZero + (int)minute;
+        if (minute >= 10)
+        {
+            m = ((int)minute).ToString();
+        }
+        else
+        {
+            m = "0" + (int)minute;
+        }
+
+        timerText.text = t + " : " + m;
     }
 
     public void ResetTimer()

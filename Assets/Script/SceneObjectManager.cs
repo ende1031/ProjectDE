@@ -23,7 +23,7 @@ public class SceneObjectManager : MonoBehaviour
             grid = g;
         }
 
-        public SceneObject(string t, string n, int g, int temp) //포탈용
+        public SceneObject(string t, string n, int g, int temp) //temp : 이동후좌표(포탈), 상태(식물)
         {
             type = t;
             name = n;
@@ -40,6 +40,10 @@ public class SceneObjectManager : MonoBehaviour
         public int portalAfterMoveGrid;
         public int plantState;
         public float plantGrowthTimer;
+        public global::Inventory.Item facilityMakeItem;
+        public float facilityMakeTimer;
+        public bool facilityIsMake;
+        public bool facilityIsMakeFinish;
     }
 
     static int maxSceneCount = 2; //씬 추가시 늘려줘야 됨
@@ -86,6 +90,11 @@ public class SceneObjectManager : MonoBehaviour
                     ob.inGameObject = Instantiate(TempFacility, tempPos, Quaternion.identity);
                     break;
             }
+            ob.inGameObject.GetComponent<FacilityBalloon>().makeItem = ob.facilityMakeItem;
+            ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer = ob.facilityMakeTimer;
+            ob.inGameObject.GetComponent<FacilityBalloon>().isMake = ob.facilityIsMake;
+            ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish = ob.facilityIsMakeFinish;
+            ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
         }
         else if (ob.type == "Portal")
         {
@@ -133,6 +142,13 @@ public class SceneObjectManager : MonoBehaviour
                         ob.plantGrowthTimer += Time.deltaTime;
                     }
                 }
+                else if (ob.type == "Facility")
+                {
+                    if (ob.inGameObject == null && ob.facilityIsMake == true && ob.facilityMakeTimer > 0)
+                    {
+                        ob.facilityMakeTimer -= Time.deltaTime;
+                    }
+                }
             }
         }
     }
@@ -152,6 +168,16 @@ public class SceneObjectManager : MonoBehaviour
                         ob.plantGrowthTimer = ob.inGameObject.GetComponent<Plant>().growthTimer;
                     }
                 }
+                else if(ob.type == "Facility")
+                {
+                    if(ob.inGameObject != null)
+                    {
+                        ob.facilityMakeTimer = ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
+                        ob.facilityMakeItem = ob.inGameObject.GetComponent<FacilityBalloon>().makeItem;
+                        ob.facilityIsMake = ob.inGameObject.GetComponent<FacilityBalloon>().isMake;
+                        ob.facilityIsMakeFinish = ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;
+                    }
+                }
             }
         }
     }
@@ -166,6 +192,11 @@ public class SceneObjectManager : MonoBehaviour
                 if (ob.type == "Plant")
                 {
                     ob.plantState = 1;
+                }
+                else if (ob.type == "Facility")
+                {
+                    ob.facilityIsMake = false;
+                    ob.facilityIsMakeFinish = false;
                 }
             }
         }

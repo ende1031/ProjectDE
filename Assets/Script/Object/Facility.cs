@@ -80,16 +80,16 @@ public class Facility : MonoBehaviour
                 PopupWindow.GetComponent<PopupWindow>().ClearItemList();
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Board);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Oxygen);
                 PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
             case "EscapePod":
                 PopupWindow.GetComponent<PopupWindow>().ClearItemList();
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Stick);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Oxygen);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Oxygen);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Hose);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Stick);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Board);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Mass);
                 PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);

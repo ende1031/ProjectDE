@@ -36,7 +36,7 @@ public class EnergyGauge : MonoBehaviour
     void DisplayText()
     {
         float temp = Mathf.Round(amountOfEnergy);
-        percent.GetComponent<Text>().text = (int)temp + "%";
+        percent.GetComponent<Text>().text = (int)temp + "";
     }
 
     void DisplayGauge()

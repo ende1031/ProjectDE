@@ -108,19 +108,19 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "멋진배터리", "배터리 중에서 가장 잘생긴 인기배터리이다.\n\n걸리는 시간 : 5억년 31초", global::Inventory.Item.Stick, 1));
                 break;
             case global::Inventory.Item.Food:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Food, "특제 계란후라이", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다.\n\n걸리는 시간 : 3개월", global::Inventory.Item.Stick, 2));
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Food, "특제 계란후라이", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다.\n\n걸리는 시간 : 3개월", global::Inventory.Item.Stick, 2, global::Inventory.Item.Board, 1));
                 break;
             case global::Inventory.Item.Oxygen:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Oxygen, "San-So", "괴식물 막대를 어떻게 가공하면 산소가 되는걸까?\n미래 우주의 기술은 놀랍다.\n\n걸리는 시간 : 보름", global::Inventory.Item.Stick, 2, global::Inventory.Item.Battery, 1));
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Oxygen, "San-So", "괴식물 막대를 어떻게 가공하면 산소가 되는걸까?\n미래 우주의 기술은 놀랍다.\n\n걸리는 시간 : 보름", global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 1));
                 break;
             case global::Inventory.Item.Stick:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Stick, "막대", "여기서 막대 만들 시간에 괴식물한테 채집하는게 이득이다.\n\n그렇다고 한다.\n\n걸리는 시간 : 조만간", global::Inventory.Item.Battery, 1, global::Inventory.Item.Food, 3));
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Stick, "막대", "여기서 막대 만들 시간에 괴식물한테 채집하는게 이득이다.\n\n그렇다고 한다.\n\n걸리는 시간 : 조만간", global::Inventory.Item.Battery, 1, global::Inventory.Item.Board, 2));
                 break;
             case global::Inventory.Item.Board:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Board, "판자", "판\n자\n다\n\n걸리는 시간 : 금방", global::Inventory.Item.Stick, 1, global::Inventory.Item.Food, 3));
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Board, "판자", "판\n자\n다\n\n걸리는 시간 : 금방", global::Inventory.Item.Stick, 2, global::Inventory.Item.Food, 1));
                 break;
             case global::Inventory.Item.Hose:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Hose, "호스", "테스트용 호스\n\n걸리는 시간 : 21세기", global::Inventory.Item.Stick, 7, global::Inventory.Item.Board, 5, global::Inventory.Item.Food, 7, global::Inventory.Item.Oxygen, 2));
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Hose, "호스", "테스트용 호스\n\n걸리는 시간 : 21세기", global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 3, global::Inventory.Item.Food, 2, global::Inventory.Item.Oxygen, 1));
                 break;
             case global::Inventory.Item.Mass:
                 WindowItemList.Add(new WindowItem(global::Inventory.Item.Mass, "덩어리 M.A.S.S.", "테스트용으로 재료를 엄청나게 많게 설정했다.\n참고로 MASS는 고유명사임.\n\n걸리는 시간 : 내일", global::Inventory.Item.Stick, 73, global::Inventory.Item.Board, 10, global::Inventory.Item.Food, 57, global::Inventory.Item.Oxygen, 42, global::Inventory.Item.Battery, 91));
@@ -278,7 +278,15 @@ public class PopupWindow : MonoBehaviour
                 tempColor.a = 1;
                 MaterialsItem[i].GetComponent<Image>().color = tempColor;
                 MaterialsItem[i].GetComponent<Image>().sprite = itemDictionary[WindowItemList[selectedIndex].material[i]];
-                MaterialsNum[i].GetComponent<Text>().text = Inventory.GetComponent<Inventory>().CountOfItem(WindowItemList[selectedIndex].material[i]) + " / " + WindowItemList[selectedIndex].materialNum[i];
+                MaterialsNum[i].GetComponent<Text>().text = Inventory.GetComponent<Inventory>().CountOfItem(WindowItemList[selectedIndex].material[i]) + "/" + WindowItemList[selectedIndex].materialNum[i];
+                if(WindowItemList[selectedIndex].materialNum[i] > Inventory.GetComponent<Inventory>().CountOfItem(WindowItemList[selectedIndex].material[i]))
+                {
+                    MaterialsNum[i].GetComponent<Text>().color = Color.red;
+                }
+                else
+                {
+                    MaterialsNum[i].GetComponent<Text>().color = Color.white;
+                }
             }
             else
             {
