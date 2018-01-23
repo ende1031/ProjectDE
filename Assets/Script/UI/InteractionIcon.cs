@@ -8,13 +8,13 @@ public class InteractionIcon : MonoBehaviour
     public enum Icon //아이콘 추가시 수정할 부분
     {
         Gather,
-        Input,
+        Make,
         Sleep,
         Portal,
     };
 
     GameObject GatherIcon; //아이콘 추가시 수정할 부분
-    GameObject InputIcon;
+    GameObject MakeIcon;
     GameObject SleepIcon;
     GameObject PortalIcon;
 
@@ -39,14 +39,14 @@ public class InteractionIcon : MonoBehaviour
         IconBG = transform.Find("IconBG").gameObject;
 
         GatherIcon = transform.Find("Gather").gameObject; //아이콘 추가시 수정할 부분
-        InputIcon = transform.Find("Input").gameObject;
+        MakeIcon = transform.Find("Make").gameObject;
         SleepIcon = transform.Find("Sleep").gameObject;
         PortalIcon = transform.Find("Portal").gameObject;
 
         if (GatherIcon != null)
         {
             iconDictionary[Icon.Gather] = GatherIcon; //아이콘 추가시 수정할 부분
-            iconDictionary[Icon.Input] = InputIcon;
+            iconDictionary[Icon.Make] = MakeIcon;
             iconDictionary[Icon.Sleep] = SleepIcon;
             iconDictionary[Icon.Portal] = PortalIcon;
         }
@@ -55,7 +55,7 @@ public class InteractionIcon : MonoBehaviour
     void HideAllIcons()
     {
         GatherIcon.SetActive(false); //아이콘 추가시 수정할 부분
-        InputIcon.SetActive(false);
+        MakeIcon.SetActive(false);
         SleepIcon.SetActive(false);
         PortalIcon.SetActive(false);
     }
@@ -83,7 +83,7 @@ public class InteractionIcon : MonoBehaviour
         IconBGAlpha();
     }
 
-    void DeleteAllIcons()
+    public void DeleteAllIcons()
     {
         displayedIconList.Clear();
         RefreshIcons();

@@ -84,6 +84,7 @@
     <Compile Include="Assets\Script\Object\CamaraSetting.cs" />
     <Compile Include="Assets\Script\Object\CameraMove.cs" />
     <Compile Include="Assets\Script\Object\Facility.cs" />
+    <Compile Include="Assets\Script\Object\FacilityBalloon.cs" />
     <Compile Include="Assets\Script\Object\Plant.cs" />
     <Compile Include="Assets\Script\Object\PlayerInteraction.cs" />
     <Compile Include="Assets\Script\Object\PlayerMove.cs" />

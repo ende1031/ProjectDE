@@ -49,11 +49,21 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                target.GetComponent<Facility>().OpenProductionWindow();
+                if(target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
+                {
+                    target.GetComponent<Facility>().OpenProductionWindow();
+                }
+                if (target.GetComponent<FacilityBalloon>().isMakeFinish == true)
+                {
+                    target.GetComponent<FacilityBalloon>().GetItem();
+                }
             }
             if (Input.GetKeyDown(KeyCode.C))
             {
-                target.GetComponent<Facility>().Sleep();
+                if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
+                {
+                    target.GetComponent<Facility>().Sleep();
+                }
             }
         }
 

@@ -28,16 +28,28 @@ public class Facility : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && Inventory.GetComponent<Inventory>().isInventoryActive == false)
         {
+            DisplayIcon();
+        }
+    }
+
+    public void DisplayIcon()
+    {
+        if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
+        {
             switch (facilityName)
             {
                 case "TempFacility":
-                    InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Input);
+                    InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
                     break;
                 case "EscapePod":
-                    InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Input);
+                    InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
                     InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Sleep);
                     break;
             }
+        }
+        if (GetComponent<FacilityBalloon>().isMakeFinish == true)
+        {
+            InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Gather);
         }
     }
 
@@ -48,10 +60,12 @@ public class Facility : MonoBehaviour
             switch (facilityName)
             {
                 case "TempFacility":
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Input);
+                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Make);
+                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
                     break;
                 case "EscapePod":
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Input);
+                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Make);
+                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Sleep);
                     break;
             }
@@ -67,7 +81,7 @@ public class Facility : MonoBehaviour
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Board);
-                PopupWindow.GetComponent<PopupWindow>().OpenWindow();
+                PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
             case "EscapePod":
                 PopupWindow.GetComponent<PopupWindow>().ClearItemList();
@@ -78,25 +92,7 @@ public class Facility : MonoBehaviour
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Hose);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Board);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Mass);
-                PopupWindow.GetComponent<PopupWindow>().OpenWindow();
-                break;
-        }
-    }
-
-    public void DeleteItem()
-    {
-        switch (facilityName) //테스트용 코드
-        {
-            case "TempFacility":
-                if (Inventory.GetComponent<Inventory>().DeleteItem(global::Inventory.Item.Stick) == true)
-                {
-                    Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass);
-                }
-                break;
-            case "EscapePod":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Food, 10);
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Oxygen, 5);
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Battery, 15);
+                PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
         }
     }
