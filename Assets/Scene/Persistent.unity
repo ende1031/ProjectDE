@@ -441,6 +441,7 @@ MonoBehaviour:
   StickPlant: {fileID: 1962487321500588, guid: 2168df4ebe7306c4fb664ba8e3f9fb3b, type: 2}
   BoardPlant: {fileID: 1713309569161114, guid: 808a858534c1ac2439e0925dcdffc967, type: 2}
   MassPlant: {fileID: 1973922401690096, guid: 66b814dee91cd054b97b5993d8474763, type: 2}
+  ThornPlant: {fileID: 1549453647226052, guid: ea87fe77882e2eb40bee0bd6e7597135, type: 2}
   Portal: {fileID: 1768756399868750, guid: b0a0c9869ade5d74384781159a06efb6, type: 2}
 --- !u!1 &136986828
 GameObject:
@@ -2984,6 +2985,7 @@ GameObject:
   - component: {fileID: 1662992164}
   - component: {fileID: 1662992163}
   - component: {fileID: 1662992162}
+  - component: {fileID: 1662992167}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3067,6 +3069,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1662992167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1662992161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dc54123a161004a84b03952d6b90f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScreenSize: {x: 1280, y: 720}
 --- !u!1 &1690817546
 GameObject:
   m_ObjectHideFlags: 0

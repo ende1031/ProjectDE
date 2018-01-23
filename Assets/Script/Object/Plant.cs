@@ -61,6 +61,9 @@ public class Plant : MonoBehaviour
             case "BoardPlant":
                 Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Board);
                 break;
+            case "ThornPlant":
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Thorn);
+                break;
         }
         isGatherPossible = false;
 

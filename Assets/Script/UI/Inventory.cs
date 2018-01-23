@@ -24,7 +24,8 @@ public class Inventory : MonoBehaviour
         Stick,
         Board,
         Hose,
-        Mass
+        Mass,
+        Thorn
     };
 
     GameObject[] itemSlot = new GameObject[7];
@@ -47,6 +48,7 @@ public class Inventory : MonoBehaviour
     public Sprite BoardSp;
     public Sprite HoseSp;
     public Sprite MassSp;
+    public Sprite ThornSp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -69,6 +71,8 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Image>().sprite = HoseSp;
         else if (itemName == Item.Mass)
             slot.GetComponent<Image>().sprite = MassSp;
+        else if (itemName == Item.Thorn)
+            slot.GetComponent<Image>().sprite = ThornSp;
     }
 
     void RefreshItemMenu()
@@ -97,6 +101,7 @@ public class Inventory : MonoBehaviour
             case Item.Board:
             case Item.Hose:
             case Item.Mass:
+            case Item.Thorn:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "C : 버리기";
                 break;
@@ -155,6 +160,7 @@ public class Inventory : MonoBehaviour
                 case Item.Board:
                 case Item.Hose:
                 case Item.Mass:
+                case Item.Thorn:
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;

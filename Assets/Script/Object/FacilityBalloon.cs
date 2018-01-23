@@ -7,6 +7,8 @@ public class FacilityBalloon : MonoBehaviour
     GameObject Inventory;
     GameObject InteractionIcon;
 
+    Animator animaitor;
+
     GameObject Balloon;
     GameObject TimeText;
     GameObject Item;
@@ -37,6 +39,8 @@ public class FacilityBalloon : MonoBehaviour
         Item = Balloon.transform.Find("Item").gameObject;
         Item_back = Balloon.transform.Find("Item_back").gameObject;
 
+        animaitor = GetComponent<Animator>();
+
         Balloon.SetActive(false);
     }
 
@@ -49,6 +53,7 @@ public class FacilityBalloon : MonoBehaviour
         itemDictionary[global::Inventory.Item.Board] = Inventory.GetComponent<Inventory>().BoardSp;
         itemDictionary[global::Inventory.Item.Hose] = Inventory.GetComponent<Inventory>().HoseSp;
         itemDictionary[global::Inventory.Item.Mass] = Inventory.GetComponent<Inventory>().MassSp;
+        itemDictionary[global::Inventory.Item.Thorn] = Inventory.GetComponent<Inventory>().ThornSp;
     }
 
     void Update ()
@@ -64,6 +69,7 @@ public class FacilityBalloon : MonoBehaviour
             if (isMake == true)
             {
                 Balloon.SetActive(true);
+                animaitor.SetBool("isMaking", true);
             }
             if (isMakeFinish == true)
             {
@@ -89,6 +95,7 @@ public class FacilityBalloon : MonoBehaviour
         progressTimer = timeToMake;
         isMake = true;
         isMakeFinish = false;
+        animaitor.SetBool("isMaking", true);
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
@@ -102,6 +109,7 @@ public class FacilityBalloon : MonoBehaviour
         isMake = false;
         isMakeFinish = true;
         Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
+        animaitor.SetBool("isMaking", false);
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {

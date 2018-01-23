@@ -36,14 +36,6 @@ public class PlayerMove : MonoBehaviour
             InputAndMove();
             SetDirection();
         }
-
-        //테스트용 코드
-        /*
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            print(Grid.instance.PlayerGrid());
-        }
-        */
     }
 
     void InputAndMove()
@@ -108,6 +100,22 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
+            spRenderer.flipX = true;
+        }
+    }
+
+    // 0:왼쪽, 1:오른쪽
+    public void SetDirection(int dir)
+    {
+        oldPos = transform.position;
+        if (dir == 0)
+        {
+            playerDir = Direction.Left;
+            spRenderer.flipX = false;
+        }
+        else if (dir == 1)
+        {
+            playerDir = Direction.Right;
             spRenderer.flipX = true;
         }
     }

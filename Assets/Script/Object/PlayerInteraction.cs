@@ -31,6 +31,18 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    void PlayerDirection()
+    {
+        if (target.transform.position.x > transform.position.x)
+        {
+            GetComponent<PlayerMove>().SetDirection(1);
+        }
+        else if (target.transform.position.x < transform.position.x)
+        {
+            GetComponent<PlayerMove>().SetDirection(0);
+        }
+    }
+
     void Interaction()
     {
         if (target == null)
@@ -42,6 +54,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 GatherAnimation(target.GetComponent<Plant>().GatherAnimationType, true);
                 target.GetComponent<Plant>().GatherStart();
+                PlayerDirection();
             }
         }
 
@@ -52,10 +65,12 @@ public class PlayerInteraction : MonoBehaviour
                 if(target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                 {
                     target.GetComponent<Facility>().OpenProductionWindow();
+                    PlayerDirection();
                 }
                 if (target.GetComponent<FacilityBalloon>().isMakeFinish == true)
                 {
                     target.GetComponent<FacilityBalloon>().GetItem();
+                    PlayerDirection();
                 }
             }
             if (Input.GetKeyDown(KeyCode.C))
@@ -71,6 +86,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
+                GetComponent<PlayerMove>().SetMovePossible(false);
                 SceneObjectManager.instance.SaveObject();
                 SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
             }

@@ -98,6 +98,7 @@ public class PopupWindow : MonoBehaviour
         itemDictionary[global::Inventory.Item.Board] = Inventory.GetComponent<Inventory>().BoardSp;
         itemDictionary[global::Inventory.Item.Hose] = Inventory.GetComponent<Inventory>().HoseSp;
         itemDictionary[global::Inventory.Item.Mass] = Inventory.GetComponent<Inventory>().MassSp;
+        itemDictionary[global::Inventory.Item.Thorn] = Inventory.GetComponent<Inventory>().ThornSp;
     }
 
     public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
@@ -124,6 +125,9 @@ public class PopupWindow : MonoBehaviour
                 break;
             case global::Inventory.Item.Mass:
                 WindowItemList.Add(new WindowItem(global::Inventory.Item.Mass, "덩어리 M.A.S.S.", "테스트용으로 재료를 엄청나게 많게 설정했다.\n참고로 MASS는 고유명사임.\n\n걸리는 시간 : 내일", global::Inventory.Item.Stick, 73, global::Inventory.Item.Board, 10, global::Inventory.Item.Food, 57, global::Inventory.Item.Oxygen, 42, global::Inventory.Item.Battery, 91));
+                break;
+            case global::Inventory.Item.Thorn:
+                WindowItemList.Add(new WindowItem(global::Inventory.Item.Mass, "가시", "놀라운 가시", global::Inventory.Item.Stick, 99, global::Inventory.Item.Board, 99, global::Inventory.Item.Food, 99, global::Inventory.Item.Oxygen, 99, global::Inventory.Item.Battery, 99));
                 break;
         }
     }

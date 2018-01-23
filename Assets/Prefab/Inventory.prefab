@@ -1135,6 +1135,7 @@ MonoBehaviour:
   BoardSp: {fileID: 21300000, guid: 278e6d22e140bfe41b9bb32faa66d196, type: 3}
   HoseSp: {fileID: 21300000, guid: 0c2014a7fc54bcb4295c982382234ca6, type: 3}
   MassSp: {fileID: 21300000, guid: 93ba6e72f925039419bfe54e260949b3, type: 3}
+  ThornSp: {fileID: 21300000, guid: 4402973014267024ba89c616109c66b0, type: 3}
   isInventoryActive: 0
 --- !u!114 &114427440867818556
 MonoBehaviour:
