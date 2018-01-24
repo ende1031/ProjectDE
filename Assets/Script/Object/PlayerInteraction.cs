@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     GameObject Inventory;
+    GameObject Monologue;
 
     Animator animaitor;
     bool isGather = false;
@@ -18,6 +19,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         animaitor = GetComponent<Animator>();
         Inventory = GameObject.Find("Inventory");
+        Monologue = transform.Find("Monologue").gameObject;
     }
 	
 	void Update ()
@@ -60,7 +62,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target.gameObject.tag == "Plant")
         {
-            if (Input.GetKeyDown(KeyCode.Z) && target.GetComponent<Plant>().isGatherPossible == true)
+            if (Input.GetKeyDown(KeyCode.C) && target.GetComponent<Plant>().isGatherPossible == true)
             {
                 PlayerDirection();
                 if (target.GetComponent<Plant>().InventoryCheck() == true)
@@ -70,15 +72,19 @@ public class PlayerInteraction : MonoBehaviour
                 }
                 else
                 {
-                    //인벤토리 공간 부족
+                    Monologue.GetComponent<Monologue>().DisplayLog("인벤토리 공간이 부족하군.\n채집하기 전에 필요없는 아이템을 버리는게 좋겠어.");
                     return;
                 }
             }
+            else if (Input.GetKeyDown(KeyCode.C) && target.GetComponent<Plant>().isGatherPossible == false)
+            {
+                Monologue.GetComponent<Monologue>().DisplayLog("조금 더 자란 다음에 채집하는게 좋겠군.");
+                return;
+            }
         }
-
-        if (target.gameObject.tag == "Facility")
+        else if (target.gameObject.tag == "Facility")
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 if(target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                 {
@@ -94,12 +100,17 @@ public class PlayerInteraction : MonoBehaviour
                     }
                     else
                     {
-                        //인벤토리 공간 부족
+                        Monologue.GetComponent<Monologue>().DisplayLog("인벤토리 공간이 부족하군.\n아이템을 획득하려면 인벤토리에 빈 공간이 필요해.");
                         return;
                     }
                 }
+                else if(target.GetComponent<FacilityBalloon>().isMake == true)
+                {
+                    Monologue.GetComponent<Monologue>().DisplayLog("아직 제작중이군.\n다른 일을 하면서 조금 기다려보자.");
+                    return;
+                }
             }
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                 {
@@ -107,10 +118,9 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
         }
-
-        if (target.gameObject.tag == "Portal")
+        else if (target.gameObject.tag == "Portal")
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 GetComponent<PlayerMove>().SetMovePossible(false);
                 SceneObjectManager.instance.SaveObject();

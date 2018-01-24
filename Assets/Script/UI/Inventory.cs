@@ -92,9 +92,9 @@ public class Inventory : MonoBehaviour
             case Item.Oxygen:
             case Item.Battery:
                 InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "C : 버리기";
+                InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
                 InventoryMenu[1].SetActive(true);
-                InventoryMenuText[1].GetComponent<Text>().text = "Z : 사용하기";
+                InventoryMenuText[1].GetComponent<Text>().text = "C : 사용하기";
                 break;
             
             case Item.Stick:
@@ -103,16 +103,16 @@ public class Inventory : MonoBehaviour
             case Item.Mass:
             case Item.Thorn:
                 InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "C : 버리기";
+                InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
                 break;
 
             default:
                 InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "C : 먹기";
+                InventoryMenuText[0].GetComponent<Text>().text = "Z : 먹기";
                 InventoryMenu[1].SetActive(true);
                 InventoryMenuText[1].GetComponent<Text>().text = "X : 마시기";
                 InventoryMenu[2].SetActive(true);
-                InventoryMenuText[2].GetComponent<Text>().text = "Z : 발차기";
+                InventoryMenuText[2].GetComponent<Text>().text = "C : 발차기";
                 break;
         }
     }
@@ -124,7 +124,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.Z))
+        if (Input.GetKeyUp(KeyCode.C))
         {
             switch (Items[selectedIndex].name)
             {
@@ -147,10 +147,6 @@ public class Inventory : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.X))
         {
-
-        }
-        else if (Input.GetKeyUp(KeyCode.C))
-        {
             switch (Items[selectedIndex].name)
             {
                 case Item.Food:
@@ -165,6 +161,10 @@ public class Inventory : MonoBehaviour
                     RefreshItemMenu();
                     break;
             }
+        }
+        else if (Input.GetKeyUp(KeyCode.Z))
+        {
+
         }
     }
 

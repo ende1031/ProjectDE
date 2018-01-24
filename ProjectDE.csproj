@@ -97,6 +97,7 @@
     <Compile Include="Assets\Script\UI\HungerGauge.cs" />
     <Compile Include="Assets\Script\UI\InteractionIcon.cs" />
     <Compile Include="Assets\Script\UI\Inventory.cs" />
+    <Compile Include="Assets\Script\UI\Monologue.cs" />
     <Compile Include="Assets\Script\UI\OxygenGauge.cs" />
     <Compile Include="Assets\Script\UI\PopupWindow.cs" />
     <Compile Include="Assets\Script\UI\Timer.cs" />

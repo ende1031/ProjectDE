@@ -243,7 +243,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Z : \uC81C\uC791\uD558\uAE30"
+  m_Text: "C : \uC81C\uC791\uD558\uAE30"
 --- !u!222 &18595225
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1542,7 +1542,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'C:'
+  m_Text: 'X:'
 --- !u!222 &517626179
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -166,11 +166,11 @@ public class PopupWindow : MonoBehaviour
             else
             {
                 MoveCursor();
-                if (Input.GetKeyUp(KeyCode.C))
+                if (Input.GetKeyUp(KeyCode.X))
                 {
                     CloseWindow();
                 }
-                else if (Input.GetKeyUp(KeyCode.Z))
+                else if (Input.GetKeyUp(KeyCode.C))
                 {
                     MakeItem();
                 }
@@ -201,7 +201,7 @@ public class PopupWindow : MonoBehaviour
         displayedSelectedIndex = 0;
         openTimer = 0;
         MoveCursor();
-        RefreshWindow();
+        //RefreshWindow();
         //PopupBG.SetActive(false);
         animaitor.SetBool("isOpen", false);
     }
@@ -324,7 +324,7 @@ public class PopupWindow : MonoBehaviour
                 {
                     MaterialsNum[i].GetComponent<Text>().color = Color.white;
                     Button.GetComponent<Image>().sprite = YellowButton;
-                    ButtonText.GetComponent<Text>().text = "Z : 제작하기";
+                    ButtonText.GetComponent<Text>().text = "C : 제작하기";
                 }
             }
             else

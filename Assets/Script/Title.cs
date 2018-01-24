@@ -39,7 +39,7 @@ public class Title : MonoBehaviour
                     tempPos.x = 981.0f;
                     tempPos.y = 290.0f;
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.C))
                     {
                         GameStart();
                     }
@@ -48,7 +48,7 @@ public class Title : MonoBehaviour
                     tempPos.x = 1114.0f;
                     tempPos.y = 190.0f;
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.C))
                     {
                         Application.Quit();
                     }
