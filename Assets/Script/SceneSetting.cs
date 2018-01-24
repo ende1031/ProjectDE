@@ -36,10 +36,6 @@ public class SceneSetting : MonoBehaviour
         }
 
         //테스트용 코드
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Facility", "TempFacility", Grid.instance.PlayerGrid()));
-        }
         if (Input.GetKeyUp(KeyCode.D))
         {
             SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "MassPlant", Grid.instance.PlayerGrid(), 1));

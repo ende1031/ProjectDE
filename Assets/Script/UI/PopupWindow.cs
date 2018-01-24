@@ -108,6 +108,7 @@ public class PopupWindow : MonoBehaviour
         itemDictionary[global::Inventory.Item.Hose] = Inventory.GetComponent<Inventory>().HoseSp;
         itemDictionary[global::Inventory.Item.Mass] = Inventory.GetComponent<Inventory>().MassSp;
         itemDictionary[global::Inventory.Item.Thorn] = Inventory.GetComponent<Inventory>().ThornSp;
+        itemDictionary[global::Inventory.Item.Facility01] = Inventory.GetComponent<Inventory>().Facility01Sp;
     }
 
     public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
@@ -115,13 +116,13 @@ public class PopupWindow : MonoBehaviour
         switch (itemName)
         {
             case global::Inventory.Item.Battery:
-                WindowItemList.Add(new WindowItem(itemName, 15, "멋진배터리", "배터리 중에서 가장 잘생긴 인기배터리이다." + TimeToString(15), global::Inventory.Item.Stick, 1));
+                WindowItemList.Add(new WindowItem(itemName, 15, "배터리", "괴물의 심장으로 만든 고밀도 배터리이다. 가공해서 형체는 많이 달라졌지만 들고 있으면 작은 움직임이 느껴진다.\n사용하면 에너지 게이지를 충전할 수 있다." + TimeToString(15), global::Inventory.Item.Stick, 1));
                 break;
             case global::Inventory.Item.Food:
-                WindowItemList.Add(new WindowItem(itemName, 20, "특제 계란후라이", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다." + TimeToString(20), global::Inventory.Item.Stick, 2, global::Inventory.Item.Board, 1));
+                WindowItemList.Add(new WindowItem(itemName, 20, "식량", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다.\n사용하면 허기 게이지를 충전할 수 있다." + TimeToString(20), global::Inventory.Item.Stick, 2, global::Inventory.Item.Board, 1));
                 break;
             case global::Inventory.Item.Oxygen:
-                WindowItemList.Add(new WindowItem(itemName, 10, "San-So", "괴식물 막대를 어떻게 가공하면 산소가 되는걸까?\n미래 우주의 기술은 놀랍다." + TimeToString(10), global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 1));
+                WindowItemList.Add(new WindowItem(itemName, 10, "산소", "폐허가 된 지구에서 숨을 쉬기 위해서는 정제를 통해 산소를 얻는 방법 밖에는 없다.\n산소가 다 떨어지면 나는 어떻게 될까?\n사용하면 산소 게이지를 충전할 수 있다." + TimeToString(10), global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 1));
                 break;
             case global::Inventory.Item.Stick:
                 WindowItemList.Add(new WindowItem(itemName, 30, "막대", "여기서 막대 만들 시간에 괴식물한테 채집하는게 이득이다.\n\n그렇다고 한다." + TimeToString(30), global::Inventory.Item.Battery, 1, global::Inventory.Item.Board, 2));
@@ -133,15 +134,18 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(itemName, 70, "호스", "테스트용 호스" + TimeToString(70), global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 3, global::Inventory.Item.Food, 2, global::Inventory.Item.Oxygen, 1));
                 break;
             case global::Inventory.Item.Mass:
-                WindowItemList.Add(new WindowItem(itemName, 80, "덩어리 M.A.S.S.", "테스트용으로 재료를 엄청나게 많게 설정했다.\n참고로 MASS는 고유명사임." + TimeToString(80), global::Inventory.Item.Stick, 73, global::Inventory.Item.Board, 10, global::Inventory.Item.Food, 57, global::Inventory.Item.Oxygen, 42, global::Inventory.Item.Battery, 91));
+                WindowItemList.Add(new WindowItem(itemName, 80, "덩어리", "테스트용으로 재료를 엄청나게 많게 설정했다.\n참고로 덩어리는 고유명사임." + TimeToString(80), global::Inventory.Item.Stick, 73, global::Inventory.Item.Board, 10, global::Inventory.Item.Food, 57, global::Inventory.Item.Oxygen, 42, global::Inventory.Item.Battery, 91));
                 break;
             case global::Inventory.Item.Thorn:
-                WindowItemList.Add(new WindowItem(itemName, 300, "가시", "놀라운 가시" + TimeToString(300), global::Inventory.Item.Stick, 99, global::Inventory.Item.Board, 99, global::Inventory.Item.Food, 99, global::Inventory.Item.Oxygen, 99, global::Inventory.Item.Battery, 99));
+                WindowItemList.Add(new WindowItem(itemName, 300, "가시", "괴식물을 통해 얻는게 빠르다." + TimeToString(300), global::Inventory.Item.Stick, 99, global::Inventory.Item.Board, 99, global::Inventory.Item.Food, 99, global::Inventory.Item.Oxygen, 99, global::Inventory.Item.Battery, 99));
+                break;
+            case global::Inventory.Item.Facility01:
+                WindowItemList.Add(new WindowItem(itemName, 30, "워크벤치", "괴물의 조직을 이용해서 만든 워크벤치이다. 살아있지만 위험하지는 않다.\n각종 물품을 생산할 수 있다." + TimeToString(30), global::Inventory.Item.Board, 2, global::Inventory.Item.Battery, 1));
                 break;
         }
     }
 
-    // 테스트용 코드
+    // 기본세팅
     void SetWindowItem()
     {
         AddItem(global::Inventory.Item.Battery);
