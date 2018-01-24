@@ -29,6 +29,16 @@ public class PlayerInteraction : MonoBehaviour
                 Interaction();
             }
         }
+
+        //테스트용 코드
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Battery, 15);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Food, 15);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Hose, 15);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Oxygen, 15);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick, 35);
+        }
     }
 
     void PlayerDirection()
@@ -52,9 +62,17 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Z) && target.GetComponent<Plant>().isGatherPossible == true)
             {
-                GatherAnimation(target.GetComponent<Plant>().GatherAnimationType, true);
-                target.GetComponent<Plant>().GatherStart();
                 PlayerDirection();
+                if (target.GetComponent<Plant>().InventoryCheck() == true)
+                {
+                    GatherAnimation(target.GetComponent<Plant>().GatherAnimationType, true);
+                    target.GetComponent<Plant>().GatherStart();
+                }
+                else
+                {
+                    //인벤토리 공간 부족
+                    return;
+                }
             }
         }
 
@@ -69,8 +87,16 @@ public class PlayerInteraction : MonoBehaviour
                 }
                 if (target.GetComponent<FacilityBalloon>().isMakeFinish == true)
                 {
-                    target.GetComponent<FacilityBalloon>().GetItem();
                     PlayerDirection();
+                    if (target.GetComponent<FacilityBalloon>().InventoryCheck() == true)
+                    {
+                        target.GetComponent<FacilityBalloon>().GetItem();
+                    }
+                    else
+                    {
+                        //인벤토리 공간 부족
+                        return;
+                    }
                 }
             }
             if (Input.GetKeyDown(KeyCode.C))

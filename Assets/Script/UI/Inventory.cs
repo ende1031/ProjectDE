@@ -303,7 +303,7 @@ public class Inventory : MonoBehaviour
     //아이템 획득에 실패하면 false를 반환 
     public bool GetItem(Item itemName, int num = 1)
     {
-        if (Items.Count < 7)
+        if (isFull(itemName) == false)
         {
             int? temp = isContains(itemName);
             if(temp.HasValue)
@@ -392,5 +392,14 @@ public class Inventory : MonoBehaviour
             }
         }
         return 0;
+    }
+
+    public bool isFull(Item itemName)
+    {
+        if(Items.Count >= 7 && HasItem(itemName) == false)
+        {
+            return true;
+        }
+        return false;
     }
 }

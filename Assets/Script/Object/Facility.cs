@@ -92,6 +92,7 @@ public class Facility : MonoBehaviour
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Stick);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Board);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Mass);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Thorn);
                 PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
         }

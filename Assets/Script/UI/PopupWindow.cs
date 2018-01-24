@@ -17,6 +17,11 @@ public class PopupWindow : MonoBehaviour
     GameObject ExplanationText;
     GameObject[] MaterialsItem = new GameObject[6];
     GameObject[] MaterialsNum = new GameObject[6];
+    GameObject Button;
+    GameObject ButtonText;
+
+    public Sprite YellowButton;
+    public Sprite RedButton;
 
     int selectedIndex = 0;
     int displayedSelectedIndex = 0;
@@ -30,11 +35,12 @@ public class PopupWindow : MonoBehaviour
 
     public class WindowItem
     {
-        public WindowItem(global::Inventory.Item n, string iName, string ex, global::Inventory.Item m1, int mn1,
+        public WindowItem(global::Inventory.Item n, int t, string iName, string ex, global::Inventory.Item m1, int mn1,
             global::Inventory.Item m2 = 0, int mn2 = 0, global::Inventory.Item m3 = 0, int mn3 = 0, global::Inventory.Item m4 = 0, int mn4 = 0,
             global::Inventory.Item m5 = 0, int mn5 = 0, global::Inventory.Item m6 = 0, int mn6 = 0)
         {
             name = n;
+            time = t;
             itemName = iName;
             expText = ex;
 
@@ -46,6 +52,7 @@ public class PopupWindow : MonoBehaviour
             material[5] = m6; materialNum[5] = mn6;
         }
         public global::Inventory.Item name;
+        public int time;
         public string itemName;
         public string expText;
         
@@ -87,6 +94,8 @@ public class PopupWindow : MonoBehaviour
             MaterialsItem[i] = MakingMaterials.transform.Find("Item" + (i + 1)).gameObject;
             MaterialsNum[i] = MaterialsItem[i].transform.Find("Text").gameObject;
         }
+        Button = MakingMaterials.transform.Find("Button").gameObject;
+        ButtonText = Button.transform.Find("Text").gameObject;
     }
 
     void SetDictionary() //아이템 추가시 수정할 부분
@@ -106,28 +115,28 @@ public class PopupWindow : MonoBehaviour
         switch (itemName)
         {
             case global::Inventory.Item.Battery:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Battery, "멋진배터리", "배터리 중에서 가장 잘생긴 인기배터리이다.\n\n걸리는 시간 : 5억년 31초", global::Inventory.Item.Stick, 1));
+                WindowItemList.Add(new WindowItem(itemName, 15, "멋진배터리", "배터리 중에서 가장 잘생긴 인기배터리이다." + TimeToString(15), global::Inventory.Item.Stick, 1));
                 break;
             case global::Inventory.Item.Food:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Food, "특제 계란후라이", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다.\n\n걸리는 시간 : 3개월", global::Inventory.Item.Stick, 2, global::Inventory.Item.Board, 1));
+                WindowItemList.Add(new WindowItem(itemName, 20, "특제 계란후라이", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다." + TimeToString(20), global::Inventory.Item.Stick, 2, global::Inventory.Item.Board, 1));
                 break;
             case global::Inventory.Item.Oxygen:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Oxygen, "San-So", "괴식물 막대를 어떻게 가공하면 산소가 되는걸까?\n미래 우주의 기술은 놀랍다.\n\n걸리는 시간 : 보름", global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 1));
+                WindowItemList.Add(new WindowItem(itemName, 10, "San-So", "괴식물 막대를 어떻게 가공하면 산소가 되는걸까?\n미래 우주의 기술은 놀랍다." + TimeToString(10), global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 1));
                 break;
             case global::Inventory.Item.Stick:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Stick, "막대", "여기서 막대 만들 시간에 괴식물한테 채집하는게 이득이다.\n\n그렇다고 한다.\n\n걸리는 시간 : 조만간", global::Inventory.Item.Battery, 1, global::Inventory.Item.Board, 2));
+                WindowItemList.Add(new WindowItem(itemName, 30, "막대", "여기서 막대 만들 시간에 괴식물한테 채집하는게 이득이다.\n\n그렇다고 한다." + TimeToString(30), global::Inventory.Item.Battery, 1, global::Inventory.Item.Board, 2));
                 break;
             case global::Inventory.Item.Board:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Board, "판자", "판\n자\n다\n\n걸리는 시간 : 금방", global::Inventory.Item.Stick, 2, global::Inventory.Item.Food, 1));
+                WindowItemList.Add(new WindowItem(itemName, 45, "판자", "판\n자\n다" + TimeToString(45), global::Inventory.Item.Stick, 2, global::Inventory.Item.Food, 1));
                 break;
             case global::Inventory.Item.Hose:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Hose, "호스", "테스트용 호스\n\n걸리는 시간 : 21세기", global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 3, global::Inventory.Item.Food, 2, global::Inventory.Item.Oxygen, 1));
+                WindowItemList.Add(new WindowItem(itemName, 70, "호스", "테스트용 호스" + TimeToString(70), global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 3, global::Inventory.Item.Food, 2, global::Inventory.Item.Oxygen, 1));
                 break;
             case global::Inventory.Item.Mass:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Mass, "덩어리 M.A.S.S.", "테스트용으로 재료를 엄청나게 많게 설정했다.\n참고로 MASS는 고유명사임.\n\n걸리는 시간 : 내일", global::Inventory.Item.Stick, 73, global::Inventory.Item.Board, 10, global::Inventory.Item.Food, 57, global::Inventory.Item.Oxygen, 42, global::Inventory.Item.Battery, 91));
+                WindowItemList.Add(new WindowItem(itemName, 80, "덩어리 M.A.S.S.", "테스트용으로 재료를 엄청나게 많게 설정했다.\n참고로 MASS는 고유명사임." + TimeToString(80), global::Inventory.Item.Stick, 73, global::Inventory.Item.Board, 10, global::Inventory.Item.Food, 57, global::Inventory.Item.Oxygen, 42, global::Inventory.Item.Battery, 91));
                 break;
             case global::Inventory.Item.Thorn:
-                WindowItemList.Add(new WindowItem(global::Inventory.Item.Mass, "가시", "놀라운 가시", global::Inventory.Item.Stick, 99, global::Inventory.Item.Board, 99, global::Inventory.Item.Food, 99, global::Inventory.Item.Oxygen, 99, global::Inventory.Item.Battery, 99));
+                WindowItemList.Add(new WindowItem(itemName, 300, "가시", "놀라운 가시" + TimeToString(300), global::Inventory.Item.Stick, 99, global::Inventory.Item.Board, 99, global::Inventory.Item.Food, 99, global::Inventory.Item.Oxygen, 99, global::Inventory.Item.Battery, 99));
                 break;
         }
     }
@@ -226,10 +235,32 @@ public class PopupWindow : MonoBehaviour
                 }
             }
             //Inventory.GetComponent<Inventory>().GetItem(WindowItemList[selectedIndex].name);
-            Facility.GetComponent<FacilityBalloon>().MakeItem(WindowItemList[selectedIndex].name, 15);
+            Facility.GetComponent<FacilityBalloon>().MakeItem(WindowItemList[selectedIndex].name, WindowItemList[selectedIndex].time);
             CloseWindow();
         }
 
+    }
+
+    string TimeToString(int t)
+    {
+        int m = t / 60;
+        int s = t % 60;
+
+        string temp = "\n\n걸리는 시간 : " + m + "분 " + s + "초";
+        if (m == 0)
+        {
+            temp = "\n\n걸리는 시간 : " + s + "초";
+        }
+        if (s == 0)
+        {
+            temp = "\n\n걸리는 시간 : " + m + "분";
+        }
+        if (t <= 0)
+        {
+            temp = "\n\n걸리는 시간 : 알 수 없음(오류 코드명 : 치킨마요)";
+        }
+
+        return temp;
     }
 
     void MoveCursor()
@@ -286,10 +317,14 @@ public class PopupWindow : MonoBehaviour
                 if(WindowItemList[selectedIndex].materialNum[i] > Inventory.GetComponent<Inventory>().CountOfItem(WindowItemList[selectedIndex].material[i]))
                 {
                     MaterialsNum[i].GetComponent<Text>().color = Color.red;
+                    Button.GetComponent<Image>().sprite = RedButton;
+                    ButtonText.GetComponent<Text>().text = "재료 부족";
                 }
                 else
                 {
                     MaterialsNum[i].GetComponent<Text>().color = Color.white;
+                    Button.GetComponent<Image>().sprite = YellowButton;
+                    ButtonText.GetComponent<Text>().text = "Z : 제작하기";
                 }
             }
             else

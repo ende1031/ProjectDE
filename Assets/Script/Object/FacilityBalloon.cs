@@ -69,7 +69,10 @@ public class FacilityBalloon : MonoBehaviour
             if (isMake == true)
             {
                 Balloon.SetActive(true);
-                animaitor.SetBool("isMaking", true);
+                if(animaitor != null)
+                {
+                    animaitor.SetBool("isMaking", true);
+                }
             }
             if (isMakeFinish == true)
             {
@@ -95,7 +98,10 @@ public class FacilityBalloon : MonoBehaviour
         progressTimer = timeToMake;
         isMake = true;
         isMakeFinish = false;
-        animaitor.SetBool("isMaking", true);
+        if (animaitor != null)
+        {
+            animaitor.SetBool("isMaking", true);
+        }
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
@@ -109,13 +115,23 @@ public class FacilityBalloon : MonoBehaviour
         isMake = false;
         isMakeFinish = true;
         Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
-        animaitor.SetBool("isMaking", false);
+        if (animaitor != null)
+        {
+            animaitor.SetBool("isMaking", false);
+        }
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
             InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
             GetComponent<Facility>().DisplayIcon();
         }
+    }
+
+    public bool InventoryCheck()
+    {
+        bool temp = true;
+        temp = !Inventory.GetComponent<Inventory>().isFull(makeItem);
+        return temp;
     }
 
     public void GetItem()

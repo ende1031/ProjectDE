@@ -73,6 +73,27 @@ public class Plant : MonoBehaviour
         }
     }
 
+    public bool InventoryCheck()
+    {
+        bool temp = true;
+        switch (plantName)
+        {
+            case "StickPlant":
+                temp = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Stick);
+                break;
+            case "MassPlant":
+                temp = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Mass);
+                break;
+            case "BoardPlant":
+                temp = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Board);
+                break;
+            case "ThornPlant":
+                temp = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Thorn);
+                break;
+        }
+        return temp;
+    }
+
     //애니메이션 이벤트에서 사용하는 함수
     public void SetGatherPossibleFalse()
     {
