@@ -14,6 +14,7 @@ public class SceneObjectManager : MonoBehaviour
     public GameObject MassPlant;
     public GameObject ThornPlant;
     public GameObject Portal;
+    public GameObject Trap01;
 
     public class SceneObject
     {
@@ -71,6 +72,9 @@ public class SceneObjectManager : MonoBehaviour
                     break;
                 case "ThornPlant":
                     ob.inGameObject = Instantiate(ThornPlant, tempPos, Quaternion.identity);
+                    break;
+                case "Trap01":
+                    ob.inGameObject = Instantiate(Trap01, tempPos, Quaternion.identity);
                     break;
                 default:
                     ob.inGameObject = Instantiate(StickPlant, tempPos, Quaternion.identity);

@@ -14,7 +14,7 @@ public class Plant : MonoBehaviour
     public bool isGatherPossible;
     public string plantName = "StickPlant";
     public int GatherAnimationType = 1;
-    public int state; //0:자라는 중, 1:채집가능, 2:채집후
+    public int state; //0:자라는 중(덫설치후 대기중), 1:채집가능(덫잡힘), 2:채집후, 3:덫설치중
 
     public float growthTime; //성장하는데 걸리는 시간(초)
     public float growthTimer = 0;
@@ -29,15 +29,6 @@ public class Plant : MonoBehaviour
         animaitor = GetComponent<Animator>();
         animaitor.SetInteger("State", state);
         animaitor.SetBool("isGathering", false); //플레이어가 채집을 하는것인지, 아니면 바로 애니메이션 전환을 할지
-
-        if (plantName == "StickPlant")
-        {
-            isGatherPossible = true;
-        }
-        else if (plantName == "MassPlant")
-        {
-            isGatherPossible = true;
-        }
     }
 
     public void GatherStart()
@@ -63,6 +54,11 @@ public class Plant : MonoBehaviour
                 break;
             case "ThornPlant":
                 Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Thorn);
+                break;
+            case "Trap01":
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Hose);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass);
+                SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                 break;
         }
         isGatherPossible = false;
@@ -90,6 +86,14 @@ public class Plant : MonoBehaviour
             case "ThornPlant":
                 temp = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Thorn);
                 break;
+            case "Trap01":
+                bool t1 = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Hose);
+                bool t2 = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Mass);
+                if(t1 == false || t2 == false)
+                {
+                    temp = false;
+                }
+                break;
         }
         return temp;
     }
@@ -110,9 +114,16 @@ public class Plant : MonoBehaviour
         }
     }
 
+    //애니메이션 이벤트에서 사용하는 함수
+    public void SetTrapOn()
+    {
+        state = 0;
+        animaitor.SetInteger("State", state);
+    }
+
     void Update ()
     {
-        if(plantName != "MassPlant")
+        if (plantName != "MassPlant")
         {
             Growth();
         }
@@ -122,7 +133,18 @@ public class Plant : MonoBehaviour
     {
         if (state == 0 || state == 2)
         {
-            growthTimer += Time.deltaTime;
+            if (plantName == "Trap01")
+            {
+                if (Mathf.Abs(Grid.instance.PlayerGrid() - Grid.instance.PosToGrid(transform.position.x)) > 6)
+                {
+                    growthTimer += Time.deltaTime;
+                }
+            }
+            else
+            {
+                growthTimer += Time.deltaTime;
+            }
+            
             if (growthTimer >= growthTime)
             {
                 growthTimer = 0;

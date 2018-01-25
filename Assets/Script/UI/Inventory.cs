@@ -26,7 +26,8 @@ public class Inventory : MonoBehaviour
         Hose,
         Mass,
         Thorn,
-        Facility01
+        Facility01,
+        Trap01
     };
 
     GameObject[] itemSlot = new GameObject[7];
@@ -52,6 +53,7 @@ public class Inventory : MonoBehaviour
     public Sprite MassSp;
     public Sprite ThornSp;
     public Sprite Facility01Sp;
+    public Sprite Trap01Sp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -78,6 +80,8 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Image>().sprite = ThornSp;
         else if (itemName == Item.Facility01)
             slot.GetComponent<Image>().sprite = Facility01Sp;
+        else if (itemName == Item.Trap01)
+            slot.GetComponent<Image>().sprite = Trap01Sp;
     }
 
     void RefreshItemMenu()
@@ -112,6 +116,7 @@ public class Inventory : MonoBehaviour
                 break;
 
             case Item.Facility01:
+            case Item.Trap01:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
                 InventoryMenu[1].SetActive(true);
@@ -138,6 +143,7 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.C))
         {
+            int sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
             switch (Items[selectedIndex].name)
             {
                 case Item.Food:
@@ -156,16 +162,27 @@ public class Inventory : MonoBehaviour
                     RefreshItemMenu();
                     break;
                 case Item.Facility01:
-
-                    int sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
                     if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Facility", "TempFacility", Grid.instance.PlayerGrid())) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();
+                        CloseInventory();
                     }
                     else
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 이미 다른 물체가 있어서 설치할 수 없어.\n비어있는 곳으로 이동하자.");
+                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                    }
+                    break;
+                case Item.Trap01:
+                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "Trap01", Grid.instance.PlayerGrid(), 3)) == true)
+                    {
+                        DeleteItem(Items[selectedIndex].name);
+                        RefreshItemMenu();
+                        CloseInventory();
+                    }
+                    else
+                    {
+                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
                     }
                     break;
             }
@@ -183,6 +200,7 @@ public class Inventory : MonoBehaviour
                 case Item.Mass:
                 case Item.Thorn:
                 case Item.Facility01:
+                case Item.Trap01:
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;

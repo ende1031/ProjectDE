@@ -35,11 +35,14 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Battery, 15);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Food, 15);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Hose, 15);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Oxygen, 15);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick, 35);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Battery, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Food, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Oxygen, 5);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Facility01, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Trap01, 5);
         }
     }
 
@@ -78,7 +81,14 @@ public class PlayerInteraction : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.C) && target.GetComponent<Plant>().isGatherPossible == false)
             {
-                Monologue.GetComponent<Monologue>().DisplayLog("조금 더 자란 다음에 채집하는게 좋겠군.");
+                if(target.GetComponent<Plant>().plantName == "Trap01")
+                {
+                    Monologue.GetComponent<Monologue>().DisplayLog("아직 덫에 아무 것도 걸리지 않았군.\n괴물은 빛을 싫어하니까 내가 까가이 있으면 잡히지 않을거야.");
+                }
+                else
+                {
+                    Monologue.GetComponent<Monologue>().DisplayLog("조금 더 자란 다음에 채집하는게 좋겠군.");
+                }
                 return;
             }
         }

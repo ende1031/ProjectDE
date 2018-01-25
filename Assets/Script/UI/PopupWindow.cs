@@ -31,6 +31,8 @@ public class PopupWindow : MonoBehaviour
 
     float openTimer = 0;
 
+    bool isShortage;
+
     Dictionary<global::Inventory.Item, Sprite> itemDictionary = new Dictionary<global::Inventory.Item, Sprite>();
 
     public class WindowItem
@@ -109,6 +111,7 @@ public class PopupWindow : MonoBehaviour
         itemDictionary[global::Inventory.Item.Mass] = Inventory.GetComponent<Inventory>().MassSp;
         itemDictionary[global::Inventory.Item.Thorn] = Inventory.GetComponent<Inventory>().ThornSp;
         itemDictionary[global::Inventory.Item.Facility01] = Inventory.GetComponent<Inventory>().Facility01Sp;
+        itemDictionary[global::Inventory.Item.Trap01] = Inventory.GetComponent<Inventory>().Trap01Sp;
     }
 
     public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
@@ -141,6 +144,9 @@ public class PopupWindow : MonoBehaviour
                 break;
             case global::Inventory.Item.Facility01:
                 WindowItemList.Add(new WindowItem(itemName, 30, "워크벤치", "괴물의 조직을 이용해서 만든 워크벤치이다. 살아있지만 위험하지는 않다.\n각종 물품을 생산할 수 있다." + TimeToString(30), global::Inventory.Item.Board, 2, global::Inventory.Item.Battery, 1));
+                break;
+            case global::Inventory.Item.Trap01:
+                WindowItemList.Add(new WindowItem(itemName, 30, "소형 덫", "괴식물한테서 획득한 가시로 만든 소형 덫이다.\n어둠 속에 설치해 두면 작은 괴물을 잡을 수 있을 것 같다.\n반드시 빛이 없는 곳에 설치하자." + TimeToString(30), global::Inventory.Item.Thorn, 2, global::Inventory.Item.Board, 1));
                 break;
         }
     }
@@ -310,6 +316,7 @@ public class PopupWindow : MonoBehaviour
 
         Color tempColor = MaterialsItem[0].GetComponent<Image>().color;
 
+        isShortage = false;
         for (int i = 0; i<6; i++)
         {
             if(WindowItemList[selectedIndex].materialNum[i] != 0)
@@ -320,15 +327,12 @@ public class PopupWindow : MonoBehaviour
                 MaterialsNum[i].GetComponent<Text>().text = Inventory.GetComponent<Inventory>().CountOfItem(WindowItemList[selectedIndex].material[i]) + "/" + WindowItemList[selectedIndex].materialNum[i];
                 if(WindowItemList[selectedIndex].materialNum[i] > Inventory.GetComponent<Inventory>().CountOfItem(WindowItemList[selectedIndex].material[i]))
                 {
+                    isShortage = true;
                     MaterialsNum[i].GetComponent<Text>().color = Color.red;
-                    Button.GetComponent<Image>().sprite = RedButton;
-                    ButtonText.GetComponent<Text>().text = "재료 부족";
                 }
                 else
                 {
                     MaterialsNum[i].GetComponent<Text>().color = Color.white;
-                    Button.GetComponent<Image>().sprite = YellowButton;
-                    ButtonText.GetComponent<Text>().text = "C : 제작하기";
                 }
             }
             else
@@ -337,6 +341,17 @@ public class PopupWindow : MonoBehaviour
                 MaterialsItem[i].GetComponent<Image>().color = tempColor;
                 MaterialsNum[i].GetComponent<Text>().text = string.Empty;
             }
+        }
+
+        if(isShortage == true)
+        {
+            Button.GetComponent<Image>().sprite = RedButton;
+            ButtonText.GetComponent<Text>().text = "재료 부족";
+        }
+        else
+        {
+            Button.GetComponent<Image>().sprite = YellowButton;
+            ButtonText.GetComponent<Text>().text = "C : 제작하기";
         }
     }
 }

@@ -79,9 +79,8 @@ public class Facility : MonoBehaviour
             case "TempFacility":
                 PopupWindow.GetComponent<PopupWindow>().ClearItemList();
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Oxygen);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Facility01);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Trap01);
                 PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
             case "EscapePod":
@@ -95,6 +94,7 @@ public class Facility : MonoBehaviour
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Mass);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Thorn);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Facility01);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Trap01);
                 PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
         }

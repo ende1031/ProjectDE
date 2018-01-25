@@ -96,6 +96,10 @@ public class InteractionIcon : MonoBehaviour
             displayedIconList.Add(ico);
             RefreshIcons();
         }
+        if(isInventoryOpen == true)
+        {
+            HideAllIcons();
+        }
     }
 
     public void DeleteIcon(Icon ico)
@@ -104,6 +108,10 @@ public class InteractionIcon : MonoBehaviour
         {
             displayedIconList.Remove(ico);
             RefreshIcons();
+        }
+        if (isInventoryOpen == true)
+        {
+            HideAllIcons();
         }
     }
 

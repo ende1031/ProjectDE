@@ -443,6 +443,7 @@ MonoBehaviour:
   MassPlant: {fileID: 1973922401690096, guid: 66b814dee91cd054b97b5993d8474763, type: 2}
   ThornPlant: {fileID: 1549453647226052, guid: ea87fe77882e2eb40bee0bd6e7597135, type: 2}
   Portal: {fileID: 1768756399868750, guid: b0a0c9869ade5d74384781159a06efb6, type: 2}
+  Trap01: {fileID: 1720078919906398, guid: 19fbe4929e63cf240ad69bc8e88e0e65, type: 2}
 --- !u!1 &136986828
 GameObject:
   m_ObjectHideFlags: 0
