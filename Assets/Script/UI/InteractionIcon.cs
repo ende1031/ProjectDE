@@ -11,12 +11,16 @@ public class InteractionIcon : MonoBehaviour
         Make,
         Sleep,
         Portal,
+        Dump,
+        OnOff
     };
 
     GameObject GatherIcon; //아이콘 추가시 수정할 부분
     GameObject MakeIcon;
     GameObject SleepIcon;
     GameObject PortalIcon;
+    GameObject DumpIcon;
+    GameObject OnOffIcon;
 
     List<Icon> displayedIconList = new List<Icon>();
     Dictionary<Icon, GameObject> iconDictionary = new Dictionary<Icon, GameObject>();
@@ -42,6 +46,8 @@ public class InteractionIcon : MonoBehaviour
         MakeIcon = transform.Find("Make").gameObject;
         SleepIcon = transform.Find("Sleep").gameObject;
         PortalIcon = transform.Find("Portal").gameObject;
+        DumpIcon = transform.Find("Dump").gameObject;
+        OnOffIcon = transform.Find("OnOff").gameObject;
 
         if (GatherIcon != null)
         {
@@ -49,6 +55,8 @@ public class InteractionIcon : MonoBehaviour
             iconDictionary[Icon.Make] = MakeIcon;
             iconDictionary[Icon.Sleep] = SleepIcon;
             iconDictionary[Icon.Portal] = PortalIcon;
+            iconDictionary[Icon.Dump] = DumpIcon;
+            iconDictionary[Icon.OnOff] = OnOffIcon;
         }
     }
 
@@ -58,6 +66,8 @@ public class InteractionIcon : MonoBehaviour
         MakeIcon.SetActive(false);
         SleepIcon.SetActive(false);
         PortalIcon.SetActive(false);
+        DumpIcon.SetActive(false);
+        OnOffIcon.SetActive(false);
     }
 
     void Update ()

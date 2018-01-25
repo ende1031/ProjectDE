@@ -15,6 +15,7 @@ public class SceneObjectManager : MonoBehaviour
     public GameObject ThornPlant;
     public GameObject Portal;
     public GameObject Trap01;
+    public GameObject Bulb01;
 
     public class SceneObject
     {
@@ -109,6 +110,10 @@ public class SceneObjectManager : MonoBehaviour
             ob.inGameObject = Instantiate(Portal, tempPos, Quaternion.identity);
             ob.inGameObject.GetComponent<Portal>().sceneName = ob.name;
             ob.inGameObject.GetComponent<Portal>().AfterMoveGrid = ob.portalAfterMoveGrid;
+        }
+        else if (ob.type == "Bulb")
+        {
+            ob.inGameObject = Instantiate(Bulb01, tempPos, Quaternion.identity);
         }
     }
 

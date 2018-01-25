@@ -57,7 +57,7 @@ public class Plant : MonoBehaviour
                 break;
             case "Trap01":
                 Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Hose);
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Heart);
                 SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                 break;
         }
@@ -88,7 +88,7 @@ public class Plant : MonoBehaviour
                 break;
             case "Trap01":
                 bool t1 = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Hose);
-                bool t2 = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Mass);
+                bool t2 = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Heart);
                 if(t1 == false || t2 == false)
                 {
                     temp = false;

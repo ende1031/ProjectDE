@@ -74,6 +74,7 @@ public class SceneSetting : MonoBehaviour
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 19, 1));
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 20, 1));
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Portal", "Stage02", 13, 13));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Bulb", "Bulb", 23));
 
         //맵이동시 삭제된 오브젝트를 다시 불러옴.
         SceneObjectManager.instance.ReloadObject(0);

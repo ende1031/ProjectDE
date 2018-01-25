@@ -43,6 +43,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Facility01, 5);
             Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Trap01, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Bulb01, 5);
         }
     }
 
@@ -120,11 +121,18 @@ public class PlayerInteraction : MonoBehaviour
                     return;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Z))
+            else if (Input.GetKeyDown(KeyCode.Z))
             {
                 if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                 {
                     target.GetComponent<Facility>().Sleep();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.X))
+            {
+                if (target.GetComponent<FacilityBalloon>().isMake == true)
+                {
+                    target.GetComponent<FacilityBalloon>().Dunp();
                 }
             }
         }

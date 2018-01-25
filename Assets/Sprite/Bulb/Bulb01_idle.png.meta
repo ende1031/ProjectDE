@@ -1,0 +1,817 @@
+fileFormatVersion: 2
+guid: 2cb5fd6ef64e6084d8c53d94ee1af878
+timeCreated: 1516865300
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Bulb01_idle_0
+    21300002: Bulb01_idle_1
+    21300004: Bulb01_idle_2
+    21300006: Bulb01_idle_3
+    21300008: Bulb01_idle_4
+    21300010: Bulb01_idle_5
+    21300012: Bulb01_idle_6
+    21300014: Bulb01_idle_7
+    21300016: Bulb01_idle_8
+    21300018: Bulb01_idle_9
+    21300020: Bulb01_idle_10
+    21300022: Bulb01_idle_11
+    21300024: Bulb01_idle_12
+    21300026: Bulb01_idle_13
+    21300028: Bulb01_idle_14
+    21300030: Bulb01_idle_15
+    21300032: Bulb01_idle_16
+    21300034: Bulb01_idle_17
+    21300036: Bulb01_idle_18
+    21300038: Bulb01_idle_19
+    21300040: Bulb01_idle_20
+    21300042: Bulb01_idle_21
+    21300044: Bulb01_idle_22
+    21300046: Bulb01_idle_23
+    21300048: Bulb01_idle_24
+    21300050: Bulb01_idle_25
+    21300052: Bulb01_idle_26
+    21300054: Bulb01_idle_27
+    21300056: Bulb01_idle_28
+    21300058: Bulb01_idle_29
+    21300060: Bulb01_idle_30
+    21300062: Bulb01_idle_31
+    21300064: Bulb01_idle_32
+    21300066: Bulb01_idle_33
+    21300068: Bulb01_idle_34
+    21300070: Bulb01_idle_35
+    21300072: Bulb01_idle_36
+    21300074: Bulb01_idle_37
+    21300076: Bulb01_idle_38
+    21300078: Bulb01_idle_39
+    21300080: Bulb01_idle_40
+    21300082: Bulb01_idle_41
+    21300084: Bulb01_idle_42
+    21300086: Bulb01_idle_43
+    21300088: Bulb01_idle_44
+    21300090: Bulb01_idle_45
+    21300092: Bulb01_idle_46
+    21300094: Bulb01_idle_47
+    21300096: Bulb01_idle_48
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bulb01_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1134
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_1
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 1134
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_2
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 1134
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_3
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 1134
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_4
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 1134
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_5
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 1134
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_6
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 1134
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 945
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_8
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 945
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_9
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 945
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_10
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 945
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_11
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 945
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_12
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 945
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_13
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 945
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 756
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_15
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 756
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_16
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 756
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_17
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 756
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_18
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 756
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_19
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 756
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_20
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 756
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 567
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_22
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 567
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_23
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 567
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_24
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 567
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_25
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 567
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_26
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 567
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_27
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 567
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 378
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_29
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 378
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_30
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 378
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_31
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 378
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_32
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 378
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_33
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 378
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_34
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 378
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 189
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_36
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 189
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_37
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 189
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_38
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 189
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_39
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 189
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_40
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 189
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_41
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 189
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_43
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 0
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_44
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 0
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_45
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 0
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_46
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 0
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_47
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 0
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bulb01_idle_48
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 0
+        width: 102
+        height: 189
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -27,7 +27,9 @@ public class Inventory : MonoBehaviour
         Mass,
         Thorn,
         Facility01,
-        Trap01
+        Trap01,
+        Heart,
+        Bulb01
     };
 
     GameObject[] itemSlot = new GameObject[7];
@@ -54,6 +56,8 @@ public class Inventory : MonoBehaviour
     public Sprite ThornSp;
     public Sprite Facility01Sp;
     public Sprite Trap01Sp;
+    public Sprite HeartSp;
+    public Sprite Bulb01Sp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -82,6 +86,10 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Image>().sprite = Facility01Sp;
         else if (itemName == Item.Trap01)
             slot.GetComponent<Image>().sprite = Trap01Sp;
+        else if (itemName == Item.Heart)
+            slot.GetComponent<Image>().sprite = HeartSp;
+        else if (itemName == Item.Bulb01)
+            slot.GetComponent<Image>().sprite = Bulb01Sp;
     }
 
     void RefreshItemMenu()
@@ -111,12 +119,14 @@ public class Inventory : MonoBehaviour
             case Item.Hose:
             case Item.Mass:
             case Item.Thorn:
+            case Item.Heart:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
                 break;
 
             case Item.Facility01:
             case Item.Trap01:
+            case Item.Bulb01:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
                 InventoryMenu[1].SetActive(true);
@@ -185,6 +195,18 @@ public class Inventory : MonoBehaviour
                         Monologue.GetComponent<Monologue>().DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
                     }
                     break;
+                case Item.Bulb01:
+                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Bulb", "Bulb", Grid.instance.PlayerGrid())) == true)
+                    {
+                        DeleteItem(Items[selectedIndex].name);
+                        RefreshItemMenu();
+                        CloseInventory();
+                    }
+                    else
+                    {
+                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                    }
+                    break;
             }
         }
         else if (Input.GetKeyUp(KeyCode.X))
@@ -201,6 +223,8 @@ public class Inventory : MonoBehaviour
                 case Item.Thorn:
                 case Item.Facility01:
                 case Item.Trap01:
+                case Item.Heart:
+                case Item.Bulb01:
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
@@ -258,7 +282,7 @@ public class Inventory : MonoBehaviour
                     OpenInventory();
                 }
             }
-            else if (Input.GetKeyUp(KeyCode.A) && isInventoryActive == true)
+            else if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.Escape)) && isInventoryActive == true)
             {
                 CloseInventory();
             }

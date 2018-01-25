@@ -1138,6 +1138,8 @@ MonoBehaviour:
   ThornSp: {fileID: 21300000, guid: 4402973014267024ba89c616109c66b0, type: 3}
   Facility01Sp: {fileID: 21300000, guid: 2a937262ddedec84aae829ffe6b89cd1, type: 3}
   Trap01Sp: {fileID: 21300000, guid: 68e988d3276d4f143863eac049af96d3, type: 3}
+  HeartSp: {fileID: 21300000, guid: df66a5687c4c6eb47b189fff433633c1, type: 3}
+  Bulb01Sp: {fileID: 21300000, guid: a983efb82f714a449889aef6484ab534, type: 3}
   isInventoryActive: 0
 --- !u!114 &114427440867818556
 MonoBehaviour:

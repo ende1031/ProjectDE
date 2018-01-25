@@ -112,6 +112,8 @@ public class PopupWindow : MonoBehaviour
         itemDictionary[global::Inventory.Item.Thorn] = Inventory.GetComponent<Inventory>().ThornSp;
         itemDictionary[global::Inventory.Item.Facility01] = Inventory.GetComponent<Inventory>().Facility01Sp;
         itemDictionary[global::Inventory.Item.Trap01] = Inventory.GetComponent<Inventory>().Trap01Sp;
+        itemDictionary[global::Inventory.Item.Heart] = Inventory.GetComponent<Inventory>().HeartSp;
+        itemDictionary[global::Inventory.Item.Bulb01] = Inventory.GetComponent<Inventory>().Bulb01Sp;
     }
 
     public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
@@ -119,7 +121,7 @@ public class PopupWindow : MonoBehaviour
         switch (itemName)
         {
             case global::Inventory.Item.Battery:
-                WindowItemList.Add(new WindowItem(itemName, 15, "배터리", "괴물의 심장으로 만든 고밀도 배터리이다. 가공해서 형체는 많이 달라졌지만 들고 있으면 작은 움직임이 느껴진다.\n사용하면 에너지 게이지를 충전할 수 있다." + TimeToString(15), global::Inventory.Item.Stick, 1));
+                WindowItemList.Add(new WindowItem(itemName, 15, "배터리", "괴물의 심장으로 만든 고밀도 배터리이다. 가공해서 형체는 많이 달라졌지만 들고 있으면 작은 움직임이 느껴진다.\n사용하면 에너지 게이지를 충전할 수 있다." + TimeToString(15), global::Inventory.Item.Heart, 1));
                 break;
             case global::Inventory.Item.Food:
                 WindowItemList.Add(new WindowItem(itemName, 20, "식량", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다.\n사용하면 허기 게이지를 충전할 수 있다." + TimeToString(20), global::Inventory.Item.Stick, 2, global::Inventory.Item.Board, 1));
@@ -146,7 +148,13 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(itemName, 30, "워크벤치", "괴물의 조직을 이용해서 만든 워크벤치이다. 살아있지만 위험하지는 않다.\n각종 물품을 생산할 수 있다." + TimeToString(30), global::Inventory.Item.Board, 2, global::Inventory.Item.Battery, 1));
                 break;
             case global::Inventory.Item.Trap01:
-                WindowItemList.Add(new WindowItem(itemName, 30, "소형 덫", "괴식물한테서 획득한 가시로 만든 소형 덫이다.\n어둠 속에 설치해 두면 작은 괴물을 잡을 수 있을 것 같다.\n반드시 빛이 없는 곳에 설치하자." + TimeToString(30), global::Inventory.Item.Thorn, 2, global::Inventory.Item.Board, 1));
+                WindowItemList.Add(new WindowItem(itemName, 30, "소형 덫", "괴식물한테서 획득한 가시로 만든 소형 덫이다.\n어둠 속에 설치해 두면 작은 괴물을 잡을 수 있을 것 같다.\n반드시 빛이 없는 곳에 설치하자." + TimeToString(30), global::Inventory.Item.Thorn, 1, global::Inventory.Item.Board, 1));
+                break;
+            case global::Inventory.Item.Heart:
+                WindowItemList.Add(new WindowItem(itemName, 45, "심장", "두근" + TimeToString(45), global::Inventory.Item.Thorn, 77, global::Inventory.Item.Facility01, 99));
+                break;
+            case global::Inventory.Item.Bulb01:
+                WindowItemList.Add(new WindowItem(itemName, 20, "전구", "괴물은 빛을 싫어한다.\n전구를 켜두면 내가 만들어둔 시설들이 공격받는 일도 없을 것이다." + TimeToString(20), global::Inventory.Item.Battery, 1, global::Inventory.Item.Stick, 2));
                 break;
         }
     }
@@ -176,7 +184,7 @@ public class PopupWindow : MonoBehaviour
             else
             {
                 MoveCursor();
-                if (Input.GetKeyUp(KeyCode.X))
+                if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Escape))
                 {
                     CloseWindow();
                 }

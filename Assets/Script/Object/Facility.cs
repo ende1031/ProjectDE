@@ -47,9 +47,13 @@ public class Facility : MonoBehaviour
                     break;
             }
         }
-        if (GetComponent<FacilityBalloon>().isMakeFinish == true)
+        else if (GetComponent<FacilityBalloon>().isMakeFinish == true)
         {
             InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Gather);
+        }
+        else if (GetComponent<FacilityBalloon>().isMake == true)
+        {
+            InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Dump);
         }
     }
 
@@ -62,11 +66,13 @@ public class Facility : MonoBehaviour
                 case "TempFacility":
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Make);
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
+                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Dump);
                     break;
                 case "EscapePod":
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Make);
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Sleep);
+                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Dump);
                     break;
             }
         }
@@ -81,6 +87,7 @@ public class Facility : MonoBehaviour
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Facility01);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Trap01);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Bulb01);
                 PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
             case "EscapePod":
@@ -95,6 +102,8 @@ public class Facility : MonoBehaviour
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Thorn);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Facility01);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Trap01);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Heart);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Bulb01);
                 PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
         }

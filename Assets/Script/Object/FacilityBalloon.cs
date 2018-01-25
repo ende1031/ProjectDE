@@ -56,6 +56,8 @@ public class FacilityBalloon : MonoBehaviour
         itemDictionary[global::Inventory.Item.Thorn] = Inventory.GetComponent<Inventory>().ThornSp;
         itemDictionary[global::Inventory.Item.Facility01] = Inventory.GetComponent<Inventory>().Facility01Sp;
         itemDictionary[global::Inventory.Item.Trap01] = Inventory.GetComponent<Inventory>().Trap01Sp;
+        itemDictionary[global::Inventory.Item.Heart] = Inventory.GetComponent<Inventory>().HeartSp;
+        itemDictionary[global::Inventory.Item.Bulb01] = Inventory.GetComponent<Inventory>().Bulb01Sp;
     }
 
     void Update ()
@@ -63,6 +65,11 @@ public class FacilityBalloon : MonoBehaviour
         if(isMake == true)
         {
             Timer();
+        }
+        if(isMakeFinish == true)
+        {
+            Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
+            Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
         }
         
 
@@ -79,6 +86,8 @@ public class FacilityBalloon : MonoBehaviour
             if (isMakeFinish == true)
             {
                 Balloon.SetActive(true);
+                Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
+                Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
             }
             Item.GetComponent<SpriteRenderer>().sprite = itemDictionary[makeItem];
             Item_back.GetComponent<SpriteRenderer>().sprite = itemDictionary[makeItem];
@@ -114,9 +123,9 @@ public class FacilityBalloon : MonoBehaviour
 
     void MakeFinish()
     {
-        isMake = false;
         isMakeFinish = true;
         Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
+        Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
         if (animaitor != null)
         {
             animaitor.SetBool("isMaking", false);
@@ -127,6 +136,7 @@ public class FacilityBalloon : MonoBehaviour
             InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
             GetComponent<Facility>().DisplayIcon();
         }
+        isMake = false;
     }
 
     public bool InventoryCheck()
@@ -150,10 +160,22 @@ public class FacilityBalloon : MonoBehaviour
         }
     }
 
+    public void Dunp()
+    {
+        Balloon.SetActive(false);
+        isMake = false;
+        isMakeFinish = false;
+        animaitor.SetBool("isMaking", false);
+
+        if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
+        {
+            InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
+            GetComponent<Facility>().DisplayIcon();
+        }
+    }
+
     void Display()
     {
-        Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, progress * 0.55f);
-
         float temp = Mathf.Ceil(progressTimer % 60);
         if (temp < 10)
         {
@@ -162,6 +184,15 @@ public class FacilityBalloon : MonoBehaviour
         else
         {
             TimeText.GetComponent<TextMesh>().text = (int)(progressTimer / 60.0f) + ":" + temp;
+        }
+
+        if (isMakeFinish == true)
+        {
+            Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
+        }
+        else
+        {
+            Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, progress * 0.55f);
         }
     }
 
@@ -179,7 +210,9 @@ public class FacilityBalloon : MonoBehaviour
 
         if (progressTimer <= 0)
         {
+            progress = 1.0f;
             MakeFinish();
+            Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
         }
     }
 }

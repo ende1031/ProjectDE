@@ -7,6 +7,7 @@ TagManager:
   - Plant
   - Facility
   - Portal
+  - Bulb
   layers:
   - Default
   - TransparentFX
