@@ -282,6 +282,9 @@ public class Inventory : MonoBehaviour
                 case Item.Trap01:
                 case Item.Heart:
                 case Item.Bulb01:
+                case Item.StickSeed:
+                case Item.BoardSeed:
+                case Item.ThornSeed:
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
