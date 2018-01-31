@@ -24,7 +24,8 @@ public class SceneObjectManager : MonoBehaviour
             type = t;
             name = n;
             grid = g;
-            facilityIsOn = true;
+            isOn = true;
+            isAlive = true;
         }
 
         public SceneObject(string t, string n, int g, int temp) //temp : 이동후좌표(포탈), 상태(식물)
@@ -34,7 +35,8 @@ public class SceneObjectManager : MonoBehaviour
             grid = g;
             portalAfterMoveGrid = temp;
             plantState = temp;
-            facilityIsOn = true;
+            isOn = true;
+            isAlive = true;
         }
 
         public GameObject inGameObject;
@@ -42,12 +44,12 @@ public class SceneObjectManager : MonoBehaviour
         public string name; //"TempFacility", "EscapePod", "StickPlant" 등. Portal의 경우 이동하려는 씬의 이름
         public int grid;
 
+        public bool isOn;
+        public bool isAlive;
+        public float timer; //growthTimer(괴식물), progressTimer(시설), LifeTimer(전구)
         public int portalAfterMoveGrid;
         public int plantState;
-        public float plantGrowthTimer;
-        public bool facilityIsOn;
         public global::Inventory.Item facilityMakeItem;
-        public float facilityMakeTimer;
         public bool facilityIsMake;
         public bool facilityIsMakeFinish;
     }
@@ -85,7 +87,7 @@ public class SceneObjectManager : MonoBehaviour
                     break;
             }
             ob.inGameObject.GetComponent<Plant>().state = ob.plantState;
-            ob.inGameObject.GetComponent<Plant>().growthTimer = ob.plantGrowthTimer;
+            ob.inGameObject.GetComponent<Plant>().growthTimer = ob.timer;
         }
         else if (ob.type == "Facility")
         {
@@ -102,9 +104,9 @@ public class SceneObjectManager : MonoBehaviour
                     ob.inGameObject = Instantiate(TempFacility, tempPos, Quaternion.identity);
                     break;
             }
-            ob.inGameObject.GetComponent<Facility>().isOn = ob.facilityIsOn;
+            ob.inGameObject.GetComponent<Facility>().isOn = ob.isOn;
             ob.inGameObject.GetComponent<FacilityBalloon>().makeItem = ob.facilityMakeItem;
-            ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer = ob.facilityMakeTimer;
+            ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer = ob.timer;
             ob.inGameObject.GetComponent<FacilityBalloon>().isMake = ob.facilityIsMake;
             ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish = ob.facilityIsMakeFinish;
             ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
@@ -118,7 +120,9 @@ public class SceneObjectManager : MonoBehaviour
         else if (ob.type == "Bulb")
         {
             ob.inGameObject = Instantiate(Bulb01, tempPos, Quaternion.identity);
-            ob.inGameObject.GetComponent<Bulb>().isOn = ob.facilityIsOn;
+            ob.inGameObject.GetComponent<Bulb>().isOn = ob.isOn;
+            ob.inGameObject.GetComponent<Bulb>().LifeTimer = ob.timer;
+            ob.inGameObject.GetComponent<Bulb>().isAlive = ob.isAlive;
             ob.inGameObject.GetComponent<Bulb>().isLoadByManager = true;
         }
     }
@@ -158,14 +162,21 @@ public class SceneObjectManager : MonoBehaviour
                 {
                     if (ob.inGameObject == null)
                     {
-                        ob.plantGrowthTimer += Time.deltaTime;
+                        ob.timer += Time.deltaTime;
                     }
                 }
                 else if (ob.type == "Facility")
                 {
-                    if (ob.inGameObject == null && ob.facilityIsMake == true && ob.facilityMakeTimer > 0)
+                    if (ob.inGameObject == null && ob.facilityIsMake == true && ob.timer > 0)
                     {
-                        ob.facilityMakeTimer -= Time.deltaTime;
+                        ob.timer -= Time.deltaTime;
+                    }
+                }
+                else if (ob.type == "Bulb")
+                {
+                    if (ob.inGameObject == null && ob.isOn == true)
+                    {
+                        ob.timer += Time.deltaTime;
                     }
                 }
             }
@@ -184,15 +195,15 @@ public class SceneObjectManager : MonoBehaviour
                     if (ob.inGameObject != null)
                     {
                         ob.plantState = ob.inGameObject.GetComponent<Plant>().state;
-                        ob.plantGrowthTimer = ob.inGameObject.GetComponent<Plant>().growthTimer;
+                        ob.timer = ob.inGameObject.GetComponent<Plant>().growthTimer;
                     }
                 }
                 else if(ob.type == "Facility")
                 {
                     if(ob.inGameObject != null)
                     {
-                        ob.facilityIsOn = ob.inGameObject.GetComponent<Facility>().isOn;
-                        ob.facilityMakeTimer = ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
+                        ob.isOn = ob.inGameObject.GetComponent<Facility>().isOn;
+                        ob.timer = ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
                         ob.facilityMakeItem = ob.inGameObject.GetComponent<FacilityBalloon>().makeItem;
                         ob.facilityIsMake = ob.inGameObject.GetComponent<FacilityBalloon>().isMake;
                         ob.facilityIsMakeFinish = ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;
@@ -202,7 +213,9 @@ public class SceneObjectManager : MonoBehaviour
                 {
                     if (ob.inGameObject != null)
                     {
-                        ob.facilityIsOn = ob.inGameObject.GetComponent<Bulb>().isOn;
+                        ob.isOn = ob.inGameObject.GetComponent<Bulb>().isOn;
+                        ob.timer = ob.inGameObject.GetComponent<Bulb>().LifeTimer;
+                        ob.isAlive = ob.inGameObject.GetComponent<Bulb>().isAlive;
                     }
                 }
             }
@@ -224,14 +237,14 @@ public class SceneObjectManager : MonoBehaviour
                 {
                     if (ob.name != "EscapePod")
                     {
-                        ob.facilityIsOn = false;
+                        ob.isOn = false;
                     }
                     ob.facilityIsMake = false;
                     ob.facilityIsMakeFinish = false;
                 }
                 else if (ob.type == "Bulb")
                 {
-                    ob.facilityIsOn = false;
+                    ob.isOn = false;
                 }
             }
         }
