@@ -81,6 +81,7 @@
     <Compile Include="Assets\Script\AnimationEvent.cs" />
     <Compile Include="Assets\Script\Grid.cs" />
     <Compile Include="Assets\Script\Object\BGMove.cs" />
+    <Compile Include="Assets\Script\Object\Bulb.cs" />
     <Compile Include="Assets\Script\Object\CamaraSetting.cs" />
     <Compile Include="Assets\Script\Object\CameraMove.cs" />
     <Compile Include="Assets\Script\Object\Facility.cs" />

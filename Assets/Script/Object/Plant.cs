@@ -75,24 +75,19 @@ public class Plant : MonoBehaviour
         switch (plantName)
         {
             case "StickPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Stick);
+                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Stick);
                 break;
             case "MassPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Mass);
+                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Mass);
                 break;
             case "BoardPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Board);
+                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Board);
                 break;
             case "ThornPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Thorn);
+                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Thorn);
                 break;
             case "Trap01":
-                bool t1 = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Hose);
-                bool t2 = !Inventory.GetComponent<Inventory>().isFull(global::Inventory.Item.Heart);
-                if(t1 == false || t2 == false)
-                {
-                    temp = false;
-                }
+                temp = !Inventory.GetComponent<Inventory>().isFull(2, global::Inventory.Item.Hose, global::Inventory.Item.Heart);
                 break;
         }
         return temp;

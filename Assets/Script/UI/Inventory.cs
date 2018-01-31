@@ -375,7 +375,7 @@ public class Inventory : MonoBehaviour
     //아이템 획득에 실패하면 false를 반환 
     public bool GetItem(Item itemName, int num = 1)
     {
-        if (isFull(itemName) == false)
+        if (isFull(1, itemName) == false)
         {
             int? temp = isContains(itemName);
             if(temp.HasValue)
@@ -466,12 +466,56 @@ public class Inventory : MonoBehaviour
         return 0;
     }
 
-    public bool isFull(Item itemName)
+    // isFull 메소드에서 임시로 아이템을 추가해보는데 사용하는 메소드
+    bool FullTestGetItem(Item itemName)
     {
-        if(Items.Count >= 7 && HasItem(itemName) == false)
+        if (Items.Count >= 7 && (HasItem(itemName) == false || HasItem(itemName, 99) == true))
         {
+            return false;
+        }
+        else
+        {
+            int? temp = isContains(itemName);
+            if (temp.HasValue)
+            {
+                if (Items[(int)temp].count >= 99)
+                {
+                    return false;
+                }
+                Items[(int)temp].count++;
+            }
+            else
+            {
+                Items.Add(new ItemInfo(itemName, 1));
+            }
             return true;
         }
-        return false;
+    }
+
+    // 가득 차있으면 true를 반환
+    public bool isFull(int Num, Item itemName, Item itemName2 = Item.Battery, Item itemName3 = Item.Battery, Item itemName4 = Item.Battery, Item itemName5 = Item.Battery)
+    {
+        bool result = false;
+        bool[] temp = new bool[5];
+        Item[] iName = new Item[5] { itemName, itemName2, itemName3, itemName4, itemName5 };
+        
+        for (int i = 0; i < Num; i++)
+        {
+            temp[i] = FullTestGetItem(iName[i]);
+        }
+
+        for (int i = 0; i < Num; i++)
+        {
+            if (temp[i] == false)
+            {
+                result = true;
+            }
+            else if(temp[i] == true)
+            {
+                DeleteItem(iName[i]);
+            }
+        }
+
+        return result;
     }
 }

@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 212374078631403690}
   - component: {fileID: 95879748693365068}
   - component: {fileID: 61307918249317130}
+  - component: {fileID: 114185941303607734}
   m_Layer: 0
   m_Name: Bulb01
   m_TagString: Bulb
@@ -164,6 +165,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114185941303607734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1774011462199366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e844e27167b5d1049969e0e3bde20b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 1
 --- !u!212 &212374078631403690
 SpriteRenderer:
   m_ObjectHideFlags: 1

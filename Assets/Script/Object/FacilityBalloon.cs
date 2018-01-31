@@ -75,6 +75,10 @@ public class FacilityBalloon : MonoBehaviour
 
         if(isLoadByManager == true)
         {
+            if (animaitor != null)
+            {
+                animaitor.SetBool("isOn", GetComponent<Facility>().isOn);
+            }
             if (isMake == true)
             {
                 Balloon.SetActive(true);
@@ -142,7 +146,7 @@ public class FacilityBalloon : MonoBehaviour
     public bool InventoryCheck()
     {
         bool temp = true;
-        temp = !Inventory.GetComponent<Inventory>().isFull(makeItem);
+        temp = !Inventory.GetComponent<Inventory>().isFull(1, makeItem);
         return temp;
     }
 

@@ -97,28 +97,31 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
-                if(target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
+                if (target.GetComponent<Facility>().isOn == true)
                 {
-                    target.GetComponent<Facility>().OpenProductionWindow();
-                    PlayerDirection();
-                }
-                if (target.GetComponent<FacilityBalloon>().isMakeFinish == true)
-                {
-                    PlayerDirection();
-                    if (target.GetComponent<FacilityBalloon>().InventoryCheck() == true)
+                    if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                     {
-                        target.GetComponent<FacilityBalloon>().GetItem();
+                        target.GetComponent<Facility>().OpenProductionWindow();
+                        PlayerDirection();
                     }
-                    else
+                    if (target.GetComponent<FacilityBalloon>().isMakeFinish == true)
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("인벤토리 공간이 부족하군.\n아이템을 획득하려면 인벤토리에 빈 공간이 필요해.");
+                        PlayerDirection();
+                        if (target.GetComponent<FacilityBalloon>().InventoryCheck() == true)
+                        {
+                            target.GetComponent<FacilityBalloon>().GetItem();
+                        }
+                        else
+                        {
+                            Monologue.GetComponent<Monologue>().DisplayLog("인벤토리 공간이 부족하군.\n아이템을 획득하려면 인벤토리에 빈 공간이 필요해.");
+                            return;
+                        }
+                    }
+                    else if (target.GetComponent<FacilityBalloon>().isMake == true)
+                    {
+                        Monologue.GetComponent<Monologue>().DisplayLog("아직 제작중이군.\n다른 일을 하면서 조금 기다려보자.");
                         return;
                     }
-                }
-                else if(target.GetComponent<FacilityBalloon>().isMake == true)
-                {
-                    Monologue.GetComponent<Monologue>().DisplayLog("아직 제작중이군.\n다른 일을 하면서 조금 기다려보자.");
-                    return;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Z))
@@ -126,6 +129,7 @@ public class PlayerInteraction : MonoBehaviour
                 if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                 {
                     target.GetComponent<Facility>().Sleep();
+                    target.GetComponent<Facility>().OnOff();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.X))
@@ -143,6 +147,13 @@ public class PlayerInteraction : MonoBehaviour
                 GetComponent<PlayerMove>().SetMovePossible(false);
                 SceneObjectManager.instance.SaveObject();
                 SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
+            }
+        }
+        else if (target.gameObject.tag == "Bulb")
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                target.GetComponent<Bulb>().OnOff();
             }
         }
     }

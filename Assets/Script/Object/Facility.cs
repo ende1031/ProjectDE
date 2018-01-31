@@ -11,12 +11,22 @@ public class Facility : MonoBehaviour
     GameObject Timer;
     GameObject PopupWindow;
 
+    Animator animaitor;
+
+    public bool isOn = true;
+
     void Start ()
     {
         InteractionIcon = GameObject.Find("InteractionIcon");
         Inventory = GameObject.Find("Inventory");
         Timer = GameObject.Find("Timer");
         PopupWindow = GameObject.Find("PopupWindow");
+
+        animaitor = GetComponent<Animator>();
+        if (animaitor != null)
+        {
+            animaitor.SetBool("isOn", isOn);
+        }
     }
 	
 	void Update ()
@@ -34,26 +44,34 @@ public class Facility : MonoBehaviour
 
     public void DisplayIcon()
     {
-        if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
+        if (isOn == true)
         {
-            switch (facilityName)
+            if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
             {
-                case "TempFacility":
-                    InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
-                    break;
-                case "EscapePod":
-                    InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Sleep);
-                    InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
-                    break;
+                switch (facilityName)
+                {
+                    case "TempFacility":
+                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.OnOff);
+                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
+                        break;
+                    case "EscapePod":
+                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Sleep);
+                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
+                        break;
+                }
+            }
+            else if (GetComponent<FacilityBalloon>().isMakeFinish == true)
+            {
+                InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Gather);
+            }
+            else if (GetComponent<FacilityBalloon>().isMake == true)
+            {
+                InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Dump);
             }
         }
-        else if (GetComponent<FacilityBalloon>().isMakeFinish == true)
+        else if(facilityName != "EscapePod")
         {
-            InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Gather);
-        }
-        else if (GetComponent<FacilityBalloon>().isMake == true)
-        {
-            InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Dump);
+            InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.OnOff);
         }
     }
 
@@ -67,6 +85,7 @@ public class Facility : MonoBehaviour
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Make);
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Dump);
+                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.OnOff);
                     break;
                 case "EscapePod":
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Make);
@@ -114,12 +133,22 @@ public class Facility : MonoBehaviour
         switch (facilityName)
         {
             case "EscapePod":
-                // 0.3초쯤 뒤에? 작동중이던 시설 파괴, 심어놓은 농작물 최대성장
                 SceneObjectManager.instance.SaveObject();
                 Timer.GetComponent<Timer>().ResetTimer();
                 SceneObjectManager.instance.SleepAfter();
                 SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
                 break;
+        }
+    }
+
+    public void OnOff()
+    {
+        if (facilityName != "EscapePod")
+        {
+            isOn = !isOn;
+            animaitor.SetBool("isOn", isOn);
+            InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
+            DisplayIcon();
         }
     }
 }
