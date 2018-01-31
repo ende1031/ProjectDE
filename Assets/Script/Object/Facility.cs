@@ -111,6 +111,9 @@ public class Facility : MonoBehaviour
                 break;
             case "EscapePod":
                 PopupWindow.GetComponent<PopupWindow>().ClearItemList();
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.StickSeed);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.BoardSeed);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.ThornSeed);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Oxygen);

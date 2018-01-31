@@ -114,6 +114,9 @@ public class PopupWindow : MonoBehaviour
         itemDictionary[global::Inventory.Item.Trap01] = Inventory.GetComponent<Inventory>().Trap01Sp;
         itemDictionary[global::Inventory.Item.Heart] = Inventory.GetComponent<Inventory>().HeartSp;
         itemDictionary[global::Inventory.Item.Bulb01] = Inventory.GetComponent<Inventory>().Bulb01Sp;
+        itemDictionary[global::Inventory.Item.StickSeed] = Inventory.GetComponent<Inventory>().StickSeedSp;
+        itemDictionary[global::Inventory.Item.BoardSeed] = Inventory.GetComponent<Inventory>().BoardSeedSp;
+        itemDictionary[global::Inventory.Item.ThornSeed] = Inventory.GetComponent<Inventory>().ThornSeedSp;
     }
 
     public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
@@ -155,6 +158,15 @@ public class PopupWindow : MonoBehaviour
                 break;
             case global::Inventory.Item.Bulb01:
                 WindowItemList.Add(new WindowItem(itemName, 20, "전구", "괴물은 빛을 싫어한다.\n전구를 켜두면 내가 만들어둔 시설들이 공격받는 일도 없을 것이다." + TimeToString(20), global::Inventory.Item.Battery, 1, global::Inventory.Item.Stick, 2));
+                break;
+            case global::Inventory.Item.StickSeed:
+                WindowItemList.Add(new WindowItem(itemName, 10, "막대 모종", "심으면 긴 막대처럼 생긴 괴식물이 자라난다." + TimeToString(10), global::Inventory.Item.Stick, 1));
+                break;
+            case global::Inventory.Item.BoardSeed:
+                WindowItemList.Add(new WindowItem(itemName, 10, "판자 모종", "심으면 판자처럼 생긴 괴식물이 자라난다." + TimeToString(10), global::Inventory.Item.Board, 1));
+                break;
+            case global::Inventory.Item.ThornSeed:
+                WindowItemList.Add(new WindowItem(itemName, 10, "가시 모종", "심으면 가시가 달린 괴식물이 자라난다." + TimeToString(10), global::Inventory.Item.Thorn, 1));
                 break;
         }
     }

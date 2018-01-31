@@ -29,7 +29,10 @@ public class Inventory : MonoBehaviour
         Facility01,
         Trap01,
         Heart,
-        Bulb01
+        Bulb01,
+        StickSeed,
+        BoardSeed,
+        ThornSeed
     };
 
     GameObject[] itemSlot = new GameObject[7];
@@ -58,6 +61,9 @@ public class Inventory : MonoBehaviour
     public Sprite Trap01Sp;
     public Sprite HeartSp;
     public Sprite Bulb01Sp;
+    public Sprite StickSeedSp;
+    public Sprite BoardSeedSp;
+    public Sprite ThornSeedSp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -90,6 +96,12 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Image>().sprite = HeartSp;
         else if (itemName == Item.Bulb01)
             slot.GetComponent<Image>().sprite = Bulb01Sp;
+        else if (itemName == Item.StickSeed)
+            slot.GetComponent<Image>().sprite = StickSeedSp;
+        else if (itemName == Item.BoardSeed)
+            slot.GetComponent<Image>().sprite = BoardSeedSp;
+        else if (itemName == Item.ThornSeed)
+            slot.GetComponent<Image>().sprite = ThornSeedSp;
     }
 
     void RefreshItemMenu()
@@ -131,6 +143,15 @@ public class Inventory : MonoBehaviour
                 InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
                 InventoryMenu[1].SetActive(true);
                 InventoryMenuText[1].GetComponent<Text>().text = "C : 설치하기";
+                break;
+
+            case Item.StickSeed:
+            case Item.BoardSeed:
+            case Item.ThornSeed:
+                InventoryMenu[0].SetActive(true);
+                InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
+                InventoryMenu[1].SetActive(true);
+                InventoryMenuText[1].GetComponent<Text>().text = "C : 심기";
                 break;
 
             default:
@@ -205,6 +226,42 @@ public class Inventory : MonoBehaviour
                     else
                     {
                         Monologue.GetComponent<Monologue>().DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                    }
+                    break;
+                case Item.StickSeed:
+                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "StickPlant", Grid.instance.PlayerGrid(), 0)) == true)
+                    {
+                        DeleteItem(Items[selectedIndex].name);
+                        RefreshItemMenu();
+                        CloseInventory();
+                    }
+                    else
+                    {
+                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                    }
+                    break;
+                case Item.BoardSeed:
+                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "BoardPlant", Grid.instance.PlayerGrid(), 0)) == true)
+                    {
+                        DeleteItem(Items[selectedIndex].name);
+                        RefreshItemMenu();
+                        CloseInventory();
+                    }
+                    else
+                    {
+                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                    }
+                    break;
+                case Item.ThornSeed:
+                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "ThornPlant", Grid.instance.PlayerGrid(), 0)) == true)
+                    {
+                        DeleteItem(Items[selectedIndex].name);
+                        RefreshItemMenu();
+                        CloseInventory();
+                    }
+                    else
+                    {
+                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
                     }
                     break;
             }

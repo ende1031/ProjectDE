@@ -1,0 +1,817 @@
+fileFormatVersion: 2
+guid: 4efe7a43f6dbad44b9a58cf324a9a9e9
+timeCreated: 1517382228
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Plant01_seedling_0
+    21300002: Plant01_seedling_1
+    21300004: Plant01_seedling_2
+    21300006: Plant01_seedling_3
+    21300008: Plant01_seedling_4
+    21300010: Plant01_seedling_5
+    21300012: Plant01_seedling_6
+    21300014: Plant01_seedling_7
+    21300016: Plant01_seedling_8
+    21300018: Plant01_seedling_9
+    21300020: Plant01_seedling_10
+    21300022: Plant01_seedling_11
+    21300024: Plant01_seedling_12
+    21300026: Plant01_seedling_13
+    21300028: Plant01_seedling_14
+    21300030: Plant01_seedling_15
+    21300032: Plant01_seedling_16
+    21300034: Plant01_seedling_17
+    21300036: Plant01_seedling_18
+    21300038: Plant01_seedling_19
+    21300040: Plant01_seedling_20
+    21300042: Plant01_seedling_21
+    21300044: Plant01_seedling_22
+    21300046: Plant01_seedling_23
+    21300048: Plant01_seedling_24
+    21300050: Plant01_seedling_25
+    21300052: Plant01_seedling_26
+    21300054: Plant01_seedling_27
+    21300056: Plant01_seedling_28
+    21300058: Plant01_seedling_29
+    21300060: Plant01_seedling_30
+    21300062: Plant01_seedling_31
+    21300064: Plant01_seedling_32
+    21300066: Plant01_seedling_33
+    21300068: Plant01_seedling_34
+    21300070: Plant01_seedling_35
+    21300072: Plant01_seedling_36
+    21300074: Plant01_seedling_37
+    21300076: Plant01_seedling_38
+    21300078: Plant01_seedling_39
+    21300080: Plant01_seedling_40
+    21300082: Plant01_seedling_41
+    21300084: Plant01_seedling_42
+    21300086: Plant01_seedling_43
+    21300088: Plant01_seedling_44
+    21300090: Plant01_seedling_45
+    21300092: Plant01_seedling_46
+    21300094: Plant01_seedling_47
+    21300096: Plant01_seedling_48
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Plant01_seedling_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 558
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 558
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_2
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 558
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_3
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 558
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_4
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 558
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_5
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 558
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_6
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 558
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 465
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_8
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 465
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_9
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 465
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_10
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 465
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_11
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 465
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_12
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 465
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_13
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 465
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 372
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_15
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 372
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_16
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 372
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_17
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 372
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_18
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 372
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_19
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 372
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_20
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 372
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 279
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_22
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 279
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_23
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 279
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_24
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 279
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_25
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 279
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_26
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 279
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_27
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 279
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 186
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_29
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 186
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_30
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 186
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_31
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 186
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_32
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 186
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_33
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 186
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_34
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 186
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 93
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_36
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 93
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_37
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 93
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_38
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 93
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_39
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 93
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_40
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 93
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_41
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 93
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_43
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 0
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_44
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 0
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_45
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 0
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_46
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 0
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_47
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 0
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Plant01_seedling_48
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 0
+        width: 85
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -38,7 +38,7 @@ public class SceneSetting : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyUp(KeyCode.S))
         {
-            SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "Trap01", Grid.instance.PlayerGrid(), 3));
+            SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "StickPlant", Grid.instance.PlayerGrid(), 0));
         }
         if (Input.GetKeyUp(KeyCode.D))
         {

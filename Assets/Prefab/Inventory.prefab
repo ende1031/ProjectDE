@@ -1140,6 +1140,9 @@ MonoBehaviour:
   Trap01Sp: {fileID: 21300000, guid: 68e988d3276d4f143863eac049af96d3, type: 3}
   HeartSp: {fileID: 21300000, guid: df66a5687c4c6eb47b189fff433633c1, type: 3}
   Bulb01Sp: {fileID: 21300000, guid: a983efb82f714a449889aef6484ab534, type: 3}
+  StickSeedSp: {fileID: 21300000, guid: c859196195c207d49bab5fa66f1f32eb, type: 3}
+  BoardSeedSp: {fileID: 21300000, guid: 884ce33a4363c87488e5ada3cd09b988, type: 3}
+  ThornSeedSp: {fileID: 21300000, guid: 81bd00f60f684544b8ed0cef6bd289f3, type: 3}
   isInventoryActive: 0
 --- !u!114 &114427440867818556
 MonoBehaviour:

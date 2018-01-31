@@ -1095,7 +1095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfHunger: 100
-  reduceSpeed: 1
+  reduceSpeed: 0.3
 --- !u!114 &370606897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2016,7 +2016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfEnergy: 100
-  reduceSpeed: 1
+  reduceSpeed: 0.4
 --- !u!1 &1129776120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,7 +2065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfOxygen: 100
-  reduceSpeed: 1
+  reduceSpeed: 0.2
   speed: 50
 --- !u!114 &1129776123
 MonoBehaviour:

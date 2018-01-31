@@ -45,6 +45,12 @@ public class PlayerInteraction : MonoBehaviour
             Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Trap01, 5);
             Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Bulb01, 5);
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.StickSeed, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.BoardSeed, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.ThornSeed, 5);
+        }
     }
 
     void PlayerDirection()
