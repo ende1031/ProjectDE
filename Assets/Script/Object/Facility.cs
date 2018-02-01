@@ -10,6 +10,7 @@ public class Facility : MonoBehaviour
     GameObject Inventory;
     GameObject Timer;
     GameObject PopupWindow;
+    GameObject ResearchWindow;
 
     Animator animaitor;
 
@@ -21,6 +22,7 @@ public class Facility : MonoBehaviour
         Inventory = GameObject.Find("Inventory");
         Timer = GameObject.Find("Timer");
         PopupWindow = GameObject.Find("PopupWindow");
+        ResearchWindow = GameObject.Find("ResearchWindow");
 
         animaitor = GetComponent<Animator>();
         if (animaitor != null)
@@ -133,14 +135,20 @@ public class Facility : MonoBehaviour
 
     public void Sleep()
     {
-        switch (facilityName)
+        if (facilityName == "EscapePod")
         {
-            case "EscapePod":
-                SceneObjectManager.instance.SaveObject();
-                Timer.GetComponent<Timer>().ResetTimer();
-                SceneObjectManager.instance.SleepAfter();
-                SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
-                break;
+            SceneObjectManager.instance.SaveObject();
+            Timer.GetComponent<Timer>().ResetTimer();
+            SceneObjectManager.instance.SleepAfter();
+            SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
+        }
+    }
+
+    public void Research()
+    {
+        if (facilityName == "EscapePod")
+        {
+            ResearchWindow.GetComponent<ResearchWindow>().OpenWindow();
         }
     }
 

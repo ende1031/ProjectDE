@@ -35,9 +35,9 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Battery, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Food, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Oxygen, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Board, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Thorn, 5);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -134,13 +134,17 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                 {
-                    target.GetComponent<Facility>().Sleep();
                     target.GetComponent<Facility>().OnOff();
+                    target.GetComponent<Facility>().Research();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
-                if (target.GetComponent<FacilityBalloon>().isMake == true)
+                if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
+                {
+                    target.GetComponent<Facility>().Sleep();
+                }
+                else if (target.GetComponent<FacilityBalloon>().isMake == true)
                 {
                     target.GetComponent<FacilityBalloon>().Dunp();
                 }
