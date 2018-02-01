@@ -19,13 +19,16 @@ public class ResearchWindow : MonoBehaviour
     GameObject ButtonText;
     GameObject BigItem;
 
+    GameObject ResultBG;
+
     public Sprite YellowButton;
     public Sprite RedButton;
     public Sprite BlueButton;
 
     Animator animaitor;
 
-    bool isPopupActive = false;
+    bool isResearchActive = false;
+    bool isResultActive = false;
     float openTimer = 0;
 
     int selectedIndex = 0;
@@ -69,6 +72,7 @@ public class ResearchWindow : MonoBehaviour
         Inventory = GameObject.Find("Inventory");
         animaitor = GetComponent<Animator>();
         ResearchBG = transform.Find("ResearchBG").gameObject;
+        ResultBG = transform.Find("ResultBG").gameObject;
 
         SetWindowObject();
         SetWindowItem();
@@ -101,7 +105,7 @@ public class ResearchWindow : MonoBehaviour
             Player = GameObject.Find("Player");
         }
 
-        if (isPopupActive == true)
+        if (isResearchActive == true)
         {
             if (openTimer <= 0.3f)
             {
@@ -117,6 +121,24 @@ public class ResearchWindow : MonoBehaviour
                 else if (Input.GetKeyUp(KeyCode.C))
                 {
                     InputItem();
+                }
+            }
+        }
+        if(isResultActive == true)
+        {
+            if (openTimer <= 0.3f)
+            {
+                openTimer += Time.deltaTime;
+            }
+            else
+            {
+                if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Escape))
+                {
+                    ResultBG.SetActive(false);
+                    ResearchBG.SetActive(true);
+                    isResearchActive = true;
+                    isResultActive = false;
+                    openTimer = 0;
                 }
             }
         }
@@ -202,13 +224,13 @@ public class ResearchWindow : MonoBehaviour
         if (itemArray[selectedIndex].isKnown == false)
         {
             BigItem.SetActive(false);
-            Button.GetComponent<Image>().sprite = RedButton;
-            ButtonText.GetComponent<Text>().text = "연구 불가";
+            Button.SetActive(false);
             completeResearch = false;
         }
         else
         {
             BigItem.SetActive(true);
+            Button.SetActive(true);
             BigItem.GetComponent<Image>().sprite = itemArray[selectedIndex].itemSp;
             if (itemArray[selectedIndex].putNum < itemArray[selectedIndex].maxNum)
             {
@@ -237,7 +259,7 @@ public class ResearchWindow : MonoBehaviour
     {
         Player.GetComponent<PlayerMove>().SetMovePossible(false);
         Player.GetComponent<PlayerInteraction>().SetInteractionPossible(false);
-        isPopupActive = true;
+        isResearchActive = true;
         selectedIndex = 0;
         openTimer = 0;
         RefreshWindow();
@@ -249,7 +271,7 @@ public class ResearchWindow : MonoBehaviour
     {
         Player.GetComponent<PlayerMove>().SetMovePossible(true);
         Player.GetComponent<PlayerInteraction>().SetInteractionPossible(true);
-        isPopupActive = false;
+        isResearchActive = false;
         selectedIndex = 0;
         openTimer = 0;
         MoveCursor();
@@ -272,6 +294,14 @@ public class ResearchWindow : MonoBehaviour
                 itemArray[selectedIndex].InputItem();
                 RefreshWindow();
             }
+        }
+        else if(completeResearch == true)
+        {
+            ResultBG.SetActive(true);
+            ResearchBG.SetActive(false);
+            isResearchActive = false;
+            isResultActive = true;
+            openTimer = 0;
         }
     }
 }

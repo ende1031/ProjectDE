@@ -57,6 +57,7 @@ public class Facility : MonoBehaviour
                         InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
                         break;
                     case "EscapePod":
+                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Research);
                         InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Sleep);
                         InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
                         break;
@@ -94,6 +95,7 @@ public class Facility : MonoBehaviour
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Sleep);
                     InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Dump);
+                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Research);
                     break;
             }
         }

@@ -134,6 +134,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                 {
+                    PlayerDirection();
                     target.GetComponent<Facility>().OnOff();
                     target.GetComponent<Facility>().Research();
                 }
@@ -146,6 +147,7 @@ public class PlayerInteraction : MonoBehaviour
                 }
                 else if (target.GetComponent<FacilityBalloon>().isMake == true)
                 {
+                    PlayerDirection();
                     target.GetComponent<FacilityBalloon>().Dunp();
                 }
             }
