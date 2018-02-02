@@ -193,7 +193,7 @@ public class Inventory : MonoBehaviour
                     RefreshItemMenu();
                     break;
                 case Item.Facility01:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Facility", "TempFacility", Grid.instance.PlayerGrid())) == true)
+                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "TempFacility")) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();
@@ -205,7 +205,7 @@ public class Inventory : MonoBehaviour
                     }
                     break;
                 case Item.Trap01:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "Trap01", Grid.instance.PlayerGrid(), 3)) == true)
+                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3)) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();
@@ -217,7 +217,7 @@ public class Inventory : MonoBehaviour
                     }
                     break;
                 case Item.Bulb01:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Bulb", "Bulb", Grid.instance.PlayerGrid())) == true)
+                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb")) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();
@@ -229,7 +229,7 @@ public class Inventory : MonoBehaviour
                     }
                     break;
                 case Item.StickSeed:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "StickPlant", Grid.instance.PlayerGrid(), 0)) == true)
+                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "StickPlant", 0)) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();
@@ -241,7 +241,7 @@ public class Inventory : MonoBehaviour
                     }
                     break;
                 case Item.BoardSeed:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "BoardPlant", Grid.instance.PlayerGrid(), 0)) == true)
+                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "BoardPlant", 0)) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();
@@ -253,7 +253,7 @@ public class Inventory : MonoBehaviour
                     }
                     break;
                 case Item.ThornSeed:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, new SceneObjectManager.SceneObject("Plant", "ThornPlant", Grid.instance.PlayerGrid(), 0)) == true)
+                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "ThornPlant", 0)) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();

@@ -20,20 +20,18 @@ public class SceneObjectManager : MonoBehaviour
 
     public class SceneObject
     {
-        public SceneObject(string t, string n, int g) //기본
+        public SceneObject(string t, string n) //기본
         {
             type = t;
             name = n;
-            grid = g;
             isOn = true;
             isAlive = true;
         }
 
-        public SceneObject(string t, string n, int g, int temp) //temp : 이동후좌표(포탈), 상태(식물)
+        public SceneObject(string t, string n, int temp) //temp : 이동후좌표(포탈), 상태(식물)
         {
             type = t;
             name = n;
-            grid = g;
             portalAfterMoveGrid = temp;
             plantState = temp;
             isOn = true;
@@ -43,7 +41,6 @@ public class SceneObjectManager : MonoBehaviour
         public GameObject inGameObject;
         public string type; //"plant", "Facility" 등
         public string name; //"TempFacility", "EscapePod", "StickPlant" 등. Portal의 경우 이동하려는 씬의 이름
-        public int grid;
 
         public bool isOn;
         public bool isAlive;
@@ -57,11 +54,11 @@ public class SceneObjectManager : MonoBehaviour
 
     static int maxSceneCount = 2; //씬 추가시 늘려줘야 됨
 
-    List<List<SceneObject>> SObjects = new List<List<SceneObject>>();
+    List<Dictionary<int, SceneObject>> SObjects = new List<Dictionary<int, SceneObject>>();
 
-    void InstantiateObject(SceneObject ob)
+    void InstantiateObject(int grid, SceneObject ob)
     {
-        Vector3 tempPos = Grid.instance.GridToPos(ob.grid);
+        Vector3 tempPos = Grid.instance.GridToPos(grid);
         tempPos.z = 0.1f;
 
         if (ob.type == "Plant") //Prefab 추가시 수정할 부분
@@ -153,7 +150,7 @@ public class SceneObjectManager : MonoBehaviour
 
         for (int i = 0; i < maxSceneCount; i++)
         {
-            SObjects.Add(new List<SceneObject>());
+            SObjects.Add(new Dictionary<int, SceneObject>());
         }
     }
 
@@ -162,27 +159,27 @@ public class SceneObjectManager : MonoBehaviour
     {
         for (int i = 0; i < maxSceneCount; i++)
         {
-            foreach (SceneObject ob in SObjects[i])
+            foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
             {
-                if (ob.type == "Plant")
+                if (pair.Value.type == "Plant")
                 {
-                    if (ob.inGameObject == null)
+                    if (pair.Value.inGameObject == null)
                     {
-                        ob.timer += Time.deltaTime;
+                        pair.Value.timer += Time.deltaTime;
                     }
                 }
-                else if (ob.type == "Facility")
+                else if (pair.Value.type == "Facility")
                 {
-                    if (ob.inGameObject == null && ob.facilityIsMake == true && ob.timer > 0)
+                    if (pair.Value.inGameObject == null && pair.Value.facilityIsMake == true && pair.Value.timer > 0)
                     {
-                        ob.timer -= Time.deltaTime;
+                        pair.Value.timer -= Time.deltaTime;
                     }
                 }
-                else if (ob.type == "Bulb")
+                else if (pair.Value.type == "Bulb")
                 {
-                    if (ob.inGameObject == null && ob.isOn == true)
+                    if (pair.Value.inGameObject == null && pair.Value.isOn == true)
                     {
-                        ob.timer += Time.deltaTime;
+                        pair.Value.timer += Time.deltaTime;
                     }
                 }
             }
@@ -194,34 +191,34 @@ public class SceneObjectManager : MonoBehaviour
     {
         for (int i = 0; i < maxSceneCount; i++)
         {
-            foreach (SceneObject ob in SObjects[i])
+            foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
             {
-                if (ob.type == "Plant")
+                if (pair.Value.type == "Plant")
                 {
-                    if (ob.inGameObject != null)
+                    if (pair.Value.inGameObject != null)
                     {
-                        ob.plantState = ob.inGameObject.GetComponent<Plant>().state;
-                        ob.timer = ob.inGameObject.GetComponent<Plant>().growthTimer;
+                        pair.Value.plantState = pair.Value.inGameObject.GetComponent<Plant>().state;
+                        pair.Value.timer = pair.Value.inGameObject.GetComponent<Plant>().growthTimer;
                     }
                 }
-                else if(ob.type == "Facility")
+                else if (pair.Value.type == "Facility")
                 {
-                    if(ob.inGameObject != null)
+                    if (pair.Value.inGameObject != null)
                     {
-                        ob.isOn = ob.inGameObject.GetComponent<Facility>().isOn;
-                        ob.timer = ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
-                        ob.facilityMakeItem = ob.inGameObject.GetComponent<FacilityBalloon>().makeItem;
-                        ob.facilityIsMake = ob.inGameObject.GetComponent<FacilityBalloon>().isMake;
-                        ob.facilityIsMakeFinish = ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;
+                        pair.Value.isOn = pair.Value.inGameObject.GetComponent<Facility>().isOn;
+                        pair.Value.timer = pair.Value.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
+                        pair.Value.facilityMakeItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().makeItem;
+                        pair.Value.facilityIsMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMake;
+                        pair.Value.facilityIsMakeFinish = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;
                     }
                 }
-                else if (ob.type == "Bulb")
+                else if (pair.Value.type == "Bulb")
                 {
-                    if (ob.inGameObject != null)
+                    if (pair.Value.inGameObject != null)
                     {
-                        ob.isOn = ob.inGameObject.GetComponent<Bulb>().isOn;
-                        ob.timer = ob.inGameObject.GetComponent<Bulb>().LifeTimer;
-                        ob.isAlive = ob.inGameObject.GetComponent<Bulb>().isAlive;
+                        pair.Value.isOn = pair.Value.inGameObject.GetComponent<Bulb>().isOn;
+                        pair.Value.timer = pair.Value.inGameObject.GetComponent<Bulb>().LifeTimer;
+                        pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Bulb>().isAlive;
                     }
                 }
             }
@@ -233,39 +230,39 @@ public class SceneObjectManager : MonoBehaviour
     {
         for (int i = 0; i < maxSceneCount; i++)
         {
-            foreach (SceneObject ob in SObjects[i])
+            foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
             {
-                if (ob.type == "Plant")
+                if (pair.Value.type == "Plant")
                 {
-                    ob.plantState = 1;
+                    pair.Value.plantState = 1;
                 }
-                else if (ob.type == "Facility")
+                else if (pair.Value.type == "Facility")
                 {
-                    if (ob.name != "EscapePod")
+                    if (pair.Value.name != "EscapePod")
                     {
-                        ob.isOn = false;
+                        pair.Value.isOn = false;
                     }
-                    ob.facilityIsMake = false;
-                    ob.facilityIsMakeFinish = false;
+                    pair.Value.facilityIsMake = false;
+                    pair.Value.facilityIsMakeFinish = false;
                 }
-                else if (ob.type == "Bulb")
+                else if (pair.Value.type == "Bulb")
                 {
-                    ob.isOn = false;
+                    pair.Value.isOn = false;
                 }
             }
         }
     }
 
     //해당 좌표에 이미 다른 오브젝트가 있으면 false를 반환
-    public bool AddObject(int sceneNum, SceneObject ob)
+    public bool AddObject(int sceneNum, int grid, SceneObject ob)
     {
-        if(isContain(sceneNum, ob.grid).HasValue == true)
+        if (SObjects[sceneNum].ContainsKey(grid) == true)
         {
             return false;
         }
-
-        SObjects[sceneNum].Add(ob);
-        InstantiateObject(ob);
+        
+        SObjects[sceneNum].Add(grid, ob);
+        InstantiateObject(grid, ob);
 
         return true;
     }
@@ -273,45 +270,25 @@ public class SceneObjectManager : MonoBehaviour
     //해당 좌표에 오브젝트가 없으면 false를 반환
     public bool DeleteObject(int sceneNum, int grid)
     {
-        int? temp = isContain(sceneNum, grid);
-        if (temp.HasValue == false)
+        if (SObjects[sceneNum].ContainsKey(grid) == false)
         {
             return false;
         }
 
-        Destroy(SObjects[sceneNum][(int)temp].inGameObject.gameObject);
-        SObjects[sceneNum].RemoveAt((int)temp);
+        Destroy(SObjects[sceneNum][grid].inGameObject.gameObject);
+        SObjects[sceneNum].Remove(grid);
 
         return true;
-    }
-
-    //해당 좌표에 오브젝트가 있으면 리스트의 몇번째 오브젝트인지 반환, 없으면 null반환
-    int? isContain(int sceneNum, int grid)
-    {
-        if(SObjects[sceneNum].Count <= 0)
-        {
-            return null;
-        }
-
-        for (int i =0; i< SObjects[sceneNum].Count; i++)
-        {
-            if (SObjects[sceneNum][i].grid == grid)
-            {
-                return i;
-            }
-        }
-
-        return null;
     }
 
     //맵이동시 삭제되는 오브젝트를 다시 불러옴
     public void ReloadObject(int sceneNum)
     {
-        foreach (SceneObject ob in SObjects[sceneNum])
+        foreach (KeyValuePair<int, SceneObject> pair in SObjects[sceneNum])
         {
-            if (ob.inGameObject == null)
+            if (pair.Value.inGameObject == null)
             {
-                InstantiateObject(ob);
+                InstantiateObject(pair.Key, pair.Value);
             }
         }
     }
