@@ -100,7 +100,7 @@ MonoBehaviour:
   plantName: Trap01
   GatherAnimationType: 1
   state: 3
-  growthTime: 20
+  growthTime: 180
   growthTimer: 0
 --- !u!212 &212474785703097292
 SpriteRenderer:

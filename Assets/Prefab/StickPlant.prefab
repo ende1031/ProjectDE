@@ -100,7 +100,7 @@ MonoBehaviour:
   plantName: StickPlant
   GatherAnimationType: 2
   state: 1
-  growthTime: 20
+  growthTime: 120
   growthTimer: 0
 --- !u!212 &212157090944066114
 SpriteRenderer:

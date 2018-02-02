@@ -3682,7 +3682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfOxygen: 100
-  reduceSpeed: 0.2
+  reduceSpeed: 0.03
   speed: 50
 --- !u!114 &537715995
 MonoBehaviour:
@@ -7030,7 +7030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b361e4010aeb384db2fd17e0f2ceefb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 12
+  time: 6
   minute: 0
 --- !u!114 &1133549724
 MonoBehaviour:
@@ -12091,7 +12091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfHunger: 100
-  reduceSpeed: 0.3
+  reduceSpeed: 0.06
 --- !u!114 &2035891836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12530,7 +12530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfEnergy: 100
-  reduceSpeed: 0.4
+  reduceSpeed: 0.1
 --- !u!1 &2103040782
 GameObject:
   m_ObjectHideFlags: 0

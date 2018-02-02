@@ -103,33 +103,23 @@ public class Facility : MonoBehaviour
 
     public void OpenProductionWindow()
     {
-        switch (facilityName) //테스트용 코드
+        switch (facilityName)
         {
             case "TempFacility":
                 PopupWindow.GetComponent<PopupWindow>().ClearItemList();
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Facility01);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Trap01);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Bulb01);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.StickSeed);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.BoardSeed);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.ThornSeed);
+                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Facility01);
                 PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
             case "EscapePod":
                 PopupWindow.GetComponent<PopupWindow>().ClearItemList();
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.StickSeed);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.BoardSeed);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.ThornSeed);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
                 PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Oxygen);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Hose);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Stick);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Board);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Mass);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Thorn);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Facility01);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Trap01);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Heart);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Bulb01);
                 PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
                 break;
         }

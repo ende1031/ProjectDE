@@ -7,6 +7,10 @@ public class SceneObjectManager : MonoBehaviour
     public static SceneObjectManager instance = null;
     GameObject UI;
 
+    GameObject OxygenUI;
+    GameObject HungerUI;
+    GameObject EnergyUI;
+
     public GameObject TempFacility; //Prefab 추가시 수정할 부분
     public GameObject EscapePod;
     public GameObject StickPlant;
@@ -53,7 +57,7 @@ public class SceneObjectManager : MonoBehaviour
         public float bulbLifeTime;
     }
 
-    static int maxSceneCount = 2; //씬 추가시 늘려줘야 됨
+    static int maxSceneCount = 4; //씬 추가시 늘려줘야 됨
 
     List<Dictionary<int, SceneObject>> SObjects = new List<Dictionary<int, SceneObject>>();
 
@@ -147,6 +151,9 @@ public class SceneObjectManager : MonoBehaviour
     void Start ()
     {
         UI = GameObject.Find("UI");
+        OxygenUI = GameObject.Find("Oxygen_Needle");
+        HungerUI = GameObject.Find("Hunger_Guage");
+        EnergyUI = GameObject.Find("LeftUI");
         UI.SetActive(false);
 
         for (int i = 0; i < maxSceneCount; i++)
@@ -276,6 +283,10 @@ public class SceneObjectManager : MonoBehaviour
                 }
             }
         }
+
+        HungerUI.GetComponent<HungerGauge>().SetAmount(-20);
+        OxygenUI.GetComponent<OxygenGauge>().SetAmount(-10);
+        EnergyUI.GetComponent<EnergyGauge>().SetAmount(-10);
     }
 
     //해당 좌표에 이미 다른 오브젝트가 있으면 false를 반환

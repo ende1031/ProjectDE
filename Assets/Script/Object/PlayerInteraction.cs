@@ -35,21 +35,11 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Board, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Thorn, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Tumor, 1);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Trap01, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Facility01, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Bulb01, 5);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.StickSeed, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.BoardSeed, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.ThornSeed, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass, 1);
         }
     }
 

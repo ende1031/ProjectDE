@@ -73,7 +73,7 @@ public class PopupWindow : MonoBehaviour
         SetWindowObject();
         SetDictionary();
 
-        SetWindowItem(); // 테스트용 코드
+        SetWindowItem();
         RefreshWindow();
     }
 
@@ -117,20 +117,39 @@ public class PopupWindow : MonoBehaviour
         itemDictionary[global::Inventory.Item.StickSeed] = Inventory.GetComponent<Inventory>().StickSeedSp;
         itemDictionary[global::Inventory.Item.BoardSeed] = Inventory.GetComponent<Inventory>().BoardSeedSp;
         itemDictionary[global::Inventory.Item.ThornSeed] = Inventory.GetComponent<Inventory>().ThornSeedSp;
+        itemDictionary[global::Inventory.Item.Tumor] = Inventory.GetComponent<Inventory>().TumorSp;
     }
 
     public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
     {
         switch (itemName)
         {
+            case global::Inventory.Item.Trap01:
+                WindowItemList.Add(new WindowItem(itemName, 60, "소형 덫", "괴식물한테서 획득한 가시로 만든 소형 덫이다.\n어둠 속에 설치해 두면 작은 괴물을 잡을 수 있을 것 같다.\n반드시 빛이 없는 곳에 설치하자." + TimeToString(60), global::Inventory.Item.Stick, 2, global::Inventory.Item.Thorn, 3));
+                break;
             case global::Inventory.Item.Battery:
-                WindowItemList.Add(new WindowItem(itemName, 15, "배터리", "괴물의 심장으로 만든 고밀도 배터리이다. 가공해서 형체는 많이 달라졌지만 들고 있으면 작은 움직임이 느껴진다.\n사용하면 에너지 게이지를 충전할 수 있다." + TimeToString(15), global::Inventory.Item.Heart, 1));
+                WindowItemList.Add(new WindowItem(itemName, 30, "배터리", "괴물의 심장으로 만든 고밀도 배터리이다. 가공해서 형체는 많이 달라졌지만 들고 있으면 작은 움직임이 느껴진다.\n사용하면 에너지 게이지를 충전할 수 있다." + TimeToString(30), global::Inventory.Item.Board, 1, global::Inventory.Item.Mass, 2, global::Inventory.Item.Heart, 1, global::Inventory.Item.Hose, 1));
+                break;
+            case global::Inventory.Item.Facility01:
+                WindowItemList.Add(new WindowItem(itemName, 150, "워크벤치", "괴물의 조직을 이용해서 만든 워크벤치이다. 살아있지만 위험하지는 않다.\n각종 물품을 생산할 수 있다." + TimeToString(150), global::Inventory.Item.Stick, 30, global::Inventory.Item.Board, 18, global::Inventory.Item.Mass, 10, global::Inventory.Item.Battery, 1));
+                break;
+            case global::Inventory.Item.Bulb01:
+                WindowItemList.Add(new WindowItem(itemName, 30, "전구", "괴물은 빛을 싫어한다.\n전구를 켜두면 내가 만들어둔 시설들이 공격받는 일도 없을 것이다." + TimeToString(30), global::Inventory.Item.Mass, 2, global::Inventory.Item.Heart, 1, global::Inventory.Item.Hose, 1, global::Inventory.Item.Tumor, 1));
                 break;
             case global::Inventory.Item.Food:
-                WindowItemList.Add(new WindowItem(itemName, 20, "식량", "한솥도시락 주방장이 심혈을 기울여 만든 반숙 후라이를 첨단기술로 재현했다.\n사용하면 허기 게이지를 충전할 수 있다." + TimeToString(20), global::Inventory.Item.Stick, 2, global::Inventory.Item.Board, 1));
+                WindowItemList.Add(new WindowItem(itemName, 45, "식량", "젠장 맛없다.\n사용하면 허기 게이지를 충전할 수 있다." + TimeToString(45), global::Inventory.Item.Tumor, 5));
+                break;
+            case global::Inventory.Item.StickSeed:
+                WindowItemList.Add(new WindowItem(itemName, 180, "막대 모종", "심으면 긴 막대처럼 생긴 괴식물이 자라난다." + TimeToString(180), global::Inventory.Item.Stick, 8, global::Inventory.Item.Mass, 3, global::Inventory.Item.Heart, 1));
+                break;
+            case global::Inventory.Item.BoardSeed:
+                WindowItemList.Add(new WindowItem(itemName, 180, "판자 모종", "심으면 판자처럼 생긴 괴식물이 자라난다." + TimeToString(180), global::Inventory.Item.Board, 5, global::Inventory.Item.Mass, 3, global::Inventory.Item.Heart, 1));
+                break;
+            case global::Inventory.Item.ThornSeed:
+                WindowItemList.Add(new WindowItem(itemName, 180, "가시 모종", "심으면 가시가 달린 괴식물이 자라난다." + TimeToString(180), global::Inventory.Item.Thorn, 7, global::Inventory.Item.Mass, 3, global::Inventory.Item.Heart, 1));
                 break;
             case global::Inventory.Item.Oxygen:
-                WindowItemList.Add(new WindowItem(itemName, 10, "산소", "폐허가 된 지구에서 숨을 쉬기 위해서는 정제를 통해 산소를 얻는 방법 밖에는 없다.\n산소가 다 떨어지면 나는 어떻게 될까?\n사용하면 산소 게이지를 충전할 수 있다." + TimeToString(10), global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 1));
+                WindowItemList.Add(new WindowItem(itemName, 240, "산소", "폐허가 된 지구에서 숨을 쉬기 위해서는 정제를 통해 산소를 얻는 방법 밖에는 없다.\n산소가 다 떨어지면 나는 어떻게 될까?\n사용하면 산소 게이지를 충전할 수 있다." + TimeToString(240), global::Inventory.Item.Mass, 12));
                 break;
             case global::Inventory.Item.Stick:
                 WindowItemList.Add(new WindowItem(itemName, 30, "막대", "여기서 막대 만들 시간에 괴식물한테 채집하는게 이득이다.\n\n그렇다고 한다." + TimeToString(30), global::Inventory.Item.Battery, 1, global::Inventory.Item.Board, 2));
@@ -147,26 +166,11 @@ public class PopupWindow : MonoBehaviour
             case global::Inventory.Item.Thorn:
                 WindowItemList.Add(new WindowItem(itemName, 300, "가시", "괴식물을 통해 얻는게 빠르다." + TimeToString(300), global::Inventory.Item.Stick, 99, global::Inventory.Item.Board, 99, global::Inventory.Item.Food, 99, global::Inventory.Item.Oxygen, 99, global::Inventory.Item.Battery, 99));
                 break;
-            case global::Inventory.Item.Facility01:
-                WindowItemList.Add(new WindowItem(itemName, 30, "워크벤치", "괴물의 조직을 이용해서 만든 워크벤치이다. 살아있지만 위험하지는 않다.\n각종 물품을 생산할 수 있다." + TimeToString(30), global::Inventory.Item.Board, 2, global::Inventory.Item.Battery, 1));
-                break;
-            case global::Inventory.Item.Trap01:
-                WindowItemList.Add(new WindowItem(itemName, 30, "소형 덫", "괴식물한테서 획득한 가시로 만든 소형 덫이다.\n어둠 속에 설치해 두면 작은 괴물을 잡을 수 있을 것 같다.\n반드시 빛이 없는 곳에 설치하자." + TimeToString(30), global::Inventory.Item.Thorn, 1, global::Inventory.Item.Board, 1));
-                break;
             case global::Inventory.Item.Heart:
                 WindowItemList.Add(new WindowItem(itemName, 45, "심장", "두근" + TimeToString(45), global::Inventory.Item.Thorn, 77, global::Inventory.Item.Facility01, 99));
                 break;
-            case global::Inventory.Item.Bulb01:
-                WindowItemList.Add(new WindowItem(itemName, 20, "전구", "괴물은 빛을 싫어한다.\n전구를 켜두면 내가 만들어둔 시설들이 공격받는 일도 없을 것이다." + TimeToString(20), global::Inventory.Item.Battery, 1, global::Inventory.Item.Stick, 2));
-                break;
-            case global::Inventory.Item.StickSeed:
-                WindowItemList.Add(new WindowItem(itemName, 10, "막대 모종", "심으면 긴 막대처럼 생긴 괴식물이 자라난다." + TimeToString(10), global::Inventory.Item.Stick, 1));
-                break;
-            case global::Inventory.Item.BoardSeed:
-                WindowItemList.Add(new WindowItem(itemName, 10, "판자 모종", "심으면 판자처럼 생긴 괴식물이 자라난다." + TimeToString(10), global::Inventory.Item.Board, 1));
-                break;
-            case global::Inventory.Item.ThornSeed:
-                WindowItemList.Add(new WindowItem(itemName, 10, "가시 모종", "심으면 가시가 달린 괴식물이 자라난다." + TimeToString(10), global::Inventory.Item.Thorn, 1));
+            case global::Inventory.Item.Tumor:
+                WindowItemList.Add(new WindowItem(itemName, 45, "종양", "더미" + TimeToString(45), global::Inventory.Item.Thorn, 77, global::Inventory.Item.Facility01, 99));
                 break;
         }
     }

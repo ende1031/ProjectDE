@@ -1143,6 +1143,7 @@ MonoBehaviour:
   StickSeedSp: {fileID: 21300000, guid: c859196195c207d49bab5fa66f1f32eb, type: 3}
   BoardSeedSp: {fileID: 21300000, guid: 884ce33a4363c87488e5ada3cd09b988, type: 3}
   ThornSeedSp: {fileID: 21300000, guid: 81bd00f60f684544b8ed0cef6bd289f3, type: 3}
+  TumorSp: {fileID: 21300000, guid: 17399aaa48e1fb54f80a7329c13c7b43, type: 3}
   isInventoryActive: 0
 --- !u!114 &114427440867818556
 MonoBehaviour:

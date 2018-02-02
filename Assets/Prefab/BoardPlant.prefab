@@ -100,7 +100,7 @@ MonoBehaviour:
   plantName: BoardPlant
   GatherAnimationType: 2
   state: 1
-  growthTime: 10
+  growthTime: 180
   growthTimer: 0
 --- !u!212 &212090309720165488
 SpriteRenderer:

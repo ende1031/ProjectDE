@@ -41,16 +41,6 @@ public class OxygenGauge : MonoBehaviour
                 displayedAmount = amountOfOxygen;
             }
         }
-
-        //테스트용 코드
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            amountOfOxygen += 30;
-        }
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            amountOfOxygen -= 30;
-        }
     }
 
     public void SetAmount(float amount)

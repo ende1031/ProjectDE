@@ -32,7 +32,8 @@ public class Inventory : MonoBehaviour
         Bulb01,
         StickSeed,
         BoardSeed,
-        ThornSeed
+        ThornSeed,
+        Tumor
     };
 
     GameObject[] itemSlot = new GameObject[7];
@@ -64,6 +65,7 @@ public class Inventory : MonoBehaviour
     public Sprite StickSeedSp;
     public Sprite BoardSeedSp;
     public Sprite ThornSeedSp;
+    public Sprite TumorSp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -102,6 +104,8 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Image>().sprite = BoardSeedSp;
         else if (itemName == Item.ThornSeed)
             slot.GetComponent<Image>().sprite = ThornSeedSp;
+        else if (itemName == Item.Tumor)
+            slot.GetComponent<Image>().sprite = TumorSp;
     }
 
     void RefreshItemMenu()
@@ -132,6 +136,7 @@ public class Inventory : MonoBehaviour
             case Item.Mass:
             case Item.Thorn:
             case Item.Heart:
+            case Item.Tumor:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
                 break;
@@ -178,22 +183,22 @@ public class Inventory : MonoBehaviour
             switch (Items[selectedIndex].name)
             {
                 case Item.Food:
-                    HungerUI.GetComponent<HungerGauge>().SetAmount(30);
+                    HungerUI.GetComponent<HungerGauge>().SetAmount(50);
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
                 case Item.Oxygen:
-                    OxygenUI.GetComponent<OxygenGauge>().SetAmount(30);
+                    OxygenUI.GetComponent<OxygenGauge>().SetAmount(70);
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
                 case Item.Battery:
-                    EnergyUI.GetComponent<EnergyGauge>().SetAmount(30);
+                    EnergyUI.GetComponent<EnergyGauge>().SetAmount(35);
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
                 case Item.Facility01:
-                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false)
+                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
                     {
                         Monologue.GetComponent<Monologue>().DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
                     }
@@ -221,9 +226,9 @@ public class Inventory : MonoBehaviour
                     }
                     break;
                 case Item.Bulb01:
-                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb") == true)
+                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Bulb") == true || SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Facility", "EscapePod") == true)
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("근처에 이미 다른 전구가 있군.\n전구가 없는 곳에 설치하자.");
+                        Monologue.GetComponent<Monologue>().DisplayLog("근처에 이미 다른 광원이 있군.\n빛이 없는 곳에 설치하자.");
                     }
                     else if(SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb01")) == true)
                     {
@@ -293,6 +298,7 @@ public class Inventory : MonoBehaviour
                 case Item.StickSeed:
                 case Item.BoardSeed:
                 case Item.ThornSeed:
+                case Item.Tumor:
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;

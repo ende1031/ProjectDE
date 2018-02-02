@@ -312,7 +312,7 @@ MonoBehaviour:
   isOn: 1
   isLoadByManager: 0
   isAlive: 1
-  LifeTime: 30
+  LifeTime: 540
   LifeTimer: 0
 --- !u!114 &114938793622729760
 MonoBehaviour:

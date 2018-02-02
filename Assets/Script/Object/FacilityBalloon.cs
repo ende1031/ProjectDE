@@ -61,6 +61,7 @@ public class FacilityBalloon : MonoBehaviour
         itemDictionary[global::Inventory.Item.StickSeed] = Inventory.GetComponent<Inventory>().StickSeedSp;
         itemDictionary[global::Inventory.Item.BoardSeed] = Inventory.GetComponent<Inventory>().BoardSeedSp;
         itemDictionary[global::Inventory.Item.ThornSeed] = Inventory.GetComponent<Inventory>().ThornSeedSp;
+        itemDictionary[global::Inventory.Item.Tumor] = Inventory.GetComponent<Inventory>().TumorSp;
     }
 
     void Update ()
