@@ -193,7 +193,11 @@ public class Inventory : MonoBehaviour
                     RefreshItemMenu();
                     break;
                 case Item.Facility01:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "TempFacility")) == true)
+                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false)
+                    {
+                        Monologue.GetComponent<Monologue>().DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
+                    }
+                    else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "TempFacility")) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();
@@ -217,7 +221,11 @@ public class Inventory : MonoBehaviour
                     }
                     break;
                 case Item.Bulb01:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb")) == true)
+                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb") == true)
+                    {
+                        Monologue.GetComponent<Monologue>().DisplayLog("근처에 이미 다른 전구가 있군.\n전구가 없는 곳에 설치하자.");
+                    }
+                    else if(SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb01")) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();

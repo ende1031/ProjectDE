@@ -50,6 +50,7 @@ public class SceneObjectManager : MonoBehaviour
         public global::Inventory.Item facilityMakeItem;
         public bool facilityIsMake;
         public bool facilityIsMakeFinish;
+        public float bulbLifeTime;
     }
 
     static int maxSceneCount = 2; //씬 추가시 늘려줘야 됨
@@ -166,6 +167,24 @@ public class SceneObjectManager : MonoBehaviour
                     if (pair.Value.inGameObject == null)
                     {
                         pair.Value.timer += Time.deltaTime;
+
+                        if (pair.Value.name == "Trap01")
+                        {
+                            if (RangeSearch(i, pair.Key, 2, "Bulb", "Bulb01", true) == false)
+                            {
+                                if (RangeSearch(i, pair.Key, 2, "Facility", "EscapePod") == false)
+                                {
+                                    if (RangeSearch(i, pair.Key, 2, "Nest", "Nest01") == true)
+                                    {
+                                        pair.Value.timer += Time.deltaTime;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            pair.Value.timer += Time.deltaTime;
+                        }
                     }
                 }
                 else if (pair.Value.type == "Facility")
@@ -180,6 +199,11 @@ public class SceneObjectManager : MonoBehaviour
                     if (pair.Value.inGameObject == null && pair.Value.isOn == true)
                     {
                         pair.Value.timer += Time.deltaTime;
+                        if(pair.Value.timer > pair.Value.bulbLifeTime)
+                        {
+                            pair.Value.isAlive = false;
+                            pair.Value.isOn = false;
+                        }
                     }
                 }
             }
@@ -219,6 +243,7 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.isOn = pair.Value.inGameObject.GetComponent<Bulb>().isOn;
                         pair.Value.timer = pair.Value.inGameObject.GetComponent<Bulb>().LifeTimer;
                         pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Bulb>().isAlive;
+                        pair.Value.bulbLifeTime = pair.Value.inGameObject.GetComponent<Bulb>().LifeTime;
                     }
                 }
             }
@@ -291,6 +316,46 @@ public class SceneObjectManager : MonoBehaviour
                 InstantiateObject(pair.Key, pair.Value);
             }
         }
+    }
+
+    //grid를 기준으로 양옆 range범위 안에 해당 type의 오브젝트가 있으면 true, isSearchLight는 전구가 아니라 빛(켜진 전구)을 탐색함
+    public bool RangeSearch(int sceneNum, int grid, int range, string type, string name = "NoName", bool isSearchLight = false)
+    {
+        for (int i = (grid - range); i <= (grid + range); i++)
+        {
+            if (SObjects[sceneNum].ContainsKey(i) == true)
+            {
+                if (SObjects[sceneNum][i].type == type && name == "NoName")
+                {
+                    if (type == "Bulb" && isSearchLight == true)
+                    {
+                        if (SObjects[sceneNum][i].isOn == true && SObjects[sceneNum][i].isAlive == true)
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else if (SObjects[sceneNum][i].type == type && SObjects[sceneNum][i].name == name)
+                {
+                    if(type == "Bulb" && isSearchLight == true)
+                    {
+                        if(SObjects[sceneNum][i].isOn == true && SObjects[sceneNum][i].isAlive == true)
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public void SetUIActive(bool a)

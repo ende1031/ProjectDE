@@ -19,8 +19,12 @@ public class Bulb : MonoBehaviour
     public float LifeTime = 20;
     public float LifeTimer = 0;
 
+    int sceneNum;
+
     void Start ()
     {
+        sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+
         InteractionIcon = GameObject.Find("InteractionIcon");
         Inventory = GameObject.Find("Inventory");
         BulbLight = transform.Find("Light").gameObject;
@@ -47,6 +51,7 @@ public class Bulb : MonoBehaviour
             if (LifeTimer >= LifeTime)
             {
                 isAlive = false;
+                OnOff(false);
                 animaitor.SetBool("isDie", true);
             }
             isLoadByManager = false;
@@ -56,7 +61,7 @@ public class Bulb : MonoBehaviour
         {
             DisplayText();
 
-            if (isOn)
+            if (isOn == true)
             {
                 if (LifeTimer < LifeTime)
                 {
@@ -66,6 +71,7 @@ public class Bulb : MonoBehaviour
             if (LifeTimer > LifeTime)
             {
                 LifeTimer = LifeTime;
+                OnOff(false);
                 isAlive = false;
             }
         }
@@ -75,6 +81,10 @@ public class Bulb : MonoBehaviour
             animaitor.SetBool("isAlive", isAlive);
             TimeText.SetActive(false);
             Balloon.SetActive(false);
+            if(isOn == true)
+            {
+                OnOff(false);
+            }
             if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
             {
                 InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.OnOff);
@@ -141,6 +151,20 @@ public class Bulb : MonoBehaviour
             BulbLight.SetActive(isOn);
             InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
             DisplayIcon();
+            SceneObjectManager.instance.SaveObject();
+        }
+    }
+
+    public void OnOff(bool onOff)
+    {
+        if (isAlive == true)
+        {
+            isOn = false;
+            animaitor.SetBool("isOn", false);
+            BulbLight.SetActive(false);
+            InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
+            DisplayIcon();
+            SceneObjectManager.instance.SaveObject();
         }
     }
 }

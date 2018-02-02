@@ -132,7 +132,16 @@ public class Plant : MonoBehaviour
             {
                 if (Mathf.Abs(Grid.instance.PlayerGrid() - Grid.instance.PosToGrid(transform.position.x)) > 6)
                 {
-                    growthTimer += Time.deltaTime;
+                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01", true) == false)
+                    {
+                        if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
+                        {
+                            if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Nest", "Nest01") == true)
+                            {
+                                growthTimer += Time.deltaTime;
+                            }
+                        }
+                    }
                 }
             }
             else

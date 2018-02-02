@@ -41,9 +41,9 @@ public class PlayerInteraction : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Battery, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Food, 5);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Oxygen, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Trap01, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Facility01, 5);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Bulb01, 5);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
