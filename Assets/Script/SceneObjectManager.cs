@@ -16,6 +16,7 @@ public class SceneObjectManager : MonoBehaviour
     public GameObject Portal;
     public GameObject Trap01;
     public GameObject Bulb01;
+    public GameObject Nest01;
 
     public class SceneObject
     {
@@ -125,6 +126,10 @@ public class SceneObjectManager : MonoBehaviour
             ob.inGameObject.GetComponent<Bulb>().isAlive = ob.isAlive;
             ob.inGameObject.GetComponent<Bulb>().isLoadByManager = true;
         }
+        else if (ob.type == "Nest")
+        {
+            ob.inGameObject = Instantiate(Nest01, tempPos, Quaternion.identity);
+        }
     }
 
     void Awake()
@@ -152,6 +157,7 @@ public class SceneObjectManager : MonoBehaviour
         }
     }
 
+    // 다른 맵에 있을때도 오브젝트의 타이머가 흘러가도록
     void Update()
     {
         for (int i = 0; i < maxSceneCount; i++)

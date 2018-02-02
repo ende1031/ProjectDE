@@ -74,7 +74,8 @@ public class SceneSetting : MonoBehaviour
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 19, 1));
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 20, 1));
         SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Portal", "Stage02", 13, 13));
-        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Bulb", "Bulb", 23));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Bulb", "Bulb", 21));
+        SceneObjectManager.instance.AddObject(0, new SceneObjectManager.SceneObject("Nest", "Nest01", 24));
 
         //맵이동시 삭제된 오브젝트를 다시 불러옴.
         SceneObjectManager.instance.ReloadObject(0);
@@ -91,6 +92,9 @@ public class SceneSetting : MonoBehaviour
         SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Plant", "BoardPlant", 9, 1));
         SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Plant", "BoardPlant", 8, 1));
         SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Portal", "Stage01", 13, 13));
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Nest", "Nest01", 20));
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Nest", "Nest01", 24));
+        SceneObjectManager.instance.AddObject(1, new SceneObjectManager.SceneObject("Nest", "Nest01", 28));
 
         SceneObjectManager.instance.ReloadObject(1);
     }

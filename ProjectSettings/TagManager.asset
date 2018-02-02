@@ -8,6 +8,7 @@ TagManager:
   - Facility
   - Portal
   - Bulb
+  - Nest
   layers:
   - Default
   - TransparentFX
