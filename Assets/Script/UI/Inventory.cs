@@ -45,11 +45,11 @@ public class Inventory : MonoBehaviour
     GameObject[] GetEffect = new GameObject[7];
 
     GameObject player = null;
-    GameObject Monologue;
+    Monologue monologue;
 
-    GameObject OxygenUI;
-    GameObject HungerUI;
-    GameObject EnergyUI;
+    HungerGauge hungerGauge;
+    OxygenGauge oxygenGauge;
+    EnergyGauge energyGauge;
 
     public Sprite FoodSp; //아이템 추가시 수정할 부분
     public Sprite OxygenSp;
@@ -189,24 +189,24 @@ public class Inventory : MonoBehaviour
             switch (Items[selectedIndex].name)
             {
                 case Item.Food:
-                    HungerUI.GetComponent<HungerGauge>().SetAmount(50);
+                    hungerGauge.SetAmount(50);
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
                 case Item.Oxygen:
-                    OxygenUI.GetComponent<OxygenGauge>().SetAmount(70);
+                    oxygenGauge.SetAmount(70);
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
                 case Item.Battery:
-                    EnergyUI.GetComponent<EnergyGauge>().SetAmount(35);
+                    energyGauge.SetAmount(35);
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;
                 case Item.Facility01:
                     if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
+                        monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
                     }
                     else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "TempFacility")) == true)
                     {
@@ -216,7 +216,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                        monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
                     }
                     break;
                 case Item.Trap01:
@@ -228,13 +228,13 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                        monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
                     }
                     break;
                 case Item.Bulb01:
                     if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Bulb") == true || SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Facility", "EscapePod") == true)
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("근처에 이미 다른 광원이 있군.\n빛이 없는 곳에 설치하자.");
+                        monologue.DisplayLog("근처에 이미 다른 광원이 있군.\n빛이 없는 곳에 설치하자.");
                     }
                     else if(SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb01")) == true)
                     {
@@ -244,7 +244,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                        monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
                     }
                     break;
                 case Item.StickSeed:
@@ -256,7 +256,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                        monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
                     }
                     break;
                 case Item.BoardSeed:
@@ -268,7 +268,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                        monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
                     }
                     break;
                 case Item.ThornSeed:
@@ -280,7 +280,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        Monologue.GetComponent<Monologue>().DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                        monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
                     }
                     break;
             }
@@ -337,9 +337,9 @@ public class Inventory : MonoBehaviour
             GetEffect[i].SetActive(false);
         }
 
-        OxygenUI = GameObject.Find("Oxygen_Needle");
-        HungerUI = GameObject.Find("Hunger_Guage");
-        EnergyUI = GameObject.Find("LeftUI");
+        oxygenGauge = GameObject.Find("Oxygen_Needle").GetComponent<OxygenGauge>();
+        hungerGauge = GameObject.Find("Hunger_Guage").GetComponent<HungerGauge>();
+        energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
     }
 	
 	void Update ()
@@ -349,7 +349,7 @@ public class Inventory : MonoBehaviour
             player = GameObject.Find("Player");
             if(player != null)
             {
-                Monologue = player.transform.Find("Monologue").gameObject;
+                monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
             }
         }
         else

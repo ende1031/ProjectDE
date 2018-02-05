@@ -7,11 +7,11 @@ public class Portal : MonoBehaviour
     public string sceneName;
     public int AfterMoveGrid; //맵이동 후 플레이어의 좌표
 
-    GameObject InteractionIcon;
+    InteractionIcon interactionIcon;
 
     void Start ()
     {
-        InteractionIcon = GameObject.Find("InteractionIcon");
+        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
     }
 	
 	void Update ()
@@ -23,7 +23,7 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Portal);
+            interactionIcon.AddIcon(global::InteractionIcon.Icon.Portal);
         }
     }
 
@@ -31,7 +31,7 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Portal);
+            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Portal);
         }
     }
 }

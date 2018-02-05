@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
-    GameObject InteractionIcon;
-    GameObject Inventory;
+    Inventory inventory;
+    InteractionIcon interactionIcon;
 
     Animator animaitor;
 
@@ -23,8 +23,8 @@ public class Plant : MonoBehaviour
     {
         sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
 
-        InteractionIcon = GameObject.Find("InteractionIcon");
-        Inventory = GameObject.Find("Inventory");
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
 
         animaitor = GetComponent<Animator>();
         animaitor.SetInteger("State", state);
@@ -43,22 +43,22 @@ public class Plant : MonoBehaviour
         switch (plantName)
         {
             case "StickPlant":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick, 2);
+                inventory.GetItem(global::Inventory.Item.Stick, 2);
                 break;
             case "MassPlant":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass, 1);
+                inventory.GetItem(global::Inventory.Item.Mass, 1);
                 SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                 break;
             case "BoardPlant":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Board, 1);
+                inventory.GetItem(global::Inventory.Item.Board, 1);
                 break;
             case "ThornPlant":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Thorn, 5);
+                inventory.GetItem(global::Inventory.Item.Thorn, 5);
                 break;
             case "Trap01":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Hose, 1);
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Heart, 1);
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass, 1);
+                inventory.GetItem(global::Inventory.Item.Hose, 1);
+                inventory.GetItem(global::Inventory.Item.Heart, 1);
+                inventory.GetItem(global::Inventory.Item.Mass, 1);
                 SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                 break;
         }
@@ -66,7 +66,7 @@ public class Plant : MonoBehaviour
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
+            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
         }
     }
 
@@ -76,19 +76,19 @@ public class Plant : MonoBehaviour
         switch (plantName)
         {
             case "StickPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Stick, 2);
+                temp = !inventory.isFull(1, global::Inventory.Item.Stick, 2);
                 break;
             case "MassPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Mass, 1);
+                temp = !inventory.isFull(1, global::Inventory.Item.Mass, 1);
                 break;
             case "BoardPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Board, 1);
+                temp = !inventory.isFull(1, global::Inventory.Item.Board, 1);
                 break;
             case "ThornPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Thorn, 5);
+                temp = !inventory.isFull(1, global::Inventory.Item.Thorn, 5);
                 break;
             case "Trap01":
-                temp = !Inventory.GetComponent<Inventory>().isFull(2, global::Inventory.Item.Hose, 1, global::Inventory.Item.Heart, 1, global::Inventory.Item.Mass, 1);
+                temp = !inventory.isFull(2, global::Inventory.Item.Hose, 1, global::Inventory.Item.Heart, 1, global::Inventory.Item.Mass, 1);
                 break;
         }
         return temp;
@@ -106,7 +106,7 @@ public class Plant : MonoBehaviour
         isGatherPossible = true;
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
-            InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Gather);
+            interactionIcon.AddIcon(global::InteractionIcon.Icon.Gather);
         }
     }
 
@@ -166,24 +166,24 @@ public class Plant : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && Inventory.GetComponent<Inventory>().isInventoryActive == false)
+        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
             if (isGatherPossible == true)
             {
-                InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Gather);
+                interactionIcon.AddIcon(global::InteractionIcon.Icon.Gather);
             }
             else
             {
-                InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
+                interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
             }
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && Inventory.GetComponent<Inventory>().isInventoryActive == false)
+        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
+            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
         }
     }
 }

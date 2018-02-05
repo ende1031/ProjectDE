@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    GameObject Inventory;
+    Inventory inventory;
     GameObject Monologue;
 
     Animator animaitor;
@@ -18,7 +18,7 @@ public class PlayerInteraction : MonoBehaviour
     void Start ()
     {
         animaitor = GetComponent<Animator>();
-        Inventory = GameObject.Find("Inventory");
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         Monologue = transform.Find("Monologue").gameObject;
     }
 	
@@ -26,7 +26,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if(isTrigger)
         {
-            if (Inventory.GetComponent<Inventory>().isInventoryActive == false && isInteractionPossible == true)
+            if (inventory.isInventoryActive == false && isInteractionPossible == true)
             {
                 Interaction();
             }
@@ -35,21 +35,21 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Tumor, 1);
+            inventory.GetItem(global::Inventory.Item.Tumor, 1);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass, 1);
+            inventory.GetItem(global::Inventory.Item.Mass, 1);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass, 50);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Tumor, 50);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick, 50);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Board, 50);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Thorn, 50);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Heart, 50);
-            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Hose, 50);
+            inventory.GetItem(global::Inventory.Item.Mass, 50);
+            inventory.GetItem(global::Inventory.Item.Tumor, 50);
+            inventory.GetItem(global::Inventory.Item.Stick, 50);
+            inventory.GetItem(global::Inventory.Item.Board, 50);
+            inventory.GetItem(global::Inventory.Item.Thorn, 50);
+            inventory.GetItem(global::Inventory.Item.Heart, 50);
+            inventory.GetItem(global::Inventory.Item.Hose, 50);
         }
     }
 

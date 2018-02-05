@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FacilityBalloon : MonoBehaviour
 {
-    GameObject Inventory;
-    GameObject InteractionIcon;
+    Inventory inventory;
+    InteractionIcon interactionIcon;
 
     Animator animaitor;
 
@@ -30,8 +30,8 @@ public class FacilityBalloon : MonoBehaviour
 
     void Start ()
     {
-        Inventory = GameObject.Find("Inventory");
-        InteractionIcon = GameObject.Find("InteractionIcon");
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
         SetDictionary();
 
         Balloon = transform.Find("Balloon").gameObject;
@@ -46,23 +46,23 @@ public class FacilityBalloon : MonoBehaviour
 
     void SetDictionary() //아이템 추가시 수정할 부분
     {
-        itemDictionary[global::Inventory.Item.Food] = Inventory.GetComponent<Inventory>().FoodSp;
-        itemDictionary[global::Inventory.Item.Oxygen] = Inventory.GetComponent<Inventory>().OxygenSp;
-        itemDictionary[global::Inventory.Item.Battery] = Inventory.GetComponent<Inventory>().BatterySp;
-        itemDictionary[global::Inventory.Item.Stick] = Inventory.GetComponent<Inventory>().StickSp;
-        itemDictionary[global::Inventory.Item.Board] = Inventory.GetComponent<Inventory>().BoardSp;
-        itemDictionary[global::Inventory.Item.Hose] = Inventory.GetComponent<Inventory>().HoseSp;
-        itemDictionary[global::Inventory.Item.Mass] = Inventory.GetComponent<Inventory>().MassSp;
-        itemDictionary[global::Inventory.Item.Thorn] = Inventory.GetComponent<Inventory>().ThornSp;
-        itemDictionary[global::Inventory.Item.Facility01] = Inventory.GetComponent<Inventory>().Facility01Sp;
-        itemDictionary[global::Inventory.Item.Trap01] = Inventory.GetComponent<Inventory>().Trap01Sp;
-        itemDictionary[global::Inventory.Item.Heart] = Inventory.GetComponent<Inventory>().HeartSp;
-        itemDictionary[global::Inventory.Item.Bulb01] = Inventory.GetComponent<Inventory>().Bulb01Sp;
-        itemDictionary[global::Inventory.Item.StickSeed] = Inventory.GetComponent<Inventory>().StickSeedSp;
-        itemDictionary[global::Inventory.Item.BoardSeed] = Inventory.GetComponent<Inventory>().BoardSeedSp;
-        itemDictionary[global::Inventory.Item.ThornSeed] = Inventory.GetComponent<Inventory>().ThornSeedSp;
-        itemDictionary[global::Inventory.Item.Tumor] = Inventory.GetComponent<Inventory>().TumorSp;
-        itemDictionary[global::Inventory.Item.TumorSeed] = Inventory.GetComponent<Inventory>().TumorSeedSp;
+        itemDictionary[global::Inventory.Item.Food] = inventory.FoodSp;
+        itemDictionary[global::Inventory.Item.Oxygen] = inventory.OxygenSp;
+        itemDictionary[global::Inventory.Item.Battery] = inventory.BatterySp;
+        itemDictionary[global::Inventory.Item.Stick] = inventory.StickSp;
+        itemDictionary[global::Inventory.Item.Board] = inventory.BoardSp;
+        itemDictionary[global::Inventory.Item.Hose] = inventory.HoseSp;
+        itemDictionary[global::Inventory.Item.Mass] = inventory.MassSp;
+        itemDictionary[global::Inventory.Item.Thorn] = inventory.ThornSp;
+        itemDictionary[global::Inventory.Item.Facility01] = inventory.Facility01Sp;
+        itemDictionary[global::Inventory.Item.Trap01] = inventory.Trap01Sp;
+        itemDictionary[global::Inventory.Item.Heart] = inventory.HeartSp;
+        itemDictionary[global::Inventory.Item.Bulb01] = inventory.Bulb01Sp;
+        itemDictionary[global::Inventory.Item.StickSeed] = inventory.StickSeedSp;
+        itemDictionary[global::Inventory.Item.BoardSeed] = inventory.BoardSeedSp;
+        itemDictionary[global::Inventory.Item.ThornSeed] = inventory.ThornSeedSp;
+        itemDictionary[global::Inventory.Item.Tumor] = inventory.TumorSp;
+        itemDictionary[global::Inventory.Item.TumorSeed] = inventory.TumorSeedSp;
     }
 
     void Update ()
@@ -124,7 +124,7 @@ public class FacilityBalloon : MonoBehaviour
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
+            interactionIcon.DeleteAllIcons();
             GetComponent<Facility>().DisplayIcon();
         }
     }
@@ -141,7 +141,7 @@ public class FacilityBalloon : MonoBehaviour
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
+            interactionIcon.DeleteAllIcons();
             GetComponent<Facility>().DisplayIcon();
         }
         isMake = false;
@@ -150,20 +150,20 @@ public class FacilityBalloon : MonoBehaviour
     public bool InventoryCheck()
     {
         bool temp = true;
-        temp = !Inventory.GetComponent<Inventory>().isFull(1, makeItem);
+        temp = !inventory.isFull(1, makeItem);
         return temp;
     }
 
     public void GetItem()
     {
-        Inventory.GetComponent<Inventory>().GetItem(makeItem);
+        inventory.GetItem(makeItem);
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         isMakeFinish = false;
         Balloon.SetActive(false);
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
+            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
             GetComponent<Facility>().DisplayIcon();
         }
     }
@@ -180,7 +180,7 @@ public class FacilityBalloon : MonoBehaviour
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
+            interactionIcon.DeleteAllIcons();
             GetComponent<Facility>().DisplayIcon();
         }
     }

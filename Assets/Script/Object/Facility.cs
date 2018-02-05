@@ -6,11 +6,11 @@ public class Facility : MonoBehaviour
 {
     public string facilityName = "TempFacility";
 
-    GameObject InteractionIcon;
-    GameObject Inventory;
-    GameObject Timer;
-    GameObject PopupWindow;
-    GameObject ResearchWindow;
+    InteractionIcon interactionIcon;
+    Inventory inventory;
+    Timer timer;
+    PopupWindow popupWindow;
+    ResearchWindow researchWindow;
 
     Animator animaitor;
 
@@ -18,11 +18,11 @@ public class Facility : MonoBehaviour
 
     void Start ()
     {
-        InteractionIcon = GameObject.Find("InteractionIcon");
-        Inventory = GameObject.Find("Inventory");
-        Timer = GameObject.Find("Timer");
-        PopupWindow = GameObject.Find("PopupWindow");
-        ResearchWindow = GameObject.Find("ResearchWindow");
+        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
+        popupWindow = GameObject.Find("PopupWindow").GetComponent<PopupWindow>();
+        researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
 
         animaitor = GetComponent<Animator>();
         if (animaitor != null)
@@ -38,7 +38,7 @@ public class Facility : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && Inventory.GetComponent<Inventory>().isInventoryActive == false)
+        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
             DisplayIcon();
         }
@@ -53,49 +53,49 @@ public class Facility : MonoBehaviour
                 switch (facilityName)
                 {
                     case "TempFacility":
-                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.OnOff);
-                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
+                        interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
+                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Make);
                         break;
                     case "EscapePod":
-                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Research);
-                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Sleep);
-                        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Make);
+                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Research);
+                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Sleep);
+                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Make);
                         break;
                 }
             }
             else if (GetComponent<FacilityBalloon>().isMakeFinish == true)
             {
-                InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Gather);
+                interactionIcon.AddIcon(global::InteractionIcon.Icon.Gather);
             }
             else if (GetComponent<FacilityBalloon>().isMake == true)
             {
-                InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.Dump);
+                interactionIcon.AddIcon(global::InteractionIcon.Icon.Dump);
             }
         }
         else if(facilityName != "EscapePod")
         {
-            InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.OnOff);
+            interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && Inventory.GetComponent<Inventory>().isInventoryActive == false)
+        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
             switch (facilityName)
             {
                 case "TempFacility":
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Make);
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Dump);
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.OnOff);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Make);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Dump);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.OnOff);
                     break;
                 case "EscapePod":
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Make);
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Gather);
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Sleep);
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Dump);
-                    InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.Research);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Make);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Sleep);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Dump);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Research);
                     break;
             }
         }
@@ -106,21 +106,21 @@ public class Facility : MonoBehaviour
         switch (facilityName)
         {
             case "TempFacility":
-                PopupWindow.GetComponent<PopupWindow>().ClearItemList();
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Trap01);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Battery);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Bulb01);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.StickSeed);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.BoardSeed);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.ThornSeed);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Facility01);
-                PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
+                popupWindow.ClearItemList();
+                popupWindow.AddItem(global::Inventory.Item.Trap01);
+                popupWindow.AddItem(global::Inventory.Item.Battery);
+                popupWindow.AddItem(global::Inventory.Item.Bulb01);
+                popupWindow.AddItem(global::Inventory.Item.StickSeed);
+                popupWindow.AddItem(global::Inventory.Item.BoardSeed);
+                popupWindow.AddItem(global::Inventory.Item.ThornSeed);
+                popupWindow.AddItem(global::Inventory.Item.Facility01);
+                popupWindow.OpenWindow(this.gameObject);
                 break;
             case "EscapePod":
-                PopupWindow.GetComponent<PopupWindow>().ClearItemList();
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Food);
-                PopupWindow.GetComponent<PopupWindow>().AddItem(global::Inventory.Item.Oxygen);
-                PopupWindow.GetComponent<PopupWindow>().OpenWindow(this.gameObject);
+                popupWindow.ClearItemList();
+                popupWindow.AddItem(global::Inventory.Item.Food);
+                popupWindow.AddItem(global::Inventory.Item.Oxygen);
+                popupWindow.OpenWindow(this.gameObject);
                 break;
         }
     }
@@ -130,7 +130,7 @@ public class Facility : MonoBehaviour
         if (facilityName == "EscapePod")
         {
             SceneObjectManager.instance.SaveObject();
-            Timer.GetComponent<Timer>().ResetTimer();
+            timer.ResetTimer();
             SceneObjectManager.instance.SleepAfter();
             SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
         }
@@ -140,7 +140,7 @@ public class Facility : MonoBehaviour
     {
         if (facilityName == "EscapePod")
         {
-            ResearchWindow.GetComponent<ResearchWindow>().OpenWindow();
+            researchWindow.OpenWindow();
         }
     }
 
@@ -150,7 +150,7 @@ public class Facility : MonoBehaviour
         {
             isOn = !isOn;
             animaitor.SetBool("isOn", isOn);
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
+            interactionIcon.DeleteAllIcons();
             DisplayIcon();
         }
     }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Bulb : MonoBehaviour
 {
-    GameObject InteractionIcon;
-    GameObject Inventory;
+    InteractionIcon interactionIcon;
+    Inventory inventory;
 
     GameObject BulbLight;
     GameObject Balloon;
@@ -21,8 +21,9 @@ public class Bulb : MonoBehaviour
 
     void Start ()
     {
-        InteractionIcon = GameObject.Find("InteractionIcon");
-        Inventory = GameObject.Find("Inventory");
+        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+
         BulbLight = transform.Find("Light").gameObject;
         Balloon = transform.Find("Balloon").gameObject;
         TimeText = Balloon.transform.Find("TimeText").gameObject;
@@ -83,7 +84,7 @@ public class Bulb : MonoBehaviour
             }
             if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
             {
-                InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.OnOff);
+                interactionIcon.DeleteIcon(global::InteractionIcon.Icon.OnOff);
             }
         }
     }
@@ -113,7 +114,7 @@ public class Bulb : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && Inventory.GetComponent<Inventory>().isInventoryActive == false && isAlive == true)
+        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false && isAlive == true)
         {
             DisplayIcon();
         }
@@ -121,7 +122,7 @@ public class Bulb : MonoBehaviour
 
     public void DisplayIcon()
     {
-        InteractionIcon.GetComponent<InteractionIcon>().AddIcon(global::InteractionIcon.Icon.OnOff);
+        interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -132,9 +133,9 @@ public class Bulb : MonoBehaviour
             Balloon.GetComponent<Animator>().SetBool("BalloonOff", true);
         }
 
-        if (other.gameObject.tag == "Player" && Inventory.GetComponent<Inventory>().isInventoryActive == false && isAlive == true)
+        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false && isAlive == true)
         {
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteIcon(global::InteractionIcon.Icon.OnOff);
+            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.OnOff);
         }
     }
 
@@ -145,7 +146,7 @@ public class Bulb : MonoBehaviour
             isOn = !isOn;
             animaitor.SetBool("isOn", isOn);
             BulbLight.SetActive(isOn);
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
+            interactionIcon.DeleteAllIcons();
             DisplayIcon();
             SceneObjectManager.instance.SaveObject();
         }
@@ -158,7 +159,7 @@ public class Bulb : MonoBehaviour
             isOn = false;
             animaitor.SetBool("isOn", false);
             BulbLight.SetActive(false);
-            InteractionIcon.GetComponent<InteractionIcon>().DeleteAllIcons();
+            interactionIcon.DeleteAllIcons();
             DisplayIcon();
             SceneObjectManager.instance.SaveObject();
         }

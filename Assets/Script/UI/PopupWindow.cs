@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PopupWindow : MonoBehaviour
 {
-    GameObject Inventory;
+    Inventory inventory;
     GameObject Player;
 
     GameObject Facility; //제작창을 띄운 시설의 정보
@@ -66,7 +66,7 @@ public class PopupWindow : MonoBehaviour
 
     void Start ()
     {
-        Inventory = GameObject.Find("Inventory");
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         PopupBG = transform.Find("PopupBG").gameObject;
         animaitor = GetComponent<Animator>();
 
@@ -102,23 +102,23 @@ public class PopupWindow : MonoBehaviour
 
     void SetDictionary() //아이템 추가시 수정할 부분
     {
-        itemDictionary[global::Inventory.Item.Food] = Inventory.GetComponent<Inventory>().FoodSp;
-        itemDictionary[global::Inventory.Item.Oxygen] = Inventory.GetComponent<Inventory>().OxygenSp;
-        itemDictionary[global::Inventory.Item.Battery] = Inventory.GetComponent<Inventory>().BatterySp;
-        itemDictionary[global::Inventory.Item.Stick] = Inventory.GetComponent<Inventory>().StickSp;
-        itemDictionary[global::Inventory.Item.Board] = Inventory.GetComponent<Inventory>().BoardSp;
-        itemDictionary[global::Inventory.Item.Hose] = Inventory.GetComponent<Inventory>().HoseSp;
-        itemDictionary[global::Inventory.Item.Mass] = Inventory.GetComponent<Inventory>().MassSp;
-        itemDictionary[global::Inventory.Item.Thorn] = Inventory.GetComponent<Inventory>().ThornSp;
-        itemDictionary[global::Inventory.Item.Facility01] = Inventory.GetComponent<Inventory>().Facility01Sp;
-        itemDictionary[global::Inventory.Item.Trap01] = Inventory.GetComponent<Inventory>().Trap01Sp;
-        itemDictionary[global::Inventory.Item.Heart] = Inventory.GetComponent<Inventory>().HeartSp;
-        itemDictionary[global::Inventory.Item.Bulb01] = Inventory.GetComponent<Inventory>().Bulb01Sp;
-        itemDictionary[global::Inventory.Item.StickSeed] = Inventory.GetComponent<Inventory>().StickSeedSp;
-        itemDictionary[global::Inventory.Item.BoardSeed] = Inventory.GetComponent<Inventory>().BoardSeedSp;
-        itemDictionary[global::Inventory.Item.ThornSeed] = Inventory.GetComponent<Inventory>().ThornSeedSp;
-        itemDictionary[global::Inventory.Item.Tumor] = Inventory.GetComponent<Inventory>().TumorSp;
-        itemDictionary[global::Inventory.Item.TumorSeed] = Inventory.GetComponent<Inventory>().TumorSeedSp;
+        itemDictionary[global::Inventory.Item.Food] = inventory.FoodSp;
+        itemDictionary[global::Inventory.Item.Oxygen] = inventory.OxygenSp;
+        itemDictionary[global::Inventory.Item.Battery] = inventory.BatterySp;
+        itemDictionary[global::Inventory.Item.Stick] = inventory.StickSp;
+        itemDictionary[global::Inventory.Item.Board] = inventory.BoardSp;
+        itemDictionary[global::Inventory.Item.Hose] = inventory.HoseSp;
+        itemDictionary[global::Inventory.Item.Mass] = inventory.MassSp;
+        itemDictionary[global::Inventory.Item.Thorn] = inventory.ThornSp;
+        itemDictionary[global::Inventory.Item.Facility01] = inventory.Facility01Sp;
+        itemDictionary[global::Inventory.Item.Trap01] = inventory.Trap01Sp;
+        itemDictionary[global::Inventory.Item.Heart] = inventory.HeartSp;
+        itemDictionary[global::Inventory.Item.Bulb01] = inventory.Bulb01Sp;
+        itemDictionary[global::Inventory.Item.StickSeed] = inventory.StickSeedSp;
+        itemDictionary[global::Inventory.Item.BoardSeed] = inventory.BoardSeedSp;
+        itemDictionary[global::Inventory.Item.ThornSeed] = inventory.ThornSeedSp;
+        itemDictionary[global::Inventory.Item.Tumor] = inventory.TumorSp;
+        itemDictionary[global::Inventory.Item.TumorSeed] = inventory.TumorSeedSp;
     }
 
     public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
@@ -256,7 +256,7 @@ public class PopupWindow : MonoBehaviour
         {
             if(WindowItemList[selectedIndex].materialNum[i] > 0)
             {
-                if(Inventory.GetComponent<Inventory>().HasItem(WindowItemList[selectedIndex].material[i], WindowItemList[selectedIndex].materialNum[i]) == false)
+                if(inventory.HasItem(WindowItemList[selectedIndex].material[i], WindowItemList[selectedIndex].materialNum[i]) == false)
                 {
                     makePossible = false;
                 }
@@ -269,10 +269,10 @@ public class PopupWindow : MonoBehaviour
             {
                 if (WindowItemList[selectedIndex].materialNum[i] > 0)
                 {
-                    Inventory.GetComponent<Inventory>().DeleteItem(WindowItemList[selectedIndex].material[i], WindowItemList[selectedIndex].materialNum[i]);
+                    inventory.DeleteItem(WindowItemList[selectedIndex].material[i], WindowItemList[selectedIndex].materialNum[i]);
                 }
             }
-            //Inventory.GetComponent<Inventory>().GetItem(WindowItemList[selectedIndex].name);
+            //inventory.GetItem(WindowItemList[selectedIndex].name);
             Facility.GetComponent<FacilityBalloon>().MakeItem(WindowItemList[selectedIndex].name, WindowItemList[selectedIndex].time);
             CloseWindow();
         }
@@ -352,8 +352,8 @@ public class PopupWindow : MonoBehaviour
                 tempColor.a = 1;
                 MaterialsItem[i].GetComponent<Image>().color = tempColor;
                 MaterialsItem[i].GetComponent<Image>().sprite = itemDictionary[WindowItemList[selectedIndex].material[i]];
-                MaterialsNum[i].GetComponent<Text>().text = Inventory.GetComponent<Inventory>().CountOfItem(WindowItemList[selectedIndex].material[i]) + "/" + WindowItemList[selectedIndex].materialNum[i];
-                if(WindowItemList[selectedIndex].materialNum[i] > Inventory.GetComponent<Inventory>().CountOfItem(WindowItemList[selectedIndex].material[i]))
+                MaterialsNum[i].GetComponent<Text>().text = inventory.CountOfItem(WindowItemList[selectedIndex].material[i]) + "/" + WindowItemList[selectedIndex].materialNum[i];
+                if(WindowItemList[selectedIndex].materialNum[i] > inventory.CountOfItem(WindowItemList[selectedIndex].material[i]))
                 {
                     isShortage = true;
                     MaterialsNum[i].GetComponent<Text>().color = Color.red;

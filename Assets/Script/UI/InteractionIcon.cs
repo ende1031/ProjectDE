@@ -16,6 +16,8 @@ public class InteractionIcon : MonoBehaviour
         Research
     };
 
+    Inventory inventory;
+
     GameObject GatherIcon; //아이콘 추가시 수정할 부분
     GameObject MakeIcon;
     GameObject SleepIcon;
@@ -28,7 +30,6 @@ public class InteractionIcon : MonoBehaviour
     Dictionary<Icon, GameObject> iconDictionary = new Dictionary<Icon, GameObject>();
     
     GameObject IconBG;
-    GameObject Inventory;
 
     float iconSpace = 0.3f;
 
@@ -41,7 +42,7 @@ public class InteractionIcon : MonoBehaviour
 
     void LoadObjects()
     {
-        Inventory = GameObject.Find("Inventory");
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         IconBG = transform.Find("IconBG").gameObject;
 
         GatherIcon = transform.Find("Gather").gameObject; //아이콘 추가시 수정할 부분
@@ -77,7 +78,7 @@ public class InteractionIcon : MonoBehaviour
 
     void Update ()
     {
-        if (Inventory.GetComponent<Inventory>().isInventoryActive == true && isInventoryOpen == false)
+        if (inventory.isInventoryActive == true && isInventoryOpen == false)
         {
             isInventoryOpen = true;
             IconBG.SetActive(false);
@@ -86,7 +87,7 @@ public class InteractionIcon : MonoBehaviour
         }
         if(isInventoryOpen == true)
         {
-            if(Inventory.GetComponent<Inventory>().isInventoryActive == false)
+            if(inventory.isInventoryActive == false)
             {
                 isInventoryOpen = false;
                 IconBG.SetActive(true);
