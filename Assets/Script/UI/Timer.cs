@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public int time = 12;
+    public int TimeOfDay = 6;
+    public int time;
     public float minute = 0;
 
     Text timerText;
 
     void Start ()
     {
+        time = TimeOfDay;
         timerText = GetComponent<Text>();
     }
 	
@@ -50,7 +52,7 @@ public class Timer : MonoBehaviour
 
     public void ResetTimer()
     {
-        time = 12;
+        time = TimeOfDay;
         minute = 0.5f;
     }
 

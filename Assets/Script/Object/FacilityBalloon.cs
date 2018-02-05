@@ -186,7 +186,7 @@ public class FacilityBalloon : MonoBehaviour
 
     void Display()
     {
-        float temp = Mathf.Ceil(progressTimer % 60);
+        float temp = (int)(progressTimer % 60);
         if (temp < 10)
         {
             TimeText.GetComponent<TextMesh>().text = (int)(progressTimer / 60.0f) + ":0" + temp;
