@@ -541,9 +541,9 @@ public class Inventory : MonoBehaviour
     }
 
     // isFull 메소드에서 임시로 아이템을 추가해보는데 사용하는 메소드
-    bool FullTestGetItem(Item itemName)
+    bool FullTestGetItem(Item itemName, int num = 1)
     {
-        if (Items.Count >= 7 && (HasItem(itemName) == false || HasItem(itemName, 99) == true))
+        if (Items.Count >= 7 && (HasItem(itemName) == false || HasItem(itemName, 100 - num) == true))
         {
             return false;
         }
@@ -552,33 +552,34 @@ public class Inventory : MonoBehaviour
             int? temp = isContains(itemName);
             if (temp.HasValue)
             {
-                if (Items[(int)temp].count >= 99)
+                if (Items[(int)temp].count + num >= 99)
                 {
                     return false;
                 }
-                Items[(int)temp].count++;
+                Items[(int)temp].count += num;
             }
             else
             {
-                Items.Add(new ItemInfo(itemName, 1));
+                Items.Add(new ItemInfo(itemName, num));
             }
             return true;
         }
     }
 
     // 가득 차있으면 true를 반환
-    public bool isFull(int Num, Item itemName, Item itemName2 = Item.Battery, Item itemName3 = Item.Battery, Item itemName4 = Item.Battery, Item itemName5 = Item.Battery)
+    public bool isFull(int NumOfItemType, Item itemName1, int num1 = 1, Item itemName2 = Item.Battery, int num2 = 1, Item itemName3 = Item.Battery, int num3 = 1, Item itemName4 = Item.Battery, int num4 = 1, Item itemName5 = Item.Battery, int num5 = 1)
     {
         bool result = false;
         bool[] temp = new bool[5];
-        Item[] iName = new Item[5] { itemName, itemName2, itemName3, itemName4, itemName5 };
+        Item[] iName = new Item[5] { itemName1, itemName2, itemName3, itemName4, itemName5 };
+        int[] num = new int[5] { num1, num2, num3, num4, num5 };
         
-        for (int i = 0; i < Num; i++)
+        for (int i = 0; i < NumOfItemType; i++)
         {
-            temp[i] = FullTestGetItem(iName[i]);
+            temp[i] = FullTestGetItem(iName[i], num[i]);
         }
 
-        for (int i = 0; i < Num; i++)
+        for (int i = 0; i < NumOfItemType; i++)
         {
             if (temp[i] == false)
             {
@@ -586,7 +587,7 @@ public class Inventory : MonoBehaviour
             }
             else if(temp[i] == true)
             {
-                DeleteItem(iName[i]);
+                DeleteItem(iName[i], num[i]);
             }
         }
 

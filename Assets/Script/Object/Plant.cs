@@ -43,21 +43,22 @@ public class Plant : MonoBehaviour
         switch (plantName)
         {
             case "StickPlant":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick, 2);
                 break;
             case "MassPlant":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass, 1);
                 SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                 break;
             case "BoardPlant":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Board);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Board, 1);
                 break;
             case "ThornPlant":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Thorn);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Thorn, 5);
                 break;
             case "Trap01":
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Hose);
-                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Heart);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Hose, 1);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Heart, 1);
+                Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass, 1);
                 SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                 break;
         }
@@ -75,19 +76,19 @@ public class Plant : MonoBehaviour
         switch (plantName)
         {
             case "StickPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Stick);
+                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Stick, 2);
                 break;
             case "MassPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Mass);
+                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Mass, 1);
                 break;
             case "BoardPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Board);
+                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Board, 1);
                 break;
             case "ThornPlant":
-                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Thorn);
+                temp = !Inventory.GetComponent<Inventory>().isFull(1, global::Inventory.Item.Thorn, 5);
                 break;
             case "Trap01":
-                temp = !Inventory.GetComponent<Inventory>().isFull(2, global::Inventory.Item.Hose, global::Inventory.Item.Heart);
+                temp = !Inventory.GetComponent<Inventory>().isFull(2, global::Inventory.Item.Hose, 1, global::Inventory.Item.Heart, 1, global::Inventory.Item.Mass, 1);
                 break;
         }
         return temp;

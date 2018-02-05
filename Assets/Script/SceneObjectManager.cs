@@ -52,6 +52,7 @@ public class SceneObjectManager : MonoBehaviour
         public int portalAfterMoveGrid;
         public int plantState;
         public global::Inventory.Item facilityMakeItem;
+        public float facilityTimeToMake;
         public bool facilityIsMake;
         public bool facilityIsMakeFinish;
         public float bulbLifeTime;
@@ -110,6 +111,7 @@ public class SceneObjectManager : MonoBehaviour
             ob.inGameObject.GetComponent<Facility>().isOn = ob.isOn;
             ob.inGameObject.GetComponent<FacilityBalloon>().makeItem = ob.facilityMakeItem;
             ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer = ob.timer;
+            ob.inGameObject.GetComponent<FacilityBalloon>().timeToMake = ob.facilityTimeToMake;
             ob.inGameObject.GetComponent<FacilityBalloon>().isMake = ob.facilityIsMake;
             ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish = ob.facilityIsMakeFinish;
             ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
@@ -238,6 +240,7 @@ public class SceneObjectManager : MonoBehaviour
                     {
                         pair.Value.isOn = pair.Value.inGameObject.GetComponent<Facility>().isOn;
                         pair.Value.timer = pair.Value.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
+                        pair.Value.facilityTimeToMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().timeToMake;
                         pair.Value.facilityMakeItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().makeItem;
                         pair.Value.facilityIsMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMake;
                         pair.Value.facilityIsMakeFinish = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;

@@ -18,8 +18,8 @@ public class FacilityBalloon : MonoBehaviour
     public Sprite yellowBalloon;
 
     float progress;
-    public float timeToMake = 15; //초
-    public float progressTimer = 15;
+    public float timeToMake; //초
+    public float progressTimer;
 
     public global::Inventory.Item makeItem = global::Inventory.Item.Stick; // 만드는 아이템
     public bool isMake = false;
@@ -66,17 +66,6 @@ public class FacilityBalloon : MonoBehaviour
 
     void Update ()
     {
-        if(isMake == true)
-        {
-            Timer();
-        }
-        if(isMakeFinish == true)
-        {
-            Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
-            Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
-        }
-        
-
         if(isLoadByManager == true)
         {
             if (animaitor != null)
@@ -100,6 +89,16 @@ public class FacilityBalloon : MonoBehaviour
             Item.GetComponent<SpriteRenderer>().sprite = itemDictionary[makeItem];
             Item_back.GetComponent<SpriteRenderer>().sprite = itemDictionary[makeItem];
             isLoadByManager = false;
+        }
+
+        if (isMake == true)
+        {
+            Timer();
+        }
+        if (isMakeFinish == true)
+        {
+            Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
+            Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
         }
 
         Display();
@@ -173,7 +172,10 @@ public class FacilityBalloon : MonoBehaviour
         Balloon.SetActive(false);
         isMake = false;
         isMakeFinish = false;
-        animaitor.SetBool("isMaking", false);
+        if (animaitor != null)
+        {
+            animaitor.SetBool("isMaking", false);
+        }
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
