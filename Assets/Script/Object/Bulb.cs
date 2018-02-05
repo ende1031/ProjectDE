@@ -19,12 +19,8 @@ public class Bulb : MonoBehaviour
     public float LifeTime = 20;
     public float LifeTimer = 0;
 
-    int sceneNum;
-
     void Start ()
     {
-        sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
-
         InteractionIcon = GameObject.Find("InteractionIcon");
         Inventory = GameObject.Find("Inventory");
         BulbLight = transform.Find("Light").gameObject;

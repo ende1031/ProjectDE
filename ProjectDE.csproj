@@ -90,6 +90,7 @@
     <Compile Include="Assets\Script\Object\PlayerInteraction.cs" />
     <Compile Include="Assets\Script\Object\PlayerMove.cs" />
     <Compile Include="Assets\Script\Object\Portal.cs" />
+    <Compile Include="Assets\Script\Object\StageParticle.cs" />
     <Compile Include="Assets\Script\SceneChanger.cs" />
     <Compile Include="Assets\Script\SceneObjectManager.cs" />
     <Compile Include="Assets\Script\SceneSetting.cs" />

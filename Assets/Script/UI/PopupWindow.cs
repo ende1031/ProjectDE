@@ -118,6 +118,7 @@ public class PopupWindow : MonoBehaviour
         itemDictionary[global::Inventory.Item.BoardSeed] = Inventory.GetComponent<Inventory>().BoardSeedSp;
         itemDictionary[global::Inventory.Item.ThornSeed] = Inventory.GetComponent<Inventory>().ThornSeedSp;
         itemDictionary[global::Inventory.Item.Tumor] = Inventory.GetComponent<Inventory>().TumorSp;
+        itemDictionary[global::Inventory.Item.TumorSeed] = Inventory.GetComponent<Inventory>().TumorSeedSp;
     }
 
     public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
@@ -171,6 +172,9 @@ public class PopupWindow : MonoBehaviour
                 break;
             case global::Inventory.Item.Tumor:
                 WindowItemList.Add(new WindowItem(itemName, 45, "종양", "더미" + TimeToString(45), global::Inventory.Item.Thorn, 77, global::Inventory.Item.Facility01, 99));
+                break;
+            case global::Inventory.Item.TumorSeed:
+                WindowItemList.Add(new WindowItem(itemName, 45, "종양 씨앗", "더미" + TimeToString(45), global::Inventory.Item.Thorn, 77, global::Inventory.Item.Facility01, 99));
                 break;
         }
     }

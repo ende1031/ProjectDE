@@ -1144,6 +1144,8 @@ MonoBehaviour:
   BoardSeedSp: {fileID: 21300000, guid: 884ce33a4363c87488e5ada3cd09b988, type: 3}
   ThornSeedSp: {fileID: 21300000, guid: 81bd00f60f684544b8ed0cef6bd289f3, type: 3}
   TumorSp: {fileID: 21300000, guid: 17399aaa48e1fb54f80a7329c13c7b43, type: 3}
+  TumorSeedSp: {fileID: 21300000, guid: 7012c90063d79d245a02af4b366c383a, type: 3}
+  EscapePodSp: {fileID: 21300000, guid: f1909993d44816443965297c87c59fdd, type: 3}
   isInventoryActive: 0
 --- !u!114 &114427440867818556
 MonoBehaviour:

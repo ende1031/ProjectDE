@@ -5370,7 +5370,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -482, y: 290}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &853936731
 MonoBehaviour:
@@ -7030,6 +7030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b361e4010aeb384db2fd17e0f2ceefb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeOfDay: 6
   time: 6
   minute: 0
 --- !u!114 &1133549724
@@ -12347,7 +12348,7 @@ GameObject:
   - component: {fileID: 2084526313}
   - component: {fileID: 2084526312}
   m_Layer: 5
-  m_Name: Content2
+  m_Name: Content3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

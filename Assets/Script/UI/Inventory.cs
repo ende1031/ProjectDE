@@ -33,7 +33,8 @@ public class Inventory : MonoBehaviour
         StickSeed,
         BoardSeed,
         ThornSeed,
-        Tumor
+        Tumor,
+        TumorSeed
     };
 
     GameObject[] itemSlot = new GameObject[7];
@@ -66,6 +67,8 @@ public class Inventory : MonoBehaviour
     public Sprite BoardSeedSp;
     public Sprite ThornSeedSp;
     public Sprite TumorSp;
+    public Sprite TumorSeedSp;
+    public Sprite EscapePodSp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -106,6 +109,8 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Image>().sprite = ThornSeedSp;
         else if (itemName == Item.Tumor)
             slot.GetComponent<Image>().sprite = TumorSp;
+        else if (itemName == Item.TumorSeed)
+            slot.GetComponent<Image>().sprite = TumorSeedSp;
     }
 
     void RefreshItemMenu()
@@ -137,6 +142,7 @@ public class Inventory : MonoBehaviour
             case Item.Thorn:
             case Item.Heart:
             case Item.Tumor:
+            case Item.TumorSeed:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
                 break;
@@ -299,6 +305,7 @@ public class Inventory : MonoBehaviour
                 case Item.BoardSeed:
                 case Item.ThornSeed:
                 case Item.Tumor:
+                case Item.TumorSeed:
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;

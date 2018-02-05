@@ -61,4 +61,12 @@ public class Timer : MonoBehaviour
         time = t;
         minute = (float)m;
     }
+
+    public float PercentOfTime()
+    {
+        float m = TimeOfDay * 60;
+        float t = time * 60 + minute;
+
+        return 100 - (t / m * 100);
+    }
 }

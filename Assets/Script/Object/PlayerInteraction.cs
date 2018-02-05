@@ -41,6 +41,16 @@ public class PlayerInteraction : MonoBehaviour
         {
             Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass, 1);
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Mass, 50);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Tumor, 50);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Stick, 50);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Board, 50);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Thorn, 50);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Heart, 50);
+            Inventory.GetComponent<Inventory>().GetItem(global::Inventory.Item.Hose, 50);
+        }
     }
 
     void PlayerDirection()

@@ -68,6 +68,7 @@ public class SceneSetting : MonoBehaviour
         SceneObjectManager.instance.AddObject(0, -9, new SceneObjectManager.SceneObject("Portal", "Stage01_B_1F", 25));
         SceneObjectManager.instance.AddObject(0, 5, new SceneObjectManager.SceneObject("Facility", "EscapePod"));
         SceneObjectManager.instance.AddObject(0, 7, new SceneObjectManager.SceneObject("Facility", "TempFacility"));
+        SceneObjectManager.instance.AddObject(0, 10, new SceneObjectManager.SceneObject("Bulb", "Bulb01"));
         SceneObjectManager.instance.AddObject(0, 0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
         SceneObjectManager.instance.AddObject(0, -12, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
         SceneObjectManager.instance.AddObject(0, 23, new SceneObjectManager.SceneObject("Portal", "Stage01_A_1F", 25));
