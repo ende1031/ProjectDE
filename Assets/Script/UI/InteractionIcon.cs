@@ -13,7 +13,8 @@ public class InteractionIcon : MonoBehaviour
         Portal,
         Dump,
         OnOff,
-        Research
+        Research,
+        Remove
     };
 
     Inventory inventory;
@@ -25,6 +26,7 @@ public class InteractionIcon : MonoBehaviour
     GameObject DumpIcon;
     GameObject OnOffIcon;
     GameObject ResearchIcon;
+    GameObject RemoveIcon;
 
     List<Icon> displayedIconList = new List<Icon>();
     Dictionary<Icon, GameObject> iconDictionary = new Dictionary<Icon, GameObject>();
@@ -52,6 +54,7 @@ public class InteractionIcon : MonoBehaviour
         DumpIcon = transform.Find("Dump").gameObject;
         OnOffIcon = transform.Find("OnOff").gameObject;
         ResearchIcon = transform.Find("Research").gameObject;
+        RemoveIcon = transform.Find("Remove").gameObject;
 
         if (GatherIcon != null)
         {
@@ -62,6 +65,7 @@ public class InteractionIcon : MonoBehaviour
             iconDictionary[Icon.Dump] = DumpIcon;
             iconDictionary[Icon.OnOff] = OnOffIcon;
             iconDictionary[Icon.Research] = ResearchIcon;
+            iconDictionary[Icon.Remove] = RemoveIcon;
         }
     }
 
@@ -74,6 +78,7 @@ public class InteractionIcon : MonoBehaviour
         DumpIcon.SetActive(false);
         OnOffIcon.SetActive(false);
         ResearchIcon.SetActive(false);
+        RemoveIcon.SetActive(false);
     }
 
     void Update ()

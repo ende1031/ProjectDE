@@ -100,6 +100,10 @@ public class PlayerInteraction : MonoBehaviour
                 }
                 return;
             }
+            else if (Input.GetKeyDown(KeyCode.X) && target.GetComponent<Plant>().isGatherPossible == false)
+            {
+                target.GetComponent<Plant>().RemoveObject();
+            }
         }
         else if (target.gameObject.tag == "Facility")
         {
@@ -157,6 +161,10 @@ public class PlayerInteraction : MonoBehaviour
                             monologue.DisplayLog("지금은 졸리지 않아.\n일어난지 얼마 안됐는데 벌써 잘 수는 없지.");
                         }
                     }
+                    else if(target.GetComponent<Facility>().facilityName != "EscapePod")
+                    {
+                        target.GetComponent<Facility>().RemoveObject();
+                    }
                 }
                 else if (target.GetComponent<FacilityBalloon>().isMake == true)
                 {
@@ -179,6 +187,10 @@ public class PlayerInteraction : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 target.GetComponent<Bulb>().OnOff();
+            }
+            else if (Input.GetKeyDown(KeyCode.X))
+            {
+                target.GetComponent<Bulb>().RemoveObject();
             }
         }
     }

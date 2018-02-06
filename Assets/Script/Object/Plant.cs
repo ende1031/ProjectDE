@@ -70,6 +70,12 @@ public class Plant : MonoBehaviour
         }
     }
 
+    public void RemoveObject()
+    {
+        interactionIcon.DeleteAllIcons();
+        SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
+    }
+
     public bool InventoryCheck()
     {
         bool temp = true;
@@ -98,6 +104,10 @@ public class Plant : MonoBehaviour
     public void SetGatherPossibleFalse()
     {
         isGatherPossible = false;
+        if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
+        {
+            interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
+        }
     }
 
     //애니메이션 이벤트에서 사용하는 함수
@@ -171,9 +181,11 @@ public class Plant : MonoBehaviour
             if (isGatherPossible == true)
             {
                 interactionIcon.AddIcon(global::InteractionIcon.Icon.Gather);
+                interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Remove);
             }
             else
             {
+                interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
                 interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
             }
         }
@@ -184,6 +196,7 @@ public class Plant : MonoBehaviour
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
             interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
+            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Remove);
         }
     }
 }

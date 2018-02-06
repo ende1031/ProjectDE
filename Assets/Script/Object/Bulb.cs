@@ -11,6 +11,7 @@ public class Bulb : MonoBehaviour
     GameObject Balloon;
     GameObject TimeText;
     Animator animaitor;
+    int sceneNum;
 
     public bool isOn = true;
     public bool isLoadByManager;
@@ -29,6 +30,8 @@ public class Bulb : MonoBehaviour
         TimeText = Balloon.transform.Find("TimeText").gameObject;
         Balloon.GetComponent<Animator>().SetBool("BalloonOff", false);
         Balloon.SetActive(false);
+
+        sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
 
         animaitor = GetComponent<Animator>();
         if (animaitor != null)
@@ -123,6 +126,7 @@ public class Bulb : MonoBehaviour
     public void DisplayIcon()
     {
         interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
+        interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -136,6 +140,7 @@ public class Bulb : MonoBehaviour
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false && isAlive == true)
         {
             interactionIcon.DeleteIcon(global::InteractionIcon.Icon.OnOff);
+            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Remove);
         }
     }
 
@@ -163,5 +168,11 @@ public class Bulb : MonoBehaviour
             DisplayIcon();
             SceneObjectManager.instance.SaveObject();
         }
+    }
+
+    public void RemoveObject()
+    {
+        interactionIcon.DeleteAllIcons();
+        SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
     }
 }

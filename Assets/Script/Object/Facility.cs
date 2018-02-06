@@ -13,6 +13,8 @@ public class Facility : MonoBehaviour
 
     Animator animaitor;
 
+    int sceneNum;
+
     public bool isOn = true;
 
     void Start ()
@@ -21,6 +23,7 @@ public class Facility : MonoBehaviour
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         popupWindow = GameObject.Find("PopupWindow").GetComponent<PopupWindow>();
         researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
+        sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
 
         animaitor = GetComponent<Animator>();
         if (animaitor != null)
@@ -52,6 +55,7 @@ public class Facility : MonoBehaviour
                 {
                     case "TempFacility":
                         interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
+                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
                         interactionIcon.AddIcon(global::InteractionIcon.Icon.Make);
                         break;
                     case "EscapePod":
@@ -73,6 +77,7 @@ public class Facility : MonoBehaviour
         else if(facilityName != "EscapePod")
         {
             interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
+            interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
         }
     }
 
@@ -87,6 +92,7 @@ public class Facility : MonoBehaviour
                     interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
                     interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Dump);
                     interactionIcon.DeleteIcon(global::InteractionIcon.Icon.OnOff);
+                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Remove);
                     break;
                 case "EscapePod":
                     interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Make);
@@ -150,6 +156,15 @@ public class Facility : MonoBehaviour
             animaitor.SetBool("isOn", isOn);
             interactionIcon.DeleteAllIcons();
             DisplayIcon();
+        }
+    }
+
+    public void RemoveObject()
+    {
+        if (facilityName != "EscapePod")
+        {
+            interactionIcon.DeleteAllIcons();
+            SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
         }
     }
 }

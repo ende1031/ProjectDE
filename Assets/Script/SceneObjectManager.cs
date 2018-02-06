@@ -59,9 +59,10 @@ public class SceneObjectManager : MonoBehaviour
         public float bulbLifeTime;
     }
 
-    static int maxSceneCount = 4; //씬 추가시 늘려줘야 됨
+    static int maxSceneNum = 4; //씬 추가시 늘려줘야 됨
 
     List<Dictionary<int, SceneObject>> SObjects = new List<Dictionary<int, SceneObject>>();
+    public List<bool> isSceneInit = new List<bool>();
 
     void InstantiateObject(int grid, SceneObject ob)
     {
@@ -160,16 +161,17 @@ public class SceneObjectManager : MonoBehaviour
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         UI.SetActive(false);
 
-        for (int i = 0; i < maxSceneCount; i++)
+        for (int i = 0; i < maxSceneNum; i++)
         {
             SObjects.Add(new Dictionary<int, SceneObject>());
+            isSceneInit.Add(false);
         }
     }
 
     // 다른 맵에 있을때도 오브젝트의 타이머가 흘러가도록
     void Update()
     {
-        for (int i = 0; i < maxSceneCount; i++)
+        for (int i = 0; i < maxSceneNum; i++)
         {
             foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
             {
@@ -224,7 +226,7 @@ public class SceneObjectManager : MonoBehaviour
     //맵이동시 오브젝트의 상태를 저장함.
     public void SaveObject()
     {
-        for (int i = 0; i < maxSceneCount; i++)
+        for (int i = 0; i < maxSceneNum; i++)
         {
             foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
             {
@@ -265,7 +267,7 @@ public class SceneObjectManager : MonoBehaviour
     //잠자면 식물 최대성장, 건물파괴
     public void SleepAfter()
     {
-        for (int i = 0; i < maxSceneCount; i++)
+        for (int i = 0; i < maxSceneNum; i++)
         {
             foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
             {
