@@ -46,10 +46,10 @@ public class Inventory : MonoBehaviour
 
     GameObject player = null;
     Monologue monologue;
-
     HungerGauge hungerGauge;
     OxygenGauge oxygenGauge;
     EnergyGauge energyGauge;
+    ResearchWindow researchWindow;
 
     public Sprite FoodSp; //아이템 추가시 수정할 부분
     public Sprite OxygenSp;
@@ -75,42 +75,29 @@ public class Inventory : MonoBehaviour
 
     Animator animaitor;
 
-    void SetItemSprite(GameObject slot, Item itemName) //아이템 추가시 수정할 부분
+    public Dictionary<Item, Sprite> itemDictionary = new Dictionary<Item, Sprite>();
+    public List<Item> discoveredItemList = new List<Item>();
+
+
+    void SetDictionary() //아이템 추가시 수정할 부분
     {
-        if (itemName == Item.Food)
-            slot.GetComponent<Image>().sprite = FoodSp;
-        else if (itemName == Item.Oxygen)
-            slot.GetComponent<Image>().sprite = OxygenSp;
-        else if (itemName == Item.Battery)
-            slot.GetComponent<Image>().sprite = BatterySp;
-        else if (itemName == Item.Stick)
-            slot.GetComponent<Image>().sprite = StickSp;
-        else if (itemName == Item.Board)
-            slot.GetComponent<Image>().sprite = BoardSp;
-        else if (itemName == Item.Hose)
-            slot.GetComponent<Image>().sprite = HoseSp;
-        else if (itemName == Item.Mass)
-            slot.GetComponent<Image>().sprite = MassSp;
-        else if (itemName == Item.Thorn)
-            slot.GetComponent<Image>().sprite = ThornSp;
-        else if (itemName == Item.Facility01)
-            slot.GetComponent<Image>().sprite = Facility01Sp;
-        else if (itemName == Item.Trap01)
-            slot.GetComponent<Image>().sprite = Trap01Sp;
-        else if (itemName == Item.Heart)
-            slot.GetComponent<Image>().sprite = HeartSp;
-        else if (itemName == Item.Bulb01)
-            slot.GetComponent<Image>().sprite = Bulb01Sp;
-        else if (itemName == Item.StickSeed)
-            slot.GetComponent<Image>().sprite = StickSeedSp;
-        else if (itemName == Item.BoardSeed)
-            slot.GetComponent<Image>().sprite = BoardSeedSp;
-        else if (itemName == Item.ThornSeed)
-            slot.GetComponent<Image>().sprite = ThornSeedSp;
-        else if (itemName == Item.Tumor)
-            slot.GetComponent<Image>().sprite = TumorSp;
-        else if (itemName == Item.TumorSeed)
-            slot.GetComponent<Image>().sprite = TumorSeedSp;
+        itemDictionary[Item.Food] = FoodSp;
+        itemDictionary[Item.Oxygen] = OxygenSp;
+        itemDictionary[Item.Battery] = BatterySp;
+        itemDictionary[Item.Stick] = StickSp;
+        itemDictionary[Item.Board] = BoardSp;
+        itemDictionary[Item.Hose] = HoseSp;
+        itemDictionary[Item.Mass] = MassSp;
+        itemDictionary[Item.Thorn] = ThornSp;
+        itemDictionary[Item.Facility01] = Facility01Sp;
+        itemDictionary[Item.Trap01] = Trap01Sp;
+        itemDictionary[Item.Heart] = HeartSp;
+        itemDictionary[Item.Bulb01] = Bulb01Sp;
+        itemDictionary[Item.StickSeed] = StickSeedSp;
+        itemDictionary[Item.BoardSeed] = BoardSeedSp;
+        itemDictionary[Item.ThornSeed] = ThornSeedSp;
+        itemDictionary[Item.Tumor] = TumorSp;
+        itemDictionary[Item.TumorSeed] = TumorSeedSp;
     }
 
     void RefreshItemMenu()
@@ -320,7 +307,6 @@ public class Inventory : MonoBehaviour
     void Start ()
     {
         animaitor = GetComponent<Animator>();
-
         Cursor = transform.Find("Cursor").gameObject;
 
         for (int i = 0; i < 3; i++)
@@ -340,6 +326,9 @@ public class Inventory : MonoBehaviour
         oxygenGauge = GameObject.Find("Oxygen_Needle").GetComponent<OxygenGauge>();
         hungerGauge = GameObject.Find("Hunger_Guage").GetComponent<HungerGauge>();
         energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
+        researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
+
+        SetDictionary();
     }
 	
 	void Update ()
@@ -440,7 +429,7 @@ public class Inventory : MonoBehaviour
         {
             for (int i = 0; i < Items.Count; i++)
             {
-                SetItemSprite(itemSlot[i], Items[i].name);
+                itemSlot[i].GetComponent<Image>().sprite = itemDictionary[Items[i].name];
                 itemSlot[i].SetActive(true);
                 itemSlot[i].transform.Find("Text").GetComponent<Text>().text = "x" + Items[i].count;
             }
@@ -472,6 +461,12 @@ public class Inventory : MonoBehaviour
             {
                 Items.Add(new ItemInfo(itemName, num));
                 GetEffectOn(Items.Count - 1);
+
+                if(discoveredItemList.Contains(itemName) == false)
+                {
+                    discoveredItemList.Add(itemName);
+                    researchWindow.DiscoverNewResearch(itemName);
+                }
             }
             return true;
         }

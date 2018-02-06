@@ -105,13 +105,14 @@ public class Facility : MonoBehaviour
         {
             case "TempFacility":
                 popupWindow.ClearItemList();
+                popupWindow.AddItem(global::Inventory.Item.Facility01);
                 popupWindow.AddItem(global::Inventory.Item.Trap01);
                 popupWindow.AddItem(global::Inventory.Item.Battery);
+                popupWindow.AddItem(global::Inventory.Item.TumorSeed);
                 popupWindow.AddItem(global::Inventory.Item.Bulb01);
                 popupWindow.AddItem(global::Inventory.Item.StickSeed);
                 popupWindow.AddItem(global::Inventory.Item.BoardSeed);
                 popupWindow.AddItem(global::Inventory.Item.ThornSeed);
-                popupWindow.AddItem(global::Inventory.Item.Facility01);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
             case "EscapePod":

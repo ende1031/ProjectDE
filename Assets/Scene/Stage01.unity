@@ -593,7 +593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &741273620
 ParticleSystemRenderer:
   serializedVersion: 4
@@ -707,7 +707,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 150847129
+  randomSeed: 1875057405
   InitialModule:
     serializedVersion: 3
     enabled: 1

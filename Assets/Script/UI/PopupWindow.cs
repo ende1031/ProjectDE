@@ -33,7 +33,7 @@ public class PopupWindow : MonoBehaviour
 
     bool isShortage;
 
-    Dictionary<global::Inventory.Item, Sprite> itemDictionary = new Dictionary<global::Inventory.Item, Sprite>();
+    Dictionary<global::Inventory.Item, bool> researchDictionary = new Dictionary<global::Inventory.Item, bool>();
 
     public class WindowItem
     {
@@ -71,10 +71,11 @@ public class PopupWindow : MonoBehaviour
         animaitor = GetComponent<Animator>();
 
         SetWindowObject();
-        SetDictionary();
 
-        SetWindowItem();
+        //SetWindowItem();
         RefreshWindow();
+
+        SetItemMakePossible(global::Inventory.Item.Oxygen); //산소는 처음부터 제작가능
     }
 
     void SetWindowObject()
@@ -100,29 +101,22 @@ public class PopupWindow : MonoBehaviour
         ButtonText = Button.transform.Find("Text").gameObject;
     }
 
-    void SetDictionary() //아이템 추가시 수정할 부분
+    public void SetItemMakePossible(global::Inventory.Item itemName, bool b = true)
     {
-        itemDictionary[global::Inventory.Item.Food] = inventory.FoodSp;
-        itemDictionary[global::Inventory.Item.Oxygen] = inventory.OxygenSp;
-        itemDictionary[global::Inventory.Item.Battery] = inventory.BatterySp;
-        itemDictionary[global::Inventory.Item.Stick] = inventory.StickSp;
-        itemDictionary[global::Inventory.Item.Board] = inventory.BoardSp;
-        itemDictionary[global::Inventory.Item.Hose] = inventory.HoseSp;
-        itemDictionary[global::Inventory.Item.Mass] = inventory.MassSp;
-        itemDictionary[global::Inventory.Item.Thorn] = inventory.ThornSp;
-        itemDictionary[global::Inventory.Item.Facility01] = inventory.Facility01Sp;
-        itemDictionary[global::Inventory.Item.Trap01] = inventory.Trap01Sp;
-        itemDictionary[global::Inventory.Item.Heart] = inventory.HeartSp;
-        itemDictionary[global::Inventory.Item.Bulb01] = inventory.Bulb01Sp;
-        itemDictionary[global::Inventory.Item.StickSeed] = inventory.StickSeedSp;
-        itemDictionary[global::Inventory.Item.BoardSeed] = inventory.BoardSeedSp;
-        itemDictionary[global::Inventory.Item.ThornSeed] = inventory.ThornSeedSp;
-        itemDictionary[global::Inventory.Item.Tumor] = inventory.TumorSp;
-        itemDictionary[global::Inventory.Item.TumorSeed] = inventory.TumorSeedSp;
+        researchDictionary[itemName] = b;
     }
 
     public void AddItem(global::Inventory.Item itemName) //아이템 추가시 수정할 부분
     {
+        if(researchDictionary.ContainsKey(itemName) == false)
+        {
+            return;
+        }
+        else if(researchDictionary[itemName] == false)
+        {
+            return;
+        }
+
         switch (itemName)
         {
             case global::Inventory.Item.Trap01:
@@ -174,12 +168,13 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(itemName, 45, "종양", "더미" + TimeToString(45), global::Inventory.Item.Thorn, 77, global::Inventory.Item.Facility01, 99));
                 break;
             case global::Inventory.Item.TumorSeed:
-                WindowItemList.Add(new WindowItem(itemName, 45, "종양 씨앗", "더미" + TimeToString(45), global::Inventory.Item.Thorn, 77, global::Inventory.Item.Facility01, 99));
+                WindowItemList.Add(new WindowItem(itemName, 30, "종양 씨앗", "아씨엔 라하브레하의 혼이 깃든 검은 크리스탈이다.\n조디아크를 소환할 수 있다." + TimeToString(30), global::Inventory.Item.Mass, 6));
                 break;
         }
     }
 
     // 기본세팅
+    /*
     void SetWindowItem()
     {
         AddItem(global::Inventory.Item.Battery);
@@ -187,6 +182,7 @@ public class PopupWindow : MonoBehaviour
         AddItem(global::Inventory.Item.Food);
         AddItem(global::Inventory.Item.Mass);
     }
+    */
 
     void Update ()
     {
@@ -327,12 +323,34 @@ public class PopupWindow : MonoBehaviour
 
     void RefreshWindow()
     {
+        Color tempColor = MaterialsItem[0].GetComponent<Image>().color;
+
+        if(WindowItemList.Count <= 0)
+        {
+            ExplanationName.GetComponent<Text>().text = string.Empty;
+            ExplanationText.GetComponent<Text>().text = "※ 이 시설에서 제작 가능한 아이템이 없습니다.";
+            Button.GetComponent<Image>().sprite = YellowButton;
+            ButtonText.GetComponent<Text>().text = string.Empty;
+            tempColor.a = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                ScrollIndexItem[i].SetActive(false);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                MaterialsNum[i].GetComponent<Text>().text = string.Empty;
+                MaterialsItem[i].GetComponent<Image>().color = tempColor;
+            }
+            return;
+        }
+
         for(int i=0; i<5; i++)
         {
             if(i < WindowItemList.Count)
             {
                 ScrollIndexItem[i].SetActive(true);
-                ScrollIndexItem[i].GetComponent<Image>().sprite = itemDictionary[WindowItemList[i + selectedIndex - displayedSelectedIndex].name];
+                ScrollIndexItem[i].GetComponent<Image>().sprite = inventory.itemDictionary[WindowItemList[i + selectedIndex - displayedSelectedIndex].name];
             }
             else
             {
@@ -342,8 +360,6 @@ public class PopupWindow : MonoBehaviour
         ExplanationName.GetComponent<Text>().text = WindowItemList[selectedIndex].itemName;
         ExplanationText.GetComponent<Text>().text = WindowItemList[selectedIndex].expText;
 
-        Color tempColor = MaterialsItem[0].GetComponent<Image>().color;
-
         isShortage = false;
         for (int i = 0; i<6; i++)
         {
@@ -351,7 +367,7 @@ public class PopupWindow : MonoBehaviour
             {
                 tempColor.a = 1;
                 MaterialsItem[i].GetComponent<Image>().color = tempColor;
-                MaterialsItem[i].GetComponent<Image>().sprite = itemDictionary[WindowItemList[selectedIndex].material[i]];
+                MaterialsItem[i].GetComponent<Image>().sprite = inventory.itemDictionary[WindowItemList[selectedIndex].material[i]];
                 MaterialsNum[i].GetComponent<Text>().text = inventory.CountOfItem(WindowItemList[selectedIndex].material[i]) + "/" + WindowItemList[selectedIndex].materialNum[i];
                 if(WindowItemList[selectedIndex].materialNum[i] > inventory.CountOfItem(WindowItemList[selectedIndex].material[i]))
                 {

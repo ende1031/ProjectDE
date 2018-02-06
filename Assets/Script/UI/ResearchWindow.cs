@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ResearchWindow : MonoBehaviour
 {
     Inventory inventory;
+    PopupWindow popupWindow;
     GameObject Player;
 
     GameObject ResearchBG;
@@ -42,15 +43,16 @@ public class ResearchWindow : MonoBehaviour
 
     ResearchItem[] itemArray = new ResearchItem[16];
     Dictionary<global::Inventory.Item, ResultContent> contentDictionary = new Dictionary<global::Inventory.Item, ResultContent>();
+    Dictionary<global::Inventory.Item, int> ResearchNumberDictionary = new Dictionary<global::Inventory.Item, int>();
 
     public class ResearchItem
     {
-        public ResearchItem(global::Inventory.Item i, Sprite sp, int m, bool k) //기본
+        public ResearchItem(global::Inventory.Item i, int m, string t)
         {
             item = i;
-            itemSp = sp;
             maxNum = m;
-            isKnown = k;
+            expText = t;
+            isKnown = false;
             putNum = 0;
         }
 
@@ -76,7 +78,6 @@ public class ResearchWindow : MonoBehaviour
         }
 
         public global::Inventory.Item item;
-        public Sprite itemSp;
         public int maxNum;
         public int putNum;
         public bool isKnown;
@@ -87,21 +88,18 @@ public class ResearchWindow : MonoBehaviour
 
     public class ResultContent
     {
-        public ResultContent(Sprite isp, string t, Sprite fsp)
+        public ResultContent(string t, Sprite fsp)
         {
-            itemSp = isp;
             expText = t;
             facilitySp = fsp;
         }
 
-        public ResultContent(Sprite isp, string t)
+        public ResultContent(string t)
         {
-            itemSp = isp;
             expText = t;
             facilitySp = null;
         }
 
-        public Sprite itemSp;
         public string expText;
         public Sprite facilitySp;
     }
@@ -109,6 +107,7 @@ public class ResearchWindow : MonoBehaviour
     void Start ()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        popupWindow = GameObject.Find("PopupWindow").GetComponent<PopupWindow>();
         animaitor = GetComponent<Animator>();
         ResearchBG = transform.Find("ResearchBG").gameObject;
         ResultBG = transform.Find("ResultBG").gameObject;
@@ -149,62 +148,58 @@ public class ResearchWindow : MonoBehaviour
 
     void SetWindowItem()
     {
-        itemArray[0] = new ResearchItem(global::Inventory.Item.Mass, inventory.MassSp, 5, true);
-        itemArray[0].expText = "덩어리는 덩어리.\n쨔쟌~ 워크벤치를 만들 수 있게 되었다!";
+        itemArray[0] = new ResearchItem(global::Inventory.Item.Mass, 5, "덩어리는 덩어리.\n쨔쟌~ 워크벤치를 만들 수 있게 되었다!");
         itemArray[0].SetResultItem(1, global::Inventory.Item.Facility01);
 
-        itemArray[1] = new ResearchItem(global::Inventory.Item.Mass, inventory.MassSp, 5, true);
-        itemArray[1].expText = "덩어리를 연구해서 종양씨앗을 만들어낼 수 있다는 놀라운 사실을 알게 되었다. 이럴수가.";
+        itemArray[1] = new ResearchItem(global::Inventory.Item.Mass, 5, "덩어리를 연구해서 종양씨앗을 만들어낼 수 있다는 놀라운 사실을 알게 되었다. 이럴수가.");
         itemArray[1].SetResultItem(1, global::Inventory.Item.TumorSeed);
 
-        itemArray[2] = new ResearchItem(global::Inventory.Item.Tumor, inventory.TumorSp, 3, true);
-        itemArray[2].expText = "종양을 연구했다. 만족스럽다.";
+        itemArray[2] = new ResearchItem(global::Inventory.Item.Tumor, 3, "종양을 연구했다. 만족스럽다.");
         itemArray[2].SetResultItem(2, global::Inventory.Item.Food, global::Inventory.Item.Bulb01);
 
-        itemArray[3] = new ResearchItem(global::Inventory.Item.Stick, inventory.StickSp, 20, true);
-        itemArray[3].expText = "대나무는 대나무다.";
+        itemArray[3] = new ResearchItem(global::Inventory.Item.Stick, 20, "대나무는 대나무다.");
         itemArray[3].SetResultItem(1, global::Inventory.Item.StickSeed);
 
-        itemArray[4] = new ResearchItem(global::Inventory.Item.Board, inventory.BoardSp, 20, true);
-        itemArray[4].expText = "이 식물을 연구해본 결과 식용으로 쓰기에는 부적합하다는 사실을 알게 됐다. (불쾌한 표정)";
+        itemArray[4] = new ResearchItem(global::Inventory.Item.Board, 20, "이 식물을 연구해본 결과 식용으로 쓰기에는 부적합하다는 사실을 알게 됐다. (불쾌한 표정)");
         itemArray[4].SetResultItem(1, global::Inventory.Item.BoardSeed);
 
-        itemArray[5] = new ResearchItem(global::Inventory.Item.Thorn, inventory.ThornSp, 20, true);
-        itemArray[5].expText = "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너의 말을 들어보기로 했다.";
-        itemArray[5].SetResultItem(1, global::Inventory.Item.ThornSeed, global::Inventory.Item.Trap01);
+        itemArray[5] = new ResearchItem(global::Inventory.Item.Thorn, 20, "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너의 말을 들어보기로 했다.");
+        itemArray[5].SetResultItem(2, global::Inventory.Item.ThornSeed, global::Inventory.Item.Trap01);
 
-        itemArray[6] = new ResearchItem(global::Inventory.Item.Heart, inventory.HeartSp, 5, true);
-        itemArray[6].expText = "최근 발표된 뉴욕 공학 대학의 연구 결과에 따르면 형이상학적 이유에 따라 우리가 관찰 하는 절대우주는 팽창과 수축을 반복하며 무한히 연쇄한다고 한다. 즉, 괴물의 심장으로 배터리를 만들 수 있다.";
+        itemArray[6] = new ResearchItem(global::Inventory.Item.Heart, 5, "최근 발표된 뉴욕 공학 대학의 연구 결과에 따르면 형이상학적 이유에 따라 우리가 관찰 하는 절대우주는 팽창과 수축을 반복하며 무한히 연쇄한다고 한다. 즉, 괴물의 심장으로 배터리를 만들 수 있다.");
         itemArray[6].SetResultItem(1, global::Inventory.Item.Battery);
 
-        itemArray[7] = new ResearchItem(global::Inventory.Item.Hose, inventory.HoseSp, 10, true);
-        itemArray[7].expText = "호스를 연구하면 분해기를 만들 수 있다. 아마도.";
+        itemArray[7] = new ResearchItem(global::Inventory.Item.Hose, 10, "호스를 연구하면 분해기를 만들 수 있다. 아마도.");
         itemArray[7].SetResultItem(1, global::Inventory.Item.Facility01);
 
-        itemArray[8] = new ResearchItem(global::Inventory.Item.Mass, inventory.MassSp, 20, true);
-        itemArray[8].expText = "덩어리를 또 연구하기로 한지 3개월이 지났다. 드디어 빛이 보인다! 연구 결과로 알게 된 사실은 이 다음 연구도 덩어리 연구라는 것이다.";
+        itemArray[8] = new ResearchItem(global::Inventory.Item.Mass, 20, "덩어리를 또 연구하기로 한지 3개월이 지났다. 드디어 빛이 보인다! 연구 결과로 알게 된 사실은 이 다음 연구도 덩어리 연구라는 것이다.");
         itemArray[8].SetResultItem(1, global::Inventory.Item.Facility01);
 
-        itemArray[9] = new ResearchItem(global::Inventory.Item.Stick, inventory.StickSp, 20, false);
-        itemArray[10] = new ResearchItem(global::Inventory.Item.Stick, inventory.StickSp, 20, false);
-        itemArray[11] = new ResearchItem(global::Inventory.Item.Stick, inventory.StickSp, 20, false);
-        itemArray[12] = new ResearchItem(global::Inventory.Item.Stick, inventory.StickSp, 20, false);
-        itemArray[13] = new ResearchItem(global::Inventory.Item.Stick, inventory.StickSp, 20, false);
-        itemArray[14] = new ResearchItem(global::Inventory.Item.Stick, inventory.MassSp, 20, false);
-        itemArray[15] = new ResearchItem(global::Inventory.Item.Stick, inventory.StickSp, 20, false);
+        itemArray[9] = new ResearchItem(global::Inventory.Item.Stick, 20, "더미");
+        itemArray[10] = new ResearchItem(global::Inventory.Item.Stick, 20, "더미");
+        itemArray[11] = new ResearchItem(global::Inventory.Item.Stick, 20, "더미");
+        itemArray[12] = new ResearchItem(global::Inventory.Item.Stick, 20, "더미");
+        itemArray[13] = new ResearchItem(global::Inventory.Item.Stick, 20, "더미");
+        itemArray[14] = new ResearchItem(global::Inventory.Item.Stick, 20, "더미");
+        itemArray[15] = new ResearchItem(global::Inventory.Item.Stick, 20, "더미");
+
+        for(int i = 15; i >= 0; i--)
+        {
+            ResearchNumberDictionary[itemArray[i].item] = i;
+        }
     }
 
     void SetResultContent()
     {
-        contentDictionary[global::Inventory.Item.Facility01] = new ResultContent(inventory.Facility01Sp, "연금술의 오의를 깨달아서 현자의 돌 없이 워크벤치를 연성할 수 있게 됐다.");
-        contentDictionary[global::Inventory.Item.TumorSeed] = new ResultContent(inventory.TumorSeedSp, "피의 대가를 치뤄서 마계로부터 종양씨앗을 소환할 수 있게 됐다.");
-        contentDictionary[global::Inventory.Item.Food] = new ResultContent(inventory.FoodSp, "선대 요리왕의 혼이 깃들어서 식량을 만들 수 있게 됐다.", inventory.EscapePodSp);
-        contentDictionary[global::Inventory.Item.Bulb01] = new ResultContent(inventory.Bulb01Sp, "희생은 컸다. 나는 평생에 걸친 연구 끝에 스스로 빛을 내는 물건을 만들 수 있게 됐다.");
-        contentDictionary[global::Inventory.Item.StickSeed] = new ResultContent(inventory.StickSeedSp, "생명의 나무 세피로트의 가호를 받아서 대나무 모종을 생산할 수 있게 됐다.");
-        contentDictionary[global::Inventory.Item.BoardSeed] = new ResultContent(inventory.BoardSeedSp, "고대문명 속 제국의 고서로부터 얻은 지식을 통해서 판자식물을 생산하는 방법을 깨달았다.");
-        contentDictionary[global::Inventory.Item.ThornSeed] = new ResultContent(inventory.ThornSeedSp, "금지된 술법으로 불러낸 마계의 요마와의 계약을 통해 선인장 모종을 키우는 법을 알게 됐다.");
-        contentDictionary[global::Inventory.Item.Trap01] = new ResultContent(inventory.BatterySp, "별이 그려진 신비한 구슬 7개를 모아 기도하자 천계의 용이 나타나 덫을 만드는 방법을 알려줬다.");
-        contentDictionary[global::Inventory.Item.Battery] = new ResultContent(inventory.BatterySp, "간절한 염원을 담아 기도하자 대지의 어머니 크리스탈이 빛을 내며 배터리를 만드는 방법을 알려줬다.");
+        contentDictionary[global::Inventory.Item.Facility01] = new ResultContent("연금술의 오의를 깨달아서 현자의 돌 없이 워크벤치를 연성할 수 있게 됐다.");
+        contentDictionary[global::Inventory.Item.TumorSeed] = new ResultContent("피의 대가를 치뤄서 마계로부터 종양씨앗을 소환할 수 있게 됐다.");
+        contentDictionary[global::Inventory.Item.Food] = new ResultContent("선대 요리왕의 혼이 깃들어서 식량을 만들 수 있게 됐다.", inventory.EscapePodSp);
+        contentDictionary[global::Inventory.Item.Bulb01] = new ResultContent("희생은 컸다. 나는 평생에 걸친 연구 끝에 스스로 빛을 내는 물건을 만들 수 있게 됐다.");
+        contentDictionary[global::Inventory.Item.StickSeed] = new ResultContent("생명의 나무 세피로트의 가호를 받아서 대나무 모종을 생산할 수 있게 됐다.");
+        contentDictionary[global::Inventory.Item.BoardSeed] = new ResultContent("고대문명 속 제국의 고서로부터 얻은 지식을 통해서 판자식물을 생산하는 방법을 깨달았다.");
+        contentDictionary[global::Inventory.Item.ThornSeed] = new ResultContent("금지된 술법으로 불러낸 마계의 요마와의 계약을 통해 선인장 모종을 키우는 법을 알게 됐다.");
+        contentDictionary[global::Inventory.Item.Trap01] = new ResultContent("별이 그려진 신비한 구슬 7개를 모아 기도하자 천계의 용이 나타나 덫을 만드는 방법을 알려줬다.");
+        contentDictionary[global::Inventory.Item.Battery] = new ResultContent("간절한 염원을 담아 기도하자 대지의 어머니 크리스탈이 빛을 내며 배터리를 만드는 방법을 알려줬다.");
     }
 
     void Update ()
@@ -280,34 +275,7 @@ public class ResearchWindow : MonoBehaviour
 
     void RefreshWindow()
     {
-        for (int i = 0; i < 16; i++)
-        {
-            if(itemArray[i].isKnown == false)
-            {
-                NoItem[i].SetActive(true);
-                ItemIcon[i].SetActive(false);
-                ItemIconBack[i].SetActive(false);
-                ItemCount[i].SetActive(false);
-            }
-            else
-            {
-                NoItem[i].SetActive(false);
-                ItemIcon[i].SetActive(true);
-                ItemIconBack[i].SetActive(true);
-                ItemCount[i].SetActive(true);
-                ItemIcon[i].GetComponent<Image>().sprite = itemArray[i].itemSp;
-                ItemIconBack[i].GetComponent<Image>().sprite = itemArray[i].itemSp;
-                if (itemArray[i].putNum < 10)
-                {
-                    ItemCount[i].GetComponent<Text>().text = "0" + itemArray[i].putNum + "/" + itemArray[i].maxNum;
-                }
-                else
-                {
-                    ItemCount[i].GetComponent<Text>().text = itemArray[i].putNum + "/" + itemArray[i].maxNum;
-                }
-                ItemIcon[i].GetComponent<Image>().fillAmount = (float)itemArray[i].putNum / (float)itemArray[i].maxNum;
-            }
-        }
+        
 
         if (itemArray[selectedIndex].isKnown == false)
         {
@@ -319,7 +287,7 @@ public class ResearchWindow : MonoBehaviour
         {
             BigItem.SetActive(true);
             Button.SetActive(true);
-            BigItem.GetComponent<Image>().sprite = itemArray[selectedIndex].itemSp;
+            BigItem.GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].item];
             if (itemArray[selectedIndex].putNum < itemArray[selectedIndex].maxNum)
             {
                 completeResearch = false;
@@ -336,9 +304,54 @@ public class ResearchWindow : MonoBehaviour
             }
             else
             {
-                completeResearch = true;
                 Button.GetComponent<Image>().sprite = BlueButton;
                 ButtonText.GetComponent<Text>().text = "C : 연구 결과 확인";
+                completeResearch = true;
+
+                // 연구 끝난 것은 제작 팝업 윈도우에서 제작 가능하게
+                for(int i = 0; i < itemArray[selectedIndex].resultNum; i++)
+                {
+                    popupWindow.SetItemMakePossible(itemArray[selectedIndex].resultItem[i]);
+                }
+
+                //다음 연구 오픈
+                if(selectedIndex == 0)
+                {
+                    DiscoverNewResearch(1);
+                }
+                else if (selectedIndex == 1)
+                {
+                    DiscoverNewResearch(8);
+                }
+            }
+        }
+
+        for (int i = 0; i < 16; i++)
+        {
+            if (itemArray[i].isKnown == false)
+            {
+                NoItem[i].SetActive(true);
+                ItemIcon[i].SetActive(false);
+                ItemIconBack[i].SetActive(false);
+                ItemCount[i].SetActive(false);
+            }
+            else
+            {
+                NoItem[i].SetActive(false);
+                ItemIcon[i].SetActive(true);
+                ItemIconBack[i].SetActive(true);
+                ItemCount[i].SetActive(true);
+                ItemIcon[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[i].item];
+                ItemIconBack[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[i].item];
+                if (itemArray[i].putNum < 10)
+                {
+                    ItemCount[i].GetComponent<Text>().text = "0" + itemArray[i].putNum + "/" + itemArray[i].maxNum;
+                }
+                else
+                {
+                    ItemCount[i].GetComponent<Text>().text = itemArray[i].putNum + "/" + itemArray[i].maxNum;
+                }
+                ItemIcon[i].GetComponent<Image>().fillAmount = (float)itemArray[i].putNum / (float)itemArray[i].maxNum;
             }
         }
     }
@@ -374,16 +387,15 @@ public class ResearchWindow : MonoBehaviour
         isResultActive = true;
         openTimer = 0;
 
-        ResultBigItem.GetComponent<Image>().sprite = itemArray[selectedIndex].itemSp;
+        ResultBigItem.GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].item];
         ExplainText.GetComponent<Text>().text = itemArray[selectedIndex].expText;
-
 
         for(int i = 0; i < 3; i++)
         {
             if( i < itemArray[selectedIndex].resultNum)
             {
                 Content[i].SetActive(true);
-                ContentIcon[i].GetComponent<Image>().sprite = contentDictionary[itemArray[selectedIndex].resultItem[i]].itemSp;
+                ContentIcon[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].resultItem[i]];
                 ContentText[i].GetComponent<Text>().text = contentDictionary[itemArray[selectedIndex].resultItem[i]].expText;
                 if(contentDictionary[itemArray[selectedIndex].resultItem[i]].facilitySp == null)
                 {
@@ -413,7 +425,13 @@ public class ResearchWindow : MonoBehaviour
     public void DiscoverNewResearch(int num)
     {
         itemArray[num].SetKnown(true);
-        RefreshWindow();
+        //RefreshWindow();
+    }
+
+    public void DiscoverNewResearch(global::Inventory.Item item)
+    {
+        itemArray[ResearchNumberDictionary[item]].SetKnown(true);
+        //RefreshWindow();
     }
 
     void InputItem()

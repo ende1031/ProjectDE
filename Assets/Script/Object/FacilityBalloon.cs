@@ -26,13 +26,10 @@ public class FacilityBalloon : MonoBehaviour
     public bool isMakeFinish = false;
     public bool isLoadByManager = false;
 
-    Dictionary<global::Inventory.Item, Sprite> itemDictionary = new Dictionary<global::Inventory.Item, Sprite>();
-
     void Start ()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
-        SetDictionary();
 
         Balloon = transform.Find("Balloon").gameObject;
         TimeText = Balloon.transform.Find("TimeText").gameObject;
@@ -42,27 +39,6 @@ public class FacilityBalloon : MonoBehaviour
         animaitor = GetComponent<Animator>();
 
         Balloon.SetActive(false);
-    }
-
-    void SetDictionary() //아이템 추가시 수정할 부분
-    {
-        itemDictionary[global::Inventory.Item.Food] = inventory.FoodSp;
-        itemDictionary[global::Inventory.Item.Oxygen] = inventory.OxygenSp;
-        itemDictionary[global::Inventory.Item.Battery] = inventory.BatterySp;
-        itemDictionary[global::Inventory.Item.Stick] = inventory.StickSp;
-        itemDictionary[global::Inventory.Item.Board] = inventory.BoardSp;
-        itemDictionary[global::Inventory.Item.Hose] = inventory.HoseSp;
-        itemDictionary[global::Inventory.Item.Mass] = inventory.MassSp;
-        itemDictionary[global::Inventory.Item.Thorn] = inventory.ThornSp;
-        itemDictionary[global::Inventory.Item.Facility01] = inventory.Facility01Sp;
-        itemDictionary[global::Inventory.Item.Trap01] = inventory.Trap01Sp;
-        itemDictionary[global::Inventory.Item.Heart] = inventory.HeartSp;
-        itemDictionary[global::Inventory.Item.Bulb01] = inventory.Bulb01Sp;
-        itemDictionary[global::Inventory.Item.StickSeed] = inventory.StickSeedSp;
-        itemDictionary[global::Inventory.Item.BoardSeed] = inventory.BoardSeedSp;
-        itemDictionary[global::Inventory.Item.ThornSeed] = inventory.ThornSeedSp;
-        itemDictionary[global::Inventory.Item.Tumor] = inventory.TumorSp;
-        itemDictionary[global::Inventory.Item.TumorSeed] = inventory.TumorSeedSp;
     }
 
     void Update ()
@@ -87,8 +63,8 @@ public class FacilityBalloon : MonoBehaviour
                 Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
                 Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
             }
-            Item.GetComponent<SpriteRenderer>().sprite = itemDictionary[makeItem];
-            Item_back.GetComponent<SpriteRenderer>().sprite = itemDictionary[makeItem];
+            Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
+            Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
             isLoadByManager = false;
         }
 
@@ -110,8 +86,8 @@ public class FacilityBalloon : MonoBehaviour
     {
         Balloon.SetActive(true);
         makeItem = itemName;
-        Item.GetComponent<SpriteRenderer>().sprite = itemDictionary[itemName];
-        Item_back.GetComponent<SpriteRenderer>().sprite = itemDictionary[itemName];
+        Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName];
+        Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName];
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         timeToMake = time;
         progressTimer = timeToMake;
