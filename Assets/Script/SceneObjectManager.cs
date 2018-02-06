@@ -10,6 +10,7 @@ public class SceneObjectManager : MonoBehaviour
     HungerGauge hungerGauge;
     OxygenGauge oxygenGauge;
     EnergyGauge energyGauge;
+    Timer timer;
 
     public GameObject TempFacility; //Prefab 추가시 수정할 부분
     public GameObject EscapePod;
@@ -156,6 +157,7 @@ public class SceneObjectManager : MonoBehaviour
         oxygenGauge = GameObject.Find("Oxygen_Needle").GetComponent<OxygenGauge>();
         hungerGauge = GameObject.Find("Hunger_Guage").GetComponent<HungerGauge>();
         energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
         UI.SetActive(false);
 
         for (int i = 0; i < maxSceneCount; i++)
@@ -290,6 +292,8 @@ public class SceneObjectManager : MonoBehaviour
         hungerGauge.SetAmount(-20);
         oxygenGauge.SetAmount(-10);
         energyGauge.SetAmount(-10);
+        timer.ResetTimer();
+        timer.PassDay();
     }
 
     //해당 좌표에 이미 다른 오브젝트가 있으면 false를 반환

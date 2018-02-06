@@ -8,13 +8,16 @@ public class Timer : MonoBehaviour
     public int TimeOfDay = 6;
     public int time;
     public float minute = 0;
+    public int day = 1;
 
     Text timerText;
+    Text dayText;
 
     void Start ()
     {
         time = TimeOfDay;
         timerText = GetComponent<Text>();
+        dayText = GameObject.Find("DayTimer").gameObject.GetComponent<Text>();
     }
 	
 	void Update ()
@@ -48,6 +51,7 @@ public class Timer : MonoBehaviour
         }
 
         timerText.text = t + " : " + m;
+        dayText.text = "Day " + day;
     }
 
     public void ResetTimer()
@@ -68,5 +72,10 @@ public class Timer : MonoBehaviour
         float t = time * 60 + minute;
 
         return 100 - (t / m * 100);
+    }
+
+    public void PassDay()
+    {
+        day++;
     }
 }

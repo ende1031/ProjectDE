@@ -2017,7 +2017,7 @@ GameObject:
   - component: {fileID: 269367808}
   - component: {fileID: 269367807}
   m_Layer: 5
-  m_Name: Time_Text
+  m_Name: DayTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2038,7 +2038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -232.1, y: -68.9}
+  m_AnchoredPosition: {x: -232.1, y: -67.5}
   m_SizeDelta: {x: 126.15, y: 33.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &269367807
@@ -2073,7 +2073,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB0A8\uC740 \uC2DC\uAC04"
+  m_Text: Day 1
 --- !u!222 &269367808
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7033,6 +7033,7 @@ MonoBehaviour:
   TimeOfDay: 6
   time: 6
   minute: 0
+  day: 1
 --- !u!114 &1133549724
 MonoBehaviour:
   m_ObjectHideFlags: 0

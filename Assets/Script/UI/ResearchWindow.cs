@@ -170,11 +170,11 @@ public class ResearchWindow : MonoBehaviour
         itemArray[4].SetResultItem(1, global::Inventory.Item.BoardSeed);
 
         itemArray[5] = new ResearchItem(global::Inventory.Item.Thorn, inventory.ThornSp, 20, true);
-        itemArray[5].expText = "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너를 만나봐야겠다.";
+        itemArray[5].expText = "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너의 말을 들어보기로 했다.";
         itemArray[5].SetResultItem(1, global::Inventory.Item.ThornSeed, global::Inventory.Item.Trap01);
 
         itemArray[6] = new ResearchItem(global::Inventory.Item.Heart, inventory.HeartSp, 5, true);
-        itemArray[6].expText = "심장은 두근두근\n지난달 발표된 캘리포니아 주 스탠포드 대학의 연구결과에 따르면 천체우주역학적 이유에 따라 우리가 바라보는 절대우주는 팽창과 수축을 반복하며 무한히 연쇄한다고 한다. 즉, 괴물의 심장으로 배터리를 만들 수 있다는 뜻이다.";
+        itemArray[6].expText = "최근 발표된 뉴욕 공학 대학의 연구 결과에 따르면 형이상학적 이유에 따라 우리가 관찰 하는 절대우주는 팽창과 수축을 반복하며 무한히 연쇄한다고 한다. 즉, 괴물의 심장으로 배터리를 만들 수 있다.";
         itemArray[6].SetResultItem(1, global::Inventory.Item.Battery);
 
         itemArray[7] = new ResearchItem(global::Inventory.Item.Hose, inventory.HoseSp, 10, true);

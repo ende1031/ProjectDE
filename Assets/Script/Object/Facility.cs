@@ -8,7 +8,6 @@ public class Facility : MonoBehaviour
 
     InteractionIcon interactionIcon;
     Inventory inventory;
-    Timer timer;
     PopupWindow popupWindow;
     ResearchWindow researchWindow;
 
@@ -20,7 +19,6 @@ public class Facility : MonoBehaviour
     {
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        timer = GameObject.Find("Timer").GetComponent<Timer>();
         popupWindow = GameObject.Find("PopupWindow").GetComponent<PopupWindow>();
         researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
 
@@ -130,7 +128,6 @@ public class Facility : MonoBehaviour
         if (facilityName == "EscapePod")
         {
             SceneObjectManager.instance.SaveObject();
-            timer.ResetTimer();
             SceneObjectManager.instance.SleepAfter();
             SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
         }
