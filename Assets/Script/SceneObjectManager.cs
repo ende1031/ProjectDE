@@ -95,6 +95,7 @@ public class SceneObjectManager : MonoBehaviour
             }
             ob.inGameObject.GetComponent<Plant>().state = ob.plantState;
             ob.inGameObject.GetComponent<Plant>().growthTimer = ob.timer;
+            ob.inGameObject.GetComponent<Plant>().isLoadByManager = true;
         }
         else if (ob.type == "Facility")
         {

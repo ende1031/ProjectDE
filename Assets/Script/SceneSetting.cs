@@ -70,7 +70,7 @@ public class SceneSetting : MonoBehaviour
                 break;
 
             case 1:
-                SceneObjectManager.instance.AddObject(n, 15, new SceneObjectManager.SceneObject("Plant", "BoardPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 20, new SceneObjectManager.SceneObject("Plant", "BoardPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 7, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 23, new SceneObjectManager.SceneObject("Portal", "Stage01_A_2F", 25));
                 SceneObjectManager.instance.AddObject(n, 25, new SceneObjectManager.SceneObject("Portal", "Stage01", 23));

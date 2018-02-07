@@ -52,6 +52,11 @@ public class Timer : MonoBehaviour
 
         timerText.text = t + " : " + m;
         dayText.text = "Day " + day;
+
+        if(time < 0)
+        {
+            timerText.text = "DEATH";
+        }
     }
 
     public void ResetTimer()

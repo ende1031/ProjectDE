@@ -20,6 +20,8 @@ public class Plant : MonoBehaviour
     public float growthTimer = 0;
     public bool isTumor = false;
 
+    public bool isLoadByManager = false;
+
     void Start ()
     {
         sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
@@ -30,6 +32,7 @@ public class Plant : MonoBehaviour
         animaitor = GetComponent<Animator>();
         animaitor.SetInteger("State", state);
         animaitor.SetBool("isGathering", false); //플레이어가 채집을 하는것인지, 아니면 바로 애니메이션 전환을 할지
+        animaitor.SetBool("isGrowSkip", false); //성장 애니메이션을 스킵할지
     }
 
     public void GatherStart()
@@ -185,6 +188,25 @@ public class Plant : MonoBehaviour
 
     void Update ()
     {
+        if (isLoadByManager == true)
+        {
+            if (growthTimer >= growthTime)
+            {
+                growthTimer = 0;
+                if (state == 4)
+                {
+                    state = 5;
+                }
+                else
+                {
+                    state = 1;
+                }
+                animaitor.SetInteger("State", state);
+                animaitor.SetBool("isGrowSkip", true);
+            }
+            isLoadByManager = false;
+        }
+
         if (plantName != "MassPlant")
         {
             Growth();
@@ -233,6 +255,7 @@ public class Plant : MonoBehaviour
                     state = 1;
                 }
                 animaitor.SetInteger("State", state);
+                animaitor.SetBool("isGrowSkip", false);
             }
         }
 
