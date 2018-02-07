@@ -53,6 +53,10 @@ public class PlayerInteraction : MonoBehaviour
             inventory.GetItem(global::Inventory.Item.Heart, 50);
             inventory.GetItem(global::Inventory.Item.Hose, 50);
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            inventory.GetItem(global::Inventory.Item.Grinder01, 1);
+        }
     }
 
     void PlayerDirection()

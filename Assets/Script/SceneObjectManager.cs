@@ -22,6 +22,7 @@ public class SceneObjectManager : MonoBehaviour
     public GameObject Trap01;
     public GameObject Bulb01;
     public GameObject Nest01;
+    public GameObject Grinder01;
 
     public class SceneObject
     {
@@ -101,6 +102,9 @@ public class SceneObjectManager : MonoBehaviour
             {
                 case "TempFacility":
                     ob.inGameObject = Instantiate(TempFacility, tempPos, Quaternion.identity);
+                    break;
+                case "Grinder01":
+                    ob.inGameObject = Instantiate(Grinder01, tempPos, Quaternion.identity);
                     break;
                 case "EscapePod":
                     tempPos.z = 0.2f; //크기가 커서 겹쳐보일 수 있음

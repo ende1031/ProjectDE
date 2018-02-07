@@ -76,6 +76,7 @@ public class PopupWindow : MonoBehaviour
         RefreshWindow();
 
         SetItemMakePossible(global::Inventory.Item.Oxygen); //산소는 처음부터 제작가능
+        SetItemMakePossible(global::Inventory.Item.Mass); //산소는 처음부터 제작가능
     }
 
     void SetWindowObject()
@@ -156,7 +157,7 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(itemName, 70, "호스", "테스트용 호스" + TimeToString(70), global::Inventory.Item.Stick, 1, global::Inventory.Item.Board, 3, global::Inventory.Item.Food, 2, global::Inventory.Item.Oxygen, 1));
                 break;
             case global::Inventory.Item.Mass:
-                WindowItemList.Add(new WindowItem(itemName, 80, "덩어리", "테스트용으로 재료를 엄청나게 많게 설정했다.\n참고로 덩어리는 고유명사임." + TimeToString(80), global::Inventory.Item.Stick, 73, global::Inventory.Item.Board, 10, global::Inventory.Item.Food, 57, global::Inventory.Item.Oxygen, 42, global::Inventory.Item.Battery, 91));
+                WindowItemList.Add(new WindowItem(itemName, 5, "덩어리", "테스트용.\n분해기에서 분해를 통해 얻을 수 있게 수정 예정" + TimeToString(5), global::Inventory.Item.Stick, 1));
                 break;
             case global::Inventory.Item.Thorn:
                 WindowItemList.Add(new WindowItem(itemName, 300, "가시", "괴식물을 통해 얻는게 빠르다." + TimeToString(300), global::Inventory.Item.Stick, 99, global::Inventory.Item.Board, 99, global::Inventory.Item.Food, 99, global::Inventory.Item.Oxygen, 99, global::Inventory.Item.Battery, 99));
@@ -169,6 +170,9 @@ public class PopupWindow : MonoBehaviour
                 break;
             case global::Inventory.Item.TumorSeed:
                 WindowItemList.Add(new WindowItem(itemName, 30, "종양 씨앗", "아씨엔 라하브레하의 혼이 깃든 검은 크리스탈이다.\n조디아크를 소환할 수 있다." + TimeToString(30), global::Inventory.Item.Mass, 6));
+                break;
+            case global::Inventory.Item.Grinder01:
+                WindowItemList.Add(new WindowItem(itemName, 150, "분쇄기", "혼돈의 물질을 분해해서 내부에 깃들은 어두운 에너지를 추출하는데 사용하는 시설이다." + TimeToString(150), global::Inventory.Item.Stick, 10, global::Inventory.Item.Board, 8, global::Inventory.Item.Hose, 20, global::Inventory.Item.Mass, 10, global::Inventory.Item.Battery, 1));
                 break;
         }
     }
@@ -247,6 +251,11 @@ public class PopupWindow : MonoBehaviour
 
     void MakeItem()
     {
+        if (WindowItemList.Count <= 0)
+        {
+            return;
+        }
+
         bool makePossible = true;
         for(int i=0; i<6; i++)
         {

@@ -1146,7 +1146,9 @@ MonoBehaviour:
   TumorSp: {fileID: 21300000, guid: 17399aaa48e1fb54f80a7329c13c7b43, type: 3}
   TumorSeedSp: {fileID: 21300000, guid: 7012c90063d79d245a02af4b366c383a, type: 3}
   EscapePodSp: {fileID: 21300000, guid: f1909993d44816443965297c87c59fdd, type: 3}
+  Grinder01Sp: {fileID: 21300000, guid: e9ff72ee881e3ea47974a0b267036d9c, type: 3}
   isInventoryActive: 0
+  discoveredItemList: 
 --- !u!114 &114427440867818556
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -170,7 +170,7 @@ public class ResearchWindow : MonoBehaviour
         itemArray[6].SetResultItem(1, global::Inventory.Item.Battery);
 
         itemArray[7] = new ResearchItem(global::Inventory.Item.Hose, 10, "호스를 연구하면 분해기를 만들 수 있다. 아마도.");
-        itemArray[7].SetResultItem(1, global::Inventory.Item.Facility01);
+        itemArray[7].SetResultItem(1, global::Inventory.Item.Grinder01);
 
         itemArray[8] = new ResearchItem(global::Inventory.Item.Mass, 20, "덩어리를 또 연구하기로 한지 3개월이 지났다. 드디어 빛이 보인다! 연구 결과로 알게 된 사실은 이 다음 연구도 덩어리 연구라는 것이다.");
         itemArray[8].SetResultItem(1, global::Inventory.Item.Facility01);
@@ -200,6 +200,7 @@ public class ResearchWindow : MonoBehaviour
         contentDictionary[global::Inventory.Item.ThornSeed] = new ResultContent("금지된 술법으로 불러낸 마계의 요마와의 계약을 통해 선인장 모종을 키우는 법을 알게 됐다.");
         contentDictionary[global::Inventory.Item.Trap01] = new ResultContent("별이 그려진 신비한 구슬 7개를 모아 기도하자 천계의 용이 나타나 덫을 만드는 방법을 알려줬다.");
         contentDictionary[global::Inventory.Item.Battery] = new ResultContent("간절한 염원을 담아 기도하자 대지의 어머니 크리스탈이 빛을 내며 배터리를 만드는 방법을 알려줬다.");
+        contentDictionary[global::Inventory.Item.Grinder01] = new ResultContent("등가교환의 법칙에 따라 올바른 재료를 대가로 분쇄기를 연성해내는데 성공했다.");
     }
 
     void Update ()

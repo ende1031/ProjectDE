@@ -34,7 +34,8 @@ public class Inventory : MonoBehaviour
         BoardSeed,
         ThornSeed,
         Tumor,
-        TumorSeed
+        TumorSeed,
+        Grinder01
     };
 
     GameObject[] itemSlot = new GameObject[7];
@@ -69,6 +70,7 @@ public class Inventory : MonoBehaviour
     public Sprite TumorSp;
     public Sprite TumorSeedSp;
     public Sprite EscapePodSp;
+    public Sprite Grinder01Sp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -98,6 +100,7 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.ThornSeed] = ThornSeedSp;
         itemDictionary[Item.Tumor] = TumorSp;
         itemDictionary[Item.TumorSeed] = TumorSeedSp;
+        itemDictionary[Item.Grinder01] = Grinder01Sp;
     }
 
     void RefreshItemMenu()
@@ -137,6 +140,7 @@ public class Inventory : MonoBehaviour
             case Item.Facility01:
             case Item.Trap01:
             case Item.Bulb01:
+            case Item.Grinder01:
                 InventoryMenu[0].SetActive(true);
                 InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
                 InventoryMenu[1].SetActive(true);
@@ -196,6 +200,22 @@ public class Inventory : MonoBehaviour
                         monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
                     }
                     else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "TempFacility")) == true)
+                    {
+                        DeleteItem(Items[selectedIndex].name);
+                        RefreshItemMenu();
+                        CloseInventory();
+                    }
+                    else
+                    {
+                        monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
+                    }
+                    break;
+                case Item.Grinder01:
+                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
+                    {
+                        monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
+                    }
+                    else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "Grinder01")) == true)
                     {
                         DeleteItem(Items[selectedIndex].name);
                         RefreshItemMenu();
@@ -293,6 +313,7 @@ public class Inventory : MonoBehaviour
                 case Item.ThornSeed:
                 case Item.Tumor:
                 case Item.TumorSeed:
+                case Item.Grinder01:
                     DeleteItem(Items[selectedIndex].name);
                     RefreshItemMenu();
                     break;

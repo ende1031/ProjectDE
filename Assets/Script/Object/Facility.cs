@@ -54,6 +54,7 @@ public class Facility : MonoBehaviour
                 switch (facilityName)
                 {
                     case "TempFacility":
+                    case "Grinder01":
                         interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
                         interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
                         interactionIcon.AddIcon(global::InteractionIcon.Icon.Make);
@@ -88,6 +89,7 @@ public class Facility : MonoBehaviour
             switch (facilityName)
             {
                 case "TempFacility":
+                case "Grinder01":
                     interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Make);
                     interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
                     interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Dump);
@@ -119,6 +121,12 @@ public class Facility : MonoBehaviour
                 popupWindow.AddItem(global::Inventory.Item.StickSeed);
                 popupWindow.AddItem(global::Inventory.Item.BoardSeed);
                 popupWindow.AddItem(global::Inventory.Item.ThornSeed);
+                popupWindow.AddItem(global::Inventory.Item.Grinder01);
+                popupWindow.OpenWindow(this.gameObject);
+                break;
+            case "Grinder01":
+                popupWindow.ClearItemList();
+                popupWindow.AddItem(global::Inventory.Item.Mass);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
             case "EscapePod":
