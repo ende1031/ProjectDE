@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b902e04fbd24fc44a9cc8427fd863ef2
-timeCreated: 1517969490
+timeCreated: 1517978063
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -105,7 +105,7 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     textureFormat: -1
     textureCompression: 2
     compressionQuality: 50
@@ -113,7 +113,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     textureFormat: -1
     textureCompression: 2
     compressionQuality: 50
@@ -128,7 +128,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1800
+        y: 2700
         width: 256
         height: 300
       alignment: 7
@@ -142,7 +142,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 1800
+        y: 2700
         width: 256
         height: 300
       alignment: 7
@@ -156,7 +156,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 1800
+        y: 2700
         width: 256
         height: 300
       alignment: 7
@@ -170,7 +170,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 1800
+        y: 2700
         width: 256
         height: 300
       alignment: 7
@@ -184,7 +184,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 1800
+        y: 2700
         width: 256
         height: 300
       alignment: 7
@@ -197,8 +197,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_5
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 1800
+        x: 0
+        y: 2400
         width: 256
         height: 300
       alignment: 7
@@ -211,8 +211,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_6
       rect:
         serializedVersion: 2
-        x: 1536
-        y: 1800
+        x: 256
+        y: 2400
         width: 256
         height: 300
       alignment: 7
@@ -225,8 +225,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1500
+        x: 512
+        y: 2400
         width: 256
         height: 300
       alignment: 7
@@ -239,8 +239,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_8
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1500
+        x: 768
+        y: 2400
         width: 256
         height: 300
       alignment: 7
@@ -253,8 +253,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_9
       rect:
         serializedVersion: 2
-        x: 512
-        y: 1500
+        x: 1024
+        y: 2400
         width: 256
         height: 300
       alignment: 7
@@ -267,8 +267,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_10
       rect:
         serializedVersion: 2
-        x: 768
-        y: 1500
+        x: 0
+        y: 2100
         width: 256
         height: 300
       alignment: 7
@@ -281,8 +281,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_11
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 1500
+        x: 256
+        y: 2100
         width: 256
         height: 300
       alignment: 7
@@ -295,8 +295,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_12
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 1500
+        x: 512
+        y: 2100
         width: 256
         height: 300
       alignment: 7
@@ -309,8 +309,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_13
       rect:
         serializedVersion: 2
-        x: 1536
-        y: 1500
+        x: 768
+        y: 2100
         width: 256
         height: 300
       alignment: 7
@@ -323,8 +323,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_14
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1200
+        x: 1024
+        y: 2100
         width: 256
         height: 300
       alignment: 7
@@ -337,8 +337,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_15
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1200
+        x: 0
+        y: 1800
         width: 256
         height: 300
       alignment: 7
@@ -351,8 +351,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_16
       rect:
         serializedVersion: 2
-        x: 512
-        y: 1200
+        x: 256
+        y: 1800
         width: 256
         height: 300
       alignment: 7
@@ -365,8 +365,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_17
       rect:
         serializedVersion: 2
-        x: 768
-        y: 1200
+        x: 512
+        y: 1800
         width: 256
         height: 300
       alignment: 7
@@ -379,8 +379,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_18
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 1200
+        x: 768
+        y: 1800
         width: 256
         height: 300
       alignment: 7
@@ -393,8 +393,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_19
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 1200
+        x: 1024
+        y: 1800
         width: 256
         height: 300
       alignment: 7
@@ -407,8 +407,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_20
       rect:
         serializedVersion: 2
-        x: 1536
-        y: 1200
+        x: 0
+        y: 1500
         width: 256
         height: 300
       alignment: 7
@@ -421,8 +421,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_21
       rect:
         serializedVersion: 2
-        x: 0
-        y: 900
+        x: 256
+        y: 1500
         width: 256
         height: 300
       alignment: 7
@@ -435,8 +435,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_22
       rect:
         serializedVersion: 2
-        x: 256
-        y: 900
+        x: 512
+        y: 1500
         width: 256
         height: 300
       alignment: 7
@@ -449,8 +449,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_23
       rect:
         serializedVersion: 2
-        x: 512
-        y: 900
+        x: 768
+        y: 1500
         width: 256
         height: 300
       alignment: 7
@@ -463,8 +463,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_24
       rect:
         serializedVersion: 2
-        x: 768
-        y: 900
+        x: 1024
+        y: 1500
         width: 256
         height: 300
       alignment: 7
@@ -477,8 +477,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_25
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 900
+        x: 0
+        y: 1200
         width: 256
         height: 300
       alignment: 7
@@ -491,8 +491,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_26
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 900
+        x: 256
+        y: 1200
         width: 256
         height: 300
       alignment: 7
@@ -505,8 +505,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_27
       rect:
         serializedVersion: 2
-        x: 1536
-        y: 900
+        x: 512
+        y: 1200
         width: 256
         height: 300
       alignment: 7
@@ -519,8 +519,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_28
       rect:
         serializedVersion: 2
-        x: 0
-        y: 600
+        x: 768
+        y: 1200
         width: 256
         height: 300
       alignment: 7
@@ -533,8 +533,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_29
       rect:
         serializedVersion: 2
-        x: 256
-        y: 600
+        x: 1024
+        y: 1200
         width: 256
         height: 300
       alignment: 7
@@ -547,8 +547,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_30
       rect:
         serializedVersion: 2
-        x: 512
-        y: 600
+        x: 0
+        y: 900
         width: 256
         height: 300
       alignment: 7
@@ -561,8 +561,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_31
       rect:
         serializedVersion: 2
-        x: 768
-        y: 600
+        x: 256
+        y: 900
         width: 256
         height: 300
       alignment: 7
@@ -575,8 +575,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_32
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 600
+        x: 512
+        y: 900
         width: 256
         height: 300
       alignment: 7
@@ -589,8 +589,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_33
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 600
+        x: 768
+        y: 900
         width: 256
         height: 300
       alignment: 7
@@ -603,8 +603,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_34
       rect:
         serializedVersion: 2
-        x: 1536
-        y: 600
+        x: 1024
+        y: 900
         width: 256
         height: 300
       alignment: 7
@@ -618,7 +618,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 300
+        y: 600
         width: 256
         height: 300
       alignment: 7
@@ -632,7 +632,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 300
+        y: 600
         width: 256
         height: 300
       alignment: 7
@@ -646,7 +646,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 300
+        y: 600
         width: 256
         height: 300
       alignment: 7
@@ -660,7 +660,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 300
+        y: 600
         width: 256
         height: 300
       alignment: 7
@@ -674,7 +674,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 300
+        y: 600
         width: 256
         height: 300
       alignment: 7
@@ -687,7 +687,7 @@ TextureImporter:
       name: Plant01_Tumor_ing_40
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 0
         y: 300
         width: 256
         height: 300
@@ -701,7 +701,7 @@ TextureImporter:
       name: Plant01_Tumor_ing_41
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 256
         y: 300
         width: 256
         height: 300
@@ -715,8 +715,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_42
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 512
+        y: 300
         width: 256
         height: 300
       alignment: 7
@@ -729,8 +729,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_43
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
+        x: 768
+        y: 300
         width: 256
         height: 300
       alignment: 7
@@ -743,8 +743,8 @@ TextureImporter:
       name: Plant01_Tumor_ing_44
       rect:
         serializedVersion: 2
-        x: 512
-        y: 0
+        x: 1024
+        y: 300
         width: 256
         height: 300
       alignment: 7
@@ -757,7 +757,7 @@ TextureImporter:
       name: Plant01_Tumor_ing_45
       rect:
         serializedVersion: 2
-        x: 768
+        x: 0
         y: 0
         width: 256
         height: 300
@@ -771,7 +771,7 @@ TextureImporter:
       name: Plant01_Tumor_ing_46
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 256
         y: 0
         width: 256
         height: 300
@@ -785,7 +785,7 @@ TextureImporter:
       name: Plant01_Tumor_ing_47
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 512
         y: 0
         width: 256
         height: 300
@@ -799,7 +799,7 @@ TextureImporter:
       name: Plant01_Tumor_ing_48
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 768
         y: 0
         width: 256
         height: 300
