@@ -8,7 +8,8 @@ public class Title : MonoBehaviour
 
     int selectIndex = 0;
 
-    bool isCursorActive = true;
+    bool isCursorActive = false;
+    float Timer = 0;
 
     void Start ()
     {
@@ -17,6 +18,8 @@ public class Title : MonoBehaviour
 	
 	void Update ()
     {
+        Timer += Time.deltaTime;
+
         if (isCursorActive == true)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow) && selectIndex > 0)
@@ -53,6 +56,13 @@ public class Title : MonoBehaviour
             }
 
             SelectCursor.transform.position = tempPos;
+        }
+        else
+        {
+            if(Timer > 1.0f)
+            {
+                isCursorActive = true;
+            }
         }
     }
 

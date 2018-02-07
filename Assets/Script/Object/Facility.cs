@@ -55,30 +55,30 @@ public class Facility : MonoBehaviour
                 {
                     case "TempFacility":
                     case "Grinder01":
-                        interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
-                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
-                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Make);
+                        interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
+                        interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
+                        interactionIcon.AddIcon(InteractionIcon.Icon.Make);
                         break;
                     case "EscapePod":
-                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Research);
-                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Sleep);
-                        interactionIcon.AddIcon(global::InteractionIcon.Icon.Make);
+                        interactionIcon.AddIcon(InteractionIcon.Icon.Research);
+                        interactionIcon.AddIcon(InteractionIcon.Icon.Sleep);
+                        interactionIcon.AddIcon(InteractionIcon.Icon.Make);
                         break;
                 }
             }
             else if (GetComponent<FacilityBalloon>().isMakeFinish == true)
             {
-                interactionIcon.AddIcon(global::InteractionIcon.Icon.Gather);
+                interactionIcon.AddIcon(InteractionIcon.Icon.Gather);
             }
             else if (GetComponent<FacilityBalloon>().isMake == true)
             {
-                interactionIcon.AddIcon(global::InteractionIcon.Icon.Dump);
+                interactionIcon.AddIcon(InteractionIcon.Icon.Dump);
             }
         }
         else if(facilityName != "EscapePod")
         {
-            interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
-            interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
+            interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
+            interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
         }
     }
 
@@ -90,18 +90,18 @@ public class Facility : MonoBehaviour
             {
                 case "TempFacility":
                 case "Grinder01":
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Make);
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Dump);
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.OnOff);
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Remove);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Make);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Dump);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
                     break;
                 case "EscapePod":
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Make);
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Sleep);
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Dump);
-                    interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Research);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Make);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Sleep);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Dump);
+                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Research);
                     break;
             }
         }
@@ -113,26 +113,26 @@ public class Facility : MonoBehaviour
         {
             case "TempFacility":
                 popupWindow.ClearItemList();
-                popupWindow.AddItem(global::Inventory.Item.Facility01);
-                popupWindow.AddItem(global::Inventory.Item.Trap01);
-                popupWindow.AddItem(global::Inventory.Item.Battery);
-                popupWindow.AddItem(global::Inventory.Item.TumorSeed);
-                popupWindow.AddItem(global::Inventory.Item.Bulb01);
-                popupWindow.AddItem(global::Inventory.Item.StickSeed);
-                popupWindow.AddItem(global::Inventory.Item.BoardSeed);
-                popupWindow.AddItem(global::Inventory.Item.ThornSeed);
-                popupWindow.AddItem(global::Inventory.Item.Grinder01);
+                popupWindow.AddItem(Inventory.Item.Facility01);
+                popupWindow.AddItem(Inventory.Item.Trap01);
+                popupWindow.AddItem(Inventory.Item.Battery);
+                popupWindow.AddItem(Inventory.Item.TumorSeed);
+                popupWindow.AddItem(Inventory.Item.Bulb01);
+                popupWindow.AddItem(Inventory.Item.StickSeed);
+                popupWindow.AddItem(Inventory.Item.BoardSeed);
+                popupWindow.AddItem(Inventory.Item.ThornSeed);
+                popupWindow.AddItem(Inventory.Item.Grinder01);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
             case "Grinder01":
                 popupWindow.ClearItemList();
-                popupWindow.AddItem(global::Inventory.Item.Mass);
+                popupWindow.AddItem(Inventory.Item.Mass);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
             case "EscapePod":
                 popupWindow.ClearItemList();
-                popupWindow.AddItem(global::Inventory.Item.Food);
-                popupWindow.AddItem(global::Inventory.Item.Oxygen);
+                popupWindow.AddItem(Inventory.Item.Food);
+                popupWindow.AddItem(Inventory.Item.Oxygen);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
         }

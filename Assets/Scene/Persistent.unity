@@ -694,6 +694,7 @@ MonoBehaviour:
   Bulb01: {fileID: 1774011462199366, guid: cbff9c6b7547bb548a2a6b96c1324eb5, type: 2}
   Nest01: {fileID: 1435307980773974, guid: 8423024b86c172c4db6ee6433d973a67, type: 2}
   Grinder01: {fileID: 1171010268747114, guid: e284fc9ccf8d65543a8889a863d4be18, type: 2}
+  Wreckage01: {fileID: 1922126932956212, guid: 8fbe21994faff2443a63fd58b60e3c52, type: 2}
   isSceneInit: 
 --- !u!1 &87808356
 GameObject:

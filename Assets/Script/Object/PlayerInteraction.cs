@@ -37,25 +37,25 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventory.GetItem(global::Inventory.Item.TumorSeed, 1);
+            inventory.GetItem(Inventory.Item.TumorSeed, 1);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            inventory.GetItem(global::Inventory.Item.Mass, 1);
+            inventory.GetItem(Inventory.Item.Mass, 1);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            inventory.GetItem(global::Inventory.Item.Mass, 50);
-            inventory.GetItem(global::Inventory.Item.Tumor, 50);
-            inventory.GetItem(global::Inventory.Item.Stick, 50);
-            inventory.GetItem(global::Inventory.Item.Board, 50);
-            inventory.GetItem(global::Inventory.Item.Thorn, 50);
-            inventory.GetItem(global::Inventory.Item.Heart, 50);
-            inventory.GetItem(global::Inventory.Item.Hose, 50);
+            inventory.GetItem(Inventory.Item.Mass, 50);
+            inventory.GetItem(Inventory.Item.Tumor, 50);
+            inventory.GetItem(Inventory.Item.Stick, 50);
+            inventory.GetItem(Inventory.Item.Board, 50);
+            inventory.GetItem(Inventory.Item.Thorn, 50);
+            inventory.GetItem(Inventory.Item.Heart, 50);
+            inventory.GetItem(Inventory.Item.Hose, 50);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            inventory.GetItem(global::Inventory.Item.Grinder01, 1);
+            inventory.GetItem(Inventory.Item.Grinder01, 1);
         }
     }
 

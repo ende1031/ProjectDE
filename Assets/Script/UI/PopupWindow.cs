@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PopupWindow : MonoBehaviour
 {
     Inventory inventory;
+    EnergyGauge energyGauge;
     GameObject Player;
 
     GameObject Facility; //제작창을 띄운 시설의 정보
@@ -67,6 +68,7 @@ public class PopupWindow : MonoBehaviour
     void Start ()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
         PopupBG = transform.Find("PopupBG").gameObject;
         animaitor = GetComponent<Animator>();
 
@@ -279,6 +281,19 @@ public class PopupWindow : MonoBehaviour
             }
             //inventory.GetItem(WindowItemList[selectedIndex].name);
             Facility.GetComponent<FacilityBalloon>().MakeItem(WindowItemList[selectedIndex].name, WindowItemList[selectedIndex].time);
+            
+            switch(WindowItemList[selectedIndex].name)
+            {
+                case Inventory.Item.Oxygen:
+                case Inventory.Item.Battery:
+                case Inventory.Item.Food:
+                    break;
+
+                default:
+                    energyGauge.SetAmount(-10);
+                    break;
+            }
+
             CloseWindow();
         }
 

@@ -87,7 +87,7 @@ public class Bulb : MonoBehaviour
             }
             if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
             {
-                interactionIcon.DeleteIcon(global::InteractionIcon.Icon.OnOff);
+                interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
             }
         }
     }
@@ -125,8 +125,8 @@ public class Bulb : MonoBehaviour
 
     public void DisplayIcon()
     {
-        interactionIcon.AddIcon(global::InteractionIcon.Icon.OnOff);
-        interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
+        interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
+        interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -139,8 +139,8 @@ public class Bulb : MonoBehaviour
 
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false && isAlive == true)
         {
-            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.OnOff);
-            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Remove);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
         }
     }
 

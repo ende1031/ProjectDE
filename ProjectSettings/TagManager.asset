@@ -9,6 +9,7 @@ TagManager:
   - Portal
   - Bulb
   - Nest
+  - Wreckage
   layers:
   - Default
   - TransparentFX

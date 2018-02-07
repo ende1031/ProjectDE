@@ -23,7 +23,7 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            interactionIcon.AddIcon(global::InteractionIcon.Icon.Portal);
+            interactionIcon.AddIcon(InteractionIcon.Icon.Portal);
         }
     }
 
@@ -31,7 +31,7 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Portal);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Portal);
         }
     }
 }

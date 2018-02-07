@@ -49,22 +49,22 @@ public class Plant : MonoBehaviour
             switch (plantName)
             {
                 case "StickPlant":
-                    inventory.GetItem(global::Inventory.Item.Stick, 2);
+                    inventory.GetItem(Inventory.Item.Stick, 2);
                     break;
                 case "MassPlant":
-                    inventory.GetItem(global::Inventory.Item.Mass, 1);
+                    inventory.GetItem(Inventory.Item.Mass, 1);
                     SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                     break;
                 case "BoardPlant":
-                    inventory.GetItem(global::Inventory.Item.Board, 1);
+                    inventory.GetItem(Inventory.Item.Board, 1);
                     break;
                 case "ThornPlant":
-                    inventory.GetItem(global::Inventory.Item.Thorn, 5);
+                    inventory.GetItem(Inventory.Item.Thorn, 5);
                     break;
                 case "Trap01":
-                    inventory.GetItem(global::Inventory.Item.Hose, 1);
-                    inventory.GetItem(global::Inventory.Item.Heart, 1);
-                    inventory.GetItem(global::Inventory.Item.Mass, 1);
+                    inventory.GetItem(Inventory.Item.Hose, 1);
+                    inventory.GetItem(Inventory.Item.Heart, 1);
+                    inventory.GetItem(Inventory.Item.Mass, 1);
                     SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                     break;
             }
@@ -74,13 +74,13 @@ public class Plant : MonoBehaviour
             switch (plantName)
             {
                 case "StickPlant":
-                    inventory.GetItem(global::Inventory.Item.Tumor, 2);
+                    inventory.GetItem(Inventory.Item.Tumor, 2);
                     break;
                 case "BoardPlant":
-                    inventory.GetItem(global::Inventory.Item.Tumor, 2);
+                    inventory.GetItem(Inventory.Item.Tumor, 2);
                     break;
                 case "ThornPlant":
-                    inventory.GetItem(global::Inventory.Item.Tumor, 6);
+                    inventory.GetItem(Inventory.Item.Tumor, 6);
                     break;
             }
         }
@@ -89,7 +89,7 @@ public class Plant : MonoBehaviour
 
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
-            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
         }
     }
 
@@ -107,19 +107,19 @@ public class Plant : MonoBehaviour
             switch (plantName)
             {
                 case "StickPlant":
-                    temp = !inventory.isFull(1, global::Inventory.Item.Stick, 2);
+                    temp = !inventory.isFull(1, Inventory.Item.Stick, 2);
                     break;
                 case "MassPlant":
-                    temp = !inventory.isFull(1, global::Inventory.Item.Mass, 1);
+                    temp = !inventory.isFull(1, Inventory.Item.Mass, 1);
                     break;
                 case "BoardPlant":
-                    temp = !inventory.isFull(1, global::Inventory.Item.Board, 1);
+                    temp = !inventory.isFull(1, Inventory.Item.Board, 1);
                     break;
                 case "ThornPlant":
-                    temp = !inventory.isFull(1, global::Inventory.Item.Thorn, 5);
+                    temp = !inventory.isFull(1, Inventory.Item.Thorn, 5);
                     break;
                 case "Trap01":
-                    temp = !inventory.isFull(3, global::Inventory.Item.Hose, 1, global::Inventory.Item.Heart, 1, global::Inventory.Item.Mass, 1);
+                    temp = !inventory.isFull(3, Inventory.Item.Hose, 1, Inventory.Item.Heart, 1, Inventory.Item.Mass, 1);
                     break;
             }
         }
@@ -128,13 +128,13 @@ public class Plant : MonoBehaviour
             switch (plantName)
             {
                 case "StickPlant":
-                    temp = !inventory.isFull(1, global::Inventory.Item.Tumor, 2);
+                    temp = !inventory.isFull(1, Inventory.Item.Tumor, 2);
                     break;
                 case "BoardPlant":
-                    temp = !inventory.isFull(1, global::Inventory.Item.Tumor, 2);
+                    temp = !inventory.isFull(1, Inventory.Item.Tumor, 2);
                     break;
                 case "ThornPlant":
-                    temp = !inventory.isFull(1, global::Inventory.Item.Tumor, 6);
+                    temp = !inventory.isFull(1, Inventory.Item.Tumor, 6);
                     break;
             }
         }
@@ -147,7 +147,7 @@ public class Plant : MonoBehaviour
         {
             state = 4;
             animaitor.SetInteger("State", state);
-            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Tumor);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Tumor);
             inventory.DeleteItem(Inventory.Item.TumorSeed);
         }
     }
@@ -162,10 +162,10 @@ public class Plant : MonoBehaviour
             {
                 if (inventory.HasItem(Inventory.Item.TumorSeed) == true)
                 {
-                    interactionIcon.AddIcon(global::InteractionIcon.Icon.Tumor);
+                    interactionIcon.AddIcon(InteractionIcon.Icon.Tumor);
                 }
             }
-            interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
+            interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
         }
     }
 
@@ -175,7 +175,7 @@ public class Plant : MonoBehaviour
         isGatherPossible = true;
         if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
         {
-            interactionIcon.AddIcon(global::InteractionIcon.Icon.Gather);
+            interactionIcon.AddIcon(InteractionIcon.Icon.Gather);
         }
     }
 
@@ -273,19 +273,19 @@ public class Plant : MonoBehaviour
             {
                 if (inventory.HasItem(Inventory.Item.TumorSeed) == true)
                 {
-                    interactionIcon.AddIcon(global::InteractionIcon.Icon.Tumor);
+                    interactionIcon.AddIcon(InteractionIcon.Icon.Tumor);
                 }
             }
             if (isGatherPossible == true)
             {
-                interactionIcon.AddIcon(global::InteractionIcon.Icon.Gather);
-                interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Remove);
-                interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Tumor);
+                interactionIcon.AddIcon(InteractionIcon.Icon.Gather);
+                interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
+                interactionIcon.DeleteIcon(InteractionIcon.Icon.Tumor);
             }
             else
             {
-                interactionIcon.AddIcon(global::InteractionIcon.Icon.Remove);
-                interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
+                interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
+                interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
             }
         }
     }
@@ -294,9 +294,9 @@ public class Plant : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Gather);
-            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Remove);
-            interactionIcon.DeleteIcon(global::InteractionIcon.Icon.Tumor);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Tumor);
         }
     }
 }

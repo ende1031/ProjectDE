@@ -23,6 +23,7 @@ public class SceneObjectManager : MonoBehaviour
     public GameObject Bulb01;
     public GameObject Nest01;
     public GameObject Grinder01;
+    public GameObject Wreckage01;
 
     public class SceneObject
     {
@@ -53,7 +54,7 @@ public class SceneObjectManager : MonoBehaviour
         public float timer; //growthTimer(괴식물), progressTimer(시설), LifeTimer(전구)
         public int portalAfterMoveGrid;
         public int plantState;
-        public global::Inventory.Item facilityMakeItem;
+        public Inventory.Item facilityMakeItem;
         public float facilityTimeToMake;
         public bool facilityIsMake;
         public bool facilityIsMakeFinish;
@@ -140,6 +141,10 @@ public class SceneObjectManager : MonoBehaviour
         else if (ob.type == "Nest")
         {
             ob.inGameObject = Instantiate(Nest01, tempPos, Quaternion.identity);
+        }
+        else if (ob.type == "Wreckage")
+        {
+            ob.inGameObject = Instantiate(Wreckage01, tempPos, Quaternion.identity);
         }
     }
 
@@ -336,6 +341,13 @@ public class SceneObjectManager : MonoBehaviour
         SObjects[sceneNum].Remove(grid);
 
         return true;
+    }
+
+    //시설을 지우고 잔해를 넣는 등
+    public void ChangeObject(int sceneNum, int grid, SceneObject ob)
+    {
+        DeleteObject(sceneNum, grid);
+        AddObject(sceneNum, grid, ob);
     }
 
     //맵이동시 삭제되는 오브젝트를 다시 불러옴
