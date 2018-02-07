@@ -6,16 +6,13 @@ public class Title : MonoBehaviour
 {
     GameObject SelectCursor;
 
-    GameObject Logo;
-
     int selectIndex = 0;
 
-    bool isCursorActive = false;
+    bool isCursorActive = true;
 
     void Start ()
     {
         SelectCursor = GameObject.Find("Title_Select");
-        Logo = GameObject.Find("LogoCanvas");
     }
 	
 	void Update ()
@@ -56,13 +53,6 @@ public class Title : MonoBehaviour
             }
 
             SelectCursor.transform.position = tempPos;
-        }
-        else
-        {
-            if(Logo == null)
-            {
-                isCursorActive = true;
-            }
         }
     }
 

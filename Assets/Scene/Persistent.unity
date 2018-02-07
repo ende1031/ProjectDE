@@ -645,7 +645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeCanvasGroup: {fileID: 1948142579}
   fadeDuration: 0.33
-  startingSceneName: Title
+  startingSceneName: OpeningLogo
   playerGrid: 5
 --- !u!4 &75649605
 Transform:
