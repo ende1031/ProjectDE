@@ -37,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventory.GetItem(global::Inventory.Item.Tumor, 1);
+            inventory.GetItem(global::Inventory.Item.TumorSeed, 1);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -103,6 +103,13 @@ public class PlayerInteraction : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.X) && target.GetComponent<Plant>().isGatherPossible == false)
             {
                 target.GetComponent<Plant>().RemoveObject();
+            }
+            else if (Input.GetKeyDown(KeyCode.Z) && target.GetComponent<Plant>().isGatherPossible == false)
+            {
+                if(inventory.HasItem(Inventory.Item.TumorSeed) == true)
+                {
+                    target.GetComponent<Plant>().SetTumor();
+                }
             }
         }
         else if (target.gameObject.tag == "Facility")

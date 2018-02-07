@@ -273,7 +273,14 @@ public class SceneObjectManager : MonoBehaviour
             {
                 if (pair.Value.type == "Plant")
                 {
-                    pair.Value.plantState = 1;
+                    if (pair.Value.plantState != 4 && pair.Value.plantState != 5)
+                    {
+                        pair.Value.plantState = 1;
+                    }
+                    else
+                    {
+                        pair.Value.plantState = 5;
+                    }
                 }
                 else if (pair.Value.type == "Facility")
                 {

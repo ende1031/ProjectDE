@@ -430,7 +430,10 @@ public class ResearchWindow : MonoBehaviour
 
     public void DiscoverNewResearch(global::Inventory.Item item)
     {
-        itemArray[ResearchNumberDictionary[item]].SetKnown(true);
+        if(ResearchNumberDictionary.ContainsKey(item))
+        {
+            itemArray[ResearchNumberDictionary[item]].SetKnown(true);
+        }
         //RefreshWindow();
     }
 
