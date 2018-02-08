@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SceneSetting : MonoBehaviour
 {
+    Inventory inventory;
     GameObject player;
     GameObject mainCamera;
 
@@ -14,6 +15,7 @@ public class SceneSetting : MonoBehaviour
 
     void Start ()
     {
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         player = GameObject.Find("Player");
         mainCamera = GameObject.Find("Main Camera");
     }
@@ -72,6 +74,11 @@ public class SceneSetting : MonoBehaviour
                 SceneObjectManager.instance.AddObject(n, -12, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 23, new SceneObjectManager.SceneObject("Portal", "Stage01_A_1F", 25));
                 SceneObjectManager.instance.AddObject(n, -5, new SceneObjectManager.SceneObject("Nest", "Nest01"));
+
+                inventory.GetItem(Inventory.Item.Food, 5);
+                inventory.GetItem(Inventory.Item.Battery, 7);
+                inventory.GetItem(Inventory.Item.Oxygen, 3);
+                inventory.GetItem(Inventory.Item.Mass, 5);
                 break;
 
             case 1:

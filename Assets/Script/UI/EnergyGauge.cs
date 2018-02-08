@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class EnergyGauge : MonoBehaviour
 {
+    Monologue monologue;
+
     GameObject gauge;
     GameObject percent;
     GameObject gaugeLight;
 
     public float amountOfEnergy = 100;
     public float reduceSpeed = 1;
+
+    bool monoMessage = false;
 
     void Start ()
     {
@@ -21,11 +25,36 @@ public class EnergyGauge : MonoBehaviour
 	
 	void Update ()
     {
+        if (monologue == null)
+        {
+            GameObject player = GameObject.Find("Player");
+            if (player != null)
+            {
+                monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+            }
+        }
+
         Reduce();
         RangeLimit();
         DisplayText();
         DisplayGauge();
         GaugeLight();
+
+        if (monoMessage == false)
+        {
+            if (amountOfEnergy < 20)
+            {
+                monologue.DisplayLog("남은 에너지가 얼마 없군.\n충전하지 않으면 위험할지도 모르겠어.");
+                monoMessage = true;
+            }
+        }
+        else
+        {
+            if (amountOfEnergy > 20)
+            {
+                monoMessage = false;
+            }
+        }
     }
 
     void Reduce()

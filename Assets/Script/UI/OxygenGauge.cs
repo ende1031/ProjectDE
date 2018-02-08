@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class OxygenGauge : MonoBehaviour
 {
+    Monologue monologue;
+
     public float amountOfOxygen = 100;
     float displayedAmount = 100;
     float angle = 55;
     public float reduceSpeed = 1;
     public float speed = 50;
+
+    bool monoMessage = false;
 
     void Start ()
     {
@@ -18,6 +22,15 @@ public class OxygenGauge : MonoBehaviour
 	
 	void Update ()
     {
+        if (monologue == null)
+        {
+            GameObject player = GameObject.Find("Player");
+            if (player != null)
+            {
+                monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+            }
+        }
+
         Reduce();
         RangeLimit();
         DisplayGauge();
@@ -39,6 +52,22 @@ public class OxygenGauge : MonoBehaviour
             if (displayedAmount - amountOfOxygen < 0.05f)
             {
                 displayedAmount = amountOfOxygen;
+            }
+        }
+
+        if (monoMessage == false)
+        {
+            if (amountOfOxygen < 20)
+            {
+                monologue.DisplayLog("젠장.. 산소가 부족해.");
+                monoMessage = true;
+            }
+        }
+        else
+        {
+            if (amountOfOxygen > 20)
+            {
+                monoMessage = false;
             }
         }
     }

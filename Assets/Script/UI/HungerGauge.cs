@@ -5,10 +5,14 @@ using UnityEngine.UI;
 
 public class HungerGauge : MonoBehaviour
 {
+    Monologue monologue;
+
     public float amountOfHunger = 100;
     public float reduceSpeed = 1;
 
     GameObject gaugeLight;
+
+    bool monoMessage = false;
 
     void Start ()
     {
@@ -17,10 +21,35 @@ public class HungerGauge : MonoBehaviour
 	
 	void Update ()
     {
+        if (monologue == null)
+        {
+            GameObject player = GameObject.Find("Player");
+            if (player != null)
+            {
+                monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+            }
+        }
+
         Reduce();
         RangeLimit();
         DisplayGauge();
         GaugeLight();
+
+        if (monoMessage == false)
+        {
+            if (amountOfHunger < 20)
+            {
+                monologue.DisplayLog("슬슬 배가 고프군.\n뭔가 섭취할 필요가 있겠어.");
+                monoMessage = true;
+            }
+        }
+        else
+        {
+            if (amountOfHunger > 20)
+            {
+                monoMessage = false;
+            }
+        }
     }
 
     public void SetAmount(float amount)

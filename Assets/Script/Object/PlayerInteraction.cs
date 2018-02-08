@@ -37,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventory.GetItem(Inventory.Item.Mass, 1);
+            //inventory.GetItem(Inventory.Item.Mass, 1);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -45,18 +45,18 @@ public class PlayerInteraction : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            inventory.GetItem(Inventory.Item.Mass, 20);
-            inventory.GetItem(Inventory.Item.Stick, 20);
-            inventory.GetItem(Inventory.Item.Board, 20);
-            inventory.GetItem(Inventory.Item.Thorn, 20);
-            inventory.GetItem(Inventory.Item.Hose, 20);
-            inventory.GetItem(Inventory.Item.Tumor, 20);
-            inventory.GetItem(Inventory.Item.Heart, 20);
+            //inventory.GetItem(Inventory.Item.Mass, 20);
+            //inventory.GetItem(Inventory.Item.Stick, 20);
+            //inventory.GetItem(Inventory.Item.Board, 20);
+            //inventory.GetItem(Inventory.Item.Thorn, 20);
+            //inventory.GetItem(Inventory.Item.Hose, 20);
+            //inventory.GetItem(Inventory.Item.Tumor, 20);
+            //inventory.GetItem(Inventory.Item.Heart, 20);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            inventory.GetItem(Inventory.Item.Bulb01, 1);
-            inventory.GetItem(Inventory.Item.Grinder01, 1);
+            //inventory.GetItem(Inventory.Item.Bulb01, 1);
+            //inventory.GetItem(Inventory.Item.Grinder01, 1);
         }
     }
 
