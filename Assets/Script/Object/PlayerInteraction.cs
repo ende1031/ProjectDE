@@ -45,13 +45,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            inventory.GetItem(Inventory.Item.Mass, 50);
-            inventory.GetItem(Inventory.Item.Tumor, 50);
-            inventory.GetItem(Inventory.Item.Stick, 50);
-            inventory.GetItem(Inventory.Item.Board, 50);
-            inventory.GetItem(Inventory.Item.Thorn, 50);
-            inventory.GetItem(Inventory.Item.Heart, 50);
-            inventory.GetItem(Inventory.Item.Hose, 50);
+            inventory.GetItem(Inventory.Item.Bulb01, 1);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -202,6 +196,13 @@ public class PlayerInteraction : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.X))
             {
                 target.GetComponent<Bulb>().RemoveObject();
+            }
+        }
+        else if (target.gameObject.tag == "Wreckage")
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                target.GetComponent<Wreckage>().RemoveObject();
             }
         }
     }

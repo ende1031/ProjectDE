@@ -59,7 +59,7 @@ public class Title : MonoBehaviour
         }
         else
         {
-            if(Timer > 1.0f)
+            if(Timer > 0.5f)
             {
                 isCursorActive = true;
             }

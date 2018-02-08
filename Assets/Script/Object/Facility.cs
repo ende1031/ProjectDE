@@ -10,12 +10,12 @@ public class Facility : MonoBehaviour
     Inventory inventory;
     PopupWindow popupWindow;
     ResearchWindow researchWindow;
-
     Animator animaitor;
-
     int sceneNum;
 
     public bool isOn = true;
+    public bool isLoadByManager = false;
+    public bool isAlive = true;
 
     void Start ()
     {
@@ -34,8 +34,30 @@ public class Facility : MonoBehaviour
 	
 	void Update ()
     {
-		
-	}
+        if (isLoadByManager == true)
+        {
+            if (isOn == true)
+            {
+                if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01", true) == false)
+                {
+                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
+                    {
+                        isAlive = false;
+                    }
+                }
+            }
+            isLoadByManager = false;
+        }
+
+        if (RuinCheck() == true)
+        {
+            isAlive = false;
+        }
+        if(isAlive == false)
+        {
+            ruin();
+        }
+    }
 
     void OnTriggerStay2D(Collider2D other)
     {
@@ -174,5 +196,29 @@ public class Facility : MonoBehaviour
             interactionIcon.DeleteAllIcons();
             SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
         }
+    }
+
+    bool RuinCheck()
+    {
+        if (facilityName != "EscapePod" && isOn == true)
+        {
+            if (Mathf.Abs(Grid.instance.PlayerGrid() - Grid.instance.PosToGrid(transform.position.x)) > 4)
+            {
+                if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01", true) == false)
+                {
+                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    void ruin()
+    {
+        SceneObjectManager.instance.ChangeObject(sceneNum, Grid.instance.PosToGrid(transform.position.x), new SceneObjectManager.SceneObject("Wreckage", "Wreckage"));
     }
 }

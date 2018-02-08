@@ -123,6 +123,8 @@ public class SceneObjectManager : MonoBehaviour
             ob.inGameObject.GetComponent<FacilityBalloon>().isMake = ob.facilityIsMake;
             ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish = ob.facilityIsMakeFinish;
             ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
+            ob.inGameObject.GetComponent<Facility>().isAlive = ob.isAlive;
+            ob.inGameObject.GetComponent<Facility>().isLoadByManager = true;
         }
         else if (ob.type == "Portal")
         {
@@ -258,6 +260,7 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.facilityMakeItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().makeItem;
                         pair.Value.facilityIsMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMake;
                         pair.Value.facilityIsMakeFinish = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;
+                        pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Facility>().isAlive;
                     }
                 }
                 else if (pair.Value.type == "Bulb")
@@ -296,14 +299,20 @@ public class SceneObjectManager : MonoBehaviour
                 {
                     if (pair.Value.name != "EscapePod")
                     {
-                        pair.Value.isOn = false;
+                        if(pair.Value.isOn == true)
+                        {
+                            pair.Value.isAlive = false;
+                        }
                     }
                     pair.Value.facilityIsMake = false;
                     pair.Value.facilityIsMakeFinish = false;
                 }
                 else if (pair.Value.type == "Bulb")
                 {
-                    pair.Value.isOn = false;
+                    if (pair.Value.isOn == true)
+                    {
+                        pair.Value.isAlive = false;
+                    }
                 }
             }
         }

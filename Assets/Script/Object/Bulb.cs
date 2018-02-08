@@ -119,7 +119,12 @@ public class Bulb : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false && isAlive == true)
         {
-            DisplayIcon();
+            interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
+            interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
+        }
+        else if(other.gameObject.tag == "Player" && inventory.isInventoryActive == false && isAlive == false)
+        {
+            interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
         }
     }
 
@@ -137,7 +142,7 @@ public class Bulb : MonoBehaviour
             Balloon.GetComponent<Animator>().SetBool("BalloonOff", true);
         }
 
-        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false && isAlive == true)
+        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
             interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
             interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
