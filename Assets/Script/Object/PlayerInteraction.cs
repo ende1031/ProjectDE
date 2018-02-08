@@ -37,11 +37,11 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventory.GetItem(Inventory.Item.TumorSeed, 1);
+            inventory.GetItem(Inventory.Item.Mass, 1);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            inventory.GetItem(Inventory.Item.Mass, 1);
+            
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -163,7 +163,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     if (target.GetComponent<Facility>().facilityName == "EscapePod" && GetComponent<PlayerMove>().GetMovePossible() == true)
                     {
-                        if (timer.PercentOfTime() > 10)
+                        if (timer.PercentOfTime() > 1)
                         {
                             GetComponent<PlayerMove>().SetMovePossible(false);
                             target.GetComponent<Facility>().Sleep();

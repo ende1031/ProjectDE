@@ -28,6 +28,11 @@ public class SceneSetting : MonoBehaviour
             if (SceneObjectManager.instance.isSceneInit[sceneNum] == false)
             {
                 SetScene(sceneNum);
+
+                float left = GameObject.Find("LeftWall").transform.position.x;
+                float right = GameObject.Find("RightWall").transform.position.x;
+                SceneObjectManager.instance.StageWalls[sceneNum] = new Vector2(left, right);
+
                 SceneObjectManager.instance.isSceneInit[sceneNum] = true;
             }
 

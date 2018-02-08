@@ -65,6 +65,7 @@ public class SceneObjectManager : MonoBehaviour
 
     List<Dictionary<int, SceneObject>> SObjects = new List<Dictionary<int, SceneObject>>();
     public List<bool> isSceneInit = new List<bool>();
+    public List<Vector2> StageWalls = new List<Vector2>();
 
     void InstantiateObject(int grid, SceneObject ob)
     {
@@ -177,6 +178,7 @@ public class SceneObjectManager : MonoBehaviour
         {
             SObjects.Add(new Dictionary<int, SceneObject>());
             isSceneInit.Add(false);
+            StageWalls.Add(Vector2.zero);
         }
     }
 
@@ -322,6 +324,77 @@ public class SceneObjectManager : MonoBehaviour
         energyGauge.SetAmount(-10);
         timer.ResetTimer();
         timer.PassDay();
+
+        for (int i = 0; i < 3; i++)
+        {
+            RandomSpawn(new SceneObject("Plant", "MassPlant", 1));
+        }
+    }
+
+    // 방문한 적 있는 맵 중에서 랜덤으로 오브젝트 생성. 씬이동시에만 사용할 것.
+    void RandomSpawn(SceneObject ob)
+    {
+        bool[] isSceneHasBlank = new bool[maxSceneNum];
+        for (int i = 0; i < maxSceneNum; i++)
+        {
+            isSceneHasBlank[i] = true;
+        }
+
+        while (true)
+        {
+            //모든 씬이 다 꽉차있는지 확인
+            bool isAllSceneNoBlank = true;
+            for(int i =0; i< maxSceneNum; i++)
+            {
+                if(isSceneHasBlank[i] == true && isSceneInit[i] == true)
+                {
+                    isAllSceneNoBlank = false;
+                }
+            }
+            if(isAllSceneNoBlank == true)
+            {
+                print("오류코드 : 돌솥비빔밥"); // 방문한 적 있는 모든 스테이지에 빈칸 없음
+                break;
+            }
+
+            //랜덤으로 씬 선택. 꽉차있거나 가본적이 없으면 continue
+            int randomScene = Random.Range(0, maxSceneNum);
+            if (isSceneInit[randomScene] == false || isSceneHasBlank[randomScene] == false)
+            {
+                continue;
+            }
+
+            //벽 정보 받아옴
+            int left = Grid.instance.PosToGrid(StageWalls[randomScene].x);
+            int right = Grid.instance.PosToGrid(StageWalls[randomScene].y);
+
+            //현재 씬에 빈칸이 있는지 확인
+            bool isblank = false;
+            for (int i = left + 1; i < right; i++)
+            {
+                if (SObjects[randomScene].ContainsKey(i) == false)
+                {
+                    isblank = true;
+                }
+            }
+            if (isblank == false)
+            {
+                isSceneHasBlank[randomScene] = false;
+                continue;
+            }
+
+            //랜덤으로 좌표 설정
+            int randomGrid = Random.Range(left + 1, right - 1);
+            while (SObjects[randomScene].ContainsKey(randomGrid) == true)
+            {
+                randomGrid = Random.Range(left + 1, right - 1);
+            }
+
+            //오브젝트 딕셔너리에 추가
+            SObjects[randomScene].Add(randomGrid, ob);
+            print("덩어리 랜덤 스폰 : " + randomScene + "씬, " + randomGrid + "블록");
+            break;
+        }
     }
 
     //해당 좌표에 이미 다른 오브젝트가 있으면 false를 반환
@@ -334,7 +407,6 @@ public class SceneObjectManager : MonoBehaviour
         
         SObjects[sceneNum].Add(grid, ob);
         InstantiateObject(grid, ob);
-
         return true;
     }
 
