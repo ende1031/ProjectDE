@@ -124,7 +124,7 @@ Transform:
   m_LocalScale: {x: 0.1080725, y: 0.10807255, z: 0.10807255}
   m_Children: []
   m_Father: {fileID: 4739599559027714}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4164283934961264
 Transform:
@@ -133,11 +133,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1605447769956736}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9860098, z: -0.11268691}
-  m_LocalScale: {x: 1.9525025, y: 1.9525034, z: 1.9525034}
+  m_LocalPosition: {x: 0, y: 0.96132034, z: -0.12023765}
+  m_LocalScale: {x: 0.50000006, y: 0.50000006, z: 0.50000006}
   m_Children: []
   m_Father: {fileID: 4739599559027714}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4281934838100702
 Transform:
@@ -146,7 +146,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1059498077444446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.5, y: 0, z: 0.1}
+  m_LocalPosition: {x: 7.5, y: 0, z: 0.1}
   m_LocalScale: {x: 0.7214258, y: 0.7214258, z: 0.7214258}
   m_Children:
   - {fileID: 4739599559027714}
@@ -174,11 +174,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174247973190672}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.98601013, z: -0.14085864}
-  m_LocalScale: {x: 1.9525025, y: 1.9525033, z: 1.9525034}
+  m_LocalPosition: {x: 0, y: 0.96132034, z: -0.15029706}
+  m_LocalScale: {x: 0.50000006, y: 0.50000006, z: 0.52083343}
   m_Children: []
   m_Father: {fileID: 4739599559027714}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4739599559027714
 Transform:
@@ -187,12 +187,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1252942591897690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.97, z: 0.05}
-  m_LocalScale: {x: 0.709932, y: 0.7099317, z: 0.7099317}
+  m_LocalPosition: {x: 0, y: 1.8, z: 0.05000001}
+  m_LocalScale: {x: 0.6653491, y: 0.6653491, z: 0.6653491}
   m_Children:
-  - {fileID: 4152732656225630}
   - {fileID: 4586956527723648}
   - {fileID: 4164283934961264}
+  - {fileID: 4152732656225630}
   m_Father: {fileID: 4281934838100702}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -304,6 +304,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facilityName: TempFacility
   isOn: 1
+  isLoadByManager: 0
+  isAlive: 1
 --- !u!114 &114264834614907070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3704,7 +3706,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 0.6, y: 0.55}
+  m_Size: {x: 2.4, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

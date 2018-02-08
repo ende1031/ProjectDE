@@ -61,7 +61,7 @@ public class FacilityBalloon : MonoBehaviour
             {
                 Balloon.SetActive(true);
                 Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
-                Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
+                Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
             }
             Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
             Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
@@ -75,7 +75,7 @@ public class FacilityBalloon : MonoBehaviour
         if (isMakeFinish == true)
         {
             Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
-            Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
+            Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
         }
 
         Display();
@@ -109,7 +109,7 @@ public class FacilityBalloon : MonoBehaviour
     {
         isMakeFinish = true;
         Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
-        Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
+        Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
         if (animaitor != null)
         {
             animaitor.SetBool("isMaking", false);
@@ -175,11 +175,11 @@ public class FacilityBalloon : MonoBehaviour
 
         if (isMakeFinish == true)
         {
-            Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, 0.6f);
+            Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
         }
         else
         {
-            Item.GetComponent<SpriteRenderer>().size = new Vector2(0.6f, progress * 0.55f);
+            Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, progress * 2.3f);
         }
     }
 
