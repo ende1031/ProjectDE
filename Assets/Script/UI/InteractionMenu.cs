@@ -23,6 +23,12 @@ public class InteractionMenu : MonoBehaviour
         Tumor
     };
 
+    enum Direction
+    {
+        Left,
+        Right
+    };
+
     public Sprite BatterySp; //메뉴 추가시 수정할 부분
     public Sprite CancleSp;
     public Sprite DumpSp;
@@ -54,7 +60,6 @@ public class InteractionMenu : MonoBehaviour
     GameObject Player;
 
     GameObject IMenu_bg;
-    GameObject Cursor;
     Image ItemImage;
     Text ButtonText;
     GameObject IconGroup;
@@ -67,12 +72,22 @@ public class InteractionMenu : MonoBehaviour
 
     bool isPopupActive = false;
     float openTimer = 0;
+    bool isMove = false;
+
+    float circleRadius = 135.0f;
+    float moveAngle = 0;
+    float moveSeed = 5.0f;
+    float moveVec = 10.0f;
+    Direction moveDirection = Direction.Right;
+    float[] iconAlpha = new float[7] { 0.25f, 0.5f, 1.0f, 0.5f, 0.25f, 0, 0 };
+
+    GameObject targetObject;
+    string targetType;
 
     void Start ()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         IMenu_bg = transform.Find("IMenu_bg").gameObject;
-        Cursor = IMenu_bg.transform.Find("Cursor").gameObject;
         ItemImage = IMenu_bg.transform.Find("ItemImage").gameObject.GetComponent<Image>();
         ButtonText = IMenu_bg.transform.Find("ButtonText").gameObject.GetComponent<Text>();
         IconGroup = IMenu_bg.transform.Find("IconGroup").gameObject;
@@ -115,7 +130,7 @@ public class InteractionMenu : MonoBehaviour
             {
                 openTimer += Time.deltaTime;
             }
-            else
+            else if (isMove == false)
             {
                 MoveCursor();
                 if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Escape))
@@ -124,8 +139,12 @@ public class InteractionMenu : MonoBehaviour
                 }
                 else if (Input.GetKeyUp(KeyCode.C))
                 {
-
+                    SelectedMenu();
                 }
+            }
+            else if(isMove == true)
+            {
+                MoveMenuIcon();
             }
         }
     }
@@ -134,34 +153,111 @@ public class InteractionMenu : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            if (selectedIndex == 0)
-            {
-                selectedIndex = MenuList.Count - 1;
-            }
-            else
-            {
-                selectedIndex--;
-            }
-            RefreshWindow();
+            moveDirection = Direction.Left;
+            isMove = true;
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (selectedIndex == MenuList.Count - 1)
+            moveDirection = Direction.Right;
+            isMove = true;
+        }
+    }
+
+    void MoveMenuIcon()
+    {
+        if (moveDirection == Direction.Right)
+        {
+            moveVec += Time.deltaTime * moveSeed;
+            moveAngle -= moveVec;
+
+            iconAlpha[0] = 0.25f + (moveAngle / 45 * 0.25f);
+            iconAlpha[1] = 0.5f + (moveAngle / 45 * 0.5f);
+            iconAlpha[2] = 1 - (moveAngle / 45 * 0.5f);
+            iconAlpha[3] = 0.5f - (moveAngle / 45 * 0.25f);
+            iconAlpha[4] = 0.25f - (moveAngle / 45 * 0.25f);
+            iconAlpha[5] = 0;
+            iconAlpha[6] = 0 + (moveAngle / 45 * 0.25f);
+
+            // 이동 종료 조건
+            if (moveAngle <= -1 * 360 / 8)
             {
-                selectedIndex = 0;
+                isMove = false;
+                if (selectedIndex == MenuList.Count - 1)
+                {
+                    selectedIndex = 0;
+                }
+                else
+                {
+                    selectedIndex++;
+                }
+                RefreshWindow();
+                moveAngle = 0;
+                moveVec = 10.0f;
+                return;
+            }
+        }
+        else if (moveDirection == Direction.Left)
+        {
+            moveVec += Time.deltaTime * moveSeed;
+            moveAngle += moveVec;
+
+            iconAlpha[0] = 0.25f - (moveAngle / 45 * -1 * 0.25f);
+            iconAlpha[1] = 0.5f - (moveAngle / 45 * -1 * 0.25f);
+            iconAlpha[2] = 1 - (moveAngle / 45 * -1 * 0.5f);
+            iconAlpha[3] = 0.5f + (moveAngle / 45 * -1 * 0.5f);
+            iconAlpha[4] = 0.25f + (moveAngle / 45 * -1 * 0.25f);
+            iconAlpha[5] = 0 + (moveAngle / 45 * -1 * 0.25f);
+            iconAlpha[6] = 0;
+
+            // 이동 종료 조건
+            if (moveAngle >= 360 / 8)
+            {
+                isMove = false;
+                if (selectedIndex == 0)
+                {
+                    selectedIndex = MenuList.Count - 1;
+                }
+                else
+
+                {
+                    selectedIndex--;
+                }
+                RefreshWindow();
+                moveAngle = 0;
+                moveVec = 10.0f;
+                return;
+            }
+        }
+
+        // 이동 적용
+        for (int i = 0; i < 7; i++)
+        {
+            Vector3 tempVec = MenuIcon[i].transform.position;
+
+            if (i != 6)
+            {
+                tempVec.x = Mathf.Cos((360 / 8 * i + 180 + moveAngle) * Mathf.PI / 180) * circleRadius + IconGroup.transform.position.x;
+                tempVec.y = Mathf.Sin((360 / 8 * i + 180 + moveAngle) * Mathf.PI / 180) * circleRadius + IconGroup.transform.position.y;
             }
             else
             {
-                selectedIndex++;
+                tempVec.x = Mathf.Cos((360 / 8 * (i + 1) + 180 + moveAngle) * Mathf.PI / 180) * circleRadius + IconGroup.transform.position.x;
+                tempVec.y = Mathf.Sin((360 / 8 * (i + 1) + 180 + moveAngle) * Mathf.PI / 180) * circleRadius + IconGroup.transform.position.y;
             }
-            RefreshWindow();
+            MenuIcon[i].transform.position = tempVec;
+        }
+
+        //투명도 적용
+        Color tempColor = MenuIcon[0].GetComponent<Image>().color;
+        for (int i = 0; i < 7; i++)
+        {
+            tempColor.a = iconAlpha[i];
+            MenuIcon[i].GetComponent<Image>().color = tempColor;
         }
     }
 
     void RefreshWindow()
     {
-        float circleRadius = 135.0f;
-
         for (int i =0; i<7; i++)
         {
             Vector3 tempVec = MenuIcon[i].transform.position;
@@ -204,25 +300,23 @@ public class InteractionMenu : MonoBehaviour
         MenuIcon[6].GetComponent<Image>().sprite = MenuDictionary[MenuList[tempNum[4]]].itemSp;
 
         //아이콘 투명도 설정
+        iconAlpha = new float[7] { 0.25f, 0.5f, 1.0f, 0.5f, 0.25f, 0, 0 };
         Color tempColor = MenuIcon[0].GetComponent<Image>().color;
-        tempColor.a = 1.0f;
-        MenuIcon[2].GetComponent<Image>().color = tempColor;
-        tempColor.a = 0.5f;
-        MenuIcon[1].GetComponent<Image>().color = tempColor;
-        MenuIcon[3].GetComponent<Image>().color = tempColor;
-        tempColor.a = 0.25f;
-        MenuIcon[0].GetComponent<Image>().color = tempColor;
-        MenuIcon[4].GetComponent<Image>().color = tempColor;
-        tempColor.a = 0;
-        MenuIcon[5].GetComponent<Image>().color = tempColor;
-        MenuIcon[6].GetComponent<Image>().color = tempColor;
+        for (int i = 0; i < 7; i++)
+        {
+            tempColor.a = iconAlpha[i];
+            MenuIcon[i].GetComponent<Image>().color = tempColor;
+        }
 
         //버튼 텍스트 설정
         ButtonText.text = MenuDictionary[MenuList[selectedIndex]].buttonText;
     }
 
-    public void OpenMenu()
+    public void OpenMenu(GameObject to, string t)
     {
+        targetObject = to;
+        targetType = t;
+
         if(MenuList.Count == 0)
         {
             MenuList.Add(MenuItem.Battery);
@@ -266,11 +360,29 @@ public class InteractionMenu : MonoBehaviour
         MenuList.Add(mi);
     }
 
-    public MenuItem SelectMenu()
+    void SelectedMenu()
     {
-        IMenu_bg.SetActive(false);
-        isPopupActive = false;
+        CloseWindow();
 
-        return MenuList[selectedIndex];
+        switch(targetType)
+        {
+            case "Plant":
+                targetObject.GetComponent<Plant>().SelectMenu(MenuList[selectedIndex]);
+                break;
+
+            case "Facility":
+                //targetObject.GetComponent<Facility>()
+                break;
+
+            case "Bulb":
+                //targetObject.GetComponent<Bulb>()
+                break;
+
+            case "Wreckage":
+                targetObject.GetComponent<Wreckage>().SelectMenu(MenuList[selectedIndex]);
+                break;
+            case "Inventory":
+                break;
+        }
     }
 }

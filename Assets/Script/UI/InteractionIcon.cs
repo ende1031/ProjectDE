@@ -15,7 +15,8 @@ public class InteractionIcon : MonoBehaviour
         OnOff,
         Research,
         Remove,
-        Tumor
+        Tumor,
+        Interaction
     };
 
     Inventory inventory;
@@ -29,6 +30,7 @@ public class InteractionIcon : MonoBehaviour
     GameObject ResearchIcon;
     GameObject RemoveIcon;
     GameObject TumorIcon;
+    GameObject MenuIcon;
 
     List<Icon> displayedIconList = new List<Icon>();
     Dictionary<Icon, GameObject> iconDictionary = new Dictionary<Icon, GameObject>();
@@ -58,6 +60,7 @@ public class InteractionIcon : MonoBehaviour
         ResearchIcon = transform.Find("Research").gameObject;
         RemoveIcon = transform.Find("Remove").gameObject;
         TumorIcon = transform.Find("Tumor").gameObject;
+        MenuIcon = transform.Find("Interaction").gameObject;
 
         if (GatherIcon != null)
         {
@@ -70,6 +73,7 @@ public class InteractionIcon : MonoBehaviour
             iconDictionary[Icon.Research] = ResearchIcon;
             iconDictionary[Icon.Remove] = RemoveIcon;
             iconDictionary[Icon.Tumor] = TumorIcon;
+            iconDictionary[Icon.Interaction] = MenuIcon;
         }
     }
 
@@ -84,6 +88,7 @@ public class InteractionIcon : MonoBehaviour
         ResearchIcon.SetActive(false);
         RemoveIcon.SetActive(false);
         TumorIcon.SetActive(false);
+        MenuIcon.SetActive(false);
     }
 
     void Update ()

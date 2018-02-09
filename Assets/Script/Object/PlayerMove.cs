@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    enum Direction { Left, Right };
+    enum Direction
+    {
+        Left,
+        Right
+    };
 
     public float speed = 5;
 

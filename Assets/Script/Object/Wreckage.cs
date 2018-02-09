@@ -5,6 +5,7 @@ using UnityEngine;
 public class Wreckage : MonoBehaviour
 {
     InteractionIcon interactionIcon;
+    InteractionMenu interactionMenu;
     Inventory inventory;
     int sceneNum;
 
@@ -12,6 +13,7 @@ public class Wreckage : MonoBehaviour
     {
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
     }
 	
@@ -24,7 +26,7 @@ public class Wreckage : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
+            interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
         }
     }
 
@@ -32,7 +34,24 @@ public class Wreckage : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
+        }
+    }
+
+    public void OpenMenu()
+    {
+        interactionMenu.ClearMenu();
+        interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
+        interactionMenu.OpenMenu(this.gameObject, "Wreckage");
+    }
+
+    public void SelectMenu(InteractionMenu.MenuItem m)
+    {
+        switch(m)
+        {
+            case InteractionMenu.MenuItem.Remove:
+                RemoveObject();
+                break;
         }
     }
 

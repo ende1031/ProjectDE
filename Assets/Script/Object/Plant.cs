@@ -6,6 +6,9 @@ public class Plant : MonoBehaviour
 {
     Inventory inventory;
     InteractionIcon interactionIcon;
+    InteractionMenu interactionMenu;
+    Monologue monologue;
+    GameObject Player;
 
     Animator animaitor;
 
@@ -25,11 +28,14 @@ public class Plant : MonoBehaviour
     void Start ()
     {
         sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
-
+        Player = GameObject.Find("Player");
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
+        interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
+        monologue = Player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
 
         animaitor = GetComponent<Animator>();
+
         animaitor.SetInteger("State", state);
         animaitor.SetBool("isGathering", false); //플레이어가 채집을 하는것인지, 아니면 바로 애니메이션 전환을 할지
         animaitor.SetBool("isGrowSkip", false); //성장 애니메이션을 스킵할지
@@ -53,6 +59,10 @@ public class Plant : MonoBehaviour
                     break;
                 case "MassPlant":
                     inventory.GetItem(Inventory.Item.Mass, 1);
+                    if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
+                    {
+                        interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
+                    }
                     SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                     break;
                 case "BoardPlant":
@@ -86,11 +96,6 @@ public class Plant : MonoBehaviour
         }
         isGatherPossible = false;
         isTumor = false;
-
-        if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
-        {
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
-        }
     }
 
     public void RemoveObject()
@@ -146,9 +151,8 @@ public class Plant : MonoBehaviour
         if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
         {
             state = 4;
-            animaitor.SetInteger("State", state);
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Tumor);
             inventory.DeleteItem(Inventory.Item.TumorSeed);
+            animaitor.SetInteger("State", state);
         }
     }
 
@@ -156,27 +160,12 @@ public class Plant : MonoBehaviour
     public void SetGatherPossibleFalse()
     {
         isGatherPossible = false;
-        if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
-        {
-            if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
-            {
-                if (inventory.HasItem(Inventory.Item.TumorSeed) == true)
-                {
-                    interactionIcon.AddIcon(InteractionIcon.Icon.Tumor);
-                }
-            }
-            interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
-        }
     }
 
     //애니메이션 이벤트에서 사용하는 함수
     public void SetGatherPossibleTrue()
     {
         isGatherPossible = true;
-        if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
-        {
-            interactionIcon.AddIcon(InteractionIcon.Icon.Gather);
-        }
     }
 
     //애니메이션 이벤트에서 사용하는 함수
@@ -269,24 +258,7 @@ public class Plant : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            if(state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
-            {
-                if (inventory.HasItem(Inventory.Item.TumorSeed) == true)
-                {
-                    interactionIcon.AddIcon(InteractionIcon.Icon.Tumor);
-                }
-            }
-            if (isGatherPossible == true)
-            {
-                interactionIcon.AddIcon(InteractionIcon.Icon.Gather);
-                interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
-                interactionIcon.DeleteIcon(InteractionIcon.Icon.Tumor);
-            }
-            else
-            {
-                interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
-                interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
-            }
+            interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
         }
     }
 
@@ -294,9 +266,50 @@ public class Plant : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Tumor);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
+        }
+    }
+
+    public void OpenMenu()
+    {
+        interactionMenu.ClearMenu();
+
+        if(isGatherPossible == true)
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
+        }
+        else if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
+        {
+            if (inventory.HasItem(Inventory.Item.TumorSeed) == true)
+            {
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Tumor);
+            }
+        }
+        interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
+        interactionMenu.OpenMenu(this.gameObject, "Plant");
+    }
+
+    public void SelectMenu(InteractionMenu.MenuItem m)
+    {
+        switch (m)
+        {
+            case InteractionMenu.MenuItem.Gather:
+                if(InventoryCheck() == true)
+                {
+                    GatherStart();
+                    Player.GetComponent<PlayerInteraction>().GatherPlant(GatherAnimationType);
+                }
+                else
+                {
+                    monologue.DisplayLog("인벤토리 공간이 부족하군.\n채집하기 전에 필요없는 아이템을 버리는게 좋겠어.");
+                }
+                break;
+            case InteractionMenu.MenuItem.Tumor:
+                SetTumor();
+                break;
+            case InteractionMenu.MenuItem.Remove:
+                RemoveObject();
+                break;
         }
     }
 }

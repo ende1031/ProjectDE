@@ -39,11 +39,11 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            interactionMenu.ClearMenu();
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Battery);
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Dump);
-            interactionMenu.OpenMenu();
+            //interactionMenu.ClearMenu();
+            //interactionMenu.AddMenu(InteractionMenu.MenuItem.Battery);
+            //interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
+            //interactionMenu.AddMenu(InteractionMenu.MenuItem.Dump);
+            //interactionMenu.OpenMenu();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -78,6 +78,13 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    public void GatherPlant(int GatherAnimationType)
+    {
+        PlayerDirection();
+        GatherAnimation(GatherAnimationType, true);
+        GetComponent<PlayerMove>().SetMovePossible(false);
+    }
+
     void Interaction()
     {
         if (target == null)
@@ -85,42 +92,9 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target.gameObject.tag == "Plant")
         {
-            if (Input.GetKeyDown(KeyCode.C) && target.GetComponent<Plant>().isGatherPossible == true)
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                PlayerDirection();
-                if (target.GetComponent<Plant>().InventoryCheck() == true)
-                {
-                    GatherAnimation(target.GetComponent<Plant>().GatherAnimationType, true);
-                    target.GetComponent<Plant>().GatherStart();
-                }
-                else
-                {
-                    monologue.DisplayLog("인벤토리 공간이 부족하군.\n채집하기 전에 필요없는 아이템을 버리는게 좋겠어.");
-                    return;
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.C) && target.GetComponent<Plant>().isGatherPossible == false)
-            {
-                if(target.GetComponent<Plant>().plantName == "Trap01")
-                {
-                    monologue.DisplayLog("아직 덫에 아무 것도 걸리지 않았군.\n괴물은 빛을 싫어하니까 내가 까가이 있으면 잡히지 않을거야.");
-                }
-                else
-                {
-                    monologue.DisplayLog("조금 더 자란 다음에 채집하는게 좋겠군.");
-                }
-                return;
-            }
-            else if (Input.GetKeyDown(KeyCode.X) && target.GetComponent<Plant>().isGatherPossible == false)
-            {
-                target.GetComponent<Plant>().RemoveObject();
-            }
-            else if (Input.GetKeyDown(KeyCode.Z) && target.GetComponent<Plant>().isGatherPossible == false)
-            {
-                if(inventory.HasItem(Inventory.Item.TumorSeed) == true)
-                {
-                    target.GetComponent<Plant>().SetTumor();
-                }
+                target.GetComponent<Plant>().OpenMenu();
             }
         }
         else if (target.gameObject.tag == "Facility")
@@ -209,9 +183,9 @@ public class PlayerInteraction : MonoBehaviour
         }
         else if (target.gameObject.tag == "Wreckage")
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                target.GetComponent<Wreckage>().RemoveObject();
+                target.GetComponent<Wreckage>().OpenMenu();
             }
         }
     }
@@ -221,7 +195,6 @@ public class PlayerInteraction : MonoBehaviour
         isGather = onOff;
         animaitor.SetInteger("GatherType", num);
         animaitor.SetBool("isGather", isGather);
-        GetComponent<PlayerMove>().SetMovePossible(!onOff);
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -243,6 +216,7 @@ public class PlayerInteraction : MonoBehaviour
             return;
         GatherAnimation(0, false);
         target.GetComponent<Plant>().GetItem();
+        GetComponent<PlayerMove>().SetMovePossible(true);
     }
 
     public void SetInteractionPossible(bool possibility)
