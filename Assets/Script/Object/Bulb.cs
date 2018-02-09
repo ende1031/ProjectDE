@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bulb : MonoBehaviour
 {
     InteractionIcon interactionIcon;
+    InteractionMenu interactionMenu;
     Inventory inventory;
 
     GameObject BulbLight;
@@ -23,6 +24,7 @@ public class Bulb : MonoBehaviour
     void Start ()
     {
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
+        interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
         BulbLight = transform.Find("Light").gameObject;
@@ -85,10 +87,6 @@ public class Bulb : MonoBehaviour
             {
                 OnOff(false);
             }
-            if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
-            {
-                interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
-            }
         }
     }
 
@@ -117,21 +115,29 @@ public class Bulb : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false && isAlive == true)
+        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
-            interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
-        }
-        else if(other.gameObject.tag == "Player" && inventory.isInventoryActive == false && isAlive == false)
-        {
-            interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
+            if(isOn == true)
+            {
+                interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
+            }
+            else
+            {
+                interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
+            }
         }
     }
 
     public void DisplayIcon()
     {
-        interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
-        interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
+        if (isOn == true)
+        {
+            interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
+        }
+        else
+        {
+            interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -144,8 +150,8 @@ public class Bulb : MonoBehaviour
 
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
             interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
         }
     }
 
@@ -179,5 +185,30 @@ public class Bulb : MonoBehaviour
     {
         interactionIcon.DeleteAllIcons();
         SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
+    }
+
+    public void OpenMenu()
+    {
+        interactionMenu.ClearMenu();
+        if(isAlive == true)
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
+        }
+        interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
+        interactionMenu.OpenMenu(this.gameObject, "Bulb");
+    }
+
+    public void SelectMenu(InteractionMenu.MenuItem m)
+    {
+        switch (m)
+        {
+            case InteractionMenu.MenuItem.Off:
+                OnOff(false);
+                break;
+
+            case InteractionMenu.MenuItem.Remove:
+                RemoveObject();
+                break;
+        }
     }
 }

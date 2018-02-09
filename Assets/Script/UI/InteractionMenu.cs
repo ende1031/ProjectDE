@@ -57,6 +57,7 @@ public class InteractionMenu : MonoBehaviour
     }
 
     Inventory inventory;
+    Animator animaitor;
     GameObject Player;
 
     GameObject IMenu_bg;
@@ -88,6 +89,7 @@ public class InteractionMenu : MonoBehaviour
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         IMenu_bg = transform.Find("IMenu_bg").gameObject;
+        animaitor = IMenu_bg.GetComponent<Animator>();
         ItemImage = IMenu_bg.transform.Find("ItemImage").gameObject.GetComponent<Image>();
         ButtonText = IMenu_bg.transform.Find("ButtonText").gameObject.GetComponent<Text>();
         IconGroup = IMenu_bg.transform.Find("IconGroup").gameObject;
@@ -104,7 +106,7 @@ public class InteractionMenu : MonoBehaviour
         MenuDictionary[MenuItem.Cancle] = new MenuItemInfo(CancleSp, "제작 취소");
         MenuDictionary[MenuItem.Dump] = new MenuItemInfo(DumpSp, "버리기");
         MenuDictionary[MenuItem.Food] = new MenuItemInfo(FoodSp, "식품 섭취");
-        MenuDictionary[MenuItem.Gather] = new MenuItemInfo(GatherSp, "아이템 채집");
+        MenuDictionary[MenuItem.Gather] = new MenuItemInfo(GatherSp, "아이템 획득");
         MenuDictionary[MenuItem.Install] = new MenuItemInfo(InstallSp, "시설 설치");
         MenuDictionary[MenuItem.Make] = new MenuItemInfo(MakeSp, "아이템 제작");
         MenuDictionary[MenuItem.Off] = new MenuItemInfo(OffSp, "전원 끄기");
@@ -338,6 +340,7 @@ public class InteractionMenu : MonoBehaviour
         selectedIndex = 0;
         openTimer = 0;
         RefreshWindow();
+        animaitor.SetBool("isOpen", true);
     }
 
     public void CloseWindow()
@@ -345,9 +348,9 @@ public class InteractionMenu : MonoBehaviour
         Player.GetComponent<PlayerMove>().SetMovePossible(true);
         Player.GetComponent<PlayerInteraction>().SetInteractionPossible(true);
         isPopupActive = false;
-        selectedIndex = 0;
         openTimer = 0;
-        IMenu_bg.SetActive(false);
+        //IMenu_bg.SetActive(false);
+        animaitor.SetBool("isOpen", false);
     }
 
     public void ClearMenu()
@@ -371,11 +374,11 @@ public class InteractionMenu : MonoBehaviour
                 break;
 
             case "Facility":
-                //targetObject.GetComponent<Facility>()
+                targetObject.GetComponent<Facility>().SelectMenu(MenuList[selectedIndex]);
                 break;
 
             case "Bulb":
-                //targetObject.GetComponent<Bulb>()
+                targetObject.GetComponent<Bulb>().SelectMenu(MenuList[selectedIndex]);
                 break;
 
             case "Wreckage":

@@ -7,10 +7,14 @@ public class Facility : MonoBehaviour
     public string facilityName = "TempFacility";
 
     InteractionIcon interactionIcon;
+    InteractionMenu interactionMenu;
+    Monologue monologue;
     Inventory inventory;
     PopupWindow popupWindow;
     ResearchWindow researchWindow;
     Animator animaitor;
+    GameObject Player;
+    Timer timer;
     int sceneNum;
 
     public bool isOn = true;
@@ -20,10 +24,14 @@ public class Facility : MonoBehaviour
     void Start ()
     {
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
+        interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         popupWindow = GameObject.Find("PopupWindow").GetComponent<PopupWindow>();
         researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
         sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+        Player = GameObject.Find("Player");
+        monologue = Player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
 
         animaitor = GetComponent<Animator>();
         if (animaitor != null)
@@ -71,36 +79,11 @@ public class Facility : MonoBehaviour
     {
         if (isOn == true)
         {
-            if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
-            {
-                switch (facilityName)
-                {
-                    case "TempFacility":
-                    case "Grinder01":
-                        interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
-                        interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
-                        interactionIcon.AddIcon(InteractionIcon.Icon.Make);
-                        break;
-                    case "EscapePod":
-                        interactionIcon.AddIcon(InteractionIcon.Icon.Research);
-                        interactionIcon.AddIcon(InteractionIcon.Icon.Sleep);
-                        interactionIcon.AddIcon(InteractionIcon.Icon.Make);
-                        break;
-                }
-            }
-            else if (GetComponent<FacilityBalloon>().isMakeFinish == true)
-            {
-                interactionIcon.AddIcon(InteractionIcon.Icon.Gather);
-            }
-            else if (GetComponent<FacilityBalloon>().isMake == true)
-            {
-                interactionIcon.AddIcon(InteractionIcon.Icon.Dump);
-            }
+            interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
         }
         else if(facilityName != "EscapePod")
         {
             interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
-            interactionIcon.AddIcon(InteractionIcon.Icon.Remove);
         }
     }
 
@@ -108,24 +91,8 @@ public class Facility : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            switch (facilityName)
-            {
-                case "TempFacility":
-                case "Grinder01":
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Make);
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Dump);
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Remove);
-                    break;
-                case "EscapePod":
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Make);
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Sleep);
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Dump);
-                    interactionIcon.DeleteIcon(InteractionIcon.Icon.Research);
-                    break;
-            }
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
+            interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
         }
     }
 
@@ -220,5 +187,79 @@ public class Facility : MonoBehaviour
     void ruin()
     {
         SceneObjectManager.instance.ChangeObject(sceneNum, Grid.instance.PosToGrid(transform.position.x), new SceneObjectManager.SceneObject("Wreckage", "Wreckage"));
+    }
+
+    public void OpenMenu()
+    {
+        interactionMenu.ClearMenu();
+
+        if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
+        }
+        else if(GetComponent<FacilityBalloon>().isMakeFinish == true)
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
+        }
+        else if(GetComponent<FacilityBalloon>().isMake == true)
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
+        }
+        if (facilityName == "EscapePod")
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Research);
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Sleep);
+        }
+        else
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
+        }
+        
+        interactionMenu.OpenMenu(this.gameObject, "Facility");
+    }
+
+    public void SelectMenu(InteractionMenu.MenuItem m)
+    {
+        switch (m)
+        {
+            case InteractionMenu.MenuItem.Make:
+                OpenProductionWindow();
+                break;
+            case InteractionMenu.MenuItem.Gather:
+                if (GetComponent<FacilityBalloon>().InventoryCheck() == true)
+                {
+                    GetComponent<FacilityBalloon>().GetItem();
+                }
+                else
+                {
+                    monologue.DisplayLog("인벤토리 공간이 부족하군.\n아이템을 획득하려면 인벤토리에 빈 공간이 필요해.");
+                    return;
+                }
+                break;
+            case InteractionMenu.MenuItem.Cancle:
+                GetComponent<FacilityBalloon>().Dunp();
+                break;
+            case InteractionMenu.MenuItem.Research:
+                Research();
+                break;
+            case InteractionMenu.MenuItem.Sleep:
+                if (timer.PercentOfTime() > 2) //하루의 2%이상 지난 시점부터 수면 가능
+                {
+                    Player.GetComponent<PlayerMove>().SetMovePossible(false);
+                    Sleep();
+                }
+                else
+                {
+                    monologue.DisplayLog("지금은 졸리지 않아.\n일어난지 얼마 안됐는데 벌써 잘 수는 없지.");
+                }
+                break;
+            case InteractionMenu.MenuItem.Off:
+                OnOff();
+                break;
+            case InteractionMenu.MenuItem.Remove:
+                RemoveObject();
+                break;
+        }
     }
 }

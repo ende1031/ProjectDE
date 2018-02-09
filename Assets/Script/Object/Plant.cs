@@ -28,10 +28,10 @@ public class Plant : MonoBehaviour
     void Start ()
     {
         sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
-        Player = GameObject.Find("Player");
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
+        Player = GameObject.Find("Player");
         monologue = Player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
 
         animaitor = GetComponent<Animator>();

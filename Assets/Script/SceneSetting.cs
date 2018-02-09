@@ -78,6 +78,7 @@ public class SceneSetting : MonoBehaviour
                 SceneObjectManager.instance.AddObject(n, 3, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 8, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 9, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 10, new SceneObjectManager.SceneObject("Bulb", "Bulb01"));
 
                 inventory.GetItem(Inventory.Item.Food, 5);
                 inventory.GetItem(Inventory.Item.Battery, 7);
