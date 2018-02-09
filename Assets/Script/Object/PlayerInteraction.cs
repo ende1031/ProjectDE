@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     Inventory inventory;
+    InteractionMenu interactionMenu;
     Monologue monologue;
     Timer timer;
 
@@ -20,6 +21,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         animaitor = GetComponent<Animator>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         monologue = transform.Find("Monologue").gameObject.GetComponent<Monologue>();
         timer = GameObject.Find("Timer").GetComponent<Timer>();
     }
@@ -37,7 +39,11 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            //inventory.GetItem(Inventory.Item.Mass, 1);
+            interactionMenu.ClearMenu();
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Battery);
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Dump);
+            interactionMenu.OpenMenu();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -126,11 +132,9 @@ public class PlayerInteraction : MonoBehaviour
                     if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                     {
                         target.GetComponent<Facility>().OpenProductionWindow();
-                        PlayerDirection();
                     }
                     if (target.GetComponent<FacilityBalloon>().isMakeFinish == true)
                     {
-                        PlayerDirection();
                         if (target.GetComponent<FacilityBalloon>().InventoryCheck() == true)
                         {
                             target.GetComponent<FacilityBalloon>().GetItem();
@@ -152,7 +156,6 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if (target.GetComponent<FacilityBalloon>().isMake == false && target.GetComponent<FacilityBalloon>().isMakeFinish == false)
                 {
-                    PlayerDirection();
                     target.GetComponent<Facility>().OnOff();
                     target.GetComponent<Facility>().Research();
                 }
@@ -180,7 +183,6 @@ public class PlayerInteraction : MonoBehaviour
                 }
                 else if (target.GetComponent<FacilityBalloon>().isMake == true)
                 {
-                    PlayerDirection();
                     target.GetComponent<FacilityBalloon>().Dunp();
                 }
             }

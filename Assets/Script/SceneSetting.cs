@@ -69,16 +69,20 @@ public class SceneSetting : MonoBehaviour
                 SceneObjectManager.instance.AddObject(n, -9, new SceneObjectManager.SceneObject("Portal", "Stage01_B_1F", 25));
                 SceneObjectManager.instance.AddObject(n, 5, new SceneObjectManager.SceneObject("Facility", "EscapePod"));
                 SceneObjectManager.instance.AddObject(n, 7, new SceneObjectManager.SceneObject("Facility", "TempFacility"));
-                SceneObjectManager.instance.AddObject(n, 10, new SceneObjectManager.SceneObject("Bulb", "Bulb01"));
                 SceneObjectManager.instance.AddObject(n, 0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
                 SceneObjectManager.instance.AddObject(n, -12, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 23, new SceneObjectManager.SceneObject("Portal", "Stage01_A_1F", 25));
                 SceneObjectManager.instance.AddObject(n, -5, new SceneObjectManager.SceneObject("Nest", "Nest01"));
+                SceneObjectManager.instance.AddObject(n, 1, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 2, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 3, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 8, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 9, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
 
                 inventory.GetItem(Inventory.Item.Food, 5);
                 inventory.GetItem(Inventory.Item.Battery, 7);
                 inventory.GetItem(Inventory.Item.Oxygen, 3);
-                inventory.GetItem(Inventory.Item.Mass, 5);
+                inventory.GetItem(Inventory.Item.Trap01, 2);
                 break;
 
             case 1:

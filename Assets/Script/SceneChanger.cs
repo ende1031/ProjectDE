@@ -38,7 +38,7 @@ public class SceneChanger : MonoBehaviour
     public void FadeAndLoadScene(string sceneName, int moveAfterGrid = 0)
     {
         playerGrid = moveAfterGrid;
-        if (!isFading)
+        if (isFading == false)
         {
             StartCoroutine(FadeAndSwitchScenes(sceneName));
         }
@@ -71,7 +71,7 @@ public class SceneChanger : MonoBehaviour
 
         fadeCanvasGroup.blocksRaycasts = true;
         float fadeSpeed = Mathf.Abs(fadeCanvasGroup.alpha - finalAlpha) / fadeDuration;
-        while (!Mathf.Approximately(fadeCanvasGroup.alpha, finalAlpha))
+        while (Mathf.Approximately(fadeCanvasGroup.alpha, finalAlpha) == false)
         {
             fadeCanvasGroup.alpha = Mathf.MoveTowards(fadeCanvasGroup.alpha, finalAlpha,
                 fadeSpeed * Time.deltaTime);
