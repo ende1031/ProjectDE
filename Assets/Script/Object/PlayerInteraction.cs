@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     Inventory inventory;
-    Monologue monologue;
 
     Animator animaitor;
     bool isGather = false;
@@ -19,7 +18,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         animaitor = GetComponent<Animator>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        monologue = transform.Find("Monologue").gameObject.GetComponent<Monologue>();
     }
 	
 	void Update ()
@@ -77,14 +75,17 @@ public class PlayerInteraction : MonoBehaviour
 
         if (target.gameObject.tag == "Plant")
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyUp(KeyCode.C))
             {
-                target.GetComponent<Plant>().OpenMenu();
+                if(isGather == false)
+                {
+                    target.GetComponent<Plant>().OpenMenu();
+                }
             }
         }
         else if (target.gameObject.tag == "Facility")
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyUp(KeyCode.C))
             {
                 if (target.GetComponent<Facility>().isOn == false)
                 {
@@ -98,7 +99,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         else if (target.gameObject.tag == "Portal")
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyUp(KeyCode.C))
             {
                 GetComponent<PlayerMove>().SetMovePossible(false);
                 SceneObjectManager.instance.SaveObject();
@@ -107,7 +108,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         else if (target.gameObject.tag == "Bulb")
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyUp(KeyCode.C))
             {
                 if(target.GetComponent<Bulb>().isOn == false)
                 {
@@ -121,7 +122,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         else if (target.gameObject.tag == "Wreckage")
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyUp(KeyCode.C))
             {
                 target.GetComponent<Wreckage>().OpenMenu();
             }

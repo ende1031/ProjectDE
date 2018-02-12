@@ -128,7 +128,7 @@ public class InteractionMenu : MonoBehaviour
 
         if (isPopupActive == true)
         {
-            if (openTimer <= 0.3f)
+            if (openTimer <= 0.1f)
             {
                 openTimer += Time.deltaTime;
             }

@@ -38,12 +38,12 @@ public class Inventory : MonoBehaviour
         Grinder01
     };
 
-    GameObject[] itemSlot = new GameObject[7];
+    GameObject[] itemSlot = new GameObject[15];
     List<ItemInfo> Items = new List<ItemInfo>();
     GameObject Cursor;
     GameObject[] InventoryMenu = new GameObject[3];
     GameObject[] InventoryMenuText = new GameObject[3];
-    GameObject[] GetEffect = new GameObject[7];
+    GameObject[] GetEffect = new GameObject[15];
 
     GameObject player = null;
     Monologue monologue;
@@ -336,7 +336,7 @@ public class Inventory : MonoBehaviour
             InventoryMenuText[i] = InventoryMenu[i].transform.Find("Text").gameObject;
         }
 
-        for (int i=0; i<7; i++)
+        for (int i=0; i<15; i++)
         {
             itemSlot[i] = transform.Find("Item" + (i + 1)).gameObject;
             GetEffect[i] = transform.Find("GetEffect" + (i + 1)).gameObject;
@@ -422,13 +422,13 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                selectedIndex = 6;
+                selectedIndex = 14;
             }
             RefreshItemMenu();
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (selectedIndex < 6)
+            if (selectedIndex < 14)
             {
                 selectedIndex++;
             }
@@ -439,9 +439,9 @@ public class Inventory : MonoBehaviour
             RefreshItemMenu();
         }
 
-        Vector3 temp = Cursor.transform.position;
-        temp.x = transform.position.x - 63 * 3 + selectedIndex * 63;
-        Cursor.transform.position = temp;
+        //Vector3 temp = Cursor.transform.position;
+        //temp.x = transform.position.x - 63 * 3 + selectedIndex * 63;
+        Cursor.transform.position = itemSlot[selectedIndex].transform.position;
     }
 
     void DisplayItem()
@@ -457,7 +457,7 @@ public class Inventory : MonoBehaviour
         }
 
         //빈칸 아이템 안보이게
-        for(int i = 6; i >= Items.Count; i--)
+        for(int i = 14; i >= Items.Count; i--)
         {
             itemSlot[i].SetActive(false);
         }
@@ -566,7 +566,7 @@ public class Inventory : MonoBehaviour
     // isFull 메소드에서 임시로 아이템을 추가해보는데 사용하는 메소드
     bool FullTestGetItem(Item itemName, int num = 1)
     {
-        if (Items.Count >= 7 && (HasItem(itemName) == false || HasItem(itemName, 100 - num) == true))
+        if (Items.Count >= 15 && (HasItem(itemName) == false || HasItem(itemName, 100 - num) == true))
         {
             return false;
         }
