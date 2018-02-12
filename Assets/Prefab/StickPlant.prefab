@@ -100,8 +100,10 @@ MonoBehaviour:
   plantName: StickPlant
   GatherAnimationType: 2
   state: 1
-  growthTime: 120
+  growthTime: 360
   growthTimer: 0
+  isTumor: 0
+  isLoadByManager: 0
 --- !u!212 &212157090944066114
 SpriteRenderer:
   m_ObjectHideFlags: 1

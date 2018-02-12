@@ -33,21 +33,13 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //inventory.GetItem(Inventory.Item.Mass, 20);
-            //inventory.GetItem(Inventory.Item.Stick, 20);
-            //inventory.GetItem(Inventory.Item.Board, 20);
-            //inventory.GetItem(Inventory.Item.Thorn, 20);
-            //inventory.GetItem(Inventory.Item.Hose, 20);
-            //inventory.GetItem(Inventory.Item.Tumor, 20);
-            //inventory.GetItem(Inventory.Item.Heart, 20);
+            inventory.GetItem(Inventory.Item.Mass, 20);
+            inventory.GetItem(Inventory.Item.Stick, 20);
+            inventory.GetItem(Inventory.Item.Board, 20);
+            inventory.GetItem(Inventory.Item.Thorn, 20);
+            inventory.GetItem(Inventory.Item.Hose, 20);
+            inventory.GetItem(Inventory.Item.Tumor, 20);
+            inventory.GetItem(Inventory.Item.Heart, 20);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -73,58 +65,52 @@ public class PlayerInteraction : MonoBehaviour
         if (target == null)
             return;
 
-        if (target.gameObject.tag == "Plant")
+        if (Input.GetKeyUp(KeyCode.C))
         {
-            if (Input.GetKeyUp(KeyCode.C))
+            switch(target.gameObject.tag)
             {
-                if(isGather == false)
-                {
-                    target.GetComponent<Plant>().OpenMenu();
-                }
-            }
-        }
-        else if (target.gameObject.tag == "Facility")
-        {
-            if (Input.GetKeyUp(KeyCode.C))
-            {
-                if (target.GetComponent<Facility>().isOn == false)
-                {
-                    target.GetComponent<Facility>().OnOff();
-                }
-                else
-                {
-                    target.GetComponent<Facility>().OpenMenu();
-                }
-            }
-        }
-        else if (target.gameObject.tag == "Portal")
-        {
-            if (Input.GetKeyUp(KeyCode.C))
-            {
-                GetComponent<PlayerMove>().SetMovePossible(false);
-                SceneObjectManager.instance.SaveObject();
-                SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
-            }
-        }
-        else if (target.gameObject.tag == "Bulb")
-        {
-            if (Input.GetKeyUp(KeyCode.C))
-            {
-                if(target.GetComponent<Bulb>().isOn == false)
-                {
-                    target.GetComponent<Bulb>().OnOff();
-                }
-                else
-                {
-                    target.GetComponent<Bulb>().OpenMenu();
-                }
-            }
-        }
-        else if (target.gameObject.tag == "Wreckage")
-        {
-            if (Input.GetKeyUp(KeyCode.C))
-            {
-                target.GetComponent<Wreckage>().OpenMenu();
+                case "Plant":
+                    if (isGather == false)
+                    {
+                        target.GetComponent<Plant>().OpenMenu();
+                    }
+                    break;
+
+                case "Facility":
+                    if (target.GetComponent<Facility>().isOn == false)
+                    {
+                        target.GetComponent<Facility>().OnOff();
+                    }
+                    else
+                    {
+                        target.GetComponent<Facility>().OpenMenu();
+                    }
+                    break;
+
+                case "Portal":
+                    GetComponent<PlayerMove>().SetMovePossible(false);
+                    SceneObjectManager.instance.SaveObject();
+                    SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
+                    break;
+
+                case "Bulb":
+                    if (target.GetComponent<Bulb>().isOn == false && target.GetComponent<Bulb>().isAlive == true)
+                    {
+                        target.GetComponent<Bulb>().OnOff();
+                    }
+                    else
+                    {
+                        target.GetComponent<Bulb>().OpenMenu();
+                    }
+                    break;
+
+                case "Wreckage":
+                    target.GetComponent<Wreckage>().OpenMenu();
+                    break;
+
+                case "Nest":
+                    target.GetComponent<Nest>().OpenMenu();
+                    break;
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wreckage : MonoBehaviour
+public class Nest : MonoBehaviour
 {
     InteractionIcon interactionIcon;
     InteractionMenu interactionMenu;
@@ -45,12 +45,12 @@ public class Wreckage : MonoBehaviour
 
         float w = GetComponent<SpriteRenderer>().sprite.rect.width;
         float h = GetComponent<SpriteRenderer>().sprite.rect.height;
-        interactionMenu.OpenMenu(this.gameObject, "Wreckage", GetComponent<SpriteRenderer>().sprite, w, h);
+        interactionMenu.OpenMenu(this.gameObject, "Nest", GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
     public void SelectMenu(InteractionMenu.MenuItem m)
     {
-        switch(m)
+        switch (m)
         {
             case InteractionMenu.MenuItem.Remove:
                 RemoveObject();

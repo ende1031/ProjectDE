@@ -56,12 +56,12 @@ public class InteractionMenu : MonoBehaviour
         public string buttonText;
     }
 
-    Inventory inventory;
     Animator animaitor;
     GameObject Player;
 
     GameObject IMenu_bg;
     Image ItemImage;
+    RectTransform ItemImageRT;
     Text ButtonText;
     GameObject IconGroup;
     GameObject[] MenuIcon = new GameObject[7];
@@ -88,10 +88,10 @@ public class InteractionMenu : MonoBehaviour
 
     void Start ()
     {
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         IMenu_bg = transform.Find("IMenu_bg").gameObject;
         animaitor = IMenu_bg.GetComponent<Animator>();
         ItemImage = IMenu_bg.transform.Find("ItemImage").gameObject.GetComponent<Image>();
+        ItemImageRT = IMenu_bg.transform.Find("ItemImage").gameObject.GetComponent<RectTransform>();
         ButtonText = IMenu_bg.transform.Find("ButtonText").gameObject.GetComponent<Text>();
         IconGroup = IMenu_bg.transform.Find("IconGroup").gameObject;
         for(int i =0; i < 7; i++)
@@ -322,42 +322,13 @@ public class InteractionMenu : MonoBehaviour
         ButtonText.text = MenuDictionary[MenuList[selectedIndex]].buttonText;
     }
 
-    public void OpenMenu(GameObject to, string t)
+    public void OpenMenu(GameObject to, string t, Sprite sp = null, float w = 220, float h = 220)
     {
-        if(reOpenTimer < 0.3f)
+        if (reOpenTimer < 0.3f)
         {
             return;
         }
 
-        targetObject = to;
-        targetType = t;
-
-        if(MenuList.Count == 0)
-        {
-            MenuList.Add(MenuItem.Battery);
-        }
-
-        while(MenuList.Count < 5)
-        {
-            int temp = MenuList.Count;
-            for (int i = 0; i < temp; i++)
-            {
-                MenuList.Add(MenuList[i]);
-            }
-        }
-
-        Player.GetComponent<PlayerMove>().SetMovePossible(false);
-        Player.GetComponent<PlayerInteraction>().SetInteractionPossible(false);
-        IMenu_bg.SetActive(true);
-        isPopupActive = true;
-        selectedIndex = 0;
-        openTimer = 0;
-        RefreshWindow();
-        animaitor.SetBool("isOpen", true);
-    }
-
-    public void OpenMenu(GameObject to, string t, Sprite sp)
-    {
         targetObject = to;
         targetType = t;
 
@@ -376,6 +347,7 @@ public class InteractionMenu : MonoBehaviour
         }
 
         ItemImage.sprite = sp;
+        ItemImageRT.sizeDelta = new Vector2(w, h);
 
         Player.GetComponent<PlayerMove>().SetMovePossible(false);
         Player.GetComponent<PlayerInteraction>().SetInteractionPossible(false);
@@ -433,6 +405,11 @@ public class InteractionMenu : MonoBehaviour
             case "Wreckage":
                 targetObject.GetComponent<Wreckage>().SelectMenu(MenuList[selectedIndex]);
                 break;
+
+            case "Nest":
+                targetObject.GetComponent<Nest>().SelectMenu(MenuList[selectedIndex]);
+                break;
+
             case "Inventory":
                 targetObject.GetComponent<Inventory>().SelectMenu(MenuList[selectedIndex]);
                 break;

@@ -21,6 +21,8 @@ public class Facility : MonoBehaviour
     public bool isLoadByManager = false;
     public bool isAlive = true;
 
+    float offTimer = 0;
+
     void Start ()
     {
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
@@ -64,6 +66,11 @@ public class Facility : MonoBehaviour
         if(isAlive == false)
         {
             ruin();
+        }
+
+        if(offTimer < 0.3f)
+        {
+            offTimer += Time.deltaTime;
         }
     }
 
@@ -147,12 +154,18 @@ public class Facility : MonoBehaviour
 
     public void OnOff()
     {
+        if(offTimer < 0.3f)
+        {
+            return;
+        }
+
         if (facilityName != "EscapePod")
         {
             isOn = !isOn;
             animaitor.SetBool("isOn", isOn);
             interactionIcon.DeleteAllIcons();
             DisplayIcon();
+            offTimer = 0;
         }
     }
 
@@ -193,6 +206,10 @@ public class Facility : MonoBehaviour
     {
         interactionMenu.ClearMenu();
 
+        if (facilityName == "EscapePod")
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Research);
+        }
         if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
@@ -207,7 +224,6 @@ public class Facility : MonoBehaviour
         }
         if (facilityName == "EscapePod")
         {
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Research);
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Sleep);
         }
         else
@@ -215,8 +231,17 @@ public class Facility : MonoBehaviour
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
         }
-        
-        interactionMenu.OpenMenu(this.gameObject, "Facility");
+
+        if (facilityName != "EscapePod")
+        {
+            float w = GetComponent<SpriteRenderer>().sprite.rect.width;
+            float h = GetComponent<SpriteRenderer>().sprite.rect.height;
+            interactionMenu.OpenMenu(this.gameObject, "Facility", GetComponent<SpriteRenderer>().sprite, w, h);
+        }
+        else
+        {
+            interactionMenu.OpenMenu(this.gameObject, "Facility", transform.Find("render").GetComponent<SpriteRenderer>().sprite, 341 * 0.6f, 382 * 0.6f);
+        }
     }
 
     public void SelectMenu(InteractionMenu.MenuItem m)

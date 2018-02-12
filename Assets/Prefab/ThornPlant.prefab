@@ -100,8 +100,10 @@ MonoBehaviour:
   plantName: ThornPlant
   GatherAnimationType: 2
   state: 1
-  growthTime: 240
+  growthTime: 60
   growthTimer: 0
+  isTumor: 0
+  isLoadByManager: 0
 --- !u!212 &212630604053686064
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -74,7 +74,6 @@ public class Plant : MonoBehaviour
                 case "Trap01":
                     inventory.GetItem(Inventory.Item.Hose, 1);
                     inventory.GetItem(Inventory.Item.Heart, 1);
-                    inventory.GetItem(Inventory.Item.Mass, 1);
                     SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                     break;
             }
@@ -124,7 +123,7 @@ public class Plant : MonoBehaviour
                     temp = !inventory.isFull(1, Inventory.Item.Thorn, 5);
                     break;
                 case "Trap01":
-                    temp = !inventory.isFull(3, Inventory.Item.Hose, 1, Inventory.Item.Heart, 1, Inventory.Item.Mass, 1);
+                    temp = !inventory.isFull(3, Inventory.Item.Hose, 1, Inventory.Item.Heart, 1);
                     break;
             }
         }
@@ -286,7 +285,10 @@ public class Plant : MonoBehaviour
             }
         }
         interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
-        interactionMenu.OpenMenu(this.gameObject, "Plant");
+
+        float w = GetComponent<SpriteRenderer>().sprite.rect.width;
+        float h = GetComponent<SpriteRenderer>().sprite.rect.height;
+        interactionMenu.OpenMenu(this.gameObject, "Plant", GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
     public void SelectMenu(InteractionMenu.MenuItem m)

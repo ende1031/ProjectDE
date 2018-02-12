@@ -21,6 +21,8 @@ public class Bulb : MonoBehaviour
     public float LifeTime = 20;
     public float LifeTimer = 0;
 
+    float offTimer = 0;
+
     void Start ()
     {
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
@@ -88,6 +90,11 @@ public class Bulb : MonoBehaviour
                 OnOff(false);
             }
         }
+
+        if (offTimer < 0.3f)
+        {
+            offTimer += Time.deltaTime;
+        }
     }
 
     void DisplayText()
@@ -117,26 +124,26 @@ public class Bulb : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            if(isOn == true)
+            if(isAlive == true && isOn == false)
             {
-                interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
+                interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
             }
             else
             {
-                interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
+                interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
             }
         }
     }
 
     public void DisplayIcon()
     {
-        if (isOn == true)
+        if (isAlive == true && isOn == false)
         {
-            interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
+            interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
         }
         else
         {
-            interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
+            interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
         }
     }
 
@@ -157,6 +164,11 @@ public class Bulb : MonoBehaviour
 
     public void OnOff()
     {
+        if (offTimer < 0.3f)
+        {
+            return;
+        }
+
         if (isAlive == true)
         {
             isOn = !isOn;
@@ -164,12 +176,18 @@ public class Bulb : MonoBehaviour
             BulbLight.SetActive(isOn);
             interactionIcon.DeleteAllIcons();
             DisplayIcon();
+            offTimer = 0;
             SceneObjectManager.instance.SaveObject();
         }
     }
 
     public void OnOff(bool onOff)
     {
+        if (offTimer < 0.3f)
+        {
+            return;
+        }
+
         if (isAlive == true)
         {
             isOn = false;
@@ -177,6 +195,7 @@ public class Bulb : MonoBehaviour
             BulbLight.SetActive(false);
             interactionIcon.DeleteAllIcons();
             DisplayIcon();
+            offTimer = 0;
             SceneObjectManager.instance.SaveObject();
         }
     }
@@ -195,7 +214,10 @@ public class Bulb : MonoBehaviour
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
         }
         interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
-        interactionMenu.OpenMenu(this.gameObject, "Bulb");
+
+        float w = GetComponent<SpriteRenderer>().sprite.rect.width;
+        float h = GetComponent<SpriteRenderer>().sprite.rect.height;
+        interactionMenu.OpenMenu(this.gameObject, "Bulb", GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
     public void SelectMenu(InteractionMenu.MenuItem m)

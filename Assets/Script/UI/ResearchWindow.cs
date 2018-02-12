@@ -154,28 +154,29 @@ public class ResearchWindow : MonoBehaviour
         itemArray[1] = new ResearchItem(Inventory.Item.Mass, 5, "덩어리를 연구해서 종양씨앗을 만들어낼 수 있다는 놀라운 사실을 알게 되었다. 이럴수가.");
         itemArray[1].SetResultItem(1, Inventory.Item.TumorSeed);
 
-        itemArray[2] = new ResearchItem(Inventory.Item.Tumor, 3, "종양을 연구했다. 만족스럽다.");
-        itemArray[2].SetResultItem(2, Inventory.Item.Food, Inventory.Item.Bulb01);
+        itemArray[2] = new ResearchItem(Inventory.Item.Thorn, 5, "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너의 말을 들어보기로 했다.");
+        itemArray[2].SetResultItem(1, Inventory.Item.Trap01);
 
-        itemArray[3] = new ResearchItem(Inventory.Item.Stick, 20, "대나무는 대나무다.");
-        itemArray[3].SetResultItem(1, Inventory.Item.StickSeed);
+        itemArray[3] = new ResearchItem(Inventory.Item.Heart, 5, "최근 발표된 뉴욕 공학 대학의 연구 결과에 따르면 형이상학적 이유에 따라 우리가 관찰 하는 절대우주는 팽창과 수축을 반복하며 무한히 연쇄한다고 한다. 즉, 괴물의 심장으로 배터리를 만들 수 있다.");
+        itemArray[3].SetResultItem(1, Inventory.Item.Battery);
 
-        itemArray[4] = new ResearchItem(Inventory.Item.Board, 20, "이 식물을 연구해본 결과 식용으로 쓰기에는 부적합하다는 사실을 알게 됐다. (불쾌한 표정)");
-        itemArray[4].SetResultItem(1, Inventory.Item.BoardSeed);
+        itemArray[4] = new ResearchItem(Inventory.Item.Tumor, 3, "종양을 연구했다. 만족스럽다.");
+        itemArray[4].SetResultItem(2, Inventory.Item.Food, Inventory.Item.Bulb01);
 
-        itemArray[5] = new ResearchItem(Inventory.Item.Thorn, 20, "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너의 말을 들어보기로 했다.");
-        itemArray[5].SetResultItem(2, Inventory.Item.ThornSeed, Inventory.Item.Trap01);
+        itemArray[5] = new ResearchItem(Inventory.Item.Stick, 20, "이 식물은 상당히 대나무와 유사하다.");
+        itemArray[5].SetResultItem(1, Inventory.Item.StickSeed);
 
-        itemArray[6] = new ResearchItem(Inventory.Item.Heart, 5, "최근 발표된 뉴욕 공학 대학의 연구 결과에 따르면 형이상학적 이유에 따라 우리가 관찰 하는 절대우주는 팽창과 수축을 반복하며 무한히 연쇄한다고 한다. 즉, 괴물의 심장으로 배터리를 만들 수 있다.");
-        itemArray[6].SetResultItem(1, Inventory.Item.Battery);
+        itemArray[6] = new ResearchItem(Inventory.Item.Board, 20, "이 식물을 연구해본 결과 식용으로 쓰기에는 부적합하다는 사실을 알게 됐다. (불쾌한 표정)");
+        itemArray[6].SetResultItem(1, Inventory.Item.BoardSeed);
 
-        itemArray[7] = new ResearchItem(Inventory.Item.Hose, 10, "호스를 연구하면 분해기를 만들 수 있다. 아마도.");
-        itemArray[7].SetResultItem(1, Inventory.Item.Grinder01);
+        itemArray[7] = new ResearchItem(Inventory.Item.Thorn, 20, "가시의 성분을 분석해본 결과 식물의 가시보다는 동물의 뿔에 가깝다는 사실을 알게 됐다.");
+        itemArray[7].SetResultItem(1, Inventory.Item.ThornSeed);
 
-        itemArray[8] = new ResearchItem(Inventory.Item.Mass, 20, "덩어리를 또 연구하기로 한지 3개월이 지났다. 드디어 빛이 보인다! 연구 결과로 알게 된 사실은 이 다음 연구도 덩어리 연구라는 것이다.");
-        itemArray[8].SetResultItem(1, Inventory.Item.Facility01);
+        itemArray[8] = new ResearchItem(Inventory.Item.Hose, 10, "호스를 연구하면 분해기를 만들 수 있다. 아마도.");
+        itemArray[8].SetResultItem(1, Inventory.Item.Grinder01);
 
-        itemArray[9] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
+        itemArray[9] = new ResearchItem(Inventory.Item.Mass, 99, "덩어리를 또 연구하기로 한지 3개월이 지났다. 드디어 빛이 보인다! 연구 결과로 알게 된 사실은 이 다음 연구도 덩어리 연구라는 것이다.");
+
         itemArray[10] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
         itemArray[11] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
         itemArray[12] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
@@ -322,7 +323,11 @@ public class ResearchWindow : MonoBehaviour
                 }
                 else if (selectedIndex == 1)
                 {
-                    DiscoverNewResearch(8);
+                    DiscoverNewResearch(9);
+                }
+                else if (selectedIndex == 2)
+                {
+                    DiscoverNewResearch(7);
                 }
             }
         }

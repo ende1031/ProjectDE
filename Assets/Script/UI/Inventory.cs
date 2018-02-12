@@ -14,6 +14,7 @@ public class Inventory : MonoBehaviour
         }
         public Item name;
         public int count;
+        public string strigName;
     }
 
     public enum Item
@@ -35,12 +36,15 @@ public class Inventory : MonoBehaviour
         ThornSeed,
         Tumor,
         TumorSeed,
-        Grinder01
+        Grinder01,
+        SuppliedBattery,
+        SuppliedFood
     };
 
     GameObject[] itemSlot = new GameObject[15];
     List<ItemInfo> Items = new List<ItemInfo>();
     GameObject Cursor;
+    GameObject Arrow;
     GameObject[] GetEffect = new GameObject[15];
 
     GameObject player = null;
@@ -70,6 +74,8 @@ public class Inventory : MonoBehaviour
     public Sprite TumorSeedSp;
     public Sprite EscapePodSp;
     public Sprite Grinder01Sp;
+    public Sprite SuppliedBatterySp;
+    public Sprite SuppliedFoodSp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -100,6 +106,8 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.Tumor] = TumorSp;
         itemDictionary[Item.TumorSeed] = TumorSeedSp;
         itemDictionary[Item.Grinder01] = Grinder01Sp;
+        itemDictionary[Item.SuppliedBattery] = SuppliedBatterySp;
+        itemDictionary[Item.SuppliedFood] = SuppliedFoodSp;
     }
 
     public void OpenMenu() //아이템 추가시 수정할 부분
@@ -109,18 +117,21 @@ public class Inventory : MonoBehaviour
             return;
         }
         isInventoryActive = false;
+        Arrow.SetActive(false);
 
         interactionMenu.ClearMenu();
 
         switch (Items[selectedIndex].name)
         {
             case Item.Food:
+            case Item.SuppliedFood:
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Food);
                 break;
             case Item.Oxygen:
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Oxygen);
                 break;
             case Item.Battery:
+            case Item.SuppliedBattery:
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Battery);
                 break;
             case Item.Facility01:
@@ -143,6 +154,7 @@ public class Inventory : MonoBehaviour
     public void SelectMenu(InteractionMenu.MenuItem m) //아이템 추가시 수정할 부분
     {
         isInventoryActive = true;
+        Arrow.SetActive(true);
         int sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
 
         switch (m)
@@ -249,12 +261,14 @@ public class Inventory : MonoBehaviour
     public void CancleMenu()
     {
         isInventoryActive = true;
+        Arrow.SetActive(true);
     }
 
     void Start ()
     {
         animaitor = GetComponent<Animator>();
         Cursor = transform.Find("Cursor").gameObject;
+        Arrow = transform.Find("Arrow").gameObject;
 
         for (int i=0; i<15; i++)
         {
@@ -285,26 +299,26 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            DisplayItem();
-
-            if (Input.GetKeyUp(KeyCode.A) && isInventoryActive == false)
-            {
-                if(player.GetComponent<PlayerInteraction>().GetInteractionPossible() == true)
-                {
-                    OpenInventory();
-                }
-            }
-            else if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.Escape)) && isInventoryActive == true)
-            {
-                CloseInventory();
-            }
-
             if(isInventoryActive == true)
             {
                 MoveCursor();
                 if (Input.GetKeyUp(KeyCode.C))
                 {
                     OpenMenu();
+                }
+                else if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Z))
+                {
+                    CloseInventory();
+                }
+            }
+            else
+            {
+                if (Input.GetKeyUp(KeyCode.Z))
+                {
+                    if (player.GetComponent<PlayerInteraction>().GetInteractionPossible() == true)
+                    {
+                        OpenInventory();
+                    }
                 }
             }
         }
@@ -315,10 +329,12 @@ public class Inventory : MonoBehaviour
         if (player.GetComponent<PlayerMove>().GetMovePossible() == true)
         {
             Cursor.SetActive(true);
+            Arrow.SetActive(true);
             animaitor.SetBool("isOpen", true);
-            selectedIndex = 0;
+            //selectedIndex = 0;
             isInventoryActive = true;
             player.GetComponent<PlayerMove>().SetMovePossible(false);
+            DisplayItem();
         }
     }
 
@@ -327,6 +343,7 @@ public class Inventory : MonoBehaviour
         animaitor.SetBool("isOpen", false);
         isInventoryActive = false;
         Cursor.SetActive(false);
+        Arrow.SetActive(false);
         player.GetComponent<PlayerMove>().SetMovePossible(true);
     }
 
@@ -363,6 +380,7 @@ public class Inventory : MonoBehaviour
         //Vector3 temp = Cursor.transform.position;
         //temp.x = transform.position.x - 63 * 3 + selectedIndex * 63;
         Cursor.transform.position = itemSlot[selectedIndex].transform.position;
+        Arrow.transform.position = itemSlot[selectedIndex].transform.position;
     }
 
     void DisplayItem()
@@ -410,6 +428,7 @@ public class Inventory : MonoBehaviour
                     researchWindow.DiscoverNewResearch(itemName);
                 }
             }
+            DisplayItem();
             return true;
         }
         else
@@ -437,6 +456,7 @@ public class Inventory : MonoBehaviour
             {
                 return false;
             }
+            DisplayItem();
             return true;
         }
         else
