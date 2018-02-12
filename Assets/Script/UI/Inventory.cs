@@ -41,8 +41,6 @@ public class Inventory : MonoBehaviour
     GameObject[] itemSlot = new GameObject[15];
     List<ItemInfo> Items = new List<ItemInfo>();
     GameObject Cursor;
-    GameObject[] InventoryMenu = new GameObject[3];
-    GameObject[] InventoryMenuText = new GameObject[3];
     GameObject[] GetEffect = new GameObject[15];
 
     GameObject player = null;
@@ -51,6 +49,7 @@ public class Inventory : MonoBehaviour
     OxygenGauge oxygenGauge;
     EnergyGauge energyGauge;
     ResearchWindow researchWindow;
+    InteractionMenu interactionMenu;
 
     public Sprite FoodSp; //아이템 추가시 수정할 부분
     public Sprite OxygenSp;
@@ -103,238 +102,159 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.Grinder01] = Grinder01Sp;
     }
 
-    void RefreshItemMenu()
-    {
-        for(int i = 0; i<3; i++)
-        {
-            InventoryMenu[i].SetActive(false);
-        }
-        if(Items.Count <= selectedIndex)
-        {
-            return;
-        }
-
-        switch (Items[selectedIndex].name) //아이템 추가시 수정할 부분
-        {
-            case Item.Food:
-            case Item.Oxygen:
-            case Item.Battery:
-                InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
-                InventoryMenu[1].SetActive(true);
-                InventoryMenuText[1].GetComponent<Text>().text = "C : 사용하기";
-                break;
-            
-            case Item.Stick:
-            case Item.Board:
-            case Item.Hose:
-            case Item.Mass:
-            case Item.Thorn:
-            case Item.Heart:
-            case Item.Tumor:
-            case Item.TumorSeed:
-                InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
-                break;
-
-            case Item.Facility01:
-            case Item.Trap01:
-            case Item.Bulb01:
-            case Item.Grinder01:
-                InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
-                InventoryMenu[1].SetActive(true);
-                InventoryMenuText[1].GetComponent<Text>().text = "C : 설치하기";
-                break;
-
-            case Item.StickSeed:
-            case Item.BoardSeed:
-            case Item.ThornSeed:
-                InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "X : 버리기";
-                InventoryMenu[1].SetActive(true);
-                InventoryMenuText[1].GetComponent<Text>().text = "C : 심기";
-                break;
-
-            default:
-                InventoryMenu[0].SetActive(true);
-                InventoryMenuText[0].GetComponent<Text>().text = "Z : 먹기";
-                InventoryMenu[1].SetActive(true);
-                InventoryMenuText[1].GetComponent<Text>().text = "X : 마시기";
-                InventoryMenu[2].SetActive(true);
-                InventoryMenuText[2].GetComponent<Text>().text = "C : 발차기";
-                break;
-        }
-    }
-
-    void InteractionItem() //아이템 추가시 수정할 부분
+    public void OpenMenu() //아이템 추가시 수정할 부분
     {
         if (Items.Count <= selectedIndex)
         {
             return;
         }
+        isInventoryActive = false;
 
-        if (Input.GetKeyUp(KeyCode.C))
-        {
-            int sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
-            switch (Items[selectedIndex].name)
-            {
-                case Item.Food:
-                    hungerGauge.SetAmount(50);
-                    DeleteItem(Items[selectedIndex].name);
-                    RefreshItemMenu();
-                    break;
-                case Item.Oxygen:
-                    oxygenGauge.SetAmount(70);
-                    DeleteItem(Items[selectedIndex].name);
-                    RefreshItemMenu();
-                    break;
-                case Item.Battery:
-                    energyGauge.SetAmount(35);
-                    DeleteItem(Items[selectedIndex].name);
-                    RefreshItemMenu();
-                    break;
-                case Item.Facility01:
-                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
-                    {
-                        monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
-                    }
-                    else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "TempFacility")) == true)
-                    {
-                        DeleteItem(Items[selectedIndex].name);
-                        RefreshItemMenu();
-                        CloseInventory();
-                    }
-                    else
-                    {
-                        monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
-                    }
-                    break;
-                case Item.Grinder01:
-                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
-                    {
-                        monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
-                    }
-                    else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "Grinder01")) == true)
-                    {
-                        DeleteItem(Items[selectedIndex].name);
-                        RefreshItemMenu();
-                        CloseInventory();
-                    }
-                    else
-                    {
-                        monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
-                    }
-                    break;
-                case Item.Trap01:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3)) == true)
-                    {
-                        DeleteItem(Items[selectedIndex].name);
-                        RefreshItemMenu();
-                        CloseInventory();
-                    }
-                    else
-                    {
-                        monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
-                    }
-                    break;
-                case Item.Bulb01:
-                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Bulb") == true || SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Facility", "EscapePod") == true)
-                    {
-                        monologue.DisplayLog("근처에 이미 다른 광원이 있군.\n빛이 없는 곳에 설치하자.");
-                    }
-                    else if(SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb01")) == true)
-                    {
-                        DeleteItem(Items[selectedIndex].name);
-                        RefreshItemMenu();
-                        CloseInventory();
-                    }
-                    else
-                    {
-                        monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
-                    }
-                    break;
-                case Item.StickSeed:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "StickPlant", 0)) == true)
-                    {
-                        DeleteItem(Items[selectedIndex].name);
-                        RefreshItemMenu();
-                        CloseInventory();
-                    }
-                    else
-                    {
-                        monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
-                    }
-                    break;
-                case Item.BoardSeed:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "BoardPlant", 0)) == true)
-                    {
-                        DeleteItem(Items[selectedIndex].name);
-                        RefreshItemMenu();
-                        CloseInventory();
-                    }
-                    else
-                    {
-                        monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
-                    }
-                    break;
-                case Item.ThornSeed:
-                    if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "ThornPlant", 0)) == true)
-                    {
-                        DeleteItem(Items[selectedIndex].name);
-                        RefreshItemMenu();
-                        CloseInventory();
-                    }
-                    else
-                    {
-                        monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n똑똑한 미미쨩이라면 다른 곳으로 이동해서 설치했겠지.");
-                    }
-                    break;
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.X))
-        {
-            switch (Items[selectedIndex].name)
-            {
-                case Item.Food:
-                case Item.Oxygen:
-                case Item.Battery:
-                case Item.Stick:
-                case Item.Board:
-                case Item.Hose:
-                case Item.Mass:
-                case Item.Thorn:
-                case Item.Facility01:
-                case Item.Trap01:
-                case Item.Heart:
-                case Item.Bulb01:
-                case Item.StickSeed:
-                case Item.BoardSeed:
-                case Item.ThornSeed:
-                case Item.Tumor:
-                case Item.TumorSeed:
-                case Item.Grinder01:
-                    DeleteItem(Items[selectedIndex].name);
-                    RefreshItemMenu();
-                    break;
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.Z))
-        {
+        interactionMenu.ClearMenu();
 
+        switch (Items[selectedIndex].name)
+        {
+            case Item.Food:
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Food);
+                break;
+            case Item.Oxygen:
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Oxygen);
+                break;
+            case Item.Battery:
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Battery);
+                break;
+            case Item.Facility01:
+            case Item.Trap01:
+            case Item.Bulb01:
+            case Item.Grinder01:
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Install);
+                break;
+            case Item.StickSeed:
+            case Item.BoardSeed:
+            case Item.ThornSeed:
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Plant);
+                break;
         }
+        interactionMenu.AddMenu(InteractionMenu.MenuItem.Dump);
+
+        interactionMenu.OpenMenu(this.gameObject, "Inventory", itemDictionary[Items[selectedIndex].name]);
+    }
+
+    public void SelectMenu(InteractionMenu.MenuItem m) //아이템 추가시 수정할 부분
+    {
+        isInventoryActive = true;
+        int sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+
+        switch (m)
+        {
+            case InteractionMenu.MenuItem.Food:
+                hungerGauge.SetAmount(50);
+                DeleteItem(Items[selectedIndex].name);
+                break;
+
+            case InteractionMenu.MenuItem.Oxygen:
+                oxygenGauge.SetAmount(70);
+                DeleteItem(Items[selectedIndex].name);
+                break;
+
+            case InteractionMenu.MenuItem.Battery:
+                energyGauge.SetAmount(35);
+                DeleteItem(Items[selectedIndex].name);
+                break;
+
+            case InteractionMenu.MenuItem.Install:
+                switch (Items[selectedIndex].name)
+                {
+                    case Item.Facility01:
+                    case Item.Grinder01:
+                        if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
+                        {
+                            monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
+                        }
+                        else if(SceneObjectManager.instance.ContainObject(sceneNum, Grid.instance.PlayerGrid()) == true)
+                        {
+                            monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n다른 곳에 설치하자.");
+                        }
+                        else
+                        {
+                            if(Items[selectedIndex].name == Item.Facility01)
+                            {
+                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "TempFacility"));
+                            }
+                            else if (Items[selectedIndex].name == Item.Grinder01)
+                            {
+                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "Grinder01"));
+                            }
+                            DeleteItem(Items[selectedIndex].name);
+                        }
+                        break;
+                    case Item.Trap01:
+                        if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3)) == true)
+                        {
+                            DeleteItem(Items[selectedIndex].name);
+                        }
+                        else
+                        {
+                            monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n다른 곳에 설치하자.");
+                        }
+                        break;
+                    case Item.Bulb01:
+                        if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Bulb") == true || SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Facility", "EscapePod") == true)
+                        {
+                            monologue.DisplayLog("근처에 이미 다른 광원이 있군.\n빛이 없는 곳에 설치하자.");
+                        }
+                        else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb01")) == true)
+                        {
+                            DeleteItem(Items[selectedIndex].name);
+                        }
+                        else
+                        {
+                            monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n다른 곳에 설치하자.");
+                        }
+                        break;
+                }
+                CloseInventory();
+                break;
+
+            case InteractionMenu.MenuItem.Plant:
+                if (SceneObjectManager.instance.ContainObject(sceneNum, Grid.instance.PlayerGrid()) == true)
+                {
+                    monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n다른 곳에 설치하자.");
+                }
+                else
+                {
+                    if (Items[selectedIndex].name == Item.StickSeed)
+                    {
+                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "StickPlant", 0));
+                    }
+                    else if (Items[selectedIndex].name == Item.BoardSeed)
+                    {
+                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "BoardPlant", 0));
+                    }
+                    else if (Items[selectedIndex].name == Item.ThornSeed)
+                    {
+                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "ThornPlant", 0));
+                    }
+                    DeleteItem(Items[selectedIndex].name);
+                }
+                CloseInventory();
+                break;
+
+            case InteractionMenu.MenuItem.Dump:
+                DeleteItem(Items[selectedIndex].name);
+                break;
+        }
+    }
+
+    public void CancleMenu()
+    {
+        isInventoryActive = true;
     }
 
     void Start ()
     {
         animaitor = GetComponent<Animator>();
         Cursor = transform.Find("Cursor").gameObject;
-
-        for (int i = 0; i < 3; i++)
-        {
-            InventoryMenu[i] = Cursor.transform.Find("InvenMenu" + (i + 1)).gameObject;
-            InventoryMenuText[i] = InventoryMenu[i].transform.Find("Text").gameObject;
-        }
 
         for (int i=0; i<15; i++)
         {
@@ -348,6 +268,7 @@ public class Inventory : MonoBehaviour
         hungerGauge = GameObject.Find("Hunger_Guage").GetComponent<HungerGauge>();
         energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
         researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
+        interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
 
         SetDictionary();
     }
@@ -381,7 +302,10 @@ public class Inventory : MonoBehaviour
             if(isInventoryActive == true)
             {
                 MoveCursor();
-                InteractionItem();
+                if (Input.GetKeyUp(KeyCode.C))
+                {
+                    OpenMenu();
+                }
             }
         }
     }
@@ -395,7 +319,6 @@ public class Inventory : MonoBehaviour
             selectedIndex = 0;
             isInventoryActive = true;
             player.GetComponent<PlayerMove>().SetMovePossible(false);
-            RefreshItemMenu();
         }
     }
 
@@ -424,7 +347,6 @@ public class Inventory : MonoBehaviour
             {
                 selectedIndex = 14;
             }
-            RefreshItemMenu();
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
@@ -436,7 +358,6 @@ public class Inventory : MonoBehaviour
             {
                 selectedIndex = 0;
             }
-            RefreshItemMenu();
         }
 
         //Vector3 temp = Cursor.transform.position;

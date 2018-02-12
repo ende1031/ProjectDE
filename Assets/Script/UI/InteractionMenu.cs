@@ -73,6 +73,7 @@ public class InteractionMenu : MonoBehaviour
 
     bool isPopupActive = false;
     float openTimer = 0;
+    float reOpenTimer = 0;
     bool isMove = false;
 
     float circleRadius = 135.0f;
@@ -107,7 +108,7 @@ public class InteractionMenu : MonoBehaviour
         MenuDictionary[MenuItem.Dump] = new MenuItemInfo(DumpSp, "버리기");
         MenuDictionary[MenuItem.Food] = new MenuItemInfo(FoodSp, "식품 섭취");
         MenuDictionary[MenuItem.Gather] = new MenuItemInfo(GatherSp, "아이템 획득");
-        MenuDictionary[MenuItem.Install] = new MenuItemInfo(InstallSp, "시설 설치");
+        MenuDictionary[MenuItem.Install] = new MenuItemInfo(InstallSp, "설치");
         MenuDictionary[MenuItem.Make] = new MenuItemInfo(MakeSp, "아이템 제작");
         MenuDictionary[MenuItem.Off] = new MenuItemInfo(OffSp, "전원 끄기");
         MenuDictionary[MenuItem.Oxygen] = new MenuItemInfo(OxygenSp, "산소 충전");
@@ -117,7 +118,6 @@ public class InteractionMenu : MonoBehaviour
         MenuDictionary[MenuItem.Sleep] = new MenuItemInfo(SleepSp, "잠자기");
         MenuDictionary[MenuItem.Tumor] = new MenuItemInfo(TumorSp, "종양 심기");
     }
-
 
     void Update ()
     {
@@ -137,6 +137,10 @@ public class InteractionMenu : MonoBehaviour
                 MoveCursor();
                 if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Escape))
                 {
+                    if (targetType == "Inventory")
+                    {
+                        targetObject.GetComponent<Inventory>().CancleMenu();
+                    }
                     CloseWindow();
                 }
                 else if (Input.GetKeyUp(KeyCode.C))
@@ -148,6 +152,10 @@ public class InteractionMenu : MonoBehaviour
             {
                 MoveMenuIcon();
             }
+        }
+        else
+        {
+            reOpenTimer += Time.deltaTime;
         }
     }
 
@@ -316,6 +324,11 @@ public class InteractionMenu : MonoBehaviour
 
     public void OpenMenu(GameObject to, string t)
     {
+        if(reOpenTimer < 0.3f)
+        {
+            return;
+        }
+
         targetObject = to;
         targetType = t;
 
@@ -343,9 +356,45 @@ public class InteractionMenu : MonoBehaviour
         animaitor.SetBool("isOpen", true);
     }
 
+    public void OpenMenu(GameObject to, string t, Sprite sp)
+    {
+        targetObject = to;
+        targetType = t;
+
+        if (MenuList.Count == 0)
+        {
+            MenuList.Add(MenuItem.Battery);
+        }
+
+        while (MenuList.Count < 5)
+        {
+            int temp = MenuList.Count;
+            for (int i = 0; i < temp; i++)
+            {
+                MenuList.Add(MenuList[i]);
+            }
+        }
+
+        ItemImage.sprite = sp;
+
+        Player.GetComponent<PlayerMove>().SetMovePossible(false);
+        Player.GetComponent<PlayerInteraction>().SetInteractionPossible(false);
+        IMenu_bg.SetActive(true);
+        isPopupActive = true;
+        selectedIndex = 0;
+        openTimer = 0;
+        RefreshWindow();
+        animaitor.SetBool("isOpen", true);
+    }
+
     public void CloseWindow()
     {
-        Player.GetComponent<PlayerMove>().SetMovePossible(true);
+        reOpenTimer = 0;
+
+        if (targetType != "Inventory")
+        {
+            Player.GetComponent<PlayerMove>().SetMovePossible(true);
+        }
         Player.GetComponent<PlayerInteraction>().SetInteractionPossible(true);
         isPopupActive = false;
         openTimer = 0;
@@ -385,6 +434,7 @@ public class InteractionMenu : MonoBehaviour
                 targetObject.GetComponent<Wreckage>().SelectMenu(MenuList[selectedIndex]);
                 break;
             case "Inventory":
+                targetObject.GetComponent<Inventory>().SelectMenu(MenuList[selectedIndex]);
                 break;
         }
     }

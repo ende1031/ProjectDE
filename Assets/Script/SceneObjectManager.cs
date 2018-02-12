@@ -424,6 +424,12 @@ public class SceneObjectManager : MonoBehaviour
         return true;
     }
 
+    //해당 좌표에 오브젝트가 있으면 true
+    public bool ContainObject(int sceneNum, int grid)
+    {
+        return SObjects[sceneNum].ContainsKey(grid);
+    }
+
     //시설을 지우고 잔해를 넣는 등
     public void ChangeObject(int sceneNum, int grid, SceneObject ob)
     {
