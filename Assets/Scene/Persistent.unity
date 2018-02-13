@@ -1595,6 +1595,7 @@ MonoBehaviour:
   Grinder01Sp: {fileID: 21300000, guid: e9ff72ee881e3ea47974a0b267036d9c, type: 3}
   SuppliedBatterySp: {fileID: 21300000, guid: 457c3f0f7cec45f43adac07c32ca0ba0, type: 3}
   SuppliedFoodSp: {fileID: 21300000, guid: 12fdd3632bcdc8e45990fb1e76491b73, type: 3}
+  WaterSp: {fileID: 21300000, guid: 73cd8011db5a0874ba9fa88dd855ae89, type: 3}
   isInventoryActive: 0
   discoveredItemList: 
 --- !u!114 &128048174
@@ -10243,6 +10244,7 @@ MonoBehaviour:
   ResearchSp: {fileID: 21300000, guid: 02804e0d4917c5249bc8694a77d6c8dd, type: 3}
   SleepSp: {fileID: 21300000, guid: aef6bea1dcf2bf04084916290a988223, type: 3}
   TumorSp: {fileID: 21300000, guid: a10c48b6f0bc1f442a454df0d8269bfe, type: 3}
+  GrindSp: {fileID: 21300000, guid: f31d89de63636844f902fbd4f7fa6585, type: 3}
 --- !u!1 &1136096715
 GameObject:
   m_ObjectHideFlags: 0

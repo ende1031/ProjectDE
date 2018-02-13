@@ -55,9 +55,12 @@ public class SceneObjectManager : MonoBehaviour
         public int portalAfterMoveGrid;
         public int plantState;
         public Inventory.Item facilityMakeItem;
+        public Inventory.Item[] facilityGrinderItem = new Inventory.Item[3];
+        public int[] facilityGrinderItemNum = new int[3];
         public float facilityTimeToMake;
         public bool facilityIsMake;
         public bool facilityIsMakeFinish;
+        public bool isMakeByGrinder;
         public float bulbLifeTime;
     }
 
@@ -123,8 +126,11 @@ public class SceneObjectManager : MonoBehaviour
             ob.inGameObject.GetComponent<FacilityBalloon>().timeToMake = ob.facilityTimeToMake;
             ob.inGameObject.GetComponent<FacilityBalloon>().isMake = ob.facilityIsMake;
             ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish = ob.facilityIsMakeFinish;
-            ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
+            ob.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder = ob.isMakeByGrinder;
+            ob.inGameObject.GetComponent<FacilityBalloon>().grinderItem = ob.facilityGrinderItem;
+            ob.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum = ob.facilityGrinderItemNum;
             ob.inGameObject.GetComponent<Facility>().isAlive = ob.isAlive;
+            ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
             ob.inGameObject.GetComponent<Facility>().isLoadByManager = true;
         }
         else if (ob.type == "Portal")
@@ -263,6 +269,9 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.facilityIsMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMake;
                         pair.Value.facilityIsMakeFinish = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;
                         pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Facility>().isAlive;
+                        pair.Value.isMakeByGrinder = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder;
+                        pair.Value.facilityGrinderItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItem;
+                        pair.Value.facilityGrinderItemNum = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum;
                     }
                 }
                 else if (pair.Value.type == "Bulb")

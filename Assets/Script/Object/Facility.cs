@@ -6,6 +6,7 @@ public class Facility : MonoBehaviour
 {
     public string facilityName = "TempFacility";
 
+    GrinderWindow grinderWindow;
     InteractionIcon interactionIcon;
     InteractionMenu interactionMenu;
     Monologue monologue;
@@ -25,6 +26,7 @@ public class Facility : MonoBehaviour
 
     void Start ()
     {
+        grinderWindow = GameObject.Find("GrinderWindow").GetComponent<GrinderWindow>();
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
@@ -120,18 +122,19 @@ public class Facility : MonoBehaviour
                 popupWindow.AddItem(Inventory.Item.Grinder01);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
-            case "Grinder01":
-                popupWindow.ClearItemList();
-                popupWindow.AddItem(Inventory.Item.Mass);
-                popupWindow.OpenWindow(this.gameObject);
-                break;
             case "EscapePod":
                 popupWindow.ClearItemList();
+                popupWindow.AddItem(Inventory.Item.Facility01);
                 popupWindow.AddItem(Inventory.Item.Food);
                 popupWindow.AddItem(Inventory.Item.Oxygen);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
         }
+    }
+
+    public void OpenGrinderWindow()
+    {
+        grinderWindow.OpenWindow(this.gameObject);
     }
 
     public void Sleep()
@@ -209,29 +212,30 @@ public class Facility : MonoBehaviour
         if (facilityName == "EscapePod")
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Research);
-        }
-        if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
-        {
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
-            if (facilityName != "EscapePod")
-            {
-                interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
-            }
-        }
-        else if(GetComponent<FacilityBalloon>().isMakeFinish == true)
-        {
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
-        }
-        else if(GetComponent<FacilityBalloon>().isMake == true)
-        {
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
-        }
-        if (facilityName == "EscapePod")
-        {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Sleep);
         }
         else
         {
+            if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
+            {
+                if (facilityName == "Grinder01")
+                {
+                    interactionMenu.AddMenu(InteractionMenu.MenuItem.Grind);
+                }
+                else
+                {
+                    interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
+                }
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
+            }
+            else if (GetComponent<FacilityBalloon>().isMakeFinish == true)
+            {
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
+            }
+            else if (GetComponent<FacilityBalloon>().isMake == true)
+            {
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
+            }
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
         }
 
@@ -253,6 +257,9 @@ public class Facility : MonoBehaviour
         {
             case InteractionMenu.MenuItem.Make:
                 OpenProductionWindow();
+                break;
+            case InteractionMenu.MenuItem.Grind:
+                OpenGrinderWindow();
                 break;
             case InteractionMenu.MenuItem.Gather:
                 if (GetComponent<FacilityBalloon>().InventoryCheck() == true)

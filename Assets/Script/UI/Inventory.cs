@@ -38,7 +38,8 @@ public class Inventory : MonoBehaviour
         TumorSeed,
         Grinder01,
         SuppliedBattery,
-        SuppliedFood
+        SuppliedFood,
+        Water
     };
 
     GameObject[] itemSlot = new GameObject[15];
@@ -77,6 +78,7 @@ public class Inventory : MonoBehaviour
     public Sprite Grinder01Sp;
     public Sprite SuppliedBatterySp;
     public Sprite SuppliedFoodSp;
+    public Sprite WaterSp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -111,6 +113,7 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.Grinder01] = Grinder01Sp;
         itemDictionary[Item.SuppliedBattery] = SuppliedBatterySp;
         itemDictionary[Item.SuppliedFood] = SuppliedFoodSp;
+        itemDictionary[Item.Water] = WaterSp;
     }
 
     public void OpenMenu() //아이템 추가시 수정할 부분
@@ -319,7 +322,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        if (Items.Count > selectedIndex)
+                        if (Items.Count > selectedIndex && openTimer > 0.1f)
                         {
                             grinderWindow.SelectItem(false, Items[selectedIndex].name);
                             CloseInventory();

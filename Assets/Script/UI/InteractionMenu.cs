@@ -20,7 +20,8 @@ public class InteractionMenu : MonoBehaviour
         Remove,
         Research,
         Sleep,
-        Tumor
+        Tumor,
+        Grind
     };
 
     enum Direction
@@ -43,6 +44,7 @@ public class InteractionMenu : MonoBehaviour
     public Sprite ResearchSp;
     public Sprite SleepSp;
     public Sprite TumorSp;
+    public Sprite GrindSp;
 
     public class MenuItemInfo
     {
@@ -66,6 +68,7 @@ public class InteractionMenu : MonoBehaviour
     GameObject IconGroup;
     GameObject[] MenuIcon = new GameObject[7];
     PopupWindow popupWindow;
+    GrinderWindow grinderWindow;
 
     List<MenuItem> MenuList = new List<MenuItem>();
     Dictionary<MenuItem, MenuItemInfo> MenuDictionary = new Dictionary<MenuItem, MenuItemInfo>();
@@ -90,6 +93,7 @@ public class InteractionMenu : MonoBehaviour
     void Start ()
     {
         popupWindow = GameObject.Find("PopupWindow").GetComponent<PopupWindow>();
+        grinderWindow = GameObject.Find("GrinderWindow").GetComponent<GrinderWindow>();
         IMenu_bg = transform.Find("IMenu_bg").gameObject;
         animaitor = IMenu_bg.GetComponent<Animator>();
         ItemImage = IMenu_bg.transform.Find("ItemImage").gameObject.GetComponent<Image>();
@@ -103,7 +107,7 @@ public class InteractionMenu : MonoBehaviour
         SetDictionary();
     }
 
-    void SetDictionary()
+    void SetDictionary() //메뉴 추가시 수정할 부분
     {
         MenuDictionary[MenuItem.Battery] = new MenuItemInfo(BatterySp, "배터리 사용");
         MenuDictionary[MenuItem.Cancle] = new MenuItemInfo(CancleSp, "제작 취소");
@@ -119,6 +123,7 @@ public class InteractionMenu : MonoBehaviour
         MenuDictionary[MenuItem.Research] = new MenuItemInfo(ResearchSp, "연구");
         MenuDictionary[MenuItem.Sleep] = new MenuItemInfo(SleepSp, "잠자기");
         MenuDictionary[MenuItem.Tumor] = new MenuItemInfo(TumorSp, "종양 심기");
+        MenuDictionary[MenuItem.Grind] = new MenuItemInfo(GrindSp, "아이템 분해");
     }
 
     void Update ()
@@ -155,7 +160,7 @@ public class InteractionMenu : MonoBehaviour
                 MoveMenuIcon();
             }
         }
-        else if(popupWindow.GetPopupActive() == false)
+        else if(popupWindow.GetPopupActive() == false && grinderWindow.GetUsingGrinder() == false)
         {
             reOpenTimer += Time.deltaTime;
         }

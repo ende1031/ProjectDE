@@ -5,14 +5,18 @@ using UnityEngine;
 public class FacilityBalloon : MonoBehaviour
 {
     Inventory inventory;
-    InteractionIcon interactionIcon;
 
     Animator animaitor;
 
     GameObject Balloon;
     GameObject TimeText;
+
+    GameObject MakeItems;
     GameObject Item;
     GameObject Item_back;
+
+    GameObject GrindItems;
+    GameObject[] GrindItemSet = new GameObject[3];
 
     public Sprite blueBalloon;
     public Sprite yellowBalloon;
@@ -21,20 +25,34 @@ public class FacilityBalloon : MonoBehaviour
     public float timeToMake; //초
     public float progressTimer;
 
-    public Inventory.Item makeItem = Inventory.Item.Stick; // 만드는 아이템
+    public Inventory.Item makeItem = 0; // 만드는 아이템
+
+    public Inventory.Item[] grinderItem = new Inventory.Item[3] { 0, 0, 0 };
+    public int[] grinderItemNum = new int[3] { 0, 0, 0 };
+
     public bool isMake = false;
     public bool isMakeFinish = false;
     public bool isLoadByManager = false;
 
+    public bool isMakeByGrinder = false;
+
     void Start ()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
 
         Balloon = transform.Find("Balloon").gameObject;
         TimeText = Balloon.transform.Find("TimeText").gameObject;
-        Item = Balloon.transform.Find("Item").gameObject;
-        Item_back = Balloon.transform.Find("Item_back").gameObject;
+
+        MakeItems = Balloon.transform.Find("MakeItems").gameObject;
+        Item = MakeItems.transform.Find("Item").gameObject;
+        Item_back = MakeItems.transform.Find("Item_back").gameObject;
+
+        GrindItems = Balloon.transform.Find("GrindItems").gameObject;
+        for(int i =0; i < 3; i++)
+        {
+            GrindItemSet[i] = GrindItems.transform.Find("ItemSet" + (i + 1)).gameObject;
+            GrindItemSet[i].SetActive(false);
+        }
 
         animaitor = GetComponent<Animator>();
 
@@ -56,15 +74,45 @@ public class FacilityBalloon : MonoBehaviour
                 {
                     animaitor.SetBool("isMaking", true);
                 }
+
+                if (isMakeByGrinder == true)
+                {
+                    MakeItems.SetActive(false);
+                    GrindItems.SetActive(true);
+                }
+                else
+                {
+                    MakeItems.SetActive(true);
+                    GrindItems.SetActive(false);
+                }
             }
             if (isMakeFinish == true)
             {
                 Balloon.SetActive(true);
                 Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
                 Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
+
+                if (isMakeByGrinder == true)
+                {
+                    MakeItems.SetActive(false);
+                    GrindItems.SetActive(true);
+                }
+                else
+                {
+                    MakeItems.SetActive(true);
+                    GrindItems.SetActive(false);
+                }
             }
-            Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
-            Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
+            if(isMakeByGrinder == false)
+            {
+                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
+                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
+            }
+            else
+            {
+                DisplayGrinderItems();
+            }
+
             isLoadByManager = false;
         }
 
@@ -84,6 +132,10 @@ public class FacilityBalloon : MonoBehaviour
 
     public void MakeItem(Inventory.Item itemName, int time)
     {
+        isMakeByGrinder = false;
+        MakeItems.SetActive(true);
+        GrindItems.SetActive(false);
+
         Balloon.SetActive(true);
         makeItem = itemName;
         Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName];
@@ -97,11 +149,63 @@ public class FacilityBalloon : MonoBehaviour
         {
             animaitor.SetBool("isMaking", true);
         }
+    }
 
-        if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
+    public void GrindItem(int time, Inventory.Item itemName1, int num1, Inventory.Item itemName2 = 0, int num2 = 0, Inventory.Item itemName3 = 0, int num3 = 0)
+    {
+        isMakeByGrinder = true;
+        MakeItems.SetActive(false);
+        GrindItems.SetActive(true);
+
+        Balloon.SetActive(true);
+
+        grinderItem = new Inventory.Item[3] { itemName1, itemName2, itemName3 };
+        grinderItemNum = new int[3] { num1, num2, num3 };
+        DisplayGrinderItems();
+
+        Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
+        timeToMake = time;
+        progressTimer = timeToMake;
+        isMake = true;
+        isMakeFinish = false;
+        if (animaitor != null)
         {
-            interactionIcon.DeleteAllIcons();
-            GetComponent<Facility>().DisplayIcon();
+            animaitor.SetBool("isMaking", true);
+        }   
+    }
+
+    void DisplayGrinderItems()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            GrindItemSet[i].SetActive(false);
+        }
+        int count = 3;
+        if (grinderItemNum[2] == 0)
+        {
+            count = 2;
+        }
+        if (grinderItemNum[1] == 0)
+        {
+            count = 1;
+        }
+        switch (count)
+        {
+            case 1:
+                GrindItemSet[0].SetActive(true);
+                GrindItemSet[0].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]];
+                break;
+            case 2:
+                GrindItemSet[1].SetActive(true);
+                GrindItemSet[1].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]];
+                GrindItemSet[1].transform.Find("Item2").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]];
+                break;
+            case 3:
+                GrindItemSet[2].SetActive(true);
+                GrindItemSet[2].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]];
+                GrindItemSet[2].transform.Find("Item2").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]];
+                GrindItemSet[2].transform.Find("Item3").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[2]];
+                break;
         }
     }
 
@@ -114,34 +218,69 @@ public class FacilityBalloon : MonoBehaviour
         {
             animaitor.SetBool("isMaking", false);
         }
-
-        if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
-        {
-            interactionIcon.DeleteAllIcons();
-            GetComponent<Facility>().DisplayIcon();
-        }
+        
         isMake = false;
     }
 
     public bool InventoryCheck()
     {
         bool temp = true;
-        temp = !inventory.isFull(1, makeItem);
+        if (isMakeByGrinder == false)
+        {
+            temp = !inventory.isFull(1, makeItem);
+        }
+        else
+        {
+            int count = 3;
+            if (grinderItemNum[2] == 0)
+            {
+                count = 2;
+            }
+            if (grinderItemNum[1] == 0)
+            {
+                count = 1;
+            }
+            switch (count)
+            {
+                case 1:
+                    temp = !inventory.isFull(1, grinderItem[0], grinderItemNum[0]);
+                    break;
+                case 2:
+                    temp = !inventory.isFull(2, grinderItem[0], grinderItemNum[0], grinderItem[1], grinderItemNum[1]);
+                    break;
+                case 3:
+                    temp = !inventory.isFull(3, grinderItem[0], grinderItemNum[0], grinderItem[1], grinderItemNum[1], grinderItem[2], grinderItemNum[2]);
+                    break;
+            }
+        }
         return temp;
     }
 
     public void GetItem()
     {
-        inventory.GetItem(makeItem);
+        if (isMakeByGrinder == false)
+        {
+            inventory.GetItem(makeItem);
+        }
+        else
+        {
+            int count = 3;
+            if (grinderItemNum[2] == 0)
+            {
+                count = 2;
+            }
+            if (grinderItemNum[1] == 0)
+            {
+                count = 1;
+            }
+            for(int i =0; i< count; i++)
+            {
+                inventory.GetItem(grinderItem[i], grinderItemNum[i]);
+            }
+        }
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         isMakeFinish = false;
         Balloon.SetActive(false);
-
-        if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
-        {
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Gather);
-            GetComponent<Facility>().DisplayIcon();
-        }
     }
 
     public void Dunp()
@@ -152,12 +291,6 @@ public class FacilityBalloon : MonoBehaviour
         if (animaitor != null)
         {
             animaitor.SetBool("isMaking", false);
-        }
-
-        if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
-        {
-            interactionIcon.DeleteAllIcons();
-            GetComponent<Facility>().DisplayIcon();
         }
     }
 
@@ -173,13 +306,16 @@ public class FacilityBalloon : MonoBehaviour
             TimeText.GetComponent<TextMesh>().text = (int)(progressTimer / 60.0f) + ":" + temp;
         }
 
-        if (isMakeFinish == true)
+        if (isMakeByGrinder == false)
         {
-            Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
-        }
-        else
-        {
-            Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, progress * 2.3f);
+            if (isMakeFinish == true)
+            {
+                Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
+            }
+            else
+            {
+                Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, progress * 2.3f);
+            }
         }
     }
 
