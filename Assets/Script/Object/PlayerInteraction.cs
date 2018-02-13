@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     Inventory inventory;
+    GrinderWindow grinderWindow;
 
     Animator animaitor;
     bool isGather = false;
@@ -18,6 +19,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         animaitor = GetComponent<Animator>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        grinderWindow = GameObject.Find("GrinderWindow").GetComponent<GrinderWindow>();
     }
 	
 	void Update ()
@@ -41,10 +43,9 @@ public class PlayerInteraction : MonoBehaviour
             inventory.GetItem(Inventory.Item.Tumor, 20);
             inventory.GetItem(Inventory.Item.Heart, 20);
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            //inventory.GetItem(Inventory.Item.Bulb01, 1);
-            //inventory.GetItem(Inventory.Item.Grinder01, 1);
+            grinderWindow.OpenWindow(null);
         }
     }
 

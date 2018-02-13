@@ -277,8 +277,6 @@ public class ResearchWindow : MonoBehaviour
 
     void RefreshWindow()
     {
-        
-
         if (itemArray[selectedIndex].isKnown == false)
         {
             BigItem.SetActive(false);

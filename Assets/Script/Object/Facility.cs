@@ -213,6 +213,10 @@ public class Facility : MonoBehaviour
         if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
+            if (facilityName != "EscapePod")
+            {
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
+            }
         }
         else if(GetComponent<FacilityBalloon>().isMakeFinish == true)
         {
@@ -228,7 +232,6 @@ public class Facility : MonoBehaviour
         }
         else
         {
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
         }
 

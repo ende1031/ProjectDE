@@ -54,6 +54,7 @@ public class Inventory : MonoBehaviour
     EnergyGauge energyGauge;
     ResearchWindow researchWindow;
     InteractionMenu interactionMenu;
+    GrinderWindow grinderWindow;
 
     public Sprite FoodSp; //아이템 추가시 수정할 부분
     public Sprite OxygenSp;
@@ -81,10 +82,12 @@ public class Inventory : MonoBehaviour
     int selectedIndex = 0;
 
     Animator animaitor;
+    float openTimer = 0;
 
     public Dictionary<Item, Sprite> itemDictionary = new Dictionary<Item, Sprite>();
     public List<Item> discoveredItemList = new List<Item>();
 
+    bool isOpenedByGrinder = false;
 
     void SetDictionary() //아이템 추가시 수정할 부분
     {
@@ -153,9 +156,11 @@ public class Inventory : MonoBehaviour
 
     public void SelectMenu(InteractionMenu.MenuItem m) //아이템 추가시 수정할 부분
     {
+        openTimer = 0;
         isInventoryActive = true;
         Arrow.SetActive(true);
         int sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+        print("선택메뉴 인벤토리");
 
         switch (m)
         {
@@ -262,6 +267,7 @@ public class Inventory : MonoBehaviour
     {
         isInventoryActive = true;
         Arrow.SetActive(true);
+        openTimer = 0;
     }
 
     void Start ()
@@ -283,6 +289,7 @@ public class Inventory : MonoBehaviour
         energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
         researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
+        grinderWindow = GameObject.Find("GrinderWindow").GetComponent<GrinderWindow>();
 
         SetDictionary();
     }
@@ -301,14 +308,34 @@ public class Inventory : MonoBehaviour
         {
             if(isInventoryActive == true)
             {
+                openTimer += Time.deltaTime;
+
                 MoveCursor();
                 if (Input.GetKeyUp(KeyCode.C))
                 {
-                    OpenMenu();
+                    if(isOpenedByGrinder == false)
+                    {
+                        OpenMenu();
+                    }
+                    else
+                    {
+                        if (Items.Count > selectedIndex)
+                        {
+                            grinderWindow.SelectItem(false, Items[selectedIndex].name);
+                            CloseInventory();
+                        }
+                    }
                 }
                 else if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Z))
                 {
-                    CloseInventory();
+                    if (openTimer > 0.1f)
+                    {
+                        CloseInventory();
+                        if (isOpenedByGrinder == true)
+                        {
+                            grinderWindow.CloseWindow();
+                        }
+                    }
                 }
             }
             else
@@ -324,10 +351,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void OpenInventory()
+    public void OpenInventory(bool isGrinder = false)
     {
-        if (player.GetComponent<PlayerMove>().GetMovePossible() == true)
+        if (player.GetComponent<PlayerMove>().GetMovePossible() == true || isGrinder == true)
         {
+            isOpenedByGrinder = isGrinder;
             Cursor.SetActive(true);
             Arrow.SetActive(true);
             animaitor.SetBool("isOpen", true);
@@ -335,16 +363,24 @@ public class Inventory : MonoBehaviour
             isInventoryActive = true;
             player.GetComponent<PlayerMove>().SetMovePossible(false);
             DisplayItem();
+            openTimer = 0;
         }
     }
 
     void CloseInventory()
     {
+        if (openTimer <= 0.1f)
+        {
+            return;
+        }
         animaitor.SetBool("isOpen", false);
         isInventoryActive = false;
         Cursor.SetActive(false);
         Arrow.SetActive(false);
-        player.GetComponent<PlayerMove>().SetMovePossible(true);
+        if (isOpenedByGrinder == false)
+        {
+            player.GetComponent<PlayerMove>().SetMovePossible(true);
+        }
     }
 
     void GetEffectOn(int index)
@@ -376,11 +412,21 @@ public class Inventory : MonoBehaviour
                 selectedIndex = 0;
             }
         }
-
-        //Vector3 temp = Cursor.transform.position;
-        //temp.x = transform.position.x - 63 * 3 + selectedIndex * 63;
+        
         Cursor.transform.position = itemSlot[selectedIndex].transform.position;
         Arrow.transform.position = itemSlot[selectedIndex].transform.position;
+
+        if(isOpenedByGrinder == true)
+        {
+            if (Items.Count <= selectedIndex)
+            {
+                grinderWindow.InventoryMove(true);
+            }
+            else
+            {
+                grinderWindow.InventoryMove(false, Items[selectedIndex].name);
+            }
+        }
     }
 
     void DisplayItem()

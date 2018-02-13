@@ -422,4 +422,9 @@ public class PopupWindow : MonoBehaviour
             ButtonText.GetComponent<Text>().text = "C : 제작하기";
         }
     }
+
+    public bool GetPopupActive()
+    {
+        return isPopupActive;
+    }
 }

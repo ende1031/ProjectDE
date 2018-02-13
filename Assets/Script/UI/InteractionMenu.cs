@@ -65,6 +65,7 @@ public class InteractionMenu : MonoBehaviour
     Text ButtonText;
     GameObject IconGroup;
     GameObject[] MenuIcon = new GameObject[7];
+    PopupWindow popupWindow;
 
     List<MenuItem> MenuList = new List<MenuItem>();
     Dictionary<MenuItem, MenuItemInfo> MenuDictionary = new Dictionary<MenuItem, MenuItemInfo>();
@@ -88,6 +89,7 @@ public class InteractionMenu : MonoBehaviour
 
     void Start ()
     {
+        popupWindow = GameObject.Find("PopupWindow").GetComponent<PopupWindow>();
         IMenu_bg = transform.Find("IMenu_bg").gameObject;
         animaitor = IMenu_bg.GetComponent<Animator>();
         ItemImage = IMenu_bg.transform.Find("ItemImage").gameObject.GetComponent<Image>();
@@ -153,7 +155,7 @@ public class InteractionMenu : MonoBehaviour
                 MoveMenuIcon();
             }
         }
-        else
+        else if(popupWindow.GetPopupActive() == false)
         {
             reOpenTimer += Time.deltaTime;
         }
@@ -326,6 +328,10 @@ public class InteractionMenu : MonoBehaviour
     {
         if (reOpenTimer < 0.3f)
         {
+            if(t == "Inventory")
+            {
+                targetObject.GetComponent<Inventory>().CancleMenu();
+            }
             return;
         }
 
