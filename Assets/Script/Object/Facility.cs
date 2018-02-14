@@ -209,33 +209,36 @@ public class Facility : MonoBehaviour
     {
         interactionMenu.ClearMenu();
 
+        if (GetComponent<FacilityBalloon>().isMakeFinish == true)
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
+        }
         if (facilityName == "EscapePod")
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Research);
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Sleep);
         }
-        else
+        if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
         {
-            if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
+            if (facilityName == "Grinder01")
             {
-                if (facilityName == "Grinder01")
-                {
-                    interactionMenu.AddMenu(InteractionMenu.MenuItem.Grind);
-                }
-                else
-                {
-                    interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
-                }
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Grind);
+            }
+            else
+            {
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
+            }
+            if (facilityName != "EscapePod")
+            {
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
             }
-            else if (GetComponent<FacilityBalloon>().isMakeFinish == true)
-            {
-                interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
-            }
-            else if (GetComponent<FacilityBalloon>().isMake == true)
-            {
-                interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
-            }
+        }
+        else if (GetComponent<FacilityBalloon>().isMake == true)
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
+        }
+        if (facilityName != "EscapePod")
+        {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
         }
 

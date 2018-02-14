@@ -163,7 +163,6 @@ public class Inventory : MonoBehaviour
         isInventoryActive = true;
         Arrow.SetActive(true);
         int sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
-        print("선택메뉴 인벤토리");
 
         switch (m)
         {
@@ -233,6 +232,7 @@ public class Inventory : MonoBehaviour
                         }
                         break;
                 }
+                openTimer = 1;
                 CloseInventory();
                 break;
 
@@ -257,6 +257,7 @@ public class Inventory : MonoBehaviour
                     }
                     DeleteItem(Items[selectedIndex].name);
                 }
+                openTimer = 1;
                 CloseInventory();
                 break;
 
@@ -565,7 +566,7 @@ public class Inventory : MonoBehaviour
             int? temp = isContains(itemName);
             if (temp.HasValue)
             {
-                if (Items[(int)temp].count + num >= 99)
+                if (Items[(int)temp].count + num > 99)
                 {
                     return false;
                 }

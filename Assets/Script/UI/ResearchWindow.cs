@@ -200,8 +200,8 @@ public class ResearchWindow : MonoBehaviour
         contentDictionary[Inventory.Item.BoardSeed] = new ResultContent("고대문명 속 제국의 고서로부터 얻은 지식을 통해서 판자식물을 생산하는 방법을 깨달았다.");
         contentDictionary[Inventory.Item.ThornSeed] = new ResultContent("금지된 술법으로 불러낸 마계의 요마와의 계약을 통해 선인장 모종을 키우는 법을 알게 됐다.");
         contentDictionary[Inventory.Item.Trap01] = new ResultContent("별이 그려진 신비한 구슬 7개를 모아 기도하자 천계의 용이 나타나 덫을 만드는 방법을 알려줬다.");
-        contentDictionary[Inventory.Item.Battery] = new ResultContent("간절한 염원을 담아 기도하자 대지의 어머니 크리스탈이 빛을 내며 배터리를 만드는 방법을 알려줬다.");
-        contentDictionary[Inventory.Item.Grinder01] = new ResultContent("등가교환의 법칙에 따라 올바른 재료를 대가로 분쇄기를 연성해내는데 성공했다.");
+        contentDictionary[Inventory.Item.Battery] = new ResultContent("간절한 염원을 담아 기도하자 어머니 크리스탈이 빛을 내며 배터리를 만드는 방법을 알려줬다.");
+        contentDictionary[Inventory.Item.Grinder01] = new ResultContent("등가교환의 법칙에 따라 올바른 재료를 대가로 분해기를 연성해내는데 성공했다.");
     }
 
     void Update ()

@@ -208,7 +208,7 @@ public class GrinderWindow : MonoBehaviour
                 {
                     if(selectNull == false)
                     {
-                        //public void GrindItem(Inventory.Item itemName1, int num1, Inventory.Item itemName2 = 0, int num2 = 0, Inventory.Item itemName3 = 0, int num3 = 0)
+                        inventory.DeleteItem(selectedItem, selectedItemNum);
                         Facility.GetComponent<FacilityBalloon>().GrindItem(selectedItemNum * 3, resultItem[0], resultItemNum[0], resultItem[1], resultItemNum[1], resultItem[2], resultItemNum[2]);
                         CloseWindow();
                     }
@@ -216,17 +216,6 @@ public class GrinderWindow : MonoBehaviour
             }
         }
     }
-
-    /*
-    bool InventoryCheck()
-    {
-        bool temp = true;
-
-        temp = !inventory.isFull(resultItemCount, resultItem[0], resultItemNum[0], resultItem[1], resultItemNum[1], resultItem[2], resultItemNum[2]);
-        
-        return temp;
-    }
-    */
 
     public void SelectItem(bool isNull, Inventory.Item it = 0)
     {

@@ -110,7 +110,7 @@ public class InteractionMenu : MonoBehaviour
     void SetDictionary() //메뉴 추가시 수정할 부분
     {
         MenuDictionary[MenuItem.Battery] = new MenuItemInfo(BatterySp, "배터리 사용");
-        MenuDictionary[MenuItem.Cancle] = new MenuItemInfo(CancleSp, "제작 취소");
+        MenuDictionary[MenuItem.Cancle] = new MenuItemInfo(CancleSp, "작동 취소");
         MenuDictionary[MenuItem.Dump] = new MenuItemInfo(DumpSp, "버리기");
         MenuDictionary[MenuItem.Food] = new MenuItemInfo(FoodSp, "식품 섭취");
         MenuDictionary[MenuItem.Gather] = new MenuItemInfo(GatherSp, "아이템 획득");

@@ -153,6 +153,10 @@ public class Plant : MonoBehaviour
             inventory.DeleteItem(Inventory.Item.TumorSeed);
             animaitor.SetInteger("State", state);
         }
+        else
+        {
+            monologue.DisplayLog("식물이 다 자라서 종양을 설치할 수 없게 돼버렸군.\n일단 채집을 한 후에 다시 시도해보자.");
+        }
     }
 
     //애니메이션 이벤트에서 사용하는 함수
