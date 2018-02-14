@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     Inventory inventory;
-    GrinderWindow grinderWindow;
 
     Animator animaitor;
     bool isGather = false;
@@ -19,7 +18,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         animaitor = GetComponent<Animator>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        grinderWindow = GameObject.Find("GrinderWindow").GetComponent<GrinderWindow>();
     }
 	
 	void Update ()
@@ -35,7 +33,7 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 코드
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventory.GetItem(Inventory.Item.Mass, 1);
+            //inventory.GetItem(Inventory.Item.Mass, 20);
             //inventory.GetItem(Inventory.Item.Stick, 20);
             //inventory.GetItem(Inventory.Item.Board, 20);
             //inventory.GetItem(Inventory.Item.Thorn, 20);
