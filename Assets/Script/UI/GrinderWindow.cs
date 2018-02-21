@@ -63,7 +63,7 @@ public class GrinderWindow : MonoBehaviour
         GrinderItemDictionary[Inventory.Item.Food] = new GrinderItemInfo(2, Inventory.Item.Mass, 1, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.Oxygen] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.Battery] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Stick] = new GrinderItemInfo(2, Inventory.Item.Mass, 2, Inventory.Item.Water, 1);
+        GrinderItemDictionary[Inventory.Item.Stick] = new GrinderItemInfo(2, Inventory.Item.Mass, 1, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.Board] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.Hose] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.Mass] = new GrinderItemInfo(1, Inventory.Item.Water, 1);

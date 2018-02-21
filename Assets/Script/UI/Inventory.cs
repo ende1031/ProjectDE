@@ -208,13 +208,17 @@ public class Inventory : MonoBehaviour
                         }
                         break;
                     case Item.Trap01:
-                        if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3)) == true)
+                        if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Nest") == false)
                         {
-                            DeleteItem(Items[selectedIndex].name);
+                            monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n괴물의 둥지 근처에 설치하자.");
+                        }
+                        else if (SceneObjectManager.instance.ContainObject(sceneNum, Grid.instance.PlayerGrid()) == true)
+                        {
+                            monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n다른 곳에 설치하자.");
                         }
                         else
                         {
-                            monologue.DisplayLog("여기는 설치할 수 없을 것 같군.\n다른 곳에 설치하자.");
+                            SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3));
                         }
                         break;
                     case Item.Bulb01:
