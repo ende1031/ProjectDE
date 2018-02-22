@@ -78,6 +78,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a63d2d32cd759ef429a45351e3afeca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectName: "\uBD80\uC11C\uC9C4 \uC794\uD574"
+  ObjectExplanation: "\uAD34\uBB3C\uC758 \uACF5\uACA9\uC744 \uBC1B\uACE0 \uBD80\uC11C\uC9C4
+    \uC2DC\uC124\uC758 \uC794\uD574\uC774\uB2E4.\n\uC2DC\uC124\uC740 \uD56D\uC0C1
+    \uBE5B\uC774 \uC788\uB294 \uACF3\uC5D0 \uB450\uC5B4\uC57C \uD558\uBA70, \uC218\uBA74\uC2DC\uC5D0\uB294
+    \uC804\uC6D0\uC744 \uAEBC\uB193\uC544\uC57C \uD55C\uB2E4."
 --- !u!212 &212865937604765036
 SpriteRenderer:
   m_ObjectHideFlags: 1

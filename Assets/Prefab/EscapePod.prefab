@@ -709,6 +709,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d7a398b830d4747b53f4e141eaeae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectName: "\uD0C8\uCD9C \uD3EC\uB4DC"
+  ObjectExplanation: "\uBE44\uC0C1 \uD0C8\uCD9C\uC6A9 \uD3EC\uB4DC\uC774\uB2E4. \uC544\uC774\uD15C
+    \uC5F0\uAD6C\uB97C \uC704\uD55C \uAE30\uB2A5\uC744 \uAC16\uCD94\uACE0 \uC788\uB2E4.\n\uAC04\uB2E8\uD55C
+    \uC544\uC774\uD15C \uC81C\uC791\uB3C4 \uAC00\uB2A5\uD558\uB2E4."
   facilityName: EscapePod
   isOn: 1
   isLoadByManager: 0

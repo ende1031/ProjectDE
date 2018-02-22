@@ -70,6 +70,9 @@ public class InteractionMenu : MonoBehaviour
     PopupWindow popupWindow;
     GrinderWindow grinderWindow;
 
+    Text NameText;
+    Text ExpText;
+
     List<MenuItem> MenuList = new List<MenuItem>();
     Dictionary<MenuItem, MenuItemInfo> MenuDictionary = new Dictionary<MenuItem, MenuItemInfo>();
 
@@ -104,6 +107,10 @@ public class InteractionMenu : MonoBehaviour
         {
             MenuIcon[i] = IconGroup.transform.Find("Icon" + (i + 1)).gameObject;
         }
+
+        NameText = IMenu_bg.transform.Find("NameText").gameObject.GetComponent<Text>();
+        ExpText = IMenu_bg.transform.Find("ExpText").gameObject.GetComponent<Text>();
+
         SetDictionary();
     }
 
@@ -370,6 +377,13 @@ public class InteractionMenu : MonoBehaviour
         animaitor.SetBool("isOpen", true);
     }
 
+    // 반드시 ClearMenu이후, OpenMenu 이전에 호출할 것.
+    public void SetNameAndExp(string n, string e)
+    {
+        NameText.text = n;
+        ExpText.text = e;
+    }
+
     public void CloseWindow()
     {
         reOpenTimer = 0;
@@ -388,6 +402,8 @@ public class InteractionMenu : MonoBehaviour
     public void ClearMenu()
     {
         MenuList.Clear();
+        NameText.text = "미확인 대상";
+        ExpText.text = "아직 밝혀지지 않은 대상입니다.";
     }
 
     public void AddMenu(MenuItem mi)

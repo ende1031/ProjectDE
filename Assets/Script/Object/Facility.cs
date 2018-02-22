@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Facility : MonoBehaviour
 {
+    public string ObjectName;
+    [TextArea]
+    public string ObjectExplanation;
+
     public string facilityName = "TempFacility";
 
     GrinderWindow grinderWindow;
@@ -208,6 +212,7 @@ public class Facility : MonoBehaviour
     public void OpenMenu()
     {
         interactionMenu.ClearMenu();
+        interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
 
         if (GetComponent<FacilityBalloon>().isMakeFinish == true)
         {

@@ -96,12 +96,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff61b05634f0334b9311f980c12973c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectName: "\uAD34\uC0C1\uD55C \uB369\uC5B4\uB9AC"
+  ObjectExplanation: "\uAD34\uBB3C\uC758 \uC870\uC9C1\uC73C\uB85C \uBCF4\uC774\uB294
+    \uB369\uC5B4\uB9AC\uC774\uB2E4.\n\uC8FC\uC6CC\uB450\uBA74 \uC5B4\uB518\uAC00\uC5D0\uB294
+    \uC4F8 \uC218 \uC788\uC9C0 \uC54A\uC744\uAE4C?"
   isGatherPossible: 0
   plantName: MassPlant
   GatherAnimationType: 1
   state: 1
   growthTime: 0
   growthTimer: 0
+  isTumor: 0
+  isLoadByManager: 0
 --- !u!212 &212607605885053392
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
+    public string ObjectName;
+    [TextArea]
+    public string ObjectExplanation;
+
     Inventory inventory;
     InteractionIcon interactionIcon;
     InteractionMenu interactionMenu;
@@ -276,8 +280,9 @@ public class Plant : MonoBehaviour
     public void OpenMenu()
     {
         interactionMenu.ClearMenu();
+        interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
 
-        if(isGatherPossible == true)
+        if (isGatherPossible == true)
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
         }

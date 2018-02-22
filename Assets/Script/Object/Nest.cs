@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Nest : MonoBehaviour
 {
+    public string ObjectName;
+    [TextArea]
+    public string ObjectExplanation;
+
     InteractionIcon interactionIcon;
     InteractionMenu interactionMenu;
     Inventory inventory;
@@ -41,6 +45,8 @@ public class Nest : MonoBehaviour
     public void OpenMenu()
     {
         interactionMenu.ClearMenu();
+        interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
+
         interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
 
         float w = GetComponent<SpriteRenderer>().sprite.rect.width;

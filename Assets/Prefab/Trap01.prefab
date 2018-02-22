@@ -96,12 +96,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff61b05634f0334b9311f980c12973c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectName: "\uC18C\uD615 \uB36B"
+  ObjectExplanation: "\uAD34\uBB3C\uC758 \uB465\uC9C0 \uADFC\uCC98\uC5D0 \uC124\uCE58\uD558\uBA74
+    \uAD34\uBB3C\uC758 \uC2EC\uC7A5\uC744 \uC5BB\uC744 \uC218 \uC788\uB2E4.\n\uAD34\uBB3C\uC740
+    \uBE5B\uC774 \uC5C6\uB294 \uACF3\uC5D0\uB9CC \uB098\uC624\uAE30 \uB54C\uBB38\uC5D0
+    \uD50C\uB808\uC774\uC5B4\uAC00 \uADFC\uCC98\uC5D0 \uC788\uC73C\uBA74 \uC7A1\uD788\uC9C0
+    \uC54A\uB294\uB2E4."
   isGatherPossible: 0
   plantName: Trap01
   GatherAnimationType: 1
   state: 3
   growthTime: 180
   growthTimer: 0
+  isTumor: 0
+  isLoadByManager: 0
 --- !u!212 &212474785703097292
 SpriteRenderer:
   m_ObjectHideFlags: 1

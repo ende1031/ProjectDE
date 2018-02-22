@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Bulb : MonoBehaviour
 {
+    public string ObjectName;
+    [TextArea]
+    public string ObjectExplanation;
+
     InteractionIcon interactionIcon;
     InteractionMenu interactionMenu;
     Inventory inventory;
@@ -209,7 +213,9 @@ public class Bulb : MonoBehaviour
     public void OpenMenu()
     {
         interactionMenu.ClearMenu();
-        if(isAlive == true)
+        interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
+
+        if (isAlive == true)
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
         }

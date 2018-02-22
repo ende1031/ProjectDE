@@ -649,6 +649,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d7a398b830d4747b53f4e141eaeae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectName: "\uAC04\uC774 \uBD84\uD574\uAE30"
+  ObjectExplanation: "\uD544\uC694 \uC5C6\uB294 \uC544\uC774\uD15C\uC744 \uBD84\uD574\uD574\uC11C
+    \uB2E4\uB978 \uC544\uC774\uD15C\uC744 \uC5BB\uC744 \uC218 \uC788\uB2E4.\n\uBE5B\uC774
+    \uC5C6\uB294 \uACF3\uC5D0 \uB178\uCD9C\uB418\uBA74 \uAD34\uBB3C\uC758 \uACF5\uACA9\uC73C\uB85C
+    \uC27D\uAC8C \uD30C\uAD34\uB41C\uB2E4."
   facilityName: Grinder01
   isOn: 1
   isLoadByManager: 0

@@ -627,6 +627,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d7a398b830d4747b53f4e141eaeae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectName: "\uC18C\uD615 \uC6CC\uD06C\uBCA4\uCE58"
+  ObjectExplanation: "\uC544\uC774\uD15C\uC744 \uC81C\uC791\uD558\uB294 \uC2DC\uC124\uC774\uB2E4.\n\uBE5B\uC774
+    \uC5C6\uB294 \uACF3\uC5D0 \uB178\uCD9C\uB418\uBA74 \uAD34\uBB3C\uC758 \uACF5\uACA9\uC73C\uB85C
+    \uC27D\uAC8C \uD30C\uAD34\uB41C\uB2E4."
   facilityName: TempFacility
   isOn: 1
   isLoadByManager: 0
