@@ -105,8 +105,8 @@ public class FacilityBalloon : MonoBehaviour
             }
             if(isMakeByGrinder == false)
             {
-                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
-                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem];
+                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem].sprite;
+                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem].sprite;
             }
             else
             {
@@ -138,8 +138,8 @@ public class FacilityBalloon : MonoBehaviour
 
         Balloon.SetActive(true);
         makeItem = itemName;
-        Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName];
-        Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName];
+        Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName].sprite;
+        Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName].sprite;
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         timeToMake = time;
         progressTimer = timeToMake;
@@ -193,18 +193,18 @@ public class FacilityBalloon : MonoBehaviour
         {
             case 1:
                 GrindItemSet[0].SetActive(true);
-                GrindItemSet[0].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]];
+                GrindItemSet[0].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
                 break;
             case 2:
                 GrindItemSet[1].SetActive(true);
-                GrindItemSet[1].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]];
-                GrindItemSet[1].transform.Find("Item2").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]];
+                GrindItemSet[1].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
+                GrindItemSet[1].transform.Find("Item2").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]].sprite;
                 break;
             case 3:
                 GrindItemSet[2].SetActive(true);
-                GrindItemSet[2].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]];
-                GrindItemSet[2].transform.Find("Item2").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]];
-                GrindItemSet[2].transform.Find("Item3").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[2]];
+                GrindItemSet[2].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
+                GrindItemSet[2].transform.Find("Item2").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]].sprite;
+                GrindItemSet[2].transform.Find("Item3").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[2]].sprite;
                 break;
         }
     }

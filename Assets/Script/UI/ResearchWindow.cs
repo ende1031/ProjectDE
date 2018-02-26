@@ -148,7 +148,7 @@ public class ResearchWindow : MonoBehaviour
 
     void SetWindowItem()
     {
-        itemArray[0] = new ResearchItem(Inventory.Item.Mass, 5, "덩어리는 덩어리.\n쨔쟌~ 워크벤치를 만들 수 있게 되었다!");
+        itemArray[0] = new ResearchItem(Inventory.Item.Mass, 5, "덩어리 연구를 통해 워크벤치를 만들 수 있게 되었다.");
         itemArray[0].SetResultItem(1, Inventory.Item.Facility01);
 
         itemArray[1] = new ResearchItem(Inventory.Item.Mass, 5, "덩어리를 연구해서 종양씨앗을 만들어낼 수 있다는 놀라운 사실을 알게 되었다. 이럴수가.");
@@ -160,10 +160,10 @@ public class ResearchWindow : MonoBehaviour
         itemArray[3] = new ResearchItem(Inventory.Item.Heart, 5, "최근 발표된 뉴욕 공학 대학의 연구 결과에 따르면 형이상학적 이유에 따라 우리가 관찰 하는 절대우주는 팽창과 수축을 반복하며 무한히 연쇄한다고 한다. 즉, 괴물의 심장으로 배터리를 만들 수 있다.");
         itemArray[3].SetResultItem(1, Inventory.Item.Battery);
 
-        itemArray[4] = new ResearchItem(Inventory.Item.Tumor, 3, "종양을 연구했다. 만족스럽다.");
+        itemArray[4] = new ResearchItem(Inventory.Item.Tumor, 3, "종양 연구를 통해 먹을 수 있는 식품과 빛을 내는 간이 전구를 만들 수 있게 됐다.");
         itemArray[4].SetResultItem(2, Inventory.Item.Food, Inventory.Item.Bulb01);
 
-        itemArray[5] = new ResearchItem(Inventory.Item.Stick, 20, "이 식물은 상당히 대나무와 유사하다.");
+        itemArray[5] = new ResearchItem(Inventory.Item.Stick, 20, "집게발 대나무 모종을 만들어서 원하는 곳에 심을 수 있게 됐다.");
         itemArray[5].SetResultItem(1, Inventory.Item.StickSeed);
 
         itemArray[6] = new ResearchItem(Inventory.Item.Board, 20, "이 식물을 연구해본 결과 식용으로 쓰기에는 부적합하다는 사실을 알게 됐다. (불쾌한 표정)");
@@ -172,7 +172,7 @@ public class ResearchWindow : MonoBehaviour
         itemArray[7] = new ResearchItem(Inventory.Item.Thorn, 20, "가시의 성분을 분석해본 결과 식물의 가시보다는 동물의 뿔에 가깝다는 사실을 알게 됐다.");
         itemArray[7].SetResultItem(1, Inventory.Item.ThornSeed);
 
-        itemArray[8] = new ResearchItem(Inventory.Item.Hose, 10, "호스를 연구하면 분해기를 만들 수 있다. 아마도.");
+        itemArray[8] = new ResearchItem(Inventory.Item.Hose, 10, "연구를 통해 워크벤치에서 분해기를 만들 수 있게 됐다.\n이제 필요없는 아이템은 분해하도록 하자.");
         itemArray[8].SetResultItem(1, Inventory.Item.Grinder01);
 
         itemArray[9] = new ResearchItem(Inventory.Item.Mass, 99, "덩어리를 또 연구하기로 한지 3개월이 지났다. 드디어 빛이 보인다! 연구 결과로 알게 된 사실은 이 다음 연구도 덩어리 연구라는 것이다.");
@@ -192,16 +192,16 @@ public class ResearchWindow : MonoBehaviour
 
     void SetResultContent()
     {
-        contentDictionary[Inventory.Item.Facility01] = new ResultContent("연금술의 오의를 깨달아서 현자의 돌 없이 워크벤치를 연성할 수 있게 됐다.");
-        contentDictionary[Inventory.Item.TumorSeed] = new ResultContent("피의 대가를 치뤄서 마계로부터 종양씨앗을 소환할 수 있게 됐다.");
-        contentDictionary[Inventory.Item.Food] = new ResultContent("선대 요리왕의 혼이 깃들어서 식량을 만들 수 있게 됐다.", inventory.EscapePodSp);
-        contentDictionary[Inventory.Item.Bulb01] = new ResultContent("희생은 컸다. 나는 평생에 걸친 연구 끝에 스스로 빛을 내는 물건을 만들 수 있게 됐다.");
-        contentDictionary[Inventory.Item.StickSeed] = new ResultContent("생명의 나무 세피로트의 가호를 받아서 대나무 모종을 생산할 수 있게 됐다.");
-        contentDictionary[Inventory.Item.BoardSeed] = new ResultContent("고대문명 속 제국의 고서로부터 얻은 지식을 통해서 판자식물을 생산하는 방법을 깨달았다.");
-        contentDictionary[Inventory.Item.ThornSeed] = new ResultContent("금지된 술법으로 불러낸 마계의 요마와의 계약을 통해 선인장 모종을 키우는 법을 알게 됐다.");
-        contentDictionary[Inventory.Item.Trap01] = new ResultContent("별이 그려진 신비한 구슬 7개를 모아 기도하자 천계의 용이 나타나 덫을 만드는 방법을 알려줬다.");
-        contentDictionary[Inventory.Item.Battery] = new ResultContent("간절한 염원을 담아 기도하자 어머니 크리스탈이 빛을 내며 배터리를 만드는 방법을 알려줬다.");
-        contentDictionary[Inventory.Item.Grinder01] = new ResultContent("등가교환의 법칙에 따라 올바른 재료를 대가로 분해기를 연성해내는데 성공했다.");
+        contentDictionary[Inventory.Item.Facility01] = new ResultContent("[소형 워크벤치] 다양한 아이템을 제작하는 시설이다.\n탈출 포드와 소형 워크벤치에서 만들 수 있다.", inventory.EscapePodSp);
+        contentDictionary[Inventory.Item.TumorSeed] = new ResultContent("[종양 씨앗] 유전자 조작으로 만든 종양 씨앗이다.\n식물에 심으면 종양이 자란다.");
+        contentDictionary[Inventory.Item.Food] = new ResultContent("[식량] 종양을 가공해서 만든 식량이다.\n먹으면 허기게이지가 회복된다.", inventory.EscapePodSp);
+        contentDictionary[Inventory.Item.Bulb01] = new ResultContent("[간이 전구] 빛을 내서 괴물의 접근을 막는다. 근처에\n시설을 설치해도 괴물의 공격을 받지 않는다.");
+        contentDictionary[Inventory.Item.StickSeed] = new ResultContent("[집게발 대나무 모종] 심으면 집게발 대나무가 자란다.\n게임시간으로 하루 한번 채집할 수 있다.");
+        contentDictionary[Inventory.Item.BoardSeed] = new ResultContent("[판자 식물 모종] 심으면 판자 식물이 자란다.\n빠르게 자라서 연속으로 채집할 수 있다.");
+        contentDictionary[Inventory.Item.ThornSeed] = new ResultContent("[가시 덩굴 모종] 심으면 가시 덩굴이 자란다.\n현실 시간으로 1분에 한번 채집할 수 있다.");
+        contentDictionary[Inventory.Item.Trap01] = new ResultContent("[소형 덫] 괴물의 둥지 근처에 설치하면\n괴물의 심장을 얻을 수 있다.");
+        contentDictionary[Inventory.Item.Battery] = new ResultContent("[배터리] 괴물의 심장으로 만든 배터리이다.\n사용하면 에너지 게이지를 충전할 수 있다.");
+        contentDictionary[Inventory.Item.Grinder01] = new ResultContent("[간이 분해기] 필요없는 아이템을 분해해서\n다른 아이템으로 만들 수 있다.");
     }
 
     void Update ()
@@ -287,7 +287,7 @@ public class ResearchWindow : MonoBehaviour
         {
             BigItem.SetActive(true);
             Button.SetActive(true);
-            BigItem.GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].item];
+            BigItem.GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].item].sprite;
             if (itemArray[selectedIndex].putNum < itemArray[selectedIndex].maxNum)
             {
                 completeResearch = false;
@@ -345,8 +345,8 @@ public class ResearchWindow : MonoBehaviour
                 ItemIcon[i].SetActive(true);
                 ItemIconBack[i].SetActive(true);
                 ItemCount[i].SetActive(true);
-                ItemIcon[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[i].item];
-                ItemIconBack[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[i].item];
+                ItemIcon[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[i].item].sprite;
+                ItemIconBack[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[i].item].sprite;
                 if (itemArray[i].putNum < 10)
                 {
                     ItemCount[i].GetComponent<Text>().text = "0" + itemArray[i].putNum + "/" + itemArray[i].maxNum;
@@ -391,7 +391,7 @@ public class ResearchWindow : MonoBehaviour
         isResultActive = true;
         openTimer = 0;
 
-        ResultBigItem.GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].item];
+        ResultBigItem.GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].item].sprite;
         ExplainText.GetComponent<Text>().text = itemArray[selectedIndex].expText;
 
         for(int i = 0; i < 3; i++)
@@ -399,7 +399,7 @@ public class ResearchWindow : MonoBehaviour
             if( i < itemArray[selectedIndex].resultNum)
             {
                 Content[i].SetActive(true);
-                ContentIcon[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].resultItem[i]];
+                ContentIcon[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].resultItem[i]].sprite;
                 ContentText[i].GetComponent<Text>().text = contentDictionary[itemArray[selectedIndex].resultItem[i]].expText;
                 if(contentDictionary[itemArray[selectedIndex].resultItem[i]].facilitySp == null)
                 {

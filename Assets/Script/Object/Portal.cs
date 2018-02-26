@@ -9,6 +9,8 @@ public class Portal : MonoBehaviour
 
     InteractionIcon interactionIcon;
 
+    float LoadTimer = 0;
+
     void Start ()
     {
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
@@ -16,7 +18,10 @@ public class Portal : MonoBehaviour
 	
 	void Update ()
     {
-		
+		if(LoadTimer <= 0.6f)
+        {
+            LoadTimer += Time.deltaTime;
+        }
 	}
 
     void OnTriggerStay2D(Collider2D other)
@@ -32,6 +37,18 @@ public class Portal : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             interactionIcon.DeleteIcon(InteractionIcon.Icon.Portal);
+        }
+    }
+
+    public bool isPortalReady()
+    {
+        if(LoadTimer >= 0.6f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

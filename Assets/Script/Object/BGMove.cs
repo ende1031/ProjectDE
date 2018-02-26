@@ -4,22 +4,37 @@ using UnityEngine;
 
 public class BGMove : MonoBehaviour
 {
+    SceneSetting sceneSetting;
     GameObject mainCamera;
-    public float speed = 0.5f; //0 : 일반 배경(움직이지 않음) / 0~1 : 원경(카메라보다 느림) / 1 : 카메라에 붙어다님 / -0 : 근경(카메라보다 빠름)
-    float distanceToCamera;
+    public float MoveSpeed = 0.8f;
+
+    float startPos;
+    float startCameraPos;
+    bool isSetPos = false;
     
 	void Start ()
     {
+        sceneSetting = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>();
         mainCamera = GameObject.Find("Main Camera");
-        distanceToCamera = transform.position.x - mainCamera.transform.position.x;
     }
 	
 	void Update ()
     {
-        Vector3 TempPos = transform.position;
+        if (sceneSetting.GetIsSet() == true)
+        {
+            if(isSetPos == false)
+            {
+                startCameraPos = mainCamera.transform.position.x;
+                startPos = transform.position.x - (startCameraPos * MoveSpeed);
+                isSetPos = true;
+            }
+        }
 
-        TempPos.x = mainCamera.transform.position.x * speed + distanceToCamera;
-
-        transform.position = TempPos;
+        if(isSetPos == true)
+        {
+            Vector3 TempPos = transform.position;
+            TempPos.x = startPos - ((mainCamera.transform.position.x - startCameraPos) * MoveSpeed);
+            transform.position = TempPos;
+        }
     }
 }

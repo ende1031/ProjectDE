@@ -24,7 +24,6 @@ public class SceneSetting : MonoBehaviour
     {
 		if(isSet == false)
         {
-            isSet = true;
             SetPlayerPosition(Grid.instance.GridToPos(SceneChanger.instance.playerGrid));
 
             if (SceneObjectManager.instance.isSceneInit[sceneNum] == false)
@@ -37,8 +36,9 @@ public class SceneSetting : MonoBehaviour
 
                 SceneObjectManager.instance.isSceneInit[sceneNum] = true;
             }
-
             SceneObjectManager.instance.ReloadObject(sceneNum);
+
+            isSet = true;
         }
     }
 
@@ -52,6 +52,11 @@ public class SceneSetting : MonoBehaviour
 
         player.transform.position = playerPos;
         mainCamera.transform.position = cameraPos;
+    }
+
+    public bool GetIsSet()
+    {
+        return isSet;
     }
 
     void SetScene(int n)

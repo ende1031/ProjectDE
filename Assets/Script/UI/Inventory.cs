@@ -14,7 +14,20 @@ public class Inventory : MonoBehaviour
         }
         public Item name;
         public int count;
-        public string strigName;
+    }
+
+    public class ItemName
+    {
+        public ItemName(Sprite sp, string n, string e)
+        {
+            sprite = sp;
+            ObjectName = n;
+            ObjectExplanation = e;
+        }
+
+        public Sprite sprite;
+        public string ObjectName;
+        public string ObjectExplanation;
     }
 
     public enum Item
@@ -86,34 +99,35 @@ public class Inventory : MonoBehaviour
     Animator animaitor;
     float openTimer = 0;
 
-    public Dictionary<Item, Sprite> itemDictionary = new Dictionary<Item, Sprite>();
+    //public Dictionary<Item, Sprite> itemDictionary = new Dictionary<Item, Sprite>();
+    public Dictionary<Item, ItemName> itemDictionary = new Dictionary<Item, ItemName>();
     public List<Item> discoveredItemList = new List<Item>();
 
     bool isOpenedByGrinder = false;
 
     void SetDictionary() //아이템 추가시 수정할 부분
     {
-        itemDictionary[Item.Food] = FoodSp;
-        itemDictionary[Item.Oxygen] = OxygenSp;
-        itemDictionary[Item.Battery] = BatterySp;
-        itemDictionary[Item.Stick] = StickSp;
-        itemDictionary[Item.Board] = BoardSp;
-        itemDictionary[Item.Hose] = HoseSp;
-        itemDictionary[Item.Mass] = MassSp;
-        itemDictionary[Item.Thorn] = ThornSp;
-        itemDictionary[Item.Facility01] = Facility01Sp;
-        itemDictionary[Item.Trap01] = Trap01Sp;
-        itemDictionary[Item.Heart] = HeartSp;
-        itemDictionary[Item.Bulb01] = Bulb01Sp;
-        itemDictionary[Item.StickSeed] = StickSeedSp;
-        itemDictionary[Item.BoardSeed] = BoardSeedSp;
-        itemDictionary[Item.ThornSeed] = ThornSeedSp;
-        itemDictionary[Item.Tumor] = TumorSp;
-        itemDictionary[Item.TumorSeed] = TumorSeedSp;
-        itemDictionary[Item.Grinder01] = Grinder01Sp;
-        itemDictionary[Item.SuppliedBattery] = SuppliedBatterySp;
-        itemDictionary[Item.SuppliedFood] = SuppliedFoodSp;
-        itemDictionary[Item.Water] = WaterSp;
+        itemDictionary[Item.Food] = new ItemName(FoodSp, "식량", "유전자 조작으로 만든 종양을 가공해서 먹을 수 있게 만들었다.\n사용하면 허기 게이지가 50%만큼 회복된다.");
+        itemDictionary[Item.Oxygen] = new ItemName(OxygenSp, "산소", "숨쉬는데 필요한 산소이다.\n사용하면 산소 게이지가 70%만큼 회복된다.");
+        itemDictionary[Item.Battery] = new ItemName(BatterySp, "배터리", "괴물의 심장을 가공해서 만든 배터리이다.\n사용하면 에너지 게이지가 35%만큼 회복된다.");
+        itemDictionary[Item.Stick] = new ItemName(StickSp, "막대", "집게발 대나무에서 채집한 막대이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
+        itemDictionary[Item.Board] = new ItemName(BoardSp, "판자", "판자 식물에서 채집한 판자이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
+        itemDictionary[Item.Hose] = new ItemName(HoseSp, "호스", "아직 용도가 밝혀지지 않은 아이템이다.");
+        itemDictionary[Item.Mass] = new ItemName(MassSp, "괴상한 덩어리", "괴물의 조직으로 추정되는 덩어리이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
+        itemDictionary[Item.Thorn] = new ItemName(ThornSp, "가시", "가시 덩굴에서 채집한 가시이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
+        itemDictionary[Item.Facility01] = new ItemName(Facility01Sp, "소형 워크벤치", "다양한 아이템을 만드는 시설이다.\n탈출포드나 전구 근처에 설치할 수 있다.");
+        itemDictionary[Item.Trap01] = new ItemName(Trap01Sp, "소형 덫", "작은 괴물을 잡기 위해 만든 덫이다.\n괴물의 둥지 근처에 설치하면 괴물의 심장을 얻을 수 있다.");
+        itemDictionary[Item.Heart] = new ItemName(HeartSp, "괴물의 심장", "작은 괴물의 심장이다.\n배터리나 시설을 만드는 데 사용할 수 있다.");
+        itemDictionary[Item.Bulb01] = new ItemName(Bulb01Sp, "간이 전구", "빛을 내서 괴물의 접근을 막는 시설이다.\n탈출포드나 다른 전구 근처에는 설치할 수 없다.");
+        itemDictionary[Item.StickSeed] = new ItemName(StickSeedSp, "집게발 대나무 모종", "원하는 곳에 심으면 집게발 대나무가 자란다.\n게임 시간으로 하루에 한번 채집할 수 있다.");
+        itemDictionary[Item.BoardSeed] = new ItemName(BoardSeedSp, "판자 식물 모종", "원하는 곳에 심으면 판자 식물이 자란다.\n자라는 속도가 빨라서 연속으로 채집할 수 있다.");
+        itemDictionary[Item.ThornSeed] = new ItemName(ThornSeedSp, "가시 덩굴 모종", "원하는 곳에 심으면 가시 덩굴이 자란다.\n현실 시간으로 1분에 한번 채집할 수 있다.");
+        itemDictionary[Item.Tumor] = new ItemName(TumorSp, "종양", "사용하면 허기 게이지가 10%만큼 회복된다.\n가공해서 식량으로 만들어 먹는 편이 효율적이다.");
+        itemDictionary[Item.TumorSeed] = new ItemName(TumorSeedSp, "종양 씨앗", "식물에 심으면 식용으로 쓸 수 있는 종양이 자란다.\n다 자란 식물에는 심을 수 없다.");
+        itemDictionary[Item.Grinder01] = new ItemName(Grinder01Sp, "간이 분해기", "필요 없는 아이템을 분해해서 다른 아이템을 만드는 시설이다.\n탈출포드나 전구 근처에 설치할 수 있다.");
+        itemDictionary[Item.SuppliedBattery] = new ItemName(SuppliedBatterySp, "보급용 배터리", "탈출포드에 들어있던 비상용 배터리이다.\n사용하면 에너지 게이지가 35%만큼 회복된다.");
+        itemDictionary[Item.SuppliedFood] = new ItemName(SuppliedFoodSp, "보급용 식량", "탈출포드에 들어있던 비상용 식량이다.\n사용하면 허기 게이지가 50%만큼 회복된다.");
+        itemDictionary[Item.Water] = new ItemName(WaterSp, "물", "아이템 분해를 통해 얻은 물이다.\n사용하면 허기 게이지가 5%만큼 회복된다.");
     }
 
     public void OpenMenu() //아이템 추가시 수정할 부분
@@ -126,11 +140,14 @@ public class Inventory : MonoBehaviour
         Arrow.SetActive(false);
 
         interactionMenu.ClearMenu();
+        interactionMenu.SetNameAndExp(itemDictionary[Items[selectedIndex].name].ObjectName, itemDictionary[Items[selectedIndex].name].ObjectExplanation);
 
         switch (Items[selectedIndex].name)
         {
             case Item.Food:
             case Item.SuppliedFood:
+            case Item.Tumor:
+            case Item.Water:
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Food);
                 break;
             case Item.Oxygen:
@@ -154,7 +171,7 @@ public class Inventory : MonoBehaviour
         }
         interactionMenu.AddMenu(InteractionMenu.MenuItem.Dump);
 
-        interactionMenu.OpenMenu(this.gameObject, "Inventory", itemDictionary[Items[selectedIndex].name]);
+        interactionMenu.OpenMenu(this.gameObject, "Inventory", itemDictionary[Items[selectedIndex].name].sprite);
     }
 
     public void SelectMenu(InteractionMenu.MenuItem m) //아이템 추가시 수정할 부분
@@ -167,7 +184,18 @@ public class Inventory : MonoBehaviour
         switch (m)
         {
             case InteractionMenu.MenuItem.Food:
-                hungerGauge.SetAmount(50);
+                if (Items[selectedIndex].name == Item.Food || Items[selectedIndex].name == Item.SuppliedFood)
+                {
+                    hungerGauge.SetAmount(50);
+                }
+                else if(Items[selectedIndex].name == Item.Tumor)
+                {
+                    hungerGauge.SetAmount(10);
+                }
+                else if (Items[selectedIndex].name == Item.Water)
+                {
+                    hungerGauge.SetAmount(5);
+                }
                 DeleteItem(Items[selectedIndex].name);
                 break;
 
@@ -188,7 +216,7 @@ public class Inventory : MonoBehaviour
                     case Item.Grinder01:
                         if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
                         {
-                            monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n빛이 있는 곳에 설치하자.");
+                            monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n탈출포드나 전구가 있는 곳에 설치하자.");
                         }
                         else if(SceneObjectManager.instance.ContainObject(sceneNum, Grid.instance.PlayerGrid()) == true)
                         {
@@ -218,13 +246,17 @@ public class Inventory : MonoBehaviour
                         }
                         else
                         {
-                            SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3));
+                            if (Items[selectedIndex].name == Item.Trap01)
+                            {
+                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3));
+                            }
+                            DeleteItem(Items[selectedIndex].name);
                         }
                         break;
                     case Item.Bulb01:
                         if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Bulb") == true || SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 4, "Facility", "EscapePod") == true)
                         {
-                            monologue.DisplayLog("근처에 이미 다른 광원이 있군.\n빛이 없는 곳에 설치하자.");
+                            monologue.DisplayLog("근처에 이미 다른 광원이 있군.\n근처에 탈출포드나 전구가 없는 곳에 설치하자.");
                         }
                         else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb01")) == true)
                         {
@@ -243,7 +275,7 @@ public class Inventory : MonoBehaviour
             case InteractionMenu.MenuItem.Plant:
                 if (SceneObjectManager.instance.ContainObject(sceneNum, Grid.instance.PlayerGrid()) == true)
                 {
-                    monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n다른 곳에 설치하자.");
+                    monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n다른 곳에 심도록 하자.");
                 }
                 else
                 {
@@ -443,7 +475,7 @@ public class Inventory : MonoBehaviour
         {
             for (int i = 0; i < Items.Count; i++)
             {
-                itemSlot[i].GetComponent<Image>().sprite = itemDictionary[Items[i].name];
+                itemSlot[i].GetComponent<Image>().sprite = itemDictionary[Items[i].name].sprite;
                 itemSlot[i].SetActive(true);
                 itemSlot[i].transform.Find("Text").GetComponent<Text>().text = "x" + Items[i].count;
             }

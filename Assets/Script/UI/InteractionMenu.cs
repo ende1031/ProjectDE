@@ -82,6 +82,7 @@ public class InteractionMenu : MonoBehaviour
     float openTimer = 0;
     float reOpenTimer = 0;
     bool isMove = false;
+    bool isCursorMoveActive = false;
 
     float circleRadius = 135.0f;
     float moveAngle = 0;
@@ -175,15 +176,25 @@ public class InteractionMenu : MonoBehaviour
 
     void MoveCursor()
     {
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        if (isCursorMoveActive == true)
         {
-            moveDirection = Direction.Left;
-            isMove = true;
+            if (Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                moveDirection = Direction.Left;
+                isMove = true;
+            }
+            if (Input.GetKeyUp(KeyCode.RightArrow))
+            {
+                moveDirection = Direction.Right;
+                isMove = true;
+            }
         }
-        if (Input.GetKeyUp(KeyCode.RightArrow))
+        else
         {
-            moveDirection = Direction.Right;
-            isMove = true;
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                isCursorMoveActive = true;
+            }
         }
     }
 
@@ -373,6 +384,7 @@ public class InteractionMenu : MonoBehaviour
         isPopupActive = true;
         selectedIndex = 0;
         openTimer = 0;
+        isCursorMoveActive = false;
         RefreshWindow();
         animaitor.SetBool("isOpen", true);
     }

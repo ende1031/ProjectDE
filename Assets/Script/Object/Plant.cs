@@ -76,7 +76,7 @@ public class Plant : MonoBehaviour
                     inventory.GetItem(Inventory.Item.Thorn, 5);
                     break;
                 case "Trap01":
-                    inventory.GetItem(Inventory.Item.Hose, 1);
+                    //inventory.GetItem(Inventory.Item.Hose, 1);
                     inventory.GetItem(Inventory.Item.Heart, 1);
                     SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                     break;
@@ -127,7 +127,8 @@ public class Plant : MonoBehaviour
                     temp = !inventory.isFull(1, Inventory.Item.Thorn, 5);
                     break;
                 case "Trap01":
-                    temp = !inventory.isFull(3, Inventory.Item.Hose, 1, Inventory.Item.Heart, 1);
+                    //temp = !inventory.isFull(2, Inventory.Item.Hose, 1, Inventory.Item.Heart, 1);
+                    temp = !inventory.isFull(1, Inventory.Item.Heart, 1);
                     break;
             }
         }
@@ -282,15 +283,15 @@ public class Plant : MonoBehaviour
         interactionMenu.ClearMenu();
         interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
 
-        if (isGatherPossible == true)
+        interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
+        if (isGatherPossible == false)
         {
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
-        }
-        else if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
-        {
-            if (inventory.HasItem(Inventory.Item.TumorSeed) == true)
+            if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
             {
-                interactionMenu.AddMenu(InteractionMenu.MenuItem.Tumor);
+                if (inventory.HasItem(Inventory.Item.TumorSeed) == true)
+                {
+                    interactionMenu.AddMenu(InteractionMenu.MenuItem.Tumor);
+                }
             }
         }
         interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
@@ -305,7 +306,11 @@ public class Plant : MonoBehaviour
         switch (m)
         {
             case InteractionMenu.MenuItem.Gather:
-                if(InventoryCheck() == true)
+                if (isGatherPossible == false)
+                {
+                    monologue.DisplayLog("아직 채집할 수 없어.\n조금 더 자란 다음에 채집하는게 좋겠군.");
+                }
+                else if (InventoryCheck() == true)
                 {
                     GatherStart();
                     Player.GetComponent<PlayerInteraction>().GatherPlant(GatherAnimationType);

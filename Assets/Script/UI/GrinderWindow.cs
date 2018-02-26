@@ -60,26 +60,26 @@ public class GrinderWindow : MonoBehaviour
 
     void SetDictionary() //아이템 추가시 수정할 부분
     {
-        GrinderItemDictionary[Inventory.Item.Food] = new GrinderItemInfo(2, Inventory.Item.Mass, 1, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Oxygen] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Food] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
+        GrinderItemDictionary[Inventory.Item.Oxygen] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.Battery] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.Stick] = new GrinderItemInfo(2, Inventory.Item.Mass, 1, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.Board] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Hose] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Hose] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.Mass] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.Thorn] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.Facility01] = new GrinderItemInfo(3, Inventory.Item.Mass, 1, Inventory.Item.Stick, 1, Inventory.Item.Board, 1);
-        GrinderItemDictionary[Inventory.Item.Trap01] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Trap01] = new GrinderItemInfo(1, Inventory.Item.Thorn, 1);
         GrinderItemDictionary[Inventory.Item.Heart] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Bulb01] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Bulb01] = new GrinderItemInfo(2, Inventory.Item.Stick, 1, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.StickSeed] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.BoardSeed] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.ThornSeed] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Tumor] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Tumor] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.TumorSeed] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.Grinder01] = new GrinderItemInfo(3, Inventory.Item.Mass, 1, Inventory.Item.Stick, 1, Inventory.Item.Board, 1);
         GrinderItemDictionary[Inventory.Item.SuppliedBattery] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.SuppliedFood] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.SuppliedFood] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.Water] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
     }
 
@@ -120,7 +120,7 @@ public class GrinderWindow : MonoBehaviour
         else
         {
             BigItem.SetActive(true);
-            BigItem.GetComponent<Image>().sprite = inventory.itemDictionary[selectedItem];
+            BigItem.GetComponent<Image>().sprite = inventory.itemDictionary[selectedItem].sprite;
 
             resultItemCount = GrinderItemDictionary[selectedItem].resultCount;
             for(int i = 0; i < 3; i++)
@@ -158,7 +158,7 @@ public class GrinderWindow : MonoBehaviour
         }
         for(int i = 0; i < resultItemCount; i++)
         {
-            ResultItem[i].GetComponent<Image>().sprite = inventory.itemDictionary[resultItem[i]];
+            ResultItem[i].GetComponent<Image>().sprite = inventory.itemDictionary[resultItem[i]].sprite;
             if (resultItemNum[i] >= 10)
             {
                 ResultItemNum[i].GetComponent<Text>().text = resultItemNum[i].ToString();

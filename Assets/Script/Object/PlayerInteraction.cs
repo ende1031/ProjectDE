@@ -87,9 +87,12 @@ public class PlayerInteraction : MonoBehaviour
                     break;
 
                 case "Portal":
-                    GetComponent<PlayerMove>().SetMovePossible(false);
-                    SceneObjectManager.instance.SaveObject();
-                    SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
+                    if (target.GetComponent<Portal>().isPortalReady() == true)
+                    {
+                        GetComponent<PlayerMove>().SetMovePossible(false);
+                        SceneObjectManager.instance.SaveObject();
+                        SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
+                    }
                     break;
 
                 case "Bulb":
