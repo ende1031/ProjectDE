@@ -105,7 +105,7 @@ MonoBehaviour:
   plantName: Trap01
   GatherAnimationType: 1
   state: 3
-  growthTime: 180
+  growthTime: 60
   growthTimer: 0
   isTumor: 0
   isLoadByManager: 0
