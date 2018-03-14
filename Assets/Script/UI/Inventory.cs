@@ -214,7 +214,7 @@ public class Inventory : MonoBehaviour
                 {
                     case Item.Facility01:
                     case Item.Grinder01:
-                        if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01", true) == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
+                        if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01") == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
                         {
                             monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n탈출포드나 전구가 있는 곳에 설치하자.");
                         }
@@ -496,7 +496,7 @@ public class Inventory : MonoBehaviour
             int? temp = isContains(itemName);
             if(temp.HasValue)
             {
-                if(Items[(int)temp].count + num > 99)
+                if(Items[(int)temp].count + num > 999)
                 {
                     return false;
                 }
@@ -593,7 +593,7 @@ public class Inventory : MonoBehaviour
     // isFull 메소드에서 임시로 아이템을 추가해보는데 사용하는 메소드
     bool FullTestGetItem(Item itemName, int num = 1)
     {
-        if (Items.Count >= 15 && (HasItem(itemName) == false || HasItem(itemName, 100 - num) == true))
+        if (Items.Count >= 15 && (HasItem(itemName) == false || HasItem(itemName, 1000 - num) == true))
         {
             return false;
         }
@@ -602,7 +602,7 @@ public class Inventory : MonoBehaviour
             int? temp = isContains(itemName);
             if (temp.HasValue)
             {
-                if (Items[(int)temp].count + num > 99)
+                if (Items[(int)temp].count + num > 999)
                 {
                     return false;
                 }

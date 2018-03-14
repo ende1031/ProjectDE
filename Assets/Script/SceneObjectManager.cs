@@ -142,10 +142,10 @@ public class SceneObjectManager : MonoBehaviour
         else if (ob.type == "Bulb")
         {
             ob.inGameObject = Instantiate(Bulb01, tempPos, Quaternion.identity);
-            ob.inGameObject.GetComponent<Bulb>().isOn = ob.isOn;
-            ob.inGameObject.GetComponent<Bulb>().LifeTimer = ob.timer;
-            ob.inGameObject.GetComponent<Bulb>().isAlive = ob.isAlive;
-            ob.inGameObject.GetComponent<Bulb>().isLoadByManager = true;
+            //ob.inGameObject.GetComponent<Bulb>().isOn = ob.isOn;
+            //ob.inGameObject.GetComponent<Bulb>().LifeTimer = ob.timer;
+            //ob.inGameObject.GetComponent<Bulb>().isAlive = ob.isAlive;
+            //ob.inGameObject.GetComponent<Bulb>().isLoadByManager = true;
         }
         else if (ob.type == "Nest")
         {
@@ -203,7 +203,7 @@ public class SceneObjectManager : MonoBehaviour
 
                         if (pair.Value.name == "Trap01")
                         {
-                            if (RangeSearch(i, pair.Key, 2, "Bulb", "Bulb01", true) == false)
+                            if (RangeSearch(i, pair.Key, 2, "Bulb", "Bulb01") == false)
                             {
                                 if (RangeSearch(i, pair.Key, 2, "Facility", "EscapePod") == false)
                                 {
@@ -227,18 +227,18 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.timer -= Time.deltaTime;
                     }
                 }
-                else if (pair.Value.type == "Bulb")
-                {
-                    if (pair.Value.inGameObject == null && pair.Value.isOn == true)
-                    {
-                        pair.Value.timer += Time.deltaTime;
-                        if(pair.Value.timer > pair.Value.bulbLifeTime)
-                        {
-                            pair.Value.isAlive = false;
-                            pair.Value.isOn = false;
-                        }
-                    }
-                }
+                //else if (pair.Value.type == "Bulb")
+                //{
+                //    if (pair.Value.inGameObject == null && pair.Value.isOn == true)
+                //    {
+                //        pair.Value.timer += Time.deltaTime;
+                //        if(pair.Value.timer > pair.Value.bulbLifeTime)
+                //        {
+                //            pair.Value.isAlive = false;
+                //            pair.Value.isOn = false;
+                //        }
+                //    }
+                //}
             }
         }
     }
@@ -274,16 +274,16 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.facilityGrinderItemNum = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum;
                     }
                 }
-                else if (pair.Value.type == "Bulb")
-                {
-                    if (pair.Value.inGameObject != null)
-                    {
-                        pair.Value.isOn = pair.Value.inGameObject.GetComponent<Bulb>().isOn;
-                        pair.Value.timer = pair.Value.inGameObject.GetComponent<Bulb>().LifeTimer;
-                        pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Bulb>().isAlive;
-                        pair.Value.bulbLifeTime = pair.Value.inGameObject.GetComponent<Bulb>().LifeTime;
-                    }
-                }
+                //else if (pair.Value.type == "Bulb")
+                //{
+                //    if (pair.Value.inGameObject != null)
+                //    {
+                //        pair.Value.isOn = pair.Value.inGameObject.GetComponent<Bulb>().isOn;
+                //        pair.Value.timer = pair.Value.inGameObject.GetComponent<Bulb>().LifeTimer;
+                //        pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Bulb>().isAlive;
+                //        pair.Value.bulbLifeTime = pair.Value.inGameObject.GetComponent<Bulb>().LifeTime;
+                //    }
+                //}
             }
         }
     }
@@ -318,13 +318,13 @@ public class SceneObjectManager : MonoBehaviour
                     pair.Value.facilityIsMake = false;
                     pair.Value.facilityIsMakeFinish = false;
                 }
-                else if (pair.Value.type == "Bulb")
-                {
-                    if (pair.Value.isOn == true)
-                    {
-                        pair.Value.isAlive = false;
-                    }
-                }
+                //else if (pair.Value.type == "Bulb")
+                //{
+                //    if (pair.Value.isOn == true)
+                //    {
+                //        pair.Value.isAlive = false;
+                //    }
+                //}
             }
         }
 
@@ -459,7 +459,7 @@ public class SceneObjectManager : MonoBehaviour
     }
 
     //grid를 기준으로 양옆 range범위 안에 해당 type의 오브젝트가 있으면 true, isSearchLight는 전구가 아니라 빛(켜진 전구)을 탐색함
-    public bool RangeSearch(int sceneNum, int grid, int range, string type, string name = "NoName", bool isSearchLight = false)
+    public bool RangeSearch(int sceneNum, int grid, int range, string type, string name = "NoName")
     {
         for (int i = (grid - range); i <= (grid + range); i++)
         {
@@ -467,31 +467,31 @@ public class SceneObjectManager : MonoBehaviour
             {
                 if (SObjects[sceneNum][i].type == type && name == "NoName")
                 {
-                    if (type == "Bulb" && isSearchLight == true)
-                    {
-                        if (SObjects[sceneNum][i].isOn == true && SObjects[sceneNum][i].isAlive == true)
-                        {
-                            return true;
-                        }
-                    }
-                    else
-                    {
+                    //if (type == "Bulb" && isSearchLight == true)
+                    //{
+                    //    if (SObjects[sceneNum][i].isOn == true && SObjects[sceneNum][i].isAlive == true)
+                    //    {
+                    //        return true;
+                    //    }
+                    //}
+                    //else
+                    //{
                         return true;
-                    }
+                    //}
                 }
                 else if (SObjects[sceneNum][i].type == type && SObjects[sceneNum][i].name == name)
                 {
-                    if(type == "Bulb" && isSearchLight == true)
-                    {
-                        if(SObjects[sceneNum][i].isOn == true && SObjects[sceneNum][i].isAlive == true)
-                        {
-                            return true;
-                        }
-                    }
-                    else
-                    {
+                    //if(type == "Bulb" && isSearchLight == true)
+                    //{
+                    //    if(SObjects[sceneNum][i].isOn == true && SObjects[sceneNum][i].isAlive == true)
+                    //    {
+                    //        return true;
+                    //    }
+                    //}
+                    //else
+                    //{
                         return true;
-                    }
+                    //}
                 }
             }
         }
