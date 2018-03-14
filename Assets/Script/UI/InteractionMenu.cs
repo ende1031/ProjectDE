@@ -67,6 +67,9 @@ public class InteractionMenu : MonoBehaviour
     Text ButtonText;
     GameObject IconGroup;
     GameObject[] MenuIcon = new GameObject[7];
+    GameObject WarningPopup;
+    Text WarningText;
+
     PopupWindow popupWindow;
     GrinderWindow grinderWindow;
 
@@ -83,6 +86,8 @@ public class InteractionMenu : MonoBehaviour
     float reOpenTimer = 0;
     bool isMove = false;
     bool isCursorMoveActive = false;
+
+    bool isWarningPopupActive = false;
 
     float circleRadius = 135.0f;
     float moveAngle = 0;
@@ -111,6 +116,9 @@ public class InteractionMenu : MonoBehaviour
 
         NameText = IMenu_bg.transform.Find("NameText").gameObject.GetComponent<Text>();
         ExpText = IMenu_bg.transform.Find("ExpText").gameObject.GetComponent<Text>();
+
+        WarningPopup = transform.Find("WarningPopup").gameObject;
+        WarningText = WarningPopup.transform.Find("WarningText").gameObject.GetComponent<Text>();
 
         SetDictionary();
     }
@@ -160,12 +168,30 @@ public class InteractionMenu : MonoBehaviour
                 }
                 else if (Input.GetKeyUp(KeyCode.C))
                 {
-                    SelectedMenu();
+                    if(MenuList[selectedIndex] == MenuItem.Remove || MenuList[selectedIndex] == MenuItem.Dump || MenuList[selectedIndex] == MenuItem.Cancle || MenuList[selectedIndex] == MenuItem.Sleep)
+                    {
+                        OpenWarningPopup();
+                    }
+                    else
+                    {
+                        SelectMenu();
+                    }
                 }
             }
             else if(isMove == true)
             {
                 MoveMenuIcon();
+            }
+        }
+        else if(isWarningPopupActive == true)
+        {
+            if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Escape))
+            {
+                CloseWarningPopup();
+            }
+            else if (Input.GetKeyUp(KeyCode.C))
+            {
+                SelectMenu();
             }
         }
         else if(popupWindow.GetPopupActive() == false && grinderWindow.GetUsingGrinder() == false)
@@ -408,7 +434,47 @@ public class InteractionMenu : MonoBehaviour
         isPopupActive = false;
         openTimer = 0;
         //IMenu_bg.SetActive(false);
-        animaitor.SetBool("isOpen", false);
+        if(isWarningPopupActive == false)
+        {
+            animaitor.SetBool("isOpen", false);
+        }
+        isWarningPopupActive = false;
+        WarningPopup.SetActive(false);
+    }
+
+    void OpenWarningPopup()
+    {
+        switch(MenuList[selectedIndex])
+        {
+            case MenuItem.Dump:
+                WarningText.text = "정말 아이템을 버리시겠습니까?\n되돌릴 수 없습니다.";
+                break;
+            case MenuItem.Remove:
+                WarningText.text = "정말 제거하시겠습니까?\n제거하시면 되돌릴 수 없습니다.";
+                break;
+            case MenuItem.Cancle:
+                WarningText.text = "작동을 중지 하시겠습니까?\n시설에 넣어 둔 아이템은 사라집니다.";
+                break;
+            case MenuItem.Sleep:
+                WarningText.text = "전원이 켜져있는 시설은\n잠자는 동안 괴물의 공격을 받게 됩니다.";
+                break;
+            default:
+                WarningText.text = "정말 실행하시겠습니까?\n실행하시면 되돌릴 수 없습니다.";
+                break;
+        }
+
+        isPopupActive = false;
+        isWarningPopupActive = true;
+        IMenu_bg.SetActive(false);
+        WarningPopup.SetActive(true);
+    }
+
+    void CloseWarningPopup()
+    {
+        isPopupActive = true;
+        isWarningPopupActive = false;
+        IMenu_bg.SetActive(true);
+        WarningPopup.SetActive(false);
     }
 
     public void ClearMenu()
@@ -423,11 +489,11 @@ public class InteractionMenu : MonoBehaviour
         MenuList.Add(mi);
     }
 
-    void SelectedMenu()
+    void SelectMenu()
     {
         CloseWindow();
 
-        switch(targetType)
+        switch (targetType)
         {
             case "Plant":
                 targetObject.GetComponent<Plant>().SelectMenu(MenuList[selectedIndex]);
