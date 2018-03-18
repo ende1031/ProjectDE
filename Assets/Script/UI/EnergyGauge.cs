@@ -12,7 +12,7 @@ public class EnergyGauge : MonoBehaviour
     GameObject gaugeLight;
 
     public float amountOfEnergy = 100;
-    public float reduceSpeed = 1;
+    //public float reduceSpeed = 1;
 
     bool monoMessage = false;
 
@@ -34,7 +34,7 @@ public class EnergyGauge : MonoBehaviour
             }
         }
 
-        Reduce();
+        //Reduce();
         RangeLimit();
         DisplayText();
         DisplayGauge();
@@ -57,10 +57,10 @@ public class EnergyGauge : MonoBehaviour
         }
     }
 
-    void Reduce()
-    {
-        amountOfEnergy -= reduceSpeed * Time.deltaTime;
-    }
+    //void Reduce()
+    //{
+    //    amountOfEnergy -= reduceSpeed * Time.deltaTime;
+    //}
 
     void DisplayText()
     {
@@ -89,10 +89,16 @@ public class EnergyGauge : MonoBehaviour
     public void SetAmount(float amount)
     {
         amountOfEnergy += amount;
-        if(amount > 0)
+        RangeLimit();
+        if (amount > 0)
         {
             GaugeLightReset();
         }
+    }
+
+    public float GetAmount()
+    {
+        return amountOfEnergy;
     }
 
     void GaugeLight()

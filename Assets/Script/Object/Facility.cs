@@ -20,6 +20,7 @@ public class Facility : MonoBehaviour
     Animator animaitor;
     GameObject Player;
     Timer timer;
+    EnergyGauge energyGauge;
     int sceneNum;
 
     //public bool isOn = true;
@@ -42,6 +43,7 @@ public class Facility : MonoBehaviour
         Player = GameObject.Find("Player");
         monologue = Player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
         timer = GameObject.Find("Timer").GetComponent<Timer>();
+        energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
 
         animaitor = GetComponent<Animator>();
         if (animaitor != null)
@@ -198,6 +200,12 @@ public class Facility : MonoBehaviour
     {
         if (facilityName != "EscapePod")
         {
+            if (energyGauge.GetAmount() < 10)
+            {
+                monologue.DisplayLog("에너지가 부족해서 철거할 수 없어.");
+                return;
+            }
+            energyGauge.SetAmount(-10);
             interactionIcon.DeleteAllIcons();
             SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
         }
@@ -238,6 +246,7 @@ public class Facility : MonoBehaviour
     {
         if(state == 4)
         {
+            energyGauge.SetAmount(-10);
             state = 1;
             if (animaitor != null)
             {
@@ -246,17 +255,41 @@ public class Facility : MonoBehaviour
         }
     }
 
+    void Examine()
+    {
+        if(state == 4)
+        {
+            monologue.DisplayLog("괴물의 습격을 받은 것 같다.\n에너지를 소모해서 수리하도록 하자.");
+            return;
+        }
+        switch(facilityName)
+        {
+            case "EscapePod":
+                monologue.DisplayLog("내가 타고 온 탈출포드이다.\n다행히 손상이 심한 것 같지는 않다.\n아이템 연구나 제작을 할 수 있다.");
+                break;
+            case "TempFacility":
+                monologue.DisplayLog("급하게 만든 간이 워크벤치이다.\n재료와 닉스입자를 소모해서 아이템을 제작할 수 있다.");
+                break;
+            case "Grinder01":
+                monologue.DisplayLog("아이템을 분해할 수 있는 분해기이다.\n분해를 통해 재료아이템을 얻을 수 있다.");
+                break;
+        }
+    }
+
     public void OpenMenu()
     {
         interactionMenu.ClearMenu();
         interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
 
+        if(state == 3)
+        {
+            interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
+        }
         if (facilityName == "EscapePod")
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Research);
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Sleep);
         }
-
         switch (state)
         {
             case 1:
@@ -276,14 +309,11 @@ public class Facility : MonoBehaviour
             case 2:
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
                 break;
-            case 3:
-                interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
-                break;
             case 4:
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Repair);
                 break;
         }
-
+        interactionMenu.AddMenu(InteractionMenu.MenuItem.Examine);
         if (facilityName != "EscapePod")
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
@@ -380,6 +410,9 @@ public class Facility : MonoBehaviour
                 break;
             case InteractionMenu.MenuItem.Repair:
                 Repair();
+                break;
+            case InteractionMenu.MenuItem.Examine:
+                Examine();
                 break;
         }
     }

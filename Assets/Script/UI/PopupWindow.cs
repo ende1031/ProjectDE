@@ -251,6 +251,8 @@ public class PopupWindow : MonoBehaviour
 
         if(makePossible == true)
         {
+            //에너지 부족하면 아이템 제작 안되는 코드 추가 필요
+
             for (int i = 0; i < 6; i++)
             {
                 if (WindowItemList[selectedIndex].materialNum[i] > 0)
@@ -261,11 +263,15 @@ public class PopupWindow : MonoBehaviour
             //inventory.GetItem(WindowItemList[selectedIndex].name);
             Facility.GetComponent<FacilityBalloon>().MakeItem(WindowItemList[selectedIndex].name, WindowItemList[selectedIndex].time);
             
+            //만들려는 아이템 종류에 따라 에너지 소모량 다르게
             switch(WindowItemList[selectedIndex].name)
             {
                 case Inventory.Item.Oxygen:
-                case Inventory.Item.Battery:
                 case Inventory.Item.Food:
+                    break;
+
+                case Inventory.Item.Battery:
+                    energyGauge.SetAmount(-30);
                     break;
 
                 default:

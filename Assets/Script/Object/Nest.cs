@@ -12,6 +12,8 @@ public class Nest : MonoBehaviour
     InteractionMenu interactionMenu;
     Inventory inventory;
     int sceneNum;
+    Monologue monologue;
+    EnergyGauge energyGauge;
 
     void Start ()
     {
@@ -19,6 +21,8 @@ public class Nest : MonoBehaviour
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+        monologue = GameObject.Find("Player").transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+        energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
     }
 	
 	void Update ()
@@ -47,11 +51,29 @@ public class Nest : MonoBehaviour
         interactionMenu.ClearMenu();
         interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
 
+        interactionMenu.AddMenu(InteractionMenu.MenuItem.Examine);
         interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
 
         float w = GetComponent<SpriteRenderer>().sprite.rect.width;
         float h = GetComponent<SpriteRenderer>().sprite.rect.height;
         interactionMenu.OpenMenu(this.gameObject, "Nest", GetComponent<SpriteRenderer>().sprite, w, h);
+    }
+
+    public void RemoveObject()
+    {
+        if (energyGauge.GetAmount() < 10)
+        {
+            monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.");
+            return;
+        }
+        energyGauge.SetAmount(-10);
+        interactionIcon.DeleteAllIcons();
+        SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
+    }
+
+    void Examine()
+    {
+        monologue.DisplayLog("둥지 내부에서 괴물이 생산되고 있는 것으로 추정된다.\n근처에 덫을 설치해보자.");
     }
 
     public void SelectMenu(InteractionMenu.MenuItem m)
@@ -61,12 +83,9 @@ public class Nest : MonoBehaviour
             case InteractionMenu.MenuItem.Remove:
                 RemoveObject();
                 break;
+            case InteractionMenu.MenuItem.Examine:
+                Examine();
+                break;
         }
-    }
-
-    public void RemoveObject()
-    {
-        interactionIcon.DeleteAllIcons();
-        SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
     }
 }

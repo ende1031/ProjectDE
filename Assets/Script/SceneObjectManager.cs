@@ -328,7 +328,8 @@ public class SceneObjectManager : MonoBehaviour
 
         hungerGauge.SetAmount(-20);
         oxygenGauge.SetAmount(-10);
-        energyGauge.SetAmount(-10);
+        //energyGauge.SetAmount(-10);
+        energyGauge.SetAmount(100);
         timer.ResetTimer();
         timer.PassDay();
 

@@ -210,6 +210,11 @@ public class Inventory : MonoBehaviour
                 break;
 
             case InteractionMenu.MenuItem.Install:
+                if(energyGauge.GetAmount() < 10)
+                {
+                    monologue.DisplayLog("에너지가 부족해서 설치할 수 없어.");
+                    break;
+                }
                 switch (Items[selectedIndex].name)
                 {
                     case Item.Facility01:
@@ -232,6 +237,7 @@ public class Inventory : MonoBehaviour
                             {
                                 SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "Grinder01"));
                             }
+                            energyGauge.SetAmount(-10);
                             DeleteItem(Items[selectedIndex].name);
                         }
                         break;
@@ -250,6 +256,7 @@ public class Inventory : MonoBehaviour
                             {
                                 SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3));
                             }
+                            energyGauge.SetAmount(-10);
                             DeleteItem(Items[selectedIndex].name);
                         }
                         break;
@@ -273,6 +280,11 @@ public class Inventory : MonoBehaviour
                 break;
 
             case InteractionMenu.MenuItem.Plant:
+                if (energyGauge.GetAmount() < 10)
+                {
+                    monologue.DisplayLog("에너지가 부족해서 설치할 수 없어.");
+                    break;
+                }
                 if (SceneObjectManager.instance.ContainObject(sceneNum, Grid.instance.PlayerGrid()) == true)
                 {
                     monologue.DisplayLog("여기는 모종을 심을 수 없을 것 같군.\n다른 곳에 심도록 하자.");
@@ -291,6 +303,7 @@ public class Inventory : MonoBehaviour
                     {
                         SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "ThornPlant", 0));
                     }
+                    energyGauge.SetAmount(-10);
                     DeleteItem(Items[selectedIndex].name);
                 }
                 openTimer = 1;

@@ -11,6 +11,8 @@ public class Bulb : MonoBehaviour
     InteractionIcon interactionIcon;
     InteractionMenu interactionMenu;
     Inventory inventory;
+    Monologue monologue;
+    EnergyGauge energyGauge;
 
     //GameObject BulbLight;
     //GameObject Balloon;
@@ -32,6 +34,8 @@ public class Bulb : MonoBehaviour
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        monologue = GameObject.Find("Player").transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+        energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
 
         //BulbLight = transform.Find("Light").gameObject;
         //Balloon = transform.Find("Balloon").gameObject;
@@ -208,8 +212,19 @@ public class Bulb : MonoBehaviour
         //}
     }
 
+    void Examine()
+    {
+        monologue.DisplayLog("괴물은 빛을 싫어한다.\n이 전구 근처에는 다른 시설을 설치해도 안전할 것이다.");
+    }
+
     public void RemoveObject()
     {
+        if (energyGauge.GetAmount() < 10)
+        {
+            monologue.DisplayLog("에너지가 부족해서 철거할 수 없어.");
+            return;
+        }
+        energyGauge.SetAmount(-10);
         interactionIcon.DeleteAllIcons();
         SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
     }
@@ -223,6 +238,7 @@ public class Bulb : MonoBehaviour
         //{
         //    interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
         //}
+        interactionMenu.AddMenu(InteractionMenu.MenuItem.Examine);
         interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
 
         float w = GetComponent<SpriteRenderer>().sprite.rect.width;
@@ -240,6 +256,9 @@ public class Bulb : MonoBehaviour
 
             case InteractionMenu.MenuItem.Remove:
                 RemoveObject();
+                break;
+            case InteractionMenu.MenuItem.Examine:
+                Examine();
                 break;
         }
     }
