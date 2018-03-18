@@ -22,7 +22,7 @@ public class Nest : MonoBehaviour
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
         monologue = GameObject.Find("Player").transform.Find("Monologue").gameObject.GetComponent<Monologue>();
-        energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
+        energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
     }
 	
 	void Update ()

@@ -30,8 +30,6 @@ public class FacilityBalloon : MonoBehaviour
     public Inventory.Item[] grinderItem = new Inventory.Item[3] { 0, 0, 0 };
     public int[] grinderItemNum = new int[3] { 0, 0, 0 };
 
-    //public bool isMake = false;
-    //public bool isMakeFinish = false;
     public bool isLoadByManager = false;
 
     public bool isMakeByGrinder = false;
@@ -63,18 +61,9 @@ public class FacilityBalloon : MonoBehaviour
     {
         if(isLoadByManager == true)
         {
-            //if (animaitor != null)
-            //{
-            //    animaitor.SetBool("isOn", GetComponent<Facility>().isOn);
-            //}
             if (GetComponent<Facility>().state == 2)
             {
                 Balloon.SetActive(true);
-                if(animaitor != null)
-                {
-                    //animaitor.SetBool("isMaking", true);
-                    //animaitor.SetInteger("State", 2);
-                }
 
                 if (isMakeByGrinder == true)
                 {
@@ -144,12 +133,9 @@ public class FacilityBalloon : MonoBehaviour
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         timeToMake = time;
         progressTimer = timeToMake;
-        //isMake = true;
-        //isMakeFinish = false;
         GetComponent<Facility>().state = 2;
         if (animaitor != null)
         {
-            //animaitor.SetBool("isMaking", true);
             animaitor.SetInteger("State", 2);
         }
     }
@@ -169,12 +155,9 @@ public class FacilityBalloon : MonoBehaviour
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         timeToMake = time;
         progressTimer = timeToMake;
-        //isMake = true;
-        //isMakeFinish = false;
         GetComponent<Facility>().state = 2;
         if (animaitor != null)
         {
-            //animaitor.SetBool("isMaking", true);
             animaitor.SetInteger("State", 2);
         }   
     }
@@ -216,18 +199,14 @@ public class FacilityBalloon : MonoBehaviour
 
     void MakeFinish()
     {
-        //isMakeFinish = true;
         Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
         Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
 
         GetComponent<Facility>().state = 3;
         if (animaitor != null)
         {
-            //animaitor.SetBool("isMaking", false);
             animaitor.SetInteger("State", 3);
         }
-        
-        //isMake = false;
     }
 
     public bool InventoryCheck()
@@ -287,7 +266,6 @@ public class FacilityBalloon : MonoBehaviour
             }
         }
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
-        //isMakeFinish = false;
         GetComponent<Facility>().state = 1;
         Balloon.SetActive(false);
     }
@@ -295,12 +273,9 @@ public class FacilityBalloon : MonoBehaviour
     public void Dump()
     {
         Balloon.SetActive(false);
-        //isMake = false;
-        //isMakeFinish = false;
         GetComponent<Facility>().state = 1;
         if (animaitor != null)
         {
-            //animaitor.SetBool("isMaking", false);
             animaitor.SetInteger("State", 1);
         }
     }

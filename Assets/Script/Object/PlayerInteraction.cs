@@ -96,14 +96,7 @@ public class PlayerInteraction : MonoBehaviour
                     break;
 
                 case "Bulb":
-                    //if (target.GetComponent<Bulb>().isOn == false && target.GetComponent<Bulb>().isAlive == true)
-                    //{
-                    //    target.GetComponent<Bulb>().OnOff();
-                    //}
-                    //else
-                    //{
-                        target.GetComponent<Bulb>().OpenMenu();
-                    //}
+                    target.GetComponent<Bulb>().OpenMenu();
                     break;
 
                 case "Nest":

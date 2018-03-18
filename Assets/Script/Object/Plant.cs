@@ -37,7 +37,7 @@ public class Plant : MonoBehaviour
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         Player = GameObject.Find("Player");
         monologue = Player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
-        energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
+        energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
 
         animaitor = GetComponent<Animator>();
 

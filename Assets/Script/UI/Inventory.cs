@@ -64,7 +64,6 @@ public class Inventory : MonoBehaviour
     GameObject player = null;
     Monologue monologue;
     HungerGauge hungerGauge;
-    OxygenGauge oxygenGauge;
     EnergyGauge energyGauge;
     ResearchWindow researchWindow;
     InteractionMenu interactionMenu;
@@ -200,7 +199,6 @@ public class Inventory : MonoBehaviour
                 break;
 
             case InteractionMenu.MenuItem.Oxygen:
-                oxygenGauge.SetAmount(70);
                 DeleteItem(Items[selectedIndex].name);
                 break;
 
@@ -337,9 +335,8 @@ public class Inventory : MonoBehaviour
             GetEffect[i].SetActive(false);
         }
 
-        oxygenGauge = GameObject.Find("Oxygen_Needle").GetComponent<OxygenGauge>();
-        hungerGauge = GameObject.Find("Hunger_Guage").GetComponent<HungerGauge>();
-        energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
+        hungerGauge = GameObject.Find("HungerUI").GetComponent<HungerGauge>();
+        energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
         researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         grinderWindow = GameObject.Find("GrinderWindow").GetComponent<GrinderWindow>();

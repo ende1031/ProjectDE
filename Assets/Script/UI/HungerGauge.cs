@@ -10,13 +10,19 @@ public class HungerGauge : MonoBehaviour
     public float amountOfHunger = 100;
     public float reduceSpeed = 1;
 
+    GameObject gauge;
+    GameObject percent;
     GameObject gaugeLight;
+    GameObject infoBG;
 
     bool monoMessage = false;
 
     void Start ()
     {
-        gaugeLight = GameObject.Find("Hunger_Light").gameObject;
+        gauge = transform.Find("Hunger_Guage").gameObject;
+        gaugeLight = transform.Find("Hunger_Light").gameObject;
+        infoBG = transform.Find("Hunger_Info").gameObject;
+        percent = infoBG.transform.Find("Hunger_Percent").gameObject;
     }
 	
 	void Update ()
@@ -32,6 +38,7 @@ public class HungerGauge : MonoBehaviour
 
         Reduce();
         RangeLimit();
+        DisplayText();
         DisplayGauge();
         GaugeLight();
 
@@ -66,10 +73,20 @@ public class HungerGauge : MonoBehaviour
         amountOfHunger -= reduceSpeed * Time.deltaTime;
     }
 
+    void DisplayText()
+    {
+        float temp = Mathf.Round(amountOfHunger);
+        percent.GetComponent<Text>().text = (int)temp + "";
+    }
+
     void DisplayGauge()
     {
-        GetComponent<Image>().fillAmount = amountOfHunger / 100;
+        gauge.GetComponent<Image>().fillAmount = amountOfHunger / 100;
         gaugeLight.GetComponent<Image>().fillAmount = amountOfHunger / 100;
+
+        Vector3 temp = infoBG.transform.position;
+        temp.y = 373 + amountOfHunger * 0.82f;
+        infoBG.transform.position = temp;
     }
 
     void RangeLimit()

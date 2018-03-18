@@ -68,7 +68,7 @@ public class PopupWindow : MonoBehaviour
     void Start ()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        energyGauge = GameObject.Find("LeftUI").GetComponent<EnergyGauge>();
+        energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
         PopupBG = transform.Find("PopupBG").gameObject;
         animaitor = GetComponent<Animator>();
 
