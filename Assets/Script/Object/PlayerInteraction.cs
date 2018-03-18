@@ -106,10 +106,6 @@ public class PlayerInteraction : MonoBehaviour
                     //}
                     break;
 
-                case "Wreckage":
-                    target.GetComponent<Wreckage>().OpenMenu();
-                    break;
-
                 case "Nest":
                     target.GetComponent<Nest>().OpenMenu();
                     break;

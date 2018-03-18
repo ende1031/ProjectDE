@@ -61,7 +61,7 @@ public class Facility : MonoBehaviour
                     if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
                     {
                         //isAlive = false;
-                        state = 4;
+                        Ruin();
                     }
                 }
             }
@@ -75,12 +75,12 @@ public class Facility : MonoBehaviour
         if (RuinCheck() == true)
         {
             //isAlive = false;
-            state = 4;
-        }
-        if(state == 4)
-        {
             Ruin();
         }
+        //if(state == 4)
+        //{
+        //    Ruin();
+        //}
 
         if(offTimer < 0.3f)
         {
@@ -224,7 +224,26 @@ public class Facility : MonoBehaviour
 
     void Ruin()
     {
-        SceneObjectManager.instance.ChangeObject(sceneNum, Grid.instance.PosToGrid(transform.position.x), new SceneObjectManager.SceneObject("Wreckage", "Wreckage"));
+        //SceneObjectManager.instance.ChangeObject(sceneNum, Grid.instance.PosToGrid(transform.position.x), new SceneObjectManager.SceneObject("Wreckage", "Wreckage"));
+
+        GetComponent<FacilityBalloon>().Dump();
+        state = 4;
+        if (animaitor != null)
+        {
+            animaitor.SetInteger("State", state);
+        }
+    }
+
+    void Repair()
+    {
+        if(state == 4)
+        {
+            state = 1;
+            if (animaitor != null)
+            {
+                animaitor.SetInteger("State", state);
+            }
+        }
     }
 
     public void OpenMenu()
@@ -261,7 +280,7 @@ public class Facility : MonoBehaviour
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
                 break;
             case 4:
-                //수리하기
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Repair);
                 break;
         }
 
@@ -358,6 +377,9 @@ public class Facility : MonoBehaviour
                 break;
             case InteractionMenu.MenuItem.Remove:
                 RemoveObject();
+                break;
+            case InteractionMenu.MenuItem.Repair:
+                Repair();
                 break;
         }
     }

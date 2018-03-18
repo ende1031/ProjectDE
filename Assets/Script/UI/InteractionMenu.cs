@@ -21,7 +21,9 @@ public class InteractionMenu : MonoBehaviour
         Research,
         Sleep,
         Tumor,
-        Grind
+        Grind,
+        Repair,
+        Examine
     };
 
     enum Direction
@@ -45,6 +47,8 @@ public class InteractionMenu : MonoBehaviour
     public Sprite SleepSp;
     public Sprite TumorSp;
     public Sprite GrindSp;
+    public Sprite RepairSp;
+    public Sprite ExamineSp;
 
     public class MenuItemInfo
     {
@@ -130,16 +134,18 @@ public class InteractionMenu : MonoBehaviour
         MenuDictionary[MenuItem.Dump] = new MenuItemInfo(DumpSp, "버리기");
         MenuDictionary[MenuItem.Food] = new MenuItemInfo(FoodSp, "식품 섭취");
         MenuDictionary[MenuItem.Gather] = new MenuItemInfo(GatherSp, "아이템 획득");
-        MenuDictionary[MenuItem.Install] = new MenuItemInfo(InstallSp, "설치");
+        MenuDictionary[MenuItem.Install] = new MenuItemInfo(InstallSp, "설치하기");
         MenuDictionary[MenuItem.Make] = new MenuItemInfo(MakeSp, "아이템 제작");
         MenuDictionary[MenuItem.Off] = new MenuItemInfo(OffSp, "전원 끄기");
         MenuDictionary[MenuItem.Oxygen] = new MenuItemInfo(OxygenSp, "산소 충전");
         MenuDictionary[MenuItem.Plant] = new MenuItemInfo(PlantSp, "식물 심기");
-        MenuDictionary[MenuItem.Remove] = new MenuItemInfo(RemoveSp, "제거");
-        MenuDictionary[MenuItem.Research] = new MenuItemInfo(ResearchSp, "연구");
+        MenuDictionary[MenuItem.Remove] = new MenuItemInfo(RemoveSp, "제거하기");
+        MenuDictionary[MenuItem.Research] = new MenuItemInfo(ResearchSp, "연구하기");
         MenuDictionary[MenuItem.Sleep] = new MenuItemInfo(SleepSp, "잠자기");
         MenuDictionary[MenuItem.Tumor] = new MenuItemInfo(TumorSp, "종양 심기");
         MenuDictionary[MenuItem.Grind] = new MenuItemInfo(GrindSp, "아이템 분해");
+        MenuDictionary[MenuItem.Repair] = new MenuItemInfo(RepairSp, "수리하기");
+        MenuDictionary[MenuItem.Examine] = new MenuItemInfo(ExamineSp, "살펴보기");
     }
 
     void Update ()
@@ -505,10 +511,6 @@ public class InteractionMenu : MonoBehaviour
 
             case "Bulb":
                 targetObject.GetComponent<Bulb>().SelectMenu(MenuList[selectedIndex]);
-                break;
-
-            case "Wreckage":
-                targetObject.GetComponent<Wreckage>().SelectMenu(MenuList[selectedIndex]);
                 break;
 
             case "Nest":

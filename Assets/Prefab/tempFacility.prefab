@@ -632,9 +632,8 @@ MonoBehaviour:
     \uC5C6\uB294 \uACF3\uC5D0 \uB178\uCD9C\uB418\uBA74 \uAD34\uBB3C\uC758 \uACF5\uACA9\uC73C\uB85C
     \uC27D\uAC8C \uD30C\uAD34\uB41C\uB2E4."
   facilityName: TempFacility
-  isOn: 1
   isLoadByManager: 0
-  isAlive: 1
+  state: 1
 --- !u!114 &114264834614907070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -653,8 +652,6 @@ MonoBehaviour:
   makeItem: 3
   grinderItem: 000000000000000000000000
   grinderItemNum: 000000000000000000000000
-  isMake: 0
-  isMakeFinish: 0
   isLoadByManager: 0
   isMakeByGrinder: 0
 --- !u!198 &198485119161863864

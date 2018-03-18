@@ -10486,6 +10486,8 @@ MonoBehaviour:
   SleepSp: {fileID: 21300000, guid: aef6bea1dcf2bf04084916290a988223, type: 3}
   TumorSp: {fileID: 21300000, guid: a10c48b6f0bc1f442a454df0d8269bfe, type: 3}
   GrindSp: {fileID: 21300000, guid: f31d89de63636844f902fbd4f7fa6585, type: 3}
+  RepairSp: {fileID: 21300000, guid: 534bb91b594e7554897044eb28c011c1, type: 3}
+  ExamineSp: {fileID: 21300000, guid: f052e53b79ca1ac42863d34d1ce2b6c8, type: 3}
 --- !u!1 &1136096715
 GameObject:
   m_ObjectHideFlags: 0

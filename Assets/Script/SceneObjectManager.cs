@@ -23,7 +23,6 @@ public class SceneObjectManager : MonoBehaviour
     public GameObject Bulb01;
     public GameObject Nest01;
     public GameObject Grinder01;
-    public GameObject Wreckage01;
 
     public class SceneObject
     {
@@ -152,10 +151,6 @@ public class SceneObjectManager : MonoBehaviour
         else if (ob.type == "Nest")
         {
             ob.inGameObject = Instantiate(Nest01, tempPos, Quaternion.identity);
-        }
-        else if (ob.type == "Wreckage")
-        {
-            ob.inGameObject = Instantiate(Wreckage01, tempPos, Quaternion.identity);
         }
     }
 
