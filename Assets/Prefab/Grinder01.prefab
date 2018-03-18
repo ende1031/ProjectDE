@@ -587,7 +587,7 @@ Animator:
   m_GameObject: {fileID: 1171010268747114}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0cf215e47c072f940886ab393c0788f5, type: 2}
+  m_Controller: {fileID: 22100000, guid: 252a8fb14786c2345905ac2970dbd9e2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -634,8 +634,6 @@ MonoBehaviour:
   makeItem: 3
   grinderItem: 000000000000000000000000
   grinderItemNum: 000000000000000000000000
-  isMake: 0
-  isMakeFinish: 0
   isLoadByManager: 0
   isMakeByGrinder: 0
 --- !u!114 &114610333780549762
@@ -655,9 +653,8 @@ MonoBehaviour:
     \uC5C6\uB294 \uACF3\uC5D0 \uB178\uCD9C\uB418\uBA74 \uAD34\uBB3C\uC758 \uACF5\uACA9\uC73C\uB85C
     \uC27D\uAC8C \uD30C\uAD34\uB41C\uB2E4."
   facilityName: Grinder01
-  isOn: 1
   isLoadByManager: 0
-  isAlive: 1
+  state: 1
 --- !u!198 &198004303782457690
 ParticleSystem:
   m_ObjectHideFlags: 1

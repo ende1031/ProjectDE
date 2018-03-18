@@ -27,41 +27,42 @@ public class SceneObjectManager : MonoBehaviour
 
     public class SceneObject
     {
-        public SceneObject(string t, string n) //기본
-        {
-            type = t;
-            name = n;
-            isOn = true;
-            isAlive = true;
-        }
+        //public SceneObject(string t, string n) //기본
+        //{
+        //    type = t;
+        //    name = n;
+        //    //isOn = true;
+        //    //isAlive = true;
+        //    state = 1;
+        //}
 
-        public SceneObject(string t, string n, int temp) //temp : 이동후좌표(포탈), 상태(식물)
+        public SceneObject(string t, string n, int temp = 1) //temp : 이동후좌표(포탈), 상태(식물, 시설)
         {
             type = t;
             name = n;
             portalAfterMoveGrid = temp;
-            plantState = temp;
-            isOn = true;
-            isAlive = true;
+            state = temp;
+            //isOn = true;
+            //isAlive = true;
         }
 
         public GameObject inGameObject;
         public string type; //"plant", "Facility" 등
         public string name; //"TempFacility", "EscapePod", "StickPlant" 등. Portal의 경우 이동하려는 씬의 이름
 
-        public bool isOn;
-        public bool isAlive;
+        //public bool isOn;
+        //public bool isAlive;
         public float timer; //growthTimer(괴식물), progressTimer(시설), LifeTimer(전구)
         public int portalAfterMoveGrid;
-        public int plantState;
+        public int state;
         public Inventory.Item facilityMakeItem;
         public Inventory.Item[] facilityGrinderItem = new Inventory.Item[3];
         public int[] facilityGrinderItemNum = new int[3];
         public float facilityTimeToMake;
-        public bool facilityIsMake;
-        public bool facilityIsMakeFinish;
+        //public bool facilityIsMake;
+        //public bool facilityIsMakeFinish;
         public bool isMakeByGrinder;
-        public float bulbLifeTime;
+        //public float bulbLifeTime;
     }
 
     static int maxSceneNum = 4; //씬 추가시 늘려줘야 됨
@@ -98,7 +99,7 @@ public class SceneObjectManager : MonoBehaviour
                     ob.inGameObject = Instantiate(StickPlant, tempPos, Quaternion.identity);
                     break;
             }
-            ob.inGameObject.GetComponent<Plant>().state = ob.plantState;
+            ob.inGameObject.GetComponent<Plant>().state = ob.state;
             ob.inGameObject.GetComponent<Plant>().growthTimer = ob.timer;
             ob.inGameObject.GetComponent<Plant>().isLoadByManager = true;
         }
@@ -120,18 +121,19 @@ public class SceneObjectManager : MonoBehaviour
                     ob.inGameObject = Instantiate(TempFacility, tempPos, Quaternion.identity);
                     break;
             }
-            ob.inGameObject.GetComponent<Facility>().isOn = ob.isOn;
+            ob.inGameObject.GetComponent<Facility>().state = ob.state;
+            //ob.inGameObject.GetComponent<Facility>().isOn = ob.isOn;
             ob.inGameObject.GetComponent<FacilityBalloon>().makeItem = ob.facilityMakeItem;
             ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer = ob.timer;
             ob.inGameObject.GetComponent<FacilityBalloon>().timeToMake = ob.facilityTimeToMake;
-            ob.inGameObject.GetComponent<FacilityBalloon>().isMake = ob.facilityIsMake;
-            ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish = ob.facilityIsMakeFinish;
+            //ob.inGameObject.GetComponent<FacilityBalloon>().isMake = ob.facilityIsMake;
+            //ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish = ob.facilityIsMakeFinish;
             ob.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder = ob.isMakeByGrinder;
             ob.inGameObject.GetComponent<FacilityBalloon>().grinderItem = ob.facilityGrinderItem;
             ob.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum = ob.facilityGrinderItemNum;
-            ob.inGameObject.GetComponent<Facility>().isAlive = ob.isAlive;
-            ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
+            //ob.inGameObject.GetComponent<Facility>().isAlive = ob.isAlive;
             ob.inGameObject.GetComponent<Facility>().isLoadByManager = true;
+            ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
         }
         else if (ob.type == "Portal")
         {
@@ -222,7 +224,7 @@ public class SceneObjectManager : MonoBehaviour
                 }
                 else if (pair.Value.type == "Facility")
                 {
-                    if (pair.Value.inGameObject == null && pair.Value.facilityIsMake == true && pair.Value.timer > 0)
+                    if (pair.Value.inGameObject == null && pair.Value.state == 2 && pair.Value.timer > 0)
                     {
                         pair.Value.timer -= Time.deltaTime;
                     }
@@ -254,7 +256,7 @@ public class SceneObjectManager : MonoBehaviour
                 {
                     if (pair.Value.inGameObject != null)
                     {
-                        pair.Value.plantState = pair.Value.inGameObject.GetComponent<Plant>().state;
+                        pair.Value.state = pair.Value.inGameObject.GetComponent<Plant>().state;
                         pair.Value.timer = pair.Value.inGameObject.GetComponent<Plant>().growthTimer;
                     }
                 }
@@ -262,13 +264,14 @@ public class SceneObjectManager : MonoBehaviour
                 {
                     if (pair.Value.inGameObject != null)
                     {
-                        pair.Value.isOn = pair.Value.inGameObject.GetComponent<Facility>().isOn;
+                        pair.Value.state = pair.Value.inGameObject.GetComponent<Facility>().state;
+                        //pair.Value.isOn = pair.Value.inGameObject.GetComponent<Facility>().isOn;
                         pair.Value.timer = pair.Value.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
                         pair.Value.facilityTimeToMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().timeToMake;
                         pair.Value.facilityMakeItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().makeItem;
-                        pair.Value.facilityIsMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMake;
-                        pair.Value.facilityIsMakeFinish = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;
-                        pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Facility>().isAlive;
+                        //pair.Value.facilityIsMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMake;
+                        //pair.Value.facilityIsMakeFinish = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;
+                        //pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Facility>().isAlive;
                         pair.Value.isMakeByGrinder = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder;
                         pair.Value.facilityGrinderItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItem;
                         pair.Value.facilityGrinderItemNum = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum;
@@ -297,26 +300,26 @@ public class SceneObjectManager : MonoBehaviour
             {
                 if (pair.Value.type == "Plant")
                 {
-                    if (pair.Value.plantState != 4 && pair.Value.plantState != 5)
+                    if (pair.Value.state != 4 && pair.Value.state != 5)
                     {
-                        pair.Value.plantState = 1;
+                        pair.Value.state = 1;
                     }
                     else
                     {
-                        pair.Value.plantState = 5;
+                        pair.Value.state = 5;
                     }
                 }
                 else if (pair.Value.type == "Facility")
                 {
                     if (pair.Value.name != "EscapePod")
                     {
-                        if(pair.Value.isOn == true)
+                        if(pair.Value.state != 0)
                         {
-                            pair.Value.isAlive = false;
+                            pair.Value.state = 4;
                         }
                     }
-                    pair.Value.facilityIsMake = false;
-                    pair.Value.facilityIsMakeFinish = false;
+                    //pair.Value.facilityIsMake = false;
+                    //pair.Value.facilityIsMakeFinish = false;
                 }
                 //else if (pair.Value.type == "Bulb")
                 //{

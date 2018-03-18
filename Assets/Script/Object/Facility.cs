@@ -22,9 +22,11 @@ public class Facility : MonoBehaviour
     Timer timer;
     int sceneNum;
 
-    public bool isOn = true;
+    //public bool isOn = true;
     public bool isLoadByManager = false;
-    public bool isAlive = true;
+    //public bool isAlive = true;
+
+    public int state = 1; // 0:꺼짐, 1:평상시, 2:제작중, 3:제작끝, 4:죽음
 
     float offTimer = 0;
 
@@ -44,7 +46,7 @@ public class Facility : MonoBehaviour
         animaitor = GetComponent<Animator>();
         if (animaitor != null)
         {
-            animaitor.SetBool("isOn", isOn);
+            animaitor.SetInteger("State", state);
         }
     }
 	
@@ -52,26 +54,32 @@ public class Facility : MonoBehaviour
     {
         if (isLoadByManager == true)
         {
-            if (isOn == true)
+            if (state != 0)
             {
                 if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01") == false)
                 {
                     if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
                     {
-                        isAlive = false;
+                        //isAlive = false;
+                        state = 4;
                     }
                 }
+            }
+            if (animaitor != null)
+            {
+                animaitor.SetInteger("State", state);
             }
             isLoadByManager = false;
         }
 
         if (RuinCheck() == true)
         {
-            isAlive = false;
+            //isAlive = false;
+            state = 4;
         }
-        if(isAlive == false)
+        if(state == 4)
         {
-            ruin();
+            Ruin();
         }
 
         if(offTimer < 0.3f)
@@ -90,7 +98,7 @@ public class Facility : MonoBehaviour
 
     public void DisplayIcon()
     {
-        if (isOn == true)
+        if (state != 0)
         {
             interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
         }
@@ -168,8 +176,18 @@ public class Facility : MonoBehaviour
 
         if (facilityName != "EscapePod")
         {
-            isOn = !isOn;
-            animaitor.SetBool("isOn", isOn);
+            //isOn = !isOn;
+            if(state == 0)
+            {
+                state = 1;
+                //animaitor.SetBool("isOn", true);
+            }
+            else
+            {
+                state = 0;
+                //animaitor.SetBool("isOn", false);
+            }
+            animaitor.SetInteger("State", state);
             interactionIcon.DeleteAllIcons();
             DisplayIcon();
             offTimer = 0;
@@ -187,7 +205,7 @@ public class Facility : MonoBehaviour
 
     bool RuinCheck()
     {
-        if (facilityName != "EscapePod" && isOn == true)
+        if (facilityName != "EscapePod" && state != 0)
         {
             if (Mathf.Abs(Grid.instance.PlayerGrid() - Grid.instance.PosToGrid(transform.position.x)) > 4)
             {
@@ -204,7 +222,7 @@ public class Facility : MonoBehaviour
         return false;
     }
 
-    void ruin()
+    void Ruin()
     {
         SceneObjectManager.instance.ChangeObject(sceneNum, Grid.instance.PosToGrid(transform.position.x), new SceneObjectManager.SceneObject("Wreckage", "Wreckage"));
     }
@@ -214,38 +232,76 @@ public class Facility : MonoBehaviour
         interactionMenu.ClearMenu();
         interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
 
-        if (GetComponent<FacilityBalloon>().isMakeFinish == true)
-        {
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
-        }
         if (facilityName == "EscapePod")
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Research);
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Sleep);
         }
-        if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
+
+        switch (state)
         {
-            if (facilityName == "Grinder01")
-            {
-                interactionMenu.AddMenu(InteractionMenu.MenuItem.Grind);
-            }
-            else
-            {
-                interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
-            }
-            if (facilityName != "EscapePod")
-            {
-                interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
-            }
+            case 1:
+                if (facilityName == "Grinder01")
+                {
+                    interactionMenu.AddMenu(InteractionMenu.MenuItem.Grind);
+                }
+                else
+                {
+                    interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
+                }
+                if (facilityName != "EscapePod")
+                {
+                    interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
+                }
+                break;
+            case 2:
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
+                break;
+            case 3:
+                interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
+                break;
+            case 4:
+                //수리하기
+                break;
         }
-        else if (GetComponent<FacilityBalloon>().isMake == true)
-        {
-            interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
-        }
+
         if (facilityName != "EscapePod")
         {
             interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
         }
+
+        //if (GetComponent<FacilityBalloon>().isMakeFinish == true)
+        //{
+        //    interactionMenu.AddMenu(InteractionMenu.MenuItem.Gather);
+        //}
+        //if (facilityName == "EscapePod")
+        //{
+        //    interactionMenu.AddMenu(InteractionMenu.MenuItem.Research);
+        //    interactionMenu.AddMenu(InteractionMenu.MenuItem.Sleep);
+        //}
+        //if (GetComponent<FacilityBalloon>().isMake == false && GetComponent<FacilityBalloon>().isMakeFinish == false)
+        //{
+        //    if (facilityName == "Grinder01")
+        //    {
+        //        interactionMenu.AddMenu(InteractionMenu.MenuItem.Grind);
+        //    }
+        //    else
+        //    {
+        //        interactionMenu.AddMenu(InteractionMenu.MenuItem.Make);
+        //    }
+        //    if (facilityName != "EscapePod")
+        //    {
+        //        interactionMenu.AddMenu(InteractionMenu.MenuItem.Off);
+        //    }
+        //}
+        //else if (GetComponent<FacilityBalloon>().isMake == true)
+        //{
+        //    interactionMenu.AddMenu(InteractionMenu.MenuItem.Cancle);
+        //}
+        //if (facilityName != "EscapePod")
+        //{
+        //    interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
+        //}
 
         if (facilityName != "EscapePod")
         {
@@ -281,7 +337,7 @@ public class Facility : MonoBehaviour
                 }
                 break;
             case InteractionMenu.MenuItem.Cancle:
-                GetComponent<FacilityBalloon>().Dunp();
+                GetComponent<FacilityBalloon>().Dump();
                 break;
             case InteractionMenu.MenuItem.Research:
                 Research();

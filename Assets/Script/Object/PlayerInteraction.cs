@@ -76,7 +76,7 @@ public class PlayerInteraction : MonoBehaviour
                     break;
 
                 case "Facility":
-                    if (target.GetComponent<Facility>().isOn == false)
+                    if (target.GetComponent<Facility>().state == 0)
                     {
                         target.GetComponent<Facility>().OnOff();
                     }
