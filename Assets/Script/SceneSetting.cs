@@ -85,7 +85,6 @@ public class SceneSetting : MonoBehaviour
 
                 inventory.GetItem(Inventory.Item.SuppliedFood, 5);
                 inventory.GetItem(Inventory.Item.SuppliedBattery, 7);
-                inventory.GetItem(Inventory.Item.Oxygen, 3);
                 inventory.GetItem(Inventory.Item.Trap01, 2);
                 break;
 

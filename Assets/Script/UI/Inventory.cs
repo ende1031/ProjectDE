@@ -208,7 +208,7 @@ public class Inventory : MonoBehaviour
                 break;
 
             case InteractionMenu.MenuItem.Install:
-                if(energyGauge.GetAmount() < 10)
+                if(energyGauge.GetAmount() < 5)
                 {
                     monologue.DisplayLog("에너지가 부족해서 설치할 수 없어.");
                     break;
@@ -235,7 +235,7 @@ public class Inventory : MonoBehaviour
                             {
                                 SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "Grinder01"));
                             }
-                            energyGauge.SetAmount(-10);
+                            energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);
                         }
                         break;
@@ -254,7 +254,7 @@ public class Inventory : MonoBehaviour
                             {
                                 SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3));
                             }
-                            energyGauge.SetAmount(-10);
+                            energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);
                         }
                         break;
@@ -265,6 +265,7 @@ public class Inventory : MonoBehaviour
                         }
                         else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb01")) == true)
                         {
+                            energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);
                         }
                         else
@@ -278,9 +279,9 @@ public class Inventory : MonoBehaviour
                 break;
 
             case InteractionMenu.MenuItem.Plant:
-                if (energyGauge.GetAmount() < 10)
+                if (energyGauge.GetAmount() < 5)
                 {
-                    monologue.DisplayLog("에너지가 부족해서 설치할 수 없어.");
+                    monologue.DisplayLog("에너지가 부족해서 심을 수 없어.");
                     break;
                 }
                 if (SceneObjectManager.instance.ContainObject(sceneNum, Grid.instance.PlayerGrid()) == true)
@@ -301,7 +302,7 @@ public class Inventory : MonoBehaviour
                     {
                         SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "ThornPlant", 0));
                     }
-                    energyGauge.SetAmount(-10);
+                    energyGauge.SetAmount(-5);
                     DeleteItem(Items[selectedIndex].name);
                 }
                 openTimer = 1;

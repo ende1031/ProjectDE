@@ -55,7 +55,7 @@ public class Plant : MonoBehaviour
 
     public void GetItem()
     {
-        energyGauge.SetAmount(-10);
+        energyGauge.SetAmount(-5);
         if (isTumor == false)
         {
             switch (plantName)
@@ -105,12 +105,12 @@ public class Plant : MonoBehaviour
 
     public void RemoveObject()
     {
-        if (energyGauge.GetAmount() < 10)
+        if (energyGauge.GetAmount() < 5)
         {
             monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.");
             return;
         }
-        energyGauge.SetAmount(-10);
+        energyGauge.SetAmount(-5);
         interactionIcon.DeleteAllIcons();
         SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
     }
@@ -126,7 +126,7 @@ public class Plant : MonoBehaviour
                 monologue.DisplayLog("괴물의 조직? 아니면 배설물?\n정체는 알 수 없지만 어딘가에 쓸 수는 있을 것 같다.");
                 break;
             case "BoardPlant":
-                monologue.DisplayLog("이 식물은 재생속도가 비정상적으로 빠르다.\n애초에 더이상 지구에 정상적인 것은 존재하지 않는다.");
+                monologue.DisplayLog("이 식물은 재생속도가 비정상적으로 빠르다.\n애초에 더이상 이 행성에 정상적인 것은 존재하지 않는다.");
                 break;
             case "ThornPlant":
                 monologue.DisplayLog("선인장의 변종으로 예상했지만 아니었다.\n이 식물의 가시 성분은 식물조직보다는 동물의 뿔에 가깝다.");
@@ -357,7 +357,7 @@ public class Plant : MonoBehaviour
                 }
                 else if (InventoryCheck() == true)
                 {
-                    if (energyGauge.GetAmount() < 10)
+                    if (energyGauge.GetAmount() < 5)
                     {
                         monologue.DisplayLog("에너지가 부족해서 채집할 수 없어.");
                         return;

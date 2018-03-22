@@ -61,12 +61,12 @@ public class Nest : MonoBehaviour
 
     public void RemoveObject()
     {
-        if (energyGauge.GetAmount() < 10)
+        if (energyGauge.GetAmount() < 5)
         {
             monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.");
             return;
         }
-        energyGauge.SetAmount(-10);
+        energyGauge.SetAmount(-5);
         interactionIcon.DeleteAllIcons();
         SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
     }

@@ -192,12 +192,12 @@ public class Facility : MonoBehaviour
     {
         if (facilityName != "EscapePod")
         {
-            if (energyGauge.GetAmount() < 10)
+            if (energyGauge.GetAmount() < 5)
             {
                 monologue.DisplayLog("에너지가 부족해서 철거할 수 없어.");
                 return;
             }
-            energyGauge.SetAmount(-10);
+            energyGauge.SetAmount(-5);
             interactionIcon.DeleteAllIcons();
             SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
         }
@@ -236,7 +236,12 @@ public class Facility : MonoBehaviour
     {
         if(state == 4)
         {
-            energyGauge.SetAmount(-10);
+            if (energyGauge.GetAmount() < 5)
+            {
+                monologue.DisplayLog("에너지가 부족해서 수리할 수 없어.");
+                return;
+            }
+            energyGauge.SetAmount(-5);
             state = 1;
             if (animaitor != null)
             {

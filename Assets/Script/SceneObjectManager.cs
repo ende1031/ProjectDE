@@ -24,42 +24,26 @@ public class SceneObjectManager : MonoBehaviour
 
     public class SceneObject
     {
-        //public SceneObject(string t, string n) //기본
-        //{
-        //    type = t;
-        //    name = n;
-        //    //isOn = true;
-        //    //isAlive = true;
-        //    state = 1;
-        //}
-
         public SceneObject(string t, string n, int temp = 1) //temp : 이동후좌표(포탈), 상태(식물, 시설)
         {
             type = t;
             name = n;
             portalAfterMoveGrid = temp;
             state = temp;
-            //isOn = true;
-            //isAlive = true;
         }
 
         public GameObject inGameObject;
         public string type; //"plant", "Facility" 등
         public string name; //"TempFacility", "EscapePod", "StickPlant" 등. Portal의 경우 이동하려는 씬의 이름
-
-        //public bool isOn;
-        //public bool isAlive;
-        public float timer; //growthTimer(괴식물), progressTimer(시설), LifeTimer(전구)
+        
+        public float timer; //growthTimer(괴식물), progressTimer(시설)
         public int portalAfterMoveGrid;
         public int state;
         public Inventory.Item facilityMakeItem;
         public Inventory.Item[] facilityGrinderItem = new Inventory.Item[3];
         public int[] facilityGrinderItemNum = new int[3];
         public float facilityTimeToMake;
-        //public bool facilityIsMake;
-        //public bool facilityIsMakeFinish;
         public bool isMakeByGrinder;
-        //public float bulbLifeTime;
     }
 
     static int maxSceneNum = 4; //씬 추가시 늘려줘야 됨
@@ -119,16 +103,12 @@ public class SceneObjectManager : MonoBehaviour
                     break;
             }
             ob.inGameObject.GetComponent<Facility>().state = ob.state;
-            //ob.inGameObject.GetComponent<Facility>().isOn = ob.isOn;
             ob.inGameObject.GetComponent<FacilityBalloon>().makeItem = ob.facilityMakeItem;
             ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer = ob.timer;
             ob.inGameObject.GetComponent<FacilityBalloon>().timeToMake = ob.facilityTimeToMake;
-            //ob.inGameObject.GetComponent<FacilityBalloon>().isMake = ob.facilityIsMake;
-            //ob.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish = ob.facilityIsMakeFinish;
             ob.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder = ob.isMakeByGrinder;
             ob.inGameObject.GetComponent<FacilityBalloon>().grinderItem = ob.facilityGrinderItem;
             ob.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum = ob.facilityGrinderItemNum;
-            //ob.inGameObject.GetComponent<Facility>().isAlive = ob.isAlive;
             ob.inGameObject.GetComponent<Facility>().isLoadByManager = true;
             ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
         }
@@ -141,10 +121,6 @@ public class SceneObjectManager : MonoBehaviour
         else if (ob.type == "Bulb")
         {
             ob.inGameObject = Instantiate(Bulb01, tempPos, Quaternion.identity);
-            //ob.inGameObject.GetComponent<Bulb>().isOn = ob.isOn;
-            //ob.inGameObject.GetComponent<Bulb>().LifeTimer = ob.timer;
-            //ob.inGameObject.GetComponent<Bulb>().isAlive = ob.isAlive;
-            //ob.inGameObject.GetComponent<Bulb>().isLoadByManager = true;
         }
         else if (ob.type == "Nest")
         {
@@ -220,18 +196,6 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.timer -= Time.deltaTime;
                     }
                 }
-                //else if (pair.Value.type == "Bulb")
-                //{
-                //    if (pair.Value.inGameObject == null && pair.Value.isOn == true)
-                //    {
-                //        pair.Value.timer += Time.deltaTime;
-                //        if(pair.Value.timer > pair.Value.bulbLifeTime)
-                //        {
-                //            pair.Value.isAlive = false;
-                //            pair.Value.isOn = false;
-                //        }
-                //    }
-                //}
             }
         }
     }
@@ -256,28 +220,14 @@ public class SceneObjectManager : MonoBehaviour
                     if (pair.Value.inGameObject != null)
                     {
                         pair.Value.state = pair.Value.inGameObject.GetComponent<Facility>().state;
-                        //pair.Value.isOn = pair.Value.inGameObject.GetComponent<Facility>().isOn;
                         pair.Value.timer = pair.Value.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
                         pair.Value.facilityTimeToMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().timeToMake;
                         pair.Value.facilityMakeItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().makeItem;
-                        //pair.Value.facilityIsMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMake;
-                        //pair.Value.facilityIsMakeFinish = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeFinish;
-                        //pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Facility>().isAlive;
                         pair.Value.isMakeByGrinder = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder;
                         pair.Value.facilityGrinderItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItem;
                         pair.Value.facilityGrinderItemNum = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum;
                     }
                 }
-                //else if (pair.Value.type == "Bulb")
-                //{
-                //    if (pair.Value.inGameObject != null)
-                //    {
-                //        pair.Value.isOn = pair.Value.inGameObject.GetComponent<Bulb>().isOn;
-                //        pair.Value.timer = pair.Value.inGameObject.GetComponent<Bulb>().LifeTimer;
-                //        pair.Value.isAlive = pair.Value.inGameObject.GetComponent<Bulb>().isAlive;
-                //        pair.Value.bulbLifeTime = pair.Value.inGameObject.GetComponent<Bulb>().LifeTime;
-                //    }
-                //}
             }
         }
     }
@@ -309,21 +259,15 @@ public class SceneObjectManager : MonoBehaviour
                             pair.Value.state = 4;
                         }
                     }
-                    //pair.Value.facilityIsMake = false;
-                    //pair.Value.facilityIsMakeFinish = false;
+                    else
+                    {
+                        pair.Value.state = 1;
+                    }
                 }
-                //else if (pair.Value.type == "Bulb")
-                //{
-                //    if (pair.Value.isOn == true)
-                //    {
-                //        pair.Value.isAlive = false;
-                //    }
-                //}
             }
         }
 
         hungerGauge.SetAmount(-20);
-        //energyGauge.SetAmount(-10);
         energyGauge.SetAmount(100);
 
         for (int i = 0; i < 3; i++)
@@ -450,7 +394,7 @@ public class SceneObjectManager : MonoBehaviour
         }
     }
 
-    //grid를 기준으로 양옆 range범위 안에 해당 type의 오브젝트가 있으면 true, isSearchLight는 전구가 아니라 빛(켜진 전구)을 탐색함
+    //grid를 기준으로 양옆 range범위 안에 해당 type의 오브젝트가 있으면 true
     public bool RangeSearch(int sceneNum, int grid, int range, string type, string name = "NoName")
     {
         for (int i = (grid - range); i <= (grid + range); i++)
@@ -459,31 +403,11 @@ public class SceneObjectManager : MonoBehaviour
             {
                 if (SObjects[sceneNum][i].type == type && name == "NoName")
                 {
-                    //if (type == "Bulb" && isSearchLight == true)
-                    //{
-                    //    if (SObjects[sceneNum][i].isOn == true && SObjects[sceneNum][i].isAlive == true)
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-                    //else
-                    //{
-                        return true;
-                    //}
+                    return true;
                 }
                 else if (SObjects[sceneNum][i].type == type && SObjects[sceneNum][i].name == name)
                 {
-                    //if(type == "Bulb" && isSearchLight == true)
-                    //{
-                    //    if(SObjects[sceneNum][i].isOn == true && SObjects[sceneNum][i].isAlive == true)
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-                    //else
-                    //{
-                        return true;
-                    //}
+                    return true;
                 }
             }
         }
