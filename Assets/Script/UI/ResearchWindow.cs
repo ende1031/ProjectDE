@@ -148,8 +148,8 @@ public class ResearchWindow : MonoBehaviour
 
     void SetWindowItem()
     {
-        itemArray[0] = new ResearchItem(Inventory.Item.Mass, 5, "덩어리 연구를 통해 워크벤치를 만들 수 있게 되었다.");
-        itemArray[0].SetResultItem(1, Inventory.Item.Facility01);
+        itemArray[0] = new ResearchItem(Inventory.Item.Mass, 5, "덩어리 연구를 통해 워크벤치와 닉스입자 수집기를 만들 수 있게 되었다.");
+        itemArray[0].SetResultItem(2, Inventory.Item.Facility01, Inventory.Item.NyxCollector01);
 
         itemArray[1] = new ResearchItem(Inventory.Item.Mass, 5, "덩어리를 연구해서 종양씨앗을 만들어낼 수 있다는 놀라운 사실을 알게 되었다. 이럴수가.");
         itemArray[1].SetResultItem(1, Inventory.Item.TumorSeed);
@@ -202,6 +202,7 @@ public class ResearchWindow : MonoBehaviour
         contentDictionary[Inventory.Item.Trap01] = new ResultContent("[소형 덫] 괴물의 둥지 근처에 설치하면\n괴물의 심장을 얻을 수 있다.");
         contentDictionary[Inventory.Item.Battery] = new ResultContent("[배터리] 괴물의 심장으로 만든 배터리이다.\n사용하면 에너지 게이지를 충전할 수 있다.");
         contentDictionary[Inventory.Item.Grinder01] = new ResultContent("[간이 분해기] 필요없는 아이템을 분해해서\n다른 아이템으로 만들 수 있다.");
+        contentDictionary[Inventory.Item.NyxCollector01] = new ResultContent("[닉스입자 수집기] 허공에 떠도는\n닉스입자를 수집하는 시설이다.");
     }
 
     void Update ()

@@ -517,6 +517,10 @@ public class InteractionMenu : MonoBehaviour
                 targetObject.GetComponent<Nest>().SelectMenu(MenuList[selectedIndex]);
                 break;
 
+            case "NyxCollector":
+                targetObject.GetComponent<NyxCollector>().SelectMenu(MenuList[selectedIndex]);
+                break;
+
             case "Inventory":
                 targetObject.GetComponent<Inventory>().SelectMenu(MenuList[selectedIndex]);
                 break;

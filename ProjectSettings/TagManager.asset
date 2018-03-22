@@ -9,7 +9,7 @@ TagManager:
   - Portal
   - Bulb
   - Nest
-  - Wreckage
+  - NyxCollector
   layers:
   - Default
   - TransparentFX

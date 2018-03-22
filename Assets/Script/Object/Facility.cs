@@ -129,6 +129,7 @@ public class Facility : MonoBehaviour
                 popupWindow.AddItem(Inventory.Item.BoardSeed);
                 popupWindow.AddItem(Inventory.Item.ThornSeed);
                 popupWindow.AddItem(Inventory.Item.Grinder01);
+                popupWindow.AddItem(Inventory.Item.NyxCollector01);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
             case "EscapePod":

@@ -9,6 +9,7 @@ public class SceneObjectManager : MonoBehaviour
 
     HungerGauge hungerGauge;
     EnergyGauge energyGauge;
+    NyxUI nyxUI;
 
     public GameObject TempFacility; //Prefab 추가시 수정할 부분
     public GameObject EscapePod;
@@ -21,6 +22,7 @@ public class SceneObjectManager : MonoBehaviour
     public GameObject Bulb01;
     public GameObject Nest01;
     public GameObject Grinder01;
+    public GameObject NyxCollector01;
 
     public class SceneObject
     {
@@ -126,6 +128,13 @@ public class SceneObjectManager : MonoBehaviour
         {
             ob.inGameObject = Instantiate(Nest01, tempPos, Quaternion.identity);
         }
+        else if (ob.type == "NyxCollector")
+        {
+            ob.inGameObject = Instantiate(NyxCollector01, tempPos, Quaternion.identity);
+            ob.inGameObject.GetComponent<NyxCollector>().state = ob.state;
+            ob.inGameObject.GetComponent<NyxCollector>().collectTimer = ob.timer;
+            ob.inGameObject.GetComponent<NyxCollector>().isLoadByManager = true;
+        }
     }
 
     void Awake()
@@ -147,6 +156,7 @@ public class SceneObjectManager : MonoBehaviour
         UI = GameObject.Find("UI");
         hungerGauge = GameObject.Find("HungerUI").GetComponent<HungerGauge>();
         energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
+        nyxUI = GameObject.Find("NyxUI").GetComponent<NyxUI>();
         UI.SetActive(false);
 
         for (int i = 0; i < maxSceneNum; i++)
@@ -196,6 +206,18 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.timer -= Time.deltaTime;
                     }
                 }
+                else if (pair.Value.type == "NyxCollector")
+                {
+                    if (pair.Value.inGameObject == null && pair.Value.state == 1)
+                    {
+                        pair.Value.timer += Time.deltaTime;
+                        if (pair.Value.timer >= 1.0f)
+                        {
+                            nyxUI.SetAmount(5);
+                            pair.Value.timer = 0;
+                        }
+                    }
+                }
             }
         }
     }
@@ -207,17 +229,14 @@ public class SceneObjectManager : MonoBehaviour
         {
             foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
             {
-                if (pair.Value.type == "Plant")
+                if (pair.Value.inGameObject != null)
                 {
-                    if (pair.Value.inGameObject != null)
+                    if (pair.Value.type == "Plant")
                     {
                         pair.Value.state = pair.Value.inGameObject.GetComponent<Plant>().state;
                         pair.Value.timer = pair.Value.inGameObject.GetComponent<Plant>().growthTimer;
                     }
-                }
-                else if (pair.Value.type == "Facility")
-                {
-                    if (pair.Value.inGameObject != null)
+                    else if (pair.Value.type == "Facility")
                     {
                         pair.Value.state = pair.Value.inGameObject.GetComponent<Facility>().state;
                         pair.Value.timer = pair.Value.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
@@ -226,6 +245,11 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.isMakeByGrinder = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder;
                         pair.Value.facilityGrinderItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItem;
                         pair.Value.facilityGrinderItemNum = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum;
+                    }
+                    else if (pair.Value.type == "NyxCollector")
+                    {
+                        pair.Value.state = pair.Value.inGameObject.GetComponent<NyxCollector>().state;
+                        pair.Value.timer = pair.Value.inGameObject.GetComponent<NyxCollector>().collectTimer;
                     }
                 }
             }
@@ -262,6 +286,13 @@ public class SceneObjectManager : MonoBehaviour
                     else
                     {
                         pair.Value.state = 1;
+                    }
+                }
+                else if (pair.Value.type == "NyxCollector")
+                {
+                    if (pair.Value.state != 0)
+                    {
+                        pair.Value.state = 4;
                     }
                 }
             }

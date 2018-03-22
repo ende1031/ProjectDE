@@ -43,7 +43,10 @@ public class PlayerInteraction : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-
+            inventory.GetItem(Inventory.Item.Facility01, 1);
+            inventory.GetItem(Inventory.Item.Bulb01, 1);
+            inventory.GetItem(Inventory.Item.NyxCollector01, 1);
+            inventory.GetItem(Inventory.Item.Grinder01, 1);
         }
     }
 
@@ -101,6 +104,17 @@ public class PlayerInteraction : MonoBehaviour
 
                 case "Nest":
                     target.GetComponent<Nest>().OpenMenu();
+                    break;
+
+                case "NyxCollector":
+                    if (target.GetComponent<NyxCollector>().state == 0)
+                    {
+                        target.GetComponent<NyxCollector>().OnOff();
+                    }
+                    else
+                    {
+                        target.GetComponent<NyxCollector>().OpenMenu();
+                    }
                     break;
             }
         }

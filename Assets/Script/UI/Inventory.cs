@@ -52,7 +52,8 @@ public class Inventory : MonoBehaviour
         Grinder01,
         SuppliedBattery,
         SuppliedFood,
-        Water
+        Water,
+        NyxCollector01
     };
 
     GameObject[] itemSlot = new GameObject[15];
@@ -91,6 +92,7 @@ public class Inventory : MonoBehaviour
     public Sprite SuppliedBatterySp;
     public Sprite SuppliedFoodSp;
     public Sprite WaterSp;
+    public Sprite NyxCollector01Sp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -127,6 +129,7 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.SuppliedBattery] = new ItemName(SuppliedBatterySp, "보급용 배터리", "탈출포드에 들어있던 비상용 배터리이다.\n사용하면 에너지 게이지가 35%만큼 회복된다.");
         itemDictionary[Item.SuppliedFood] = new ItemName(SuppliedFoodSp, "보급용 식량", "탈출포드에 들어있던 비상용 식량이다.\n사용하면 허기 게이지가 50%만큼 회복된다.");
         itemDictionary[Item.Water] = new ItemName(WaterSp, "물", "아이템 분해를 통해 얻은 물이다.\n사용하면 허기 게이지가 5%만큼 회복된다.");
+        itemDictionary[Item.NyxCollector01] = new ItemName(NyxCollector01Sp, "닉스입자 수집기", "닉스입자를 수집하는 시설이다.\n탈출포드나 전구 근처에 설치할 수 있다.");
     }
 
     public void OpenMenu() //아이템 추가시 수정할 부분
@@ -160,6 +163,7 @@ public class Inventory : MonoBehaviour
             case Item.Trap01:
             case Item.Bulb01:
             case Item.Grinder01:
+            case Item.NyxCollector01:
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Install);
                 break;
             case Item.StickSeed:
@@ -217,6 +221,7 @@ public class Inventory : MonoBehaviour
                 {
                     case Item.Facility01:
                     case Item.Grinder01:
+                    case Item.NyxCollector01:
                         if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Bulb", "Bulb01") == false && SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PlayerGrid(), 2, "Facility", "EscapePod") == false)
                         {
                             monologue.DisplayLog("여기에 설치해두면 공격을 받을 것 같군.\n탈출포드나 전구가 있는 곳에 설치하자.");
@@ -234,6 +239,10 @@ public class Inventory : MonoBehaviour
                             else if (Items[selectedIndex].name == Item.Grinder01)
                             {
                                 SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "Grinder01"));
+                            }
+                            else if (Items[selectedIndex].name == Item.NyxCollector01)
+                            {
+                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("NyxCollector", "NyxCollector01"));
                             }
                             energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);

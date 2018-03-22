@@ -163,7 +163,10 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(itemName, 30, 120, "종양 씨앗", "유전자 조작으로 만든 안전한 종양 씨앗이다.\n식물에 심으면 식용 종양을 얻을 수 있다.", Inventory.Item.Mass, 3));
                 break;
             case Inventory.Item.Grinder01:
-                WindowItemList.Add(new WindowItem(itemName, 30, 1000, "분쇄기", "필요 없는 아이템을 분해해서 다른 아이템을 얻는데 사용하는 시설이다.", Inventory.Item.Stick, 1, Inventory.Item.Board, 5, Inventory.Item.Thorn, 2, Inventory.Item.Hose, 2, Inventory.Item.Mass, 1, Inventory.Item.Heart, 1));
+                WindowItemList.Add(new WindowItem(itemName, 30, 1000, "간이 분해기", "필요 없는 아이템을 분해해서 다른 아이템을 얻는데 사용하는 시설이다.", Inventory.Item.Stick, 1, Inventory.Item.Board, 5, Inventory.Item.Thorn, 2, Inventory.Item.Hose, 2, Inventory.Item.Mass, 1, Inventory.Item.Heart, 1));
+                break;
+            case Inventory.Item.NyxCollector01:
+                WindowItemList.Add(new WindowItem(itemName, 30, 10, "닉스입자 수집기", "닉스입자를 수집하는 시설이다.\n허공에 떠도는 검은 닉스입자를 수집해서 사용할 수 있게 만들어준다.", Inventory.Item.Stick, 1, Inventory.Item.Board, 5, Inventory.Item.Thorn, 2, Inventory.Item.Hose, 2, Inventory.Item.Mass, 1, Inventory.Item.Heart, 1));
                 break;
         }
     }

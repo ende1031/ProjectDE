@@ -1020,6 +1020,8 @@ MonoBehaviour:
   Bulb01: {fileID: 1774011462199366, guid: cbff9c6b7547bb548a2a6b96c1324eb5, type: 2}
   Nest01: {fileID: 1435307980773974, guid: 8423024b86c172c4db6ee6433d973a67, type: 2}
   Grinder01: {fileID: 1171010268747114, guid: e284fc9ccf8d65543a8889a863d4be18, type: 2}
+  NyxCollector01: {fileID: 1472310793765806, guid: ebde7f43fc4e3284687274c7870c1253,
+    type: 2}
   isSceneInit: 
   StageWalls: []
 --- !u!1 &90487703
@@ -1582,6 +1584,7 @@ MonoBehaviour:
   SuppliedBatterySp: {fileID: 21300000, guid: 457c3f0f7cec45f43adac07c32ca0ba0, type: 3}
   SuppliedFoodSp: {fileID: 21300000, guid: 12fdd3632bcdc8e45990fb1e76491b73, type: 3}
   WaterSp: {fileID: 21300000, guid: 73cd8011db5a0874ba9fa88dd855ae89, type: 3}
+  NyxCollector01Sp: {fileID: 21300000, guid: 429b864cec830c6489295b1377ead4e7, type: 3}
   isInventoryActive: 0
   discoveredItemList: 
 --- !u!114 &128048174
