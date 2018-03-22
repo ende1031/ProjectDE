@@ -101,9 +101,9 @@ MonoBehaviour:
     \uD1B5\uD574 \uD310\uC790\uB97C \uC5BB\uC744 \uC218 \uC788\uB2E4."
   isGatherPossible: 0
   plantName: BoardPlant
-  GatherAnimationType: 2
+  GatherAnimationType: 3
   state: 1
-  growthTime: 3
+  growthTime: 10
   growthTimer: 0
   isTumor: 0
   isLoadByManager: 0
