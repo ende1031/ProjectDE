@@ -89,7 +89,7 @@ public class NyxCollector : MonoBehaviour
 
         if(collectTimer >= 1.0f)
         {
-            nyxUI.SetAmount(5);
+            nyxUI.SetAmount(1);
             collectTimer = 0;
         }
     }

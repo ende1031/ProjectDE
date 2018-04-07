@@ -53,7 +53,8 @@ public class Inventory : MonoBehaviour
         SuppliedBattery,
         SuppliedFood,
         Water,
-        NyxCollector01
+        NyxCollector01,
+        Nyx,
     };
 
     GameObject[] itemSlot = new GameObject[15];
@@ -93,6 +94,7 @@ public class Inventory : MonoBehaviour
     public Sprite SuppliedFoodSp;
     public Sprite WaterSp;
     public Sprite NyxCollector01Sp;
+    public Sprite NyxSp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -130,6 +132,7 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.SuppliedFood] = new ItemName(SuppliedFoodSp, "보급용 식량", "탈출포드에 들어있던 비상용 식량이다.\n사용하면 허기 게이지가 50%만큼 회복된다.");
         itemDictionary[Item.Water] = new ItemName(WaterSp, "물", "아이템 분해를 통해 얻은 물이다.\n사용하면 허기 게이지가 5%만큼 회복된다.");
         itemDictionary[Item.NyxCollector01] = new ItemName(NyxCollector01Sp, "닉스입자 수집기", "닉스입자를 수집하는 시설이다.\n탈출포드나 전구 근처에 설치할 수 있다.");
+        itemDictionary[Item.Nyx] = new ItemName(NyxSp, "닉스입자", "더미 아이템");
     }
 
     public void OpenMenu() //아이템 추가시 수정할 부분

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 7bbf7c3c369d91b4a9b269d75414a2db
-timeCreated: 1518491772
-licenseType: Pro
+timeCreated: 1523082740
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Grinder_PickNumber_0
@@ -109,9 +109,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 352
-        width: 209
-        height: 88
+        y: 1100
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -122,10 +122,10 @@ TextureImporter:
       name: Grinder_PickNumber_1
       rect:
         serializedVersion: 2
-        x: 209
-        y: 352
-        width: 209
-        height: 88
+        x: 210
+        y: 1100
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,10 +136,10 @@ TextureImporter:
       name: Grinder_PickNumber_2
       rect:
         serializedVersion: 2
-        x: 418
-        y: 352
-        width: 209
-        height: 88
+        x: 420
+        y: 1100
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: Grinder_PickNumber_3
       rect:
         serializedVersion: 2
-        x: 627
-        y: 352
-        width: 209
-        height: 88
+        x: 630
+        y: 1100
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,10 +164,10 @@ TextureImporter:
       name: Grinder_PickNumber_4
       rect:
         serializedVersion: 2
-        x: 836
-        y: 352
-        width: 209
-        height: 88
+        x: 840
+        y: 1100
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,10 +178,10 @@ TextureImporter:
       name: Grinder_PickNumber_5
       rect:
         serializedVersion: 2
-        x: 1045
-        y: 352
-        width: 209
-        height: 88
+        x: 0
+        y: 880
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: Grinder_PickNumber_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 264
-        width: 209
-        height: 88
+        x: 210
+        y: 880
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,10 +206,10 @@ TextureImporter:
       name: Grinder_PickNumber_7
       rect:
         serializedVersion: 2
-        x: 209
-        y: 264
-        width: 209
-        height: 88
+        x: 420
+        y: 880
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,10 +220,10 @@ TextureImporter:
       name: Grinder_PickNumber_8
       rect:
         serializedVersion: 2
-        x: 418
-        y: 264
-        width: 209
-        height: 88
+        x: 630
+        y: 880
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: Grinder_PickNumber_9
       rect:
         serializedVersion: 2
-        x: 627
-        y: 264
-        width: 209
-        height: 88
+        x: 840
+        y: 880
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,10 +248,10 @@ TextureImporter:
       name: Grinder_PickNumber_10
       rect:
         serializedVersion: 2
-        x: 836
-        y: 264
-        width: 209
-        height: 88
+        x: 0
+        y: 660
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,10 +262,10 @@ TextureImporter:
       name: Grinder_PickNumber_11
       rect:
         serializedVersion: 2
-        x: 1045
-        y: 264
-        width: 209
-        height: 88
+        x: 210
+        y: 660
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,10 +276,10 @@ TextureImporter:
       name: Grinder_PickNumber_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 176
-        width: 209
-        height: 88
+        x: 420
+        y: 660
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,10 +290,10 @@ TextureImporter:
       name: Grinder_PickNumber_13
       rect:
         serializedVersion: 2
-        x: 209
-        y: 176
-        width: 209
-        height: 88
+        x: 630
+        y: 660
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -304,10 +304,10 @@ TextureImporter:
       name: Grinder_PickNumber_14
       rect:
         serializedVersion: 2
-        x: 418
-        y: 176
-        width: 209
-        height: 88
+        x: 840
+        y: 660
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,10 +318,10 @@ TextureImporter:
       name: Grinder_PickNumber_15
       rect:
         serializedVersion: 2
-        x: 627
-        y: 176
-        width: 209
-        height: 88
+        x: 0
+        y: 440
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -332,10 +332,10 @@ TextureImporter:
       name: Grinder_PickNumber_16
       rect:
         serializedVersion: 2
-        x: 836
-        y: 176
-        width: 209
-        height: 88
+        x: 210
+        y: 440
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -346,10 +346,10 @@ TextureImporter:
       name: Grinder_PickNumber_17
       rect:
         serializedVersion: 2
-        x: 1045
-        y: 176
-        width: 209
-        height: 88
+        x: 420
+        y: 440
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -360,10 +360,10 @@ TextureImporter:
       name: Grinder_PickNumber_18
       rect:
         serializedVersion: 2
-        x: 0
-        y: 88
-        width: 209
-        height: 88
+        x: 630
+        y: 440
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -374,10 +374,10 @@ TextureImporter:
       name: Grinder_PickNumber_19
       rect:
         serializedVersion: 2
-        x: 209
-        y: 88
-        width: 209
-        height: 88
+        x: 840
+        y: 440
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -388,10 +388,10 @@ TextureImporter:
       name: Grinder_PickNumber_20
       rect:
         serializedVersion: 2
-        x: 418
-        y: 88
-        width: 209
-        height: 88
+        x: 0
+        y: 220
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -402,10 +402,10 @@ TextureImporter:
       name: Grinder_PickNumber_21
       rect:
         serializedVersion: 2
-        x: 627
-        y: 88
-        width: 209
-        height: 88
+        x: 210
+        y: 220
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -416,10 +416,10 @@ TextureImporter:
       name: Grinder_PickNumber_22
       rect:
         serializedVersion: 2
-        x: 836
-        y: 88
-        width: 209
-        height: 88
+        x: 420
+        y: 220
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -430,10 +430,10 @@ TextureImporter:
       name: Grinder_PickNumber_23
       rect:
         serializedVersion: 2
-        x: 1045
-        y: 88
-        width: 209
-        height: 88
+        x: 630
+        y: 220
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -444,10 +444,10 @@ TextureImporter:
       name: Grinder_PickNumber_24
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 209
-        height: 88
+        x: 840
+        y: 220
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -458,10 +458,10 @@ TextureImporter:
       name: Grinder_PickNumber_25
       rect:
         serializedVersion: 2
-        x: 209
+        x: 0
         y: 0
-        width: 209
-        height: 88
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -472,10 +472,10 @@ TextureImporter:
       name: Grinder_PickNumber_26
       rect:
         serializedVersion: 2
-        x: 418
+        x: 210
         y: 0
-        width: 209
-        height: 88
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -486,10 +486,10 @@ TextureImporter:
       name: Grinder_PickNumber_27
       rect:
         serializedVersion: 2
-        x: 627
+        x: 420
         y: 0
-        width: 209
-        height: 88
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -500,10 +500,10 @@ TextureImporter:
       name: Grinder_PickNumber_28
       rect:
         serializedVersion: 2
-        x: 836
+        x: 630
         y: 0
-        width: 209
-        height: 88
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -514,10 +514,10 @@ TextureImporter:
       name: Grinder_PickNumber_29
       rect:
         serializedVersion: 2
-        x: 1045
+        x: 840
         y: 0
-        width: 209
-        height: 88
+        width: 210
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

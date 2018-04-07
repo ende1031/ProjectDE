@@ -42,8 +42,8 @@ public class SceneObjectManager : MonoBehaviour
         public int portalAfterMoveGrid;
         public int state;
         public Inventory.Item facilityMakeItem;
-        public Inventory.Item[] facilityGrinderItem = new Inventory.Item[3];
-        public int[] facilityGrinderItemNum = new int[3];
+        public Inventory.Item[] facilityGrinderItem = new Inventory.Item[2];
+        public int[] facilityGrinderItemNum = new int[2];
         public float facilityTimeToMake;
         public bool isMakeByGrinder;
     }
@@ -213,7 +213,7 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.timer += Time.deltaTime;
                         if (pair.Value.timer >= 1.0f)
                         {
-                            nyxUI.SetAmount(5);
+                            nyxUI.SetAmount(1);
                             pair.Value.timer = 0;
                         }
                     }

@@ -134,9 +134,18 @@ public class Facility : MonoBehaviour
                 break;
             case "EscapePod":
                 popupWindow.ClearItemList();
-                popupWindow.AddItem(Inventory.Item.Facility01);
                 popupWindow.AddItem(Inventory.Item.Food);
                 popupWindow.AddItem(Inventory.Item.Oxygen);
+                popupWindow.AddItem(Inventory.Item.Facility01);
+                popupWindow.AddItem(Inventory.Item.Trap01);
+                popupWindow.AddItem(Inventory.Item.Battery);
+                popupWindow.AddItem(Inventory.Item.TumorSeed);
+                popupWindow.AddItem(Inventory.Item.Bulb01);
+                popupWindow.AddItem(Inventory.Item.StickSeed);
+                popupWindow.AddItem(Inventory.Item.BoardSeed);
+                popupWindow.AddItem(Inventory.Item.ThornSeed);
+                popupWindow.AddItem(Inventory.Item.Grinder01);
+                popupWindow.AddItem(Inventory.Item.NyxCollector01);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
         }

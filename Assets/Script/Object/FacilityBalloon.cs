@@ -5,18 +5,17 @@ using UnityEngine;
 public class FacilityBalloon : MonoBehaviour
 {
     Inventory inventory;
+    NyxUI nyxUI;
 
     Animator animaitor;
 
     GameObject Balloon;
     GameObject TimeText;
 
-    GameObject MakeItems;
     GameObject Item;
     GameObject Item_back;
-
-    GameObject GrindItems;
-    GameObject[] GrindItemSet = new GameObject[3];
+    GameObject Item2;
+    GameObject Item2_back;
 
     public Sprite blueBalloon;
     public Sprite yellowBalloon;
@@ -27,8 +26,9 @@ public class FacilityBalloon : MonoBehaviour
 
     public Inventory.Item makeItem = 0; // 만드는 아이템
 
-    public Inventory.Item[] grinderItem = new Inventory.Item[3] { 0, 0, 0 };
-    public int[] grinderItemNum = new int[3] { 0, 0, 0 };
+    public Inventory.Item[] grinderItem = new Inventory.Item[2] { 0, 0 };
+    public int[] grinderItemNum = new int[2] { 0, 0 };
+    public int grinderNyxNum = 0;
 
     public bool isLoadByManager = false;
 
@@ -37,20 +37,15 @@ public class FacilityBalloon : MonoBehaviour
     void Start ()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        nyxUI = GameObject.Find("NyxUI").GetComponent<NyxUI>();
 
         Balloon = transform.Find("Balloon").gameObject;
         TimeText = Balloon.transform.Find("TimeText").gameObject;
 
-        MakeItems = Balloon.transform.Find("MakeItems").gameObject;
-        Item = MakeItems.transform.Find("Item").gameObject;
-        Item_back = MakeItems.transform.Find("Item_back").gameObject;
-
-        GrindItems = Balloon.transform.Find("GrindItems").gameObject;
-        for(int i =0; i < 3; i++)
-        {
-            GrindItemSet[i] = GrindItems.transform.Find("ItemSet" + (i + 1)).gameObject;
-            GrindItemSet[i].SetActive(false);
-        }
+        Item = Balloon.transform.Find("Item").gameObject;
+        Item_back = Balloon.transform.Find("Item_back").gameObject;
+        Item2 = Balloon.transform.Find("Item2").gameObject;
+        Item2_back = Balloon.transform.Find("Item2_back").gameObject;
 
         animaitor = GetComponent<Animator>();
 
@@ -64,34 +59,13 @@ public class FacilityBalloon : MonoBehaviour
             if (GetComponent<Facility>().state == 2)
             {
                 Balloon.SetActive(true);
-
-                if (isMakeByGrinder == true)
-                {
-                    MakeItems.SetActive(false);
-                    GrindItems.SetActive(true);
-                }
-                else
-                {
-                    MakeItems.SetActive(true);
-                    GrindItems.SetActive(false);
-                }
             }
             if (GetComponent<Facility>().state == 3)
             {
                 Balloon.SetActive(true);
                 Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
                 Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
-
-                if (isMakeByGrinder == true)
-                {
-                    MakeItems.SetActive(false);
-                    GrindItems.SetActive(true);
-                }
-                else
-                {
-                    MakeItems.SetActive(true);
-                    GrindItems.SetActive(false);
-                }
+                Item2.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
             }
             if(isMakeByGrinder == false)
             {
@@ -114,6 +88,7 @@ public class FacilityBalloon : MonoBehaviour
         {
             Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
             Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
+            Item2.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
         }
 
         Display();
@@ -123,8 +98,6 @@ public class FacilityBalloon : MonoBehaviour
     public void MakeItem(Inventory.Item itemName, int time)
     {
         isMakeByGrinder = false;
-        MakeItems.SetActive(true);
-        GrindItems.SetActive(false);
 
         Balloon.SetActive(true);
         makeItem = itemName;
@@ -140,16 +113,15 @@ public class FacilityBalloon : MonoBehaviour
         }
     }
 
-    public void GrindItem(int time, Inventory.Item itemName1, int num1, Inventory.Item itemName2 = 0, int num2 = 0, Inventory.Item itemName3 = 0, int num3 = 0)
+    public void GrindItem(int time, int nyx, Inventory.Item itemName1 = 0, int num1 = 0, Inventory.Item itemName2 = 0, int num2 = 0)
     {
         isMakeByGrinder = true;
-        MakeItems.SetActive(false);
-        GrindItems.SetActive(true);
 
         Balloon.SetActive(true);
 
-        grinderItem = new Inventory.Item[3] { itemName1, itemName2, itemName3 };
-        grinderItemNum = new int[3] { num1, num2, num3 };
+        grinderNyxNum = nyx;
+        grinderItem = new Inventory.Item[2] { itemName1, itemName2 };
+        grinderItemNum = new int[2] { num1, num2 };
         DisplayGrinderItems();
 
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
@@ -164,35 +136,49 @@ public class FacilityBalloon : MonoBehaviour
 
     void DisplayGrinderItems()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            GrindItemSet[i].SetActive(false);
-        }
-        int count = 3;
-        if (grinderItemNum[2] == 0)
-        {
-            count = 2;
-        }
+        int count = 2;
         if (grinderItemNum[1] == 0)
         {
             count = 1;
         }
+        if (grinderItemNum[0] == 0)
+        {
+            count = 0;
+        }
+
+        Vector3 temp = Item.transform.position;
+        temp.x = transform.position.x;
+        Item.transform.position = temp;
+        temp.z += 0.01f;
+        Item_back.transform.position = temp;
+
         switch (count)
         {
-            case 1:
-                GrindItemSet[0].SetActive(true);
-                GrindItemSet[0].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
-                break;
             case 2:
-                GrindItemSet[1].SetActive(true);
-                GrindItemSet[1].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
-                GrindItemSet[1].transform.Find("Item2").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]].sprite;
+                temp = Item.transform.position;
+                temp.x = transform.position.x - 0.14f;
+                Item.transform.position = temp;
+                temp.z += 0.01f;
+                Item_back.transform.position = temp;
+
+                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
+                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
+                Item2.SetActive(true);
+                Item2_back.SetActive(true);
+                Item2.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]].sprite;
+                Item2_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]].sprite;
                 break;
-            case 3:
-                GrindItemSet[2].SetActive(true);
-                GrindItemSet[2].transform.Find("Item1").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
-                GrindItemSet[2].transform.Find("Item2").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]].sprite;
-                GrindItemSet[2].transform.Find("Item3").GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[2]].sprite;
+            case 1:
+                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
+                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
+                Item2.SetActive(false);
+                Item2_back.SetActive(false);
+                break;
+            case 0:
+                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[Inventory.Item.Nyx].sprite;
+                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[Inventory.Item.Nyx].sprite;
+                Item2.SetActive(false);
+                Item2_back.SetActive(false);
                 break;
         }
     }
@@ -201,6 +187,7 @@ public class FacilityBalloon : MonoBehaviour
     {
         Balloon.GetComponent<SpriteRenderer>().sprite = yellowBalloon;
         Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
+        Item2.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
 
         GetComponent<Facility>().state = 3;
         if (animaitor != null)
@@ -218,25 +205,22 @@ public class FacilityBalloon : MonoBehaviour
         }
         else
         {
-            int count = 3;
-            if (grinderItemNum[2] == 0)
-            {
-                count = 2;
-            }
+            int count = 2;
             if (grinderItemNum[1] == 0)
             {
                 count = 1;
             }
+            if (grinderItemNum[0] == 0)
+            {
+                return true;
+            }
             switch (count)
             {
-                case 1:
-                    temp = !inventory.isFull(1, grinderItem[0], grinderItemNum[0]);
-                    break;
                 case 2:
                     temp = !inventory.isFull(2, grinderItem[0], grinderItemNum[0], grinderItem[1], grinderItemNum[1]);
                     break;
-                case 3:
-                    temp = !inventory.isFull(3, grinderItem[0], grinderItemNum[0], grinderItem[1], grinderItemNum[1], grinderItem[2], grinderItemNum[2]);
+                case 1:
+                    temp = !inventory.isFull(1, grinderItem[0], grinderItemNum[0]);
                     break;
             }
         }
@@ -251,19 +235,23 @@ public class FacilityBalloon : MonoBehaviour
         }
         else
         {
-            int count = 3;
-            if (grinderItemNum[2] == 0)
-            {
-                count = 2;
-            }
+            int count = 2;
             if (grinderItemNum[1] == 0)
             {
                 count = 1;
             }
-            for(int i =0; i< count; i++)
+            if (grinderItemNum[0] == 0)
             {
-                inventory.GetItem(grinderItem[i], grinderItemNum[i]);
+                count = 0;
             }
+            if (count > 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    inventory.GetItem(grinderItem[i], grinderItemNum[i]);
+                }
+            }
+            nyxUI.SetAmount(grinderNyxNum);
         }
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         GetComponent<Facility>().state = 1;
@@ -292,16 +280,15 @@ public class FacilityBalloon : MonoBehaviour
             TimeText.GetComponent<TextMesh>().text = (int)(progressTimer / 60.0f) + ":" + temp;
         }
 
-        if (isMakeByGrinder == false)
+        if (GetComponent<Facility>().state == 3)
         {
-            if (GetComponent<Facility>().state == 3)
-            {
-                Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
-            }
-            else
-            {
-                Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, progress * 2.3f);
-            }
+            Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
+            Item2.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
+        }
+        else
+        {
+            Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, progress * 2.3f);
+            Item2.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, progress * 2.3f);
         }
     }
 

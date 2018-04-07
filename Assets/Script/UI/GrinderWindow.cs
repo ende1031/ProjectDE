@@ -7,20 +7,29 @@ public class GrinderWindow : MonoBehaviour
 {
     public class GrinderItemInfo
     {
-        public GrinderItemInfo(int c, Inventory.Item r1, int n1, Inventory.Item r2 = 0, int n2 = 0, Inventory.Item r3 = 0, int n3 = 0)
+        public GrinderItemInfo(int nxN, Inventory.Item r1 = 0, int n1 = 0, Inventory.Item r2 = 0, int n2 = 0)
         {
-            resultCount = c;
+            nyxNum = nxN;
             result[0] = r1;
             result[1] = r2;
-            result[2] = r3;
             num[0] = n1;
             num[1] = n2;
-            num[2] = n3;
+
+            resultCount = 2;
+            if (n2 == 0)
+            {
+                resultCount = 1;
+            }
+            if (n1 == 0)
+            {
+                resultCount = 0;
+            }
         }
 
         public int resultCount;
-        public Inventory.Item[] result = new Inventory.Item[3];
-        public int[] num = new int[3];
+        public Inventory.Item[] result = new Inventory.Item[2];
+        public int[] num = new int[2];
+        public int nyxNum;
     }
 
     Inventory inventory;
@@ -32,16 +41,12 @@ public class GrinderWindow : MonoBehaviour
     Text BigItemNum;
     GameObject PickItem;
     GameObject PickNumber;
-    GameObject[] ResultItem = new GameObject[3];
-    GameObject[] ResultItemNum = new GameObject[3];
-    GameObject Button;
+    GameObject[] ResultItem = new GameObject[2];
+    GameObject[] ResultItemNum = new GameObject[2];
+    GameObject ResultNyxNum;
     Text ButtonText;
-    Text EnergyNum;
 
     Animator animaitor;
-
-    public Sprite YellowButton;
-    public Sprite RedButton;
 
     bool isPopupActive = false;
     bool isUsingGrinder = false;
@@ -49,8 +54,9 @@ public class GrinderWindow : MonoBehaviour
 
     Inventory.Item selectedItem;
     int selectedItemNum = 1;
-    Inventory.Item[] resultItem = new Inventory.Item[3];
-    int[] resultItemNum = new int[3] { 0, 0, 0 };
+    Inventory.Item[] resultItem = new Inventory.Item[2];
+    int[] resultItemNum = new int[2] { 0, 0};
+    int resultNyxNum = 0;
     int resultItemCount = 0;
     bool selectNull = true;
 
@@ -60,27 +66,28 @@ public class GrinderWindow : MonoBehaviour
 
     void SetDictionary() //아이템 추가시 수정할 부분
     {
-        GrinderItemDictionary[Inventory.Item.Food] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Oxygen] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Battery] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Stick] = new GrinderItemInfo(2, Inventory.Item.Mass, 1, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Board] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Hose] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Mass] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Thorn] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Facility01] = new GrinderItemInfo(3, Inventory.Item.Mass, 1, Inventory.Item.Stick, 1, Inventory.Item.Board, 1);
-        GrinderItemDictionary[Inventory.Item.Trap01] = new GrinderItemInfo(1, Inventory.Item.Thorn, 1);
-        GrinderItemDictionary[Inventory.Item.Heart] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Bulb01] = new GrinderItemInfo(2, Inventory.Item.Stick, 1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.StickSeed] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.BoardSeed] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.ThornSeed] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Tumor] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.TumorSeed] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Grinder01] = new GrinderItemInfo(3, Inventory.Item.Mass, 1, Inventory.Item.Stick, 1, Inventory.Item.Board, 1);
-        GrinderItemDictionary[Inventory.Item.SuppliedBattery] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.SuppliedFood] = new GrinderItemInfo(1, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Water] = new GrinderItemInfo(1, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Food] = new GrinderItemInfo(20, Inventory.Item.Water, 1);
+        GrinderItemDictionary[Inventory.Item.Oxygen] = new GrinderItemInfo(50, Inventory.Item.Water, 1);
+        GrinderItemDictionary[Inventory.Item.Battery] = new GrinderItemInfo(60, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Stick] = new GrinderItemInfo(70, Inventory.Item.Mass, 1, Inventory.Item.Water, 1);
+        GrinderItemDictionary[Inventory.Item.Board] = new GrinderItemInfo(10, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Hose] = new GrinderItemInfo(55, Inventory.Item.Water, 1);
+        GrinderItemDictionary[Inventory.Item.Mass] = new GrinderItemInfo(37, Inventory.Item.Water, 1);
+        GrinderItemDictionary[Inventory.Item.Thorn] = new GrinderItemInfo(85, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Facility01] = new GrinderItemInfo(41, Inventory.Item.Mass, 1, Inventory.Item.Stick, 1);
+        GrinderItemDictionary[Inventory.Item.Trap01] = new GrinderItemInfo(10, Inventory.Item.Thorn, 1);
+        GrinderItemDictionary[Inventory.Item.Heart] = new GrinderItemInfo(80, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Bulb01] = new GrinderItemInfo(200, Inventory.Item.Stick, 1, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.StickSeed] = new GrinderItemInfo(50, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.BoardSeed] = new GrinderItemInfo(6, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.ThornSeed] = new GrinderItemInfo(77, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Tumor] = new GrinderItemInfo(800, Inventory.Item.Water, 1);
+        GrinderItemDictionary[Inventory.Item.TumorSeed] = new GrinderItemInfo(99, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Grinder01] = new GrinderItemInfo(55, Inventory.Item.Mass, 1, Inventory.Item.Stick, 1);
+        GrinderItemDictionary[Inventory.Item.SuppliedBattery] = new GrinderItemInfo(111, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.SuppliedFood] = new GrinderItemInfo(155);
+        GrinderItemDictionary[Inventory.Item.Water] = new GrinderItemInfo(13, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.NyxCollector01] = new GrinderItemInfo(31, Inventory.Item.Mass, 1);
     }
 
     void Start ()
@@ -96,17 +103,16 @@ public class GrinderWindow : MonoBehaviour
     {
         BigItem = Grinder_BG.transform.Find("BigItem").gameObject;
         BigItemNum = BigItem.transform.Find("Num").GetComponent<Text>();
-        EnergyNum = BigItem.transform.Find("EnergyNum").GetComponent<Text>();
         PickItem = Grinder_BG.transform.Find("PickItem").gameObject;
         PickNumber = Grinder_BG.transform.Find("PickNumber").gameObject;
-        Button = Grinder_BG.transform.Find("Button").gameObject;
-        ButtonText = Button.transform.Find("Text").GetComponent<Text>();
+        ButtonText = Grinder_BG.transform.Find("ButtonText").GetComponent<Text>();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             ResultItem[i] = Grinder_BG.transform.Find("ResultItem" + (i + 1)).gameObject;
             ResultItemNum[i] = ResultItem[i].transform.Find("Num").gameObject;
         }
+        ResultNyxNum = Grinder_BG.transform.Find("ResultNyx").transform.Find("Num").gameObject;
     }
 
     public void RefreshWindow()
@@ -116,14 +122,16 @@ public class GrinderWindow : MonoBehaviour
             BigItem.SetActive(false);
             resultItemCount = 0;
             selectedItemNum = 1;
+            ResultNyxNum.SetActive(false);
         }
         else
         {
             BigItem.SetActive(true);
+            ResultNyxNum.SetActive(true);
             BigItem.GetComponent<Image>().sprite = inventory.itemDictionary[selectedItem].sprite;
 
             resultItemCount = GrinderItemDictionary[selectedItem].resultCount;
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < 2; i++)
             {
                 resultItemNum[i] = 0;
             }
@@ -132,30 +140,35 @@ public class GrinderWindow : MonoBehaviour
                 resultItem[i] = GrinderItemDictionary[selectedItem].result[i];
                 resultItemNum[i] = GrinderItemDictionary[selectedItem].num[i] * selectedItemNum;
             }
+            resultNyxNum = GrinderItemDictionary[selectedItem].nyxNum * selectedItemNum;
         }
 
         if(selectedItemNum >= 10)
         {
             BigItemNum.text = selectedItemNum.ToString();
-            EnergyNum.text = selectedItemNum.ToString();
         }
         else
         {
             BigItemNum.text = "0" + selectedItemNum;
-            EnergyNum.text = "0" + selectedItemNum;
         }
-        for(int i =0; i<3; i++)
+        for(int i =0; i<2; i++)
         {
             ResultItem[i].SetActive(true);
             ResultItemNum[i].SetActive(true);
         }
-        int c = 2;
+        int c = 1;
         while(c >= resultItemCount)
         {
             ResultItem[c].SetActive(false);
             ResultItemNum[c].SetActive(false);
             c--;
         }
+
+        for(int i =0; i< resultItemCount; i++)
+        {
+
+        }
+
         for(int i = 0; i < resultItemCount; i++)
         {
             ResultItem[i].GetComponent<Image>().sprite = inventory.itemDictionary[resultItem[i]].sprite;
@@ -167,18 +180,17 @@ public class GrinderWindow : MonoBehaviour
             {
                 ResultItemNum[i].GetComponent<Text>().text = "0" + resultItemNum[i];
             }
+            ResultNyxNum.GetComponent<Text>().text = resultNyxNum.ToString();
         }
         if(isSelectingNumber == true)
         {
-            Button.GetComponent<Image>().sprite = RedButton;
             ButtonText.text = "C : 분해 시작";
             PickItem.SetActive(false);
             PickNumber.SetActive(true);
         }
         else
         {
-            Button.GetComponent<Image>().sprite = YellowButton;
-            ButtonText.text = "C : 분해 아이템 선택";
+            ButtonText.text = "C : 아이템 선택";
             PickItem.SetActive(true);
             PickNumber.SetActive(false);
         }
@@ -209,7 +221,7 @@ public class GrinderWindow : MonoBehaviour
                     if(selectNull == false)
                     {
                         inventory.DeleteItem(selectedItem, selectedItemNum);
-                        Facility.GetComponent<FacilityBalloon>().GrindItem(selectedItemNum * 3, resultItem[0], resultItemNum[0], resultItem[1], resultItemNum[1], resultItem[2], resultItemNum[2]);
+                        Facility.GetComponent<FacilityBalloon>().GrindItem(selectedItemNum * 3, resultNyxNum, resultItem[0], resultItemNum[0], resultItem[1], resultItemNum[1]);
                         CloseWindow();
                     }
                 }
@@ -223,7 +235,7 @@ public class GrinderWindow : MonoBehaviour
         selectedItem = it;
         isPopupActive = true;
         isSelectingNumber = true;
-        selectedItemNum = inventory.CountOfItem(selectedItem);
+        selectedItemNum = 1;
         RefreshWindow();
     }
 
@@ -231,13 +243,13 @@ public class GrinderWindow : MonoBehaviour
     {
         selectNull = isNull;
         selectedItem = it;
-        selectedItemNum = inventory.CountOfItem(selectedItem);
+        selectedItemNum = 1;
         RefreshWindow();
     }
 
     void MoveCursor()
     {
-        if (Input.GetKeyUp(KeyCode.UpArrow) && selectedItemNum < inventory.CountOfItem(selectedItem))
+        if (Input.GetKeyUp(KeyCode.UpArrow) && selectedItemNum < inventory.CountOfItem(selectedItem) && selectedItemNum < 10)
         {
             selectedItemNum++;
             RefreshWindow();
