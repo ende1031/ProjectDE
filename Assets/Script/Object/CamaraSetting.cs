@@ -8,6 +8,6 @@ public class CamaraSetting : MonoBehaviour
 
     void Awake()
     {
-        Screen.SetResolution((int)ScreenSize.x, (int)ScreenSize.y, false);
+        Screen.SetResolution((int)ScreenSize.x, (int)ScreenSize.y, true);
     }
 }

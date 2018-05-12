@@ -81,6 +81,7 @@
      <Compile Include="Assets\Script\UI\PopupWindow.cs" />
      <Compile Include="Assets\Script\UI\ResearchWindow.cs" />
      <Compile Include="Assets\Script\UI\Title.cs" />
+     <Compile Include="Assets\Script\UI\VideoController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

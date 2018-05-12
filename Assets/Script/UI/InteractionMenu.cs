@@ -93,7 +93,7 @@ public class InteractionMenu : MonoBehaviour
 
     bool isWarningPopupActive = false;
 
-    float circleRadius = 135.0f;
+    float circleRadius = 202.5f;
     float moveAngle = 0;
     float moveSeed = 5.0f;
     float moveVec = 10.0f;

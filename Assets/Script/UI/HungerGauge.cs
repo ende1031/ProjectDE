@@ -17,6 +17,9 @@ public class HungerGauge : MonoBehaviour
 
     bool monoMessage = false;
 
+    float infoPos = 560.0f;
+    float infoPos2 = 1.23f;
+
     void Start ()
     {
         gauge = transform.Find("Hunger_Guage").gameObject;
@@ -85,7 +88,7 @@ public class HungerGauge : MonoBehaviour
         gaugeLight.GetComponent<Image>().fillAmount = amountOfHunger / 100;
 
         Vector3 temp = infoBG.transform.position;
-        temp.y = 373 + amountOfHunger * 0.82f;
+        temp.y = infoPos + amountOfHunger * infoPos2;
         infoBG.transform.position = temp;
     }
 
