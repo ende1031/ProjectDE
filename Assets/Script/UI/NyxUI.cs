@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NyxUI : MonoBehaviour
 {
-    public int amountOfNyx = 300;
+    public int amountOfNyx = 0;
 
     Text UI_Text;
 

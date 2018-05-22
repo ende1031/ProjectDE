@@ -55,6 +55,9 @@ public class Inventory : MonoBehaviour
         Water,
         NyxCollector01,
         Nyx,
+        Fruit,
+        FruitSeed,
+        Sawtooth
     };
 
     GameObject[] itemSlot = new GameObject[15];
@@ -95,6 +98,9 @@ public class Inventory : MonoBehaviour
     public Sprite WaterSp;
     public Sprite NyxCollector01Sp;
     public Sprite NyxSp;
+    public Sprite FruitSp;
+    public Sprite FruitSeedSp;
+    public Sprite SawtoothSp;
 
     public bool isInventoryActive = false;
     int selectedIndex = 0;
@@ -115,7 +121,7 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.Battery] = new ItemName(BatterySp, "배터리", "괴물의 심장을 가공해서 만든 배터리이다.\n사용하면 에너지 게이지가 35%만큼 회복된다.");
         itemDictionary[Item.Stick] = new ItemName(StickSp, "막대", "집게발 대나무에서 채집한 막대이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
         itemDictionary[Item.Board] = new ItemName(BoardSp, "판자", "판자 식물에서 채집한 판자이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
-        itemDictionary[Item.Hose] = new ItemName(HoseSp, "호스", "아직 용도가 밝혀지지 않은 아이템이다.");
+        itemDictionary[Item.Hose] = new ItemName(HoseSp, "호스", "막대와 판자를 합쳐서 만들어낸 아이템이다.");
         itemDictionary[Item.Mass] = new ItemName(MassSp, "괴상한 덩어리", "괴물의 조직으로 추정되는 덩어리이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
         itemDictionary[Item.Thorn] = new ItemName(ThornSp, "가시", "가시 덩굴에서 채집한 가시이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
         itemDictionary[Item.Facility01] = new ItemName(Facility01Sp, "소형 워크벤치", "다양한 아이템을 만드는 시설이다.\n탈출포드나 전구 근처에 설치할 수 있다.");
@@ -133,6 +139,9 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.Water] = new ItemName(WaterSp, "물", "아이템 분해를 통해 얻은 물이다.\n사용하면 허기 게이지가 5%만큼 회복된다.");
         itemDictionary[Item.NyxCollector01] = new ItemName(NyxCollector01Sp, "닉스입자 수집기", "닉스입자를 수집하는 시설이다.\n탈출포드나 전구 근처에 설치할 수 있다.");
         itemDictionary[Item.Nyx] = new ItemName(NyxSp, "닉스입자", "더미 아이템");
+        itemDictionary[Item.Fruit] = new ItemName(FruitSp, "괴식물의 열매", "맛있어보인다. 먹을 수 있을 것 같다.\n사용하면 허기 게이지가 10%만큼 회복된다.");
+        itemDictionary[Item.FruitSeed] = new ItemName(FruitSeedSp, "열매 나무 모종", "원하는 곳에 심으면 열매 나무가 자란다.\n게임 시간으로 하루에 한번 채집할 수 있다.");
+        itemDictionary[Item.Sawtooth] = new ItemName(SawtoothSp, "톱날", "가시와 판자를 합쳐서 만들어낸 아이템이다.");
     }
 
     public void OpenMenu() //아이템 추가시 수정할 부분
@@ -153,6 +162,7 @@ public class Inventory : MonoBehaviour
             case Item.SuppliedFood:
             case Item.Tumor:
             case Item.Water:
+            case Item.Fruit:
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Food);
                 break;
             case Item.Oxygen:
@@ -172,6 +182,7 @@ public class Inventory : MonoBehaviour
             case Item.StickSeed:
             case Item.BoardSeed:
             case Item.ThornSeed:
+            case Item.FruitSeed:
                 interactionMenu.AddMenu(InteractionMenu.MenuItem.Plant);
                 break;
         }
@@ -201,6 +212,10 @@ public class Inventory : MonoBehaviour
                 else if (Items[selectedIndex].name == Item.Water)
                 {
                     hungerGauge.SetAmount(5);
+                }
+                else if (Items[selectedIndex].name == Item.Fruit)
+                {
+                    hungerGauge.SetAmount(10);
                 }
                 DeleteItem(Items[selectedIndex].name);
                 break;
@@ -313,6 +328,10 @@ public class Inventory : MonoBehaviour
                     else if (Items[selectedIndex].name == Item.ThornSeed)
                     {
                         SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "ThornPlant", 0));
+                    }
+                    else if (Items[selectedIndex].name == Item.FruitSeed)
+                    {
+                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "FruitPlant", 0));
                     }
                     energyGauge.SetAmount(-5);
                     DeleteItem(Items[selectedIndex].name);
@@ -531,11 +550,11 @@ public class Inventory : MonoBehaviour
                 Items.Add(new ItemInfo(itemName, num));
                 GetEffectOn(Items.Count - 1);
 
-                if(discoveredItemList.Contains(itemName) == false)
-                {
-                    discoveredItemList.Add(itemName);
-                    researchWindow.DiscoverNewResearch(itemName);
-                }
+                //if(discoveredItemList.Contains(itemName) == false)
+                //{
+                //    discoveredItemList.Add(itemName);
+                //    researchWindow.DiscoverNewResearch(itemName);
+                //}
             }
             DisplayItem();
             return true;

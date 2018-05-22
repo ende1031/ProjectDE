@@ -34,7 +34,6 @@ public class VideoController : MonoBehaviour
 
     void GameStart()
     {
-        SceneObjectManager.instance.SetUIActive(true);
-        SceneChanger.instance.FadeAndLoadScene("Stage01", 6);
+        SceneChanger.instance.FadeAndLoadScene("Title");
     }
 }

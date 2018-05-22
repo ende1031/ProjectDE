@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class PopupWindow : MonoBehaviour
 {
     Inventory inventory;
-    EnergyGauge energyGauge;
     GameObject Player;
     NyxUI nyxUI;
 
@@ -73,7 +72,6 @@ public class PopupWindow : MonoBehaviour
     void Start ()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
         nyxUI = GameObject.Find("NyxUI").GetComponent<NyxUI>();
         PopupBG = transform.Find("PopupBG").gameObject;
         animaitor = GetComponent<Animator>();
@@ -83,8 +81,7 @@ public class PopupWindow : MonoBehaviour
         //SetWindowItem();
         RefreshWindow();
 
-        SetItemMakePossible(Inventory.Item.Oxygen); //산소는 처음부터 제작가능
-        SetItemMakePossible(Inventory.Item.Mass); //산소는 처음부터 제작가능
+        //SetItemMakePossible(Inventory.Item.Oxygen); //산소는 처음부터 제작가능
     }
 
     void SetWindowObject()
@@ -133,16 +130,16 @@ public class PopupWindow : MonoBehaviour
         switch (itemName)
         {
             case Inventory.Item.Trap01:
-                WindowItemList.Add(new WindowItem(itemName, 30, 50, "소형 덫", "가시 덩굴의 가시로 만든 덫이다.\n괴물의 둥지 근처에 설치해두면 괴물의 심장을 얻을 수 있다.", Inventory.Item.Stick, 1, Inventory.Item.Thorn, 2));
+                WindowItemList.Add(new WindowItem(itemName, 30, 50, "소형 덫", "가시 덩굴의 가시로 만든 덫이다.\n괴물의 둥지 근처에 설치해두면 괴물의 심장을 얻을 수 있다.", Inventory.Item.Thorn, 2));
                 break;
             case Inventory.Item.Battery:
                 WindowItemList.Add(new WindowItem(itemName, 20, 200, "배터리", "괴물의 심장으로 만든 고밀도 배터리이다. 가공해서 형체는 많이 달라졌지만 들고 있으면 작은 움직임이 느껴진다.\n사용하면 에너지 게이지를 충전할 수 있다.", Inventory.Item.Heart, 1, Inventory.Item.Hose, 1));
                 break;
             case Inventory.Item.Facility01:
-                WindowItemList.Add(new WindowItem(itemName, 30, 500, "소형 워크벤치", "괴물의 조직을 이용해서 만든 워크벤치이다. 살아있지만 위험하지는 않다.\n각종 아이템을 제작할 수 있다.", Inventory.Item.Stick, 2, Inventory.Item.Board, 1, Inventory.Item.Heart, 1));
+                WindowItemList.Add(new WindowItem(itemName, 30, 1000, "소형 워크벤치", "괴물의 조직을 이용해서 만든 워크벤치이다. 살아있지만 위험하지는 않다.\n각종 아이템을 제작할 수 있다.", Inventory.Item.Stick, 3, Inventory.Item.Board, 5, Inventory.Item.Heart, 1));
                 break;
             case Inventory.Item.Bulb01:
-                WindowItemList.Add(new WindowItem(itemName, 30, 1000, "간이 전구", "빛을 내서 괴물의 접근을 막는 시설이다.\n간이 전구의 양 옆 2칸 이내에는 다른 시설을 설치할 수 있다.", Inventory.Item.Mass, 1, Inventory.Item.Heart, 1, Inventory.Item.Hose, 1, Inventory.Item.Tumor, 1));
+                WindowItemList.Add(new WindowItem(itemName, 30, 2000, "간이 전구", "빛을 내서 괴물의 접근을 막는 시설이다.\n간이 전구의 양 옆 2칸 이내에는 다른 시설을 설치할 수 있다.", Inventory.Item.Stick, 3, Inventory.Item.Heart, 1, Inventory.Item.Hose, 5, Inventory.Item.Mass, 5));
                 break;
             case Inventory.Item.Food:
                 WindowItemList.Add(new WindowItem(itemName, 45, 70, "식량", "유전자 조작으로 만든 괴물종양을 가공해서 식품으로 만들었다.\n젠장 맛없다.\n사용하면 허기 게이지를 충전할 수 있다.", Inventory.Item.Tumor, 2));
@@ -163,10 +160,19 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(itemName, 30, 120, "종양 씨앗", "유전자 조작으로 만든 안전한 종양 씨앗이다.\n식물에 심으면 식용 종양을 얻을 수 있다.", Inventory.Item.Mass, 3));
                 break;
             case Inventory.Item.Grinder01:
-                WindowItemList.Add(new WindowItem(itemName, 30, 1000, "간이 분해기", "필요 없는 아이템을 분해해서 다른 아이템을 얻는데 사용하는 시설이다.", Inventory.Item.Stick, 1, Inventory.Item.Board, 5, Inventory.Item.Thorn, 2, Inventory.Item.Hose, 2, Inventory.Item.Mass, 1, Inventory.Item.Heart, 1));
+                WindowItemList.Add(new WindowItem(itemName, 30, 3000, "간이 분해기", "필요 없는 아이템을 분해해서 다른 아이템을 얻는데 사용하는 시설이다.", Inventory.Item.Sawtooth, 5, Inventory.Item.Hose, 2, Inventory.Item.Stick, 3, Inventory.Item.Heart, 1, Inventory.Item.Mass, 5));
                 break;
             case Inventory.Item.NyxCollector01:
-                WindowItemList.Add(new WindowItem(itemName, 30, 10, "닉스입자 수집기", "닉스입자를 수집하는 시설이다.\n허공에 떠도는 검은 닉스입자를 수집해서 사용할 수 있게 만들어준다.", Inventory.Item.Stick, 1, Inventory.Item.Board, 5, Inventory.Item.Thorn, 2, Inventory.Item.Hose, 2, Inventory.Item.Mass, 1, Inventory.Item.Heart, 1));
+                WindowItemList.Add(new WindowItem(itemName, 30, 10, "닉스입자 수집기", "닉스입자를 수집하는 시설이다.\n허공에 떠도는 검은 닉스입자를 수집해서 사용할 수 있게 만들어준다.", Inventory.Item.Stick, 3, Inventory.Item.Board, 5, Inventory.Item.Thorn, 2, Inventory.Item.Heart, 1));
+                break;
+            case Inventory.Item.FruitSeed:
+                WindowItemList.Add(new WindowItem(itemName, 40, 150, "열매 나무 모종", "심으면 먹을 수 있는 열매가 열리는 괴식물이 자라난다.", Inventory.Item.Fruit, 1, Inventory.Item.Mass, 1, Inventory.Item.Heart, 1));
+                break;
+            case Inventory.Item.Hose:
+                WindowItemList.Add(new WindowItem(itemName, 20, 50, "호스", "무언가를 만드는데 사용할 수 있는 재료 아이템이다.", Inventory.Item.Stick, 1, Inventory.Item.Board, 1));
+                break;
+            case Inventory.Item.Sawtooth:
+                WindowItemList.Add(new WindowItem(itemName, 20, 50, "톱날", "무언가를 만드는데 사용할 수 있는 재료 아이템이다.", Inventory.Item.Board, 1, Inventory.Item.Thorn, 2));
                 break;
         }
     }
@@ -334,7 +340,7 @@ public class PopupWindow : MonoBehaviour
         if(WindowItemList.Count <= 0)
         {
             ExplanationName.text = string.Empty;
-            ExplanationText.text = "※ 이 시설에서 제작 가능한 아이템이 없습니다.";
+            ExplanationText.text = "※ 지금은 이 시설에서 제작 가능한 아이템이 없습니다.";
             Button.GetComponent<Image>().sprite = YellowButton;
             ButtonText.text = string.Empty;
             TimeNum.GetComponent<Text>().text = string.Empty;

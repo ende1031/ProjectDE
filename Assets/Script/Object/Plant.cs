@@ -82,6 +82,9 @@ public class Plant : MonoBehaviour
                     inventory.GetItem(Inventory.Item.Heart, 1);
                     SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                     break;
+                case "FruitPlant":
+                    inventory.GetItem(Inventory.Item.Fruit, 1);
+                    break;
             }
         }
         else
@@ -141,6 +144,9 @@ public class Plant : MonoBehaviour
                     monologue.DisplayLog("괴식물의 가시로 만든 덫이다.\n괴식물의 둥지 근처에 설치하면 무언가 잡힐지도 모른다.");
                 }
                 break;
+            case "FruitPlant":
+                monologue.DisplayLog("이 식물의 열매는 먹을 수 있을 것 같다.");
+                break;
         }
     }
 
@@ -166,6 +172,9 @@ public class Plant : MonoBehaviour
                 case "Trap01":
                     //temp = !inventory.isFull(2, Inventory.Item.Hose, 1, Inventory.Item.Heart, 1);
                     temp = !inventory.isFull(1, Inventory.Item.Heart, 1);
+                    break;
+                case "FruitPlant":
+                    temp = !inventory.isFull(1, Inventory.Item.Fruit, 1);
                     break;
             }
         }

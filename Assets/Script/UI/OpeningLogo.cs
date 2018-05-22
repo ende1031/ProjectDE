@@ -16,7 +16,7 @@ public class OpeningLogo : MonoBehaviour
         timer += Time.deltaTime;
         if(timer >= 1.0f)
         {
-            SceneChanger.instance.FadeAndLoadScene("Title");
+            SceneChanger.instance.FadeAndLoadScene("OpeningMovie");
         }
 	}
 }

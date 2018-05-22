@@ -8,6 +8,7 @@ public class ResearchWindow : MonoBehaviour
     Inventory inventory;
     PopupWindow popupWindow;
     GameObject Player;
+    NyxUI nyxUI;
 
     GameObject ResearchBG;
     GameObject[] Item = new GameObject[16];
@@ -26,7 +27,7 @@ public class ResearchWindow : MonoBehaviour
     GameObject[] Content = new GameObject[3];
     GameObject[] ContentIcon = new GameObject[3];
     GameObject[] ContentText = new GameObject[3];
-    GameObject[] ContentFacIcon = new GameObject[3];
+    //GameObject[] ContentFacIcon = new GameObject[3];
 
     public Sprite YellowButton;
     public Sprite RedButton;
@@ -42,8 +43,8 @@ public class ResearchWindow : MonoBehaviour
     bool completeResearch = false;
 
     ResearchItem[] itemArray = new ResearchItem[16];
-    Dictionary<Inventory.Item, ResultContent> contentDictionary = new Dictionary<Inventory.Item, ResultContent>();
-    Dictionary<Inventory.Item, int> ResearchNumberDictionary = new Dictionary<Inventory.Item, int>();
+    Dictionary<string, ResultContent> contentDictionary = new Dictionary<string, ResultContent>();
+    //Dictionary<Inventory.Item, int> ResearchNumberDictionary = new Dictionary<Inventory.Item, int>();
 
     public class ResearchItem
     {
@@ -69,12 +70,17 @@ public class ResearchWindow : MonoBehaviour
             }
         }
 
-        public void SetResultItem(int num, Inventory.Item c1, Inventory.Item c2 = 0, Inventory.Item c3 = 0)
+        public void SetResultItem(int num, string c1, string c2 = "", string c3 = "")
         {
             resultNum = num;
             resultItem[0] = c1;
             resultItem[1] = c2;
             resultItem[2] = c3;
+        }
+
+        public void AddNextResearch(int n)
+        {
+            nextResearch.Add(n);
         }
 
         public Inventory.Item item;
@@ -83,30 +89,37 @@ public class ResearchWindow : MonoBehaviour
         public bool isKnown;
         public string expText;
         public int resultNum;
-        public Inventory.Item[] resultItem = new Inventory.Item[3];
+        public string[] resultItem = new string[3];
+        public List<int> nextResearch = new List<int>();
     }
 
     public class ResultContent
     {
-        public ResultContent(string t, Sprite fsp)
+        public ResultContent(string t, Sprite sp)
         {
             expText = t;
-            facilitySp = fsp;
+            ContentSp = sp;
+            isOpenItem = false;
         }
 
-        public ResultContent(string t)
+        public ResultContent(string t, Sprite sp, Inventory.Item it)
         {
             expText = t;
-            facilitySp = null;
+            ContentSp = sp;
+            item = it;
+            isOpenItem = true;
         }
 
         public string expText;
-        public Sprite facilitySp;
+        public Sprite ContentSp;
+        public bool isOpenItem;
+        public Inventory.Item item;
     }
 
     void Start ()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        nyxUI = GameObject.Find("NyxUI").GetComponent<NyxUI>();
         popupWindow = GameObject.Find("PopupWindow").GetComponent<PopupWindow>();
         animaitor = GetComponent<Animator>();
         ResearchBG = transform.Find("ResearchBG").gameObject;
@@ -115,6 +128,9 @@ public class ResearchWindow : MonoBehaviour
         SetWindowObject();
         SetResultContent();
         SetWindowItem();
+
+        // 첫 연구 오픈
+        DiscoverNewResearch(0);
     }
 
     void SetWindowObject()
@@ -142,67 +158,108 @@ public class ResearchWindow : MonoBehaviour
             Content[i] = ResultBG.transform.Find("Content" + (i + 1)).gameObject;
             ContentIcon[i] = Content[i].transform.Find("Item").gameObject;
             ContentText[i] = Content[i].transform.Find("Text").gameObject;
-            ContentFacIcon[i] = Content[i].transform.Find("FacilityIcon").gameObject;
+            //ContentFacIcon[i] = Content[i].transform.Find("FacilityIcon").gameObject;
         }
     }
 
     void SetWindowItem()
     {
-        itemArray[0] = new ResearchItem(Inventory.Item.Mass, 5, "덩어리 연구를 통해 워크벤치와 닉스입자 수집기를 만들 수 있게 되었다.");
-        itemArray[0].SetResultItem(2, Inventory.Item.Facility01, Inventory.Item.NyxCollector01);
+        //덩어리 3개
+        itemArray[0] = new ResearchItem(Inventory.Item.Mass, 3, "연구를 통해 닉스입자를 발견했다.\n연구 성과로 닉스입자 100개를 획득했다! 닉스입자는 화면 상단 UI에서 확인할 수 있다.");
+        itemArray[0].SetResultItem(1, "Nyx");
+        itemArray[0].AddNextResearch(1);
+        //사과 2개
+        itemArray[1] = new ResearchItem(Inventory.Item.Fruit, 2, "이번 연구는 먹을 수 있는 것을 발견했다는 점에 큰 의의가 있다. 구조가 오기 전 까지 무사히 이 행성에서 살아남을 수 있을 것 같다.");
+        itemArray[1].SetResultItem(1, "Hunger");
+        itemArray[1].AddNextResearch(2);
+        //가시 3개
+        itemArray[2] = new ResearchItem(Inventory.Item.Thorn, 3, "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너의 말을 들어보기로 했다.");
+        itemArray[2].SetResultItem(3, "ThornPlant", "Trap01", "capture");
+        itemArray[2].AddNextResearch(3);
+        //심장 1개
+        itemArray[3] = new ResearchItem(Inventory.Item.Heart, 1, "최근 발표된 뉴욕 공학 대학의 연구 결과에 따르면 형이상학적 이유에 따라 우리가 관찰 하는 절대우주는 팽창과 수축을 반복하며 무한히 연쇄한다고 한다. 쓸 말이 생각 안난다.");
+        itemArray[3].SetResultItem(1, "Heart");
+        itemArray[3].AddNextResearch(4);
+        //막대 3개
+        itemArray[4] = new ResearchItem(Inventory.Item.Stick, 3, "닉스입자에 대한 연구가 거의 완성되었다. 하지만 아직 부족하다. 다음 연구를 진행해보자.");
+        itemArray[4].SetResultItem(1, "StickPlant");
+        itemArray[4].AddNextResearch(5);
+        //판자 3개
+        itemArray[5] = new ResearchItem(Inventory.Item.Board, 3, "드디어 닉스입자를 수집하는 방법을 알게 됐다. 닉스입자를 이용해서 무언가를 만들 수 있을 것 같다.");
+        itemArray[5].SetResultItem(2, "BoardPlant", "NyxCollector01");
+        itemArray[5].AddNextResearch(6);
+        //심장 4개
+        itemArray[6] = new ResearchItem(Inventory.Item.Heart, 4, "모든 제작을 탈출포드에서 해야 된다는 것은 지나치게 비효율적이다. 괴식물의 심장을 이용해서 다른 제작 시설을 만들어보기로 했다.");
+        itemArray[6].SetResultItem(1, "tempFacility");
+        itemArray[6].AddNextResearch(7);
+        //막대 10개
+        itemArray[7] = new ResearchItem(Inventory.Item.Stick, 10, "괴물은 빛을 싫어한다. 빛을 내는 시설을 만들 수 있으면 다른 시설들을 안전하게 지킬 수 있을 것이다.");
+        itemArray[7].SetResultItem(2, "Hose", "Bulb01");
+        itemArray[7].AddNextResearch(8);
+        //판자 10개
+        itemArray[8] = new ResearchItem(Inventory.Item.Board, 10, "연구를 통해 워크벤치에서 분해기를 만들 수 있게 됐다.\n이제 필요없는 아이템은 분해하도록 하자.");
+        itemArray[8].SetResultItem(2, "Sawtooth", "Grinder01");
+        itemArray[8].AddNextResearch(9);
+        itemArray[8].AddNextResearch(10);
+        //덩어리 20개
+        itemArray[9] = new ResearchItem(Inventory.Item.Mass, 20, "괴식물의 유전자를 조작해서 먹을 수 있는 안전한 조직을 만들어냈다. 자라는 중인 식물에 심어보자.");
+        itemArray[9].SetResultItem(2, "TumorSeed", "SeedingTumor");
+        itemArray[9].AddNextResearch(9);
+        //막대 20개
+        itemArray[10] = new ResearchItem(Inventory.Item.Stick, 20, "집게발 대나무의 유전자를 조작해서 모종을 만들 수 있게 됐다. 괴식물의 모종을 만들면 원하는 위치에 심을 수 있다.");
+        itemArray[10].SetResultItem(2, "StickSeed", "SeedingPlant");
+        itemArray[10].AddNextResearch(11);
+        itemArray[10].AddNextResearch(12);
+        itemArray[10].AddNextResearch(13);
+        itemArray[10].AddNextResearch(14);
+        //판자 20개
+        itemArray[11] = new ResearchItem(Inventory.Item.Board, 20, "판자 식물의 유전자를 조작해서 모종을 만들 수 있게 됐다. 괴식물의 모종을 만들면 원하는 위치에 심을 수 있다.");
+        itemArray[11].SetResultItem(1, "BoardSeed");
+        itemArray[11].AddNextResearch(11);
+        //가시 20개
+        itemArray[12] = new ResearchItem(Inventory.Item.Thorn, 20, "가시 덩굴의 유전자를 조작해서 모종을 만들 수 있게 됐다. 괴식물의 모종을 만들면 원하는 위치에 심을 수 있다.");
+        itemArray[12].SetResultItem(1, "ThornSeed");
+        itemArray[12].AddNextResearch(12);
+        //사과 20개
+        itemArray[13] = new ResearchItem(Inventory.Item.Fruit, 20, "열매 나무의 유전자를 조작해서 모종을 만들 수 있게 됐다. 괴식물의 모종을 만들면 원하는 위치에 심을 수 있다.");
+        itemArray[13].SetResultItem(1, "FruitSeed");
+        itemArray[13].AddNextResearch(13);
+        //호스 30개
+        itemArray[14] = new ResearchItem(Inventory.Item.Hose, 30, "참치마요를 먹을 때 닭강정(소)를 같이 주문하면 만족감이 두배가 된다는 사실을 알게 됐다.");
+        itemArray[14].AddNextResearch(15);
+        //톱날 30개
+        itemArray[15] = new ResearchItem(Inventory.Item.Sawtooth, 30, "마지막 연구를 끝냈다. 이 행성은 멸망 이후 독자적인 생태계를 만들어가고 있다. 이렇게 된 원인은 바로 ··· ···");
+        itemArray[15].AddNextResearch(15);
 
-        itemArray[1] = new ResearchItem(Inventory.Item.Mass, 5, "덩어리를 연구해서 종양씨앗을 만들어낼 수 있다는 놀라운 사실을 알게 되었다. 이럴수가.");
-        itemArray[1].SetResultItem(1, Inventory.Item.TumorSeed);
-
-        itemArray[2] = new ResearchItem(Inventory.Item.Thorn, 5, "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너의 말을 들어보기로 했다.");
-        itemArray[2].SetResultItem(1, Inventory.Item.Trap01);
-
-        itemArray[3] = new ResearchItem(Inventory.Item.Heart, 5, "최근 발표된 뉴욕 공학 대학의 연구 결과에 따르면 형이상학적 이유에 따라 우리가 관찰 하는 절대우주는 팽창과 수축을 반복하며 무한히 연쇄한다고 한다. 즉, 괴물의 심장으로 배터리를 만들 수 있다.");
-        itemArray[3].SetResultItem(1, Inventory.Item.Battery);
-
-        itemArray[4] = new ResearchItem(Inventory.Item.Tumor, 3, "종양 연구를 통해 먹을 수 있는 식품과 빛을 내는 간이 전구를 만들 수 있게 됐다.");
-        itemArray[4].SetResultItem(2, Inventory.Item.Food, Inventory.Item.Bulb01);
-
-        itemArray[5] = new ResearchItem(Inventory.Item.Stick, 20, "집게발 대나무 모종을 만들어서 원하는 곳에 심을 수 있게 됐다.");
-        itemArray[5].SetResultItem(1, Inventory.Item.StickSeed);
-
-        itemArray[6] = new ResearchItem(Inventory.Item.Board, 20, "이 식물을 연구해본 결과 식용으로 쓰기에는 부적합하다는 사실을 알게 됐다. (불쾌한 표정)");
-        itemArray[6].SetResultItem(1, Inventory.Item.BoardSeed);
-
-        itemArray[7] = new ResearchItem(Inventory.Item.Thorn, 20, "가시의 성분을 분석해본 결과 식물의 가시보다는 동물의 뿔에 가깝다는 사실을 알게 됐다.");
-        itemArray[7].SetResultItem(1, Inventory.Item.ThornSeed);
-
-        itemArray[8] = new ResearchItem(Inventory.Item.Hose, 10, "연구를 통해 워크벤치에서 분해기를 만들 수 있게 됐다.\n이제 필요없는 아이템은 분해하도록 하자.");
-        itemArray[8].SetResultItem(1, Inventory.Item.Grinder01);
-
-        itemArray[9] = new ResearchItem(Inventory.Item.Mass, 99, "덩어리를 또 연구하기로 한지 3개월이 지났다. 드디어 빛이 보인다! 연구 결과로 알게 된 사실은 이 다음 연구도 덩어리 연구라는 것이다.");
-
-        itemArray[10] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
-        itemArray[11] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
-        itemArray[12] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
-        itemArray[13] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
-        itemArray[14] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
-        itemArray[15] = new ResearchItem(Inventory.Item.Stick, 20, "더미");
-
-        for(int i = 15; i >= 0; i--)
-        {
-            ResearchNumberDictionary[itemArray[i].item] = i;
-        }
+        //for(int i = 15; i >= 0; i--)
+        //{
+        //    ResearchNumberDictionary[itemArray[i].item] = i;
+        //}
     }
 
     void SetResultContent()
     {
-        contentDictionary[Inventory.Item.Facility01] = new ResultContent("[소형 워크벤치] 다양한 아이템을 제작하는 시설이다.\n탈출 포드와 소형 워크벤치에서 만들 수 있다.", inventory.EscapePodSp);
-        contentDictionary[Inventory.Item.TumorSeed] = new ResultContent("[종양 씨앗] 유전자 조작으로 만든 종양 씨앗이다.\n식물에 심으면 종양이 자란다.");
-        contentDictionary[Inventory.Item.Food] = new ResultContent("[식량] 종양을 가공해서 만든 식량이다.\n먹으면 허기게이지가 회복된다.", inventory.EscapePodSp);
-        contentDictionary[Inventory.Item.Bulb01] = new ResultContent("[간이 전구] 빛을 내서 괴물의 접근을 막는다. 근처에\n시설을 설치해도 괴물의 공격을 받지 않는다.");
-        contentDictionary[Inventory.Item.StickSeed] = new ResultContent("[집게발 대나무 모종] 심으면 집게발 대나무가 자란다.\n게임시간으로 하루 한번 채집할 수 있다.");
-        contentDictionary[Inventory.Item.BoardSeed] = new ResultContent("[판자 식물 모종] 심으면 판자 식물이 자란다.\n빠르게 자라서 연속으로 채집할 수 있다.");
-        contentDictionary[Inventory.Item.ThornSeed] = new ResultContent("[가시 덩굴 모종] 심으면 가시 덩굴이 자란다.\n현실 시간으로 1분에 한번 채집할 수 있다.");
-        contentDictionary[Inventory.Item.Trap01] = new ResultContent("[소형 덫] 괴물의 둥지 근처에 설치하면\n괴물의 심장을 얻을 수 있다.");
-        contentDictionary[Inventory.Item.Battery] = new ResultContent("[배터리] 괴물의 심장으로 만든 배터리이다.\n사용하면 에너지 게이지를 충전할 수 있다.");
-        contentDictionary[Inventory.Item.Grinder01] = new ResultContent("[간이 분해기] 필요없는 아이템을 분해해서\n다른 아이템으로 만들 수 있다.");
-        contentDictionary[Inventory.Item.NyxCollector01] = new ResultContent("[닉스입자 수집기] 허공에 떠도는\n닉스입자를 수집하는 시설이다.");
+        contentDictionary["Nyx"] = new ResultContent("[닉스 입자] 이 행성에만 존재하는 미지의 입자로 추청된다.", inventory.NyxSp);
+        contentDictionary["Hunger"] = new ResultContent("[허기 회복] 먹을 수 있는 아이템을 먹으면 허기를 회복할 수 있다.", inventory.FruitSp);
+        contentDictionary["ThornPlant"] = new ResultContent("[가시 덩굴] 가시가 자라는 나무이다. 가시는 제작에 쓸 수 있다.", inventory.ThornSp);
+        contentDictionary["Trap01"] = new ResultContent("[소형 덫] 소형 덫을 만들 수 있게 됐다.", inventory.Trap01Sp, Inventory.Item.Trap01);
+        contentDictionary["capture"] = new ResultContent("[포획] 괴물의 둥지 근처에 덫을 설치하면 괴물을 잡을 수 있다.", inventory.Trap01Sp);
+        contentDictionary["Heart"] = new ResultContent("[심장] 작은 괴물의 심장이다. 시설 에너지원으로 쓸 수 있다.", inventory.HeartSp);
+        contentDictionary["StickPlant"] = new ResultContent("[집게발 대나무] 대나무를 닮은 괴식물이다. 하루한번 채집할 수 있다.", inventory.StickSp);
+        contentDictionary["BoardPlant"] = new ResultContent("[판자 식물] 판자를 닮은 괴식물이다. 제작에 쓸 수 있다.", inventory.BoardSp);
+        contentDictionary["NyxCollector01"] = new ResultContent("[닉스입자 수집기] 닉스입자 수집기를 만들 수 있게 됐다.", inventory.NyxCollector01Sp, Inventory.Item.NyxCollector01);
+        contentDictionary["tempFacility"] = new ResultContent("[소형 워크벤치] 소형 워크벤치를 만들 수 있게 됐다.", inventory.Facility01Sp, Inventory.Item.Facility01);
+        contentDictionary["Hose"] = new ResultContent("[호스] 호스를 만들 수 있게 됐다.", inventory.HoseSp, Inventory.Item.Hose);
+        contentDictionary["Bulb01"] = new ResultContent("[간이 전구] 간이 전구를 만들 수 있게 됐다.", inventory.Bulb01Sp, Inventory.Item.Bulb01);
+        contentDictionary["Sawtooth"] = new ResultContent("[톱날] 톱날을 만들 수 있게 됐다.", inventory.SawtoothSp, Inventory.Item.Sawtooth);
+        contentDictionary["Grinder01"] = new ResultContent("[간이 분해기] 간이 분해기를 만들 수 있게 됐다.", inventory.Grinder01Sp, Inventory.Item.Grinder01);
+        contentDictionary["TumorSeed"] = new ResultContent("[종양 씨앗] 종양 씨앗을 만들 수 있게 됐다.", inventory.TumorSeedSp, Inventory.Item.TumorSeed);
+        contentDictionary["SeedingTumor"] = new ResultContent("[종양 심기] 자라는중인 특정 식물에는 종양을 심을 수 있다.", inventory.TumorSp);
+        contentDictionary["StickSeed"] = new ResultContent("[집게발 대나무 모종] 집게발 대나무 모종을 만들 수 있게 됐다.", inventory.StickSeedSp, Inventory.Item.StickSeed);
+        contentDictionary["SeedingPlant"] = new ResultContent("[모종 심기] 원하는 위치에 모종을 심으면 괴식물이 자란다.", inventory.StickSeedSp);
+        contentDictionary["BoardSeed"] = new ResultContent("[판자 식물 모종] 판자 식물 모종을 만들 수 있게 됐다.", inventory.BoardSeedSp, Inventory.Item.BoardSeed);
+        contentDictionary["ThornSeed"] = new ResultContent("[가시 덩굴 모종] 가시 덩굴 모종을 만들 수 있게 됐다.", inventory.ThornSeedSp, Inventory.Item.ThornSeed);
+        contentDictionary["FruitSeed"] = new ResultContent("[열매 나무 모종] 열매 나무 모종을 만들 수 있게 됐다.", inventory.FruitSeedSp, Inventory.Item.FruitSeed);
     }
 
     void Update ()
@@ -312,22 +369,24 @@ public class ResearchWindow : MonoBehaviour
                 // 연구 끝난 것은 제작 팝업 윈도우에서 제작 가능하게
                 for(int i = 0; i < itemArray[selectedIndex].resultNum; i++)
                 {
-                    popupWindow.SetItemMakePossible(itemArray[selectedIndex].resultItem[i]);
+                    if(contentDictionary[itemArray[selectedIndex].resultItem[i]].isOpenItem == true)
+                    {
+                        popupWindow.SetItemMakePossible(contentDictionary[itemArray[selectedIndex].resultItem[i]].item);
+                    }
                 }
 
-                //다음 연구 오픈
+                // 다음 연구 오픈
+                foreach(int i in itemArray[selectedIndex].nextResearch)
+                {
+                    DiscoverNewResearch(i);
+                }
+
+                // 첫 연구 보상
                 if(selectedIndex == 0)
                 {
-                    DiscoverNewResearch(1);
+                    nyxUI.SetAmount(100);
                 }
-                else if (selectedIndex == 1)
-                {
-                    DiscoverNewResearch(9);
-                }
-                else if (selectedIndex == 2)
-                {
-                    DiscoverNewResearch(7);
-                }
+                
             }
         }
 
@@ -400,16 +459,16 @@ public class ResearchWindow : MonoBehaviour
             if( i < itemArray[selectedIndex].resultNum)
             {
                 Content[i].SetActive(true);
-                ContentIcon[i].GetComponent<Image>().sprite = inventory.itemDictionary[itemArray[selectedIndex].resultItem[i]].sprite;
+                ContentIcon[i].GetComponent<Image>().sprite = contentDictionary[itemArray[selectedIndex].resultItem[i]].ContentSp;
                 ContentText[i].GetComponent<Text>().text = contentDictionary[itemArray[selectedIndex].resultItem[i]].expText;
-                if(contentDictionary[itemArray[selectedIndex].resultItem[i]].facilitySp == null)
-                {
-                    ContentFacIcon[i].GetComponent<Image>().sprite = inventory.Facility01Sp;
-                }
-                else
-                {
-                    ContentFacIcon[i].GetComponent<Image>().sprite = contentDictionary[itemArray[selectedIndex].resultItem[i]].facilitySp;
-                }
+                //if(contentDictionary[itemArray[selectedIndex].resultItem[i]].facilitySp == null)
+                //{
+                //    ContentFacIcon[i].GetComponent<Image>().sprite = inventory.Facility01Sp;
+                //}
+                //else
+                //{
+                //    ContentFacIcon[i].GetComponent<Image>().sprite = contentDictionary[itemArray[selectedIndex].resultItem[i]].facilitySp;
+                //}
             }
             else
             {
@@ -433,14 +492,14 @@ public class ResearchWindow : MonoBehaviour
         //RefreshWindow();
     }
 
-    public void DiscoverNewResearch(Inventory.Item item)
-    {
-        if(ResearchNumberDictionary.ContainsKey(item))
-        {
-            itemArray[ResearchNumberDictionary[item]].SetKnown(true);
-        }
-        //RefreshWindow();
-    }
+    //public void DiscoverNewResearch(Inventory.Item item)
+    //{
+    //    if(ResearchNumberDictionary.ContainsKey(item))
+    //    {
+    //        itemArray[ResearchNumberDictionary[item]].SetKnown(true);
+    //    }
+    //    //RefreshWindow();
+    //}
 
     void InputItem()
     {

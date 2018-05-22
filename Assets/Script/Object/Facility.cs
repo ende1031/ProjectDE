@@ -120,6 +120,8 @@ public class Facility : MonoBehaviour
         {
             case "TempFacility":
                 popupWindow.ClearItemList();
+                popupWindow.AddItem(Inventory.Item.Hose);
+                popupWindow.AddItem(Inventory.Item.Sawtooth);
                 popupWindow.AddItem(Inventory.Item.Facility01);
                 popupWindow.AddItem(Inventory.Item.Trap01);
                 popupWindow.AddItem(Inventory.Item.Battery);
@@ -128,12 +130,15 @@ public class Facility : MonoBehaviour
                 popupWindow.AddItem(Inventory.Item.StickSeed);
                 popupWindow.AddItem(Inventory.Item.BoardSeed);
                 popupWindow.AddItem(Inventory.Item.ThornSeed);
+                popupWindow.AddItem(Inventory.Item.FruitSeed);
                 popupWindow.AddItem(Inventory.Item.Grinder01);
                 popupWindow.AddItem(Inventory.Item.NyxCollector01);
                 popupWindow.OpenWindow(this.gameObject);
                 break;
             case "EscapePod":
                 popupWindow.ClearItemList();
+                popupWindow.AddItem(Inventory.Item.Hose);
+                popupWindow.AddItem(Inventory.Item.Sawtooth);
                 popupWindow.AddItem(Inventory.Item.Food);
                 popupWindow.AddItem(Inventory.Item.Oxygen);
                 popupWindow.AddItem(Inventory.Item.Facility01);
@@ -144,6 +149,7 @@ public class Facility : MonoBehaviour
                 popupWindow.AddItem(Inventory.Item.StickSeed);
                 popupWindow.AddItem(Inventory.Item.BoardSeed);
                 popupWindow.AddItem(Inventory.Item.ThornSeed);
+                popupWindow.AddItem(Inventory.Item.FruitSeed);
                 popupWindow.AddItem(Inventory.Item.Grinder01);
                 popupWindow.AddItem(Inventory.Item.NyxCollector01);
                 popupWindow.OpenWindow(this.gameObject);

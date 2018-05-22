@@ -275,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &20035161
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1089,6 +1089,7 @@ MonoBehaviour:
   BoardPlant: {fileID: 1713309569161114, guid: 808a858534c1ac2439e0925dcdffc967, type: 2}
   MassPlant: {fileID: 1973922401690096, guid: 66b814dee91cd054b97b5993d8474763, type: 2}
   ThornPlant: {fileID: 1549453647226052, guid: ea87fe77882e2eb40bee0bd6e7597135, type: 2}
+  FruitPlant: {fileID: 1098878794222228, guid: 67ee1f6b48b34da44b21e67a44bdaf2d, type: 2}
   Portal: {fileID: 1768756399868750, guid: b0a0c9869ade5d74384781159a06efb6, type: 2}
   Trap01: {fileID: 1720078919906398, guid: 19fbe4929e63cf240ad69bc8e88e0e65, type: 2}
   Bulb01: {fileID: 1774011462199366, guid: cbff9c6b7547bb548a2a6b96c1324eb5, type: 2}
@@ -1661,6 +1662,9 @@ MonoBehaviour:
   WaterSp: {fileID: 21300000, guid: 73cd8011db5a0874ba9fa88dd855ae89, type: 3}
   NyxCollector01Sp: {fileID: 21300000, guid: 429b864cec830c6489295b1377ead4e7, type: 3}
   NyxSp: {fileID: 21300000, guid: f0234ec3134a2ae44b7bcb3c4dc0bd98, type: 3}
+  FruitSp: {fileID: 21300000, guid: bd300b7e68325214e96cc922e97d489d, type: 3}
+  FruitSeedSp: {fileID: 21300000, guid: 41d71c869d63e134ab1cbd75e4edd130, type: 3}
+  SawtoothSp: {fileID: 21300000, guid: e2e46c10cf2b9194189c546795c8b36d, type: 3}
   isInventoryActive: 0
   discoveredItemList: 
 --- !u!114 &128048174
@@ -6685,7 +6689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &585675339
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9044,7 +9048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &859626885
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12282,7 +12286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eade003886ae5dd46b25a410d33f0f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfNyx: 300
+  amountOfNyx: 0
 --- !u!1 &1280183426
 GameObject:
   m_ObjectHideFlags: 0
@@ -14217,7 +14221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1518900178
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16896,7 +16900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1715270306
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18778,7 +18782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1889868690
 RectTransform:
   m_ObjectHideFlags: 0
