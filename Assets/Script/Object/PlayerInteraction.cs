@@ -31,6 +31,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         //테스트용 코드
+        /*
         if (Input.GetKeyDown(KeyCode.Q))
         {
             inventory.GetItem(Inventory.Item.Mass, 20);
@@ -40,6 +41,7 @@ public class PlayerInteraction : MonoBehaviour
             inventory.GetItem(Inventory.Item.Hose, 20);
             inventory.GetItem(Inventory.Item.Tumor, 20);
             inventory.GetItem(Inventory.Item.Heart, 20);
+            inventory.GetItem(Inventory.Item.Sawtooth, 20);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -48,6 +50,7 @@ public class PlayerInteraction : MonoBehaviour
             inventory.GetItem(Inventory.Item.NyxCollector01, 1);
             inventory.GetItem(Inventory.Item.Grinder01, 1);
         }
+        */
     }
 
     void PlayerDirection()

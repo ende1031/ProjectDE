@@ -20,6 +20,7 @@ public class Facility : MonoBehaviour
     Animator animaitor;
     GameObject Player;
     EnergyGauge energyGauge;
+    ReportUI reportUI;
     int sceneNum;
 
     public bool isLoadByManager = false;
@@ -41,6 +42,7 @@ public class Facility : MonoBehaviour
         Player = GameObject.Find("Player");
         monologue = Player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
         energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
+        reportUI = GameObject.Find("ReportUI").GetComponent<ReportUI>();
 
         animaitor = GetComponent<Animator>();
         if (animaitor != null)
@@ -166,6 +168,7 @@ public class Facility : MonoBehaviour
     {
         if (facilityName == "EscapePod")
         {
+            reportUI.AddDay();
             SceneObjectManager.instance.SaveObject();
             SceneObjectManager.instance.SleepAfter();
             SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());

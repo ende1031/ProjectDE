@@ -75,7 +75,7 @@ public class Plant : MonoBehaviour
                     inventory.GetItem(Inventory.Item.Board, 1);
                     break;
                 case "ThornPlant":
-                    inventory.GetItem(Inventory.Item.Thorn, 5);
+                    inventory.GetItem(Inventory.Item.Thorn, 3);
                     break;
                 case "Trap01":
                     //inventory.GetItem(Inventory.Item.Hose, 1);
@@ -167,7 +167,7 @@ public class Plant : MonoBehaviour
                     temp = !inventory.isFull(1, Inventory.Item.Board, 1);
                     break;
                 case "ThornPlant":
-                    temp = !inventory.isFull(1, Inventory.Item.Thorn, 5);
+                    temp = !inventory.isFull(1, Inventory.Item.Thorn, 3);
                     break;
                 case "Trap01":
                     //temp = !inventory.isFull(2, Inventory.Item.Hose, 1, Inventory.Item.Heart, 1);

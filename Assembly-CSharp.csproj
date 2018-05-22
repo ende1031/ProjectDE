@@ -79,6 +79,7 @@
      <Compile Include="Assets\Script\UI\NyxUI.cs" />
      <Compile Include="Assets\Script\UI\OpeningLogo.cs" />
      <Compile Include="Assets\Script\UI\PopupWindow.cs" />
+     <Compile Include="Assets\Script\UI\ReportUI.cs" />
      <Compile Include="Assets\Script\UI\ResearchWindow.cs" />
      <Compile Include="Assets\Script\UI\Title.cs" />
      <Compile Include="Assets\Script\UI\VideoController.cs" />

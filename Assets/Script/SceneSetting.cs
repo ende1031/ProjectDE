@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SceneSetting : MonoBehaviour
 {
-    Inventory inventory;
+    //Inventory inventory;
     GameObject player;
     GameObject mainCamera;
 
@@ -15,7 +15,7 @@ public class SceneSetting : MonoBehaviour
 
     void Start ()
     {
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        //inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         player = GameObject.Find("Player");
         mainCamera = GameObject.Find("Main Camera");
     }
@@ -69,16 +69,13 @@ public class SceneSetting : MonoBehaviour
                 SceneObjectManager.instance.AddObject(n, 5, new SceneObjectManager.SceneObject("Facility", "EscapePod"));
                 //SceneObjectManager.instance.AddObject(n, 6, new SceneObjectManager.SceneObject("Facility", "Grinder01"));
                 //SceneObjectManager.instance.AddObject(n, 7, new SceneObjectManager.SceneObject("Facility", "TempFacility"));
-                SceneObjectManager.instance.AddObject(n, -12, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
-                SceneObjectManager.instance.AddObject(n, -13, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
-                SceneObjectManager.instance.AddObject(n, -14, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
-                SceneObjectManager.instance.AddObject(n, -15, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
-                SceneObjectManager.instance.AddObject(n, -16, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 28, new SceneObjectManager.SceneObject("Nest", "Nest01"));
-                SceneObjectManager.instance.AddObject(n, 11, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 12, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 17, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 18, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
+                SceneObjectManager.instance.AddObject(n, -12, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
+                SceneObjectManager.instance.AddObject(n, -13, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
+                SceneObjectManager.instance.AddObject(n, -14, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 11, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 12, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 13, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 1, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 2, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 3, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
@@ -95,17 +92,17 @@ public class SceneSetting : MonoBehaviour
                 SceneObjectManager.instance.AddObject(n, 25, new SceneObjectManager.SceneObject("Portal", "Stage01", 23));
                 SceneObjectManager.instance.AddObject(n, 3, new SceneObjectManager.SceneObject("Nest", "Nest01"));
                 SceneObjectManager.instance.AddObject(n, 8, new SceneObjectManager.SceneObject("Nest", "Nest01"));
-                SceneObjectManager.instance.AddObject(n, 17, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 19, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 21, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 17, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 19, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 21, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
                 break;
 
             case 2:
                 SceneObjectManager.instance.AddObject(n, 4, new SceneObjectManager.SceneObject("Portal", "Stage01_A_1F", 23));
                 SceneObjectManager.instance.AddObject(n, 12, new SceneObjectManager.SceneObject("Nest", "Nest01"));
-                SceneObjectManager.instance.AddObject(n, -1, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 0, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 1, new SceneObjectManager.SceneObject("Plant", "StickPlant", 1));
+                SceneObjectManager.instance.AddObject(n, -1, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 0, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 1, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
                 break;
 
             case 3:

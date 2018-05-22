@@ -70,9 +70,10 @@ public class Inventory : MonoBehaviour
     Monologue monologue;
     HungerGauge hungerGauge;
     EnergyGauge energyGauge;
-    ResearchWindow researchWindow;
+    //ResearchWindow researchWindow;
     InteractionMenu interactionMenu;
     GrinderWindow grinderWindow;
+    ReportUI reportUI;
 
     public Sprite FoodSp; //아이템 추가시 수정할 부분
     public Sprite OxygenSp;
@@ -369,9 +370,10 @@ public class Inventory : MonoBehaviour
 
         hungerGauge = GameObject.Find("HungerUI").GetComponent<HungerGauge>();
         energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
-        researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
+        //researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
         grinderWindow = GameObject.Find("GrinderWindow").GetComponent<GrinderWindow>();
+        reportUI = GameObject.Find("ReportUI").GetComponent<ReportUI>();
 
         SetDictionary();
     }
@@ -557,6 +559,7 @@ public class Inventory : MonoBehaviour
                 //}
             }
             DisplayItem();
+            reportUI.RefreshUI();
             return true;
         }
         else
@@ -585,6 +588,7 @@ public class Inventory : MonoBehaviour
                 return false;
             }
             DisplayItem();
+            reportUI.RefreshUI();
             return true;
         }
         else
