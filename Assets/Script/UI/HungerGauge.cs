@@ -15,10 +15,10 @@ public class HungerGauge : MonoBehaviour
     GameObject gaugeLight;
     GameObject infoBG;
 
-    bool monoMessage = false;
-
     float infoPos = 560.0f;
     float infoPos2 = 1.23f;
+
+    float messageTimer = 0;
 
     void Start ()
     {
@@ -45,20 +45,24 @@ public class HungerGauge : MonoBehaviour
         DisplayGauge();
         GaugeLight();
 
-        if (monoMessage == false)
+        HungerMessege();
+    }
+
+    void HungerMessege()
+    {
+        if (amountOfHunger <= 30)
         {
-            if (amountOfHunger < 20)
+            messageTimer -= Time.deltaTime;
+
+            if(messageTimer <= 0)
             {
-                monologue.DisplayLog("슬슬 배가 고프군.\n뭔가 섭취할 필요가 있겠어.");
-                monoMessage = true;
+                monologue.DisplayLog("배가 고프군. 뭔가 먹어야겠어.");
+                messageTimer = 20.0f;
             }
         }
         else
         {
-            if (amountOfHunger > 20)
-            {
-                monoMessage = false;
-            }
+            messageTimer = 0;
         }
     }
 

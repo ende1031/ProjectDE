@@ -12,9 +12,10 @@ public class ReportUI : MonoBehaviour
     Text Day_Text;
     Text D_Day_Text;
     Text ToDo_Text;
+    Text Tip_Text;
 
     int day = 1;
-    int d_Day = 99;
+    int d_Day = 3;
 
     int questNum = 0;
     bool tutorialFinish = false;
@@ -47,7 +48,7 @@ public class ReportUI : MonoBehaviour
 
         public void SetTip(string t)
         {
-            tip = "\n\nTip.\n" + t;
+            tip = "Tip.\n" + t;
         }
 
         public void SetComment(string t)
@@ -76,6 +77,7 @@ public class ReportUI : MonoBehaviour
         Day_Text = transform.Find("Day").gameObject.GetComponent<Text>();
         D_Day_Text = transform.Find("D_Day").gameObject.GetComponent<Text>();
         ToDo_Text = transform.Find("ToDo").gameObject.GetComponent<Text>();
+        Tip_Text = transform.Find("Tip").gameObject.GetComponent<Text>();
 
         SetReportItemList();
 
@@ -84,7 +86,7 @@ public class ReportUI : MonoBehaviour
 
     void SetReportItemList()
     {
-        ReportItemList.Add(new ReportItem("땅에 떨어져 있는 '괴상한 덩어리' 3개를 줍자.", Inventory.Item.Mass, 3));
+        ReportItemList.Add(new ReportItem("'괴상한 덩어리' 3개를 줍자.", Inventory.Item.Mass, 3));
         ReportItemList[0].SetTip("땅에 떨어져 있는 덩어리 앞에서 [C]버튼을 눌러보자.");
         ReportItemList[0].SetComment("어딘가에 쓸 수 있을 것 같군.\n탈출포드에 가져가서 연구를 해보자.");
 
@@ -102,7 +104,7 @@ public class ReportUI : MonoBehaviour
         ReportItemList.Add(new ReportItem("탈출포드에서 '가시' 연구를 완료하자.", 2));
         ReportItemList.Add(new ReportItem("탈출포드에서 '소형 덫'을 제작하자.", Inventory.Item.Trap01, 1));
         ReportItemList[6].SetTip("탈출포드에서 '아이템 제작'을 눌러보자.");
-        ReportItemList[6].SetComment("덫으로 괴물을 잡을 수 있겠어.\n왼쪽 끝에 있는 괴물의 둥지 옆에 설치하자.");
+        ReportItemList[6].SetComment("덫으로 괴물을 잡을 수 있겠어.\n오른쪽 끝에 있는 괴물의 둥지 옆에 설치하자.");
 
         ReportItemList.Add(new ReportItem("소형 덫을 설치해서 '괴물의 심장'을 얻자.", Inventory.Item.Heart, 1));
         ReportItemList[7].SetTip("'괴물의 둥지' 2칸 이내에 설치할 수 있다.\n설치후 탈출포드에서 '잠자기'를 해보자.");
@@ -203,11 +205,13 @@ public class ReportUI : MonoBehaviour
 
         if (ReportItemList[questNum].type == "Item")
         {
-            ToDo_Text.text = "· " + ReportItemList[questNum].text + " [" + inventory.CountOfItem(ReportItemList[questNum].item) + "/" + ReportItemList[questNum].maxNum + "]" + ReportItemList[questNum].tip;
+            ToDo_Text.text = "· " + ReportItemList[questNum].text + " [" + inventory.CountOfItem(ReportItemList[questNum].item) + "/" + ReportItemList[questNum].maxNum + "]";
+            Tip_Text.text = ReportItemList[questNum].tip;
         }
         else if (ReportItemList[questNum].type == "Research")
         {
-            ToDo_Text.text = "· " + ReportItemList[questNum].text + " [미완료]" + ReportItemList[questNum].tip;
+            ToDo_Text.text = "· " + ReportItemList[questNum].text + " [미완료]";
+            Tip_Text.text = ReportItemList[questNum].tip;
         }
 
     }
@@ -217,5 +221,16 @@ public class ReportUI : MonoBehaviour
         day++;
         d_Day--;
         RefreshUI();
+
+        if(d_Day <= 0)
+        {
+            Ending();
+        }
+    }
+
+    void Ending()
+    {
+        SceneObjectManager.instance.SetUIActive(false);
+        SceneChanger.instance.FadeAndLoadScene("EndingMovie");
     }
 }

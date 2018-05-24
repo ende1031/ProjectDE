@@ -597,6 +597,14 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    //인벤토리 초기화
+    public void DeleteAllItems()
+    {
+        Items.Clear();
+        DisplayItem();
+        reportUI.RefreshUI();
+    }
+
     //해당 아이템이 없으면 null을, 있으면 해당 아이템의 리스트번호를 리턴
     int? isContains(Item itemName)
     {

@@ -23,7 +23,7 @@ public class SceneChanger : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     //첫 씬 로드

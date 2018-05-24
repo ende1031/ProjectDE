@@ -7,6 +7,7 @@ public class SceneSetting : MonoBehaviour
     //Inventory inventory;
     GameObject player;
     GameObject mainCamera;
+    Monologue monologue;
 
     public int sceneNum;
     public float playerPosition;
@@ -18,6 +19,7 @@ public class SceneSetting : MonoBehaviour
         //inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         player = GameObject.Find("Player");
         mainCamera = GameObject.Find("Main Camera");
+        monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
     }
 	
 	void Update ()
@@ -76,6 +78,7 @@ public class SceneSetting : MonoBehaviour
                 SceneObjectManager.instance.AddObject(n, 11, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 12, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 13, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 14, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 1, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 2, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 3, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
@@ -85,6 +88,7 @@ public class SceneSetting : MonoBehaviour
                 //inventory.GetItem(Inventory.Item.SuppliedFood, 5);
                 //inventory.GetItem(Inventory.Item.SuppliedBattery, 7);
                 //inventory.GetItem(Inventory.Item.Trap01, 2);
+                monologue.DisplayLog("일단 주변에 쓸만한게 있는지 찾아보자.");
                 break;
 
             case 1:

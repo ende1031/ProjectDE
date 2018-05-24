@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a152e82ec865fe0438e4f6bb3a7b0092
-timeCreated: 1526957946
+timeCreated: 1527199859
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -128,9 +128,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1134
-        width: 90
-        height: 189
+        y: 2268
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +141,10 @@ TextureImporter:
       name: Plant05_growing_1
       rect:
         serializedVersion: 2
-        x: 90
-        y: 1134
-        width: 90
-        height: 189
+        x: 180
+        y: 2268
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: Plant05_growing_2
       rect:
         serializedVersion: 2
-        x: 180
-        y: 1134
-        width: 90
-        height: 189
+        x: 360
+        y: 2268
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +169,10 @@ TextureImporter:
       name: Plant05_growing_3
       rect:
         serializedVersion: 2
-        x: 270
-        y: 1134
-        width: 90
-        height: 189
+        x: 540
+        y: 2268
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +183,10 @@ TextureImporter:
       name: Plant05_growing_4
       rect:
         serializedVersion: 2
-        x: 360
-        y: 1134
-        width: 90
-        height: 189
+        x: 720
+        y: 2268
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: Plant05_growing_5
       rect:
         serializedVersion: 2
-        x: 450
-        y: 1134
-        width: 90
-        height: 189
+        x: 900
+        y: 2268
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,10 +211,10 @@ TextureImporter:
       name: Plant05_growing_6
       rect:
         serializedVersion: 2
-        x: 540
-        y: 1134
-        width: 90
-        height: 189
+        x: 1080
+        y: 2268
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,9 +226,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 945
-        width: 90
-        height: 189
+        y: 1890
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,10 +239,10 @@ TextureImporter:
       name: Plant05_growing_8
       rect:
         serializedVersion: 2
-        x: 90
-        y: 945
-        width: 90
-        height: 189
+        x: 180
+        y: 1890
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,10 +253,10 @@ TextureImporter:
       name: Plant05_growing_9
       rect:
         serializedVersion: 2
-        x: 180
-        y: 945
-        width: 90
-        height: 189
+        x: 360
+        y: 1890
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: Plant05_growing_10
       rect:
         serializedVersion: 2
-        x: 270
-        y: 945
-        width: 90
-        height: 189
+        x: 540
+        y: 1890
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +281,10 @@ TextureImporter:
       name: Plant05_growing_11
       rect:
         serializedVersion: 2
-        x: 360
-        y: 945
-        width: 90
-        height: 189
+        x: 720
+        y: 1890
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -295,10 +295,10 @@ TextureImporter:
       name: Plant05_growing_12
       rect:
         serializedVersion: 2
-        x: 450
-        y: 945
-        width: 90
-        height: 189
+        x: 900
+        y: 1890
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -309,10 +309,10 @@ TextureImporter:
       name: Plant05_growing_13
       rect:
         serializedVersion: 2
-        x: 540
-        y: 945
-        width: 90
-        height: 189
+        x: 1080
+        y: 1890
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -324,9 +324,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 756
-        width: 90
-        height: 189
+        y: 1512
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -337,10 +337,10 @@ TextureImporter:
       name: Plant05_growing_15
       rect:
         serializedVersion: 2
-        x: 90
-        y: 756
-        width: 90
-        height: 189
+        x: 180
+        y: 1512
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -351,10 +351,10 @@ TextureImporter:
       name: Plant05_growing_16
       rect:
         serializedVersion: 2
-        x: 180
-        y: 756
-        width: 90
-        height: 189
+        x: 360
+        y: 1512
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -365,10 +365,10 @@ TextureImporter:
       name: Plant05_growing_17
       rect:
         serializedVersion: 2
-        x: 270
-        y: 756
-        width: 90
-        height: 189
+        x: 540
+        y: 1512
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -379,10 +379,10 @@ TextureImporter:
       name: Plant05_growing_18
       rect:
         serializedVersion: 2
-        x: 360
-        y: 756
-        width: 90
-        height: 189
+        x: 720
+        y: 1512
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -393,10 +393,10 @@ TextureImporter:
       name: Plant05_growing_19
       rect:
         serializedVersion: 2
-        x: 450
-        y: 756
-        width: 90
-        height: 189
+        x: 900
+        y: 1512
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,10 +407,10 @@ TextureImporter:
       name: Plant05_growing_20
       rect:
         serializedVersion: 2
-        x: 540
-        y: 756
-        width: 90
-        height: 189
+        x: 1080
+        y: 1512
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -422,9 +422,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 567
-        width: 90
-        height: 189
+        y: 1134
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -435,10 +435,10 @@ TextureImporter:
       name: Plant05_growing_22
       rect:
         serializedVersion: 2
-        x: 90
-        y: 567
-        width: 90
-        height: 189
+        x: 180
+        y: 1134
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -449,10 +449,10 @@ TextureImporter:
       name: Plant05_growing_23
       rect:
         serializedVersion: 2
-        x: 180
-        y: 567
-        width: 90
-        height: 189
+        x: 360
+        y: 1134
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -463,10 +463,10 @@ TextureImporter:
       name: Plant05_growing_24
       rect:
         serializedVersion: 2
-        x: 270
-        y: 567
-        width: 90
-        height: 189
+        x: 540
+        y: 1134
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -477,10 +477,10 @@ TextureImporter:
       name: Plant05_growing_25
       rect:
         serializedVersion: 2
-        x: 360
-        y: 567
-        width: 90
-        height: 189
+        x: 720
+        y: 1134
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -491,10 +491,10 @@ TextureImporter:
       name: Plant05_growing_26
       rect:
         serializedVersion: 2
-        x: 450
-        y: 567
-        width: 90
-        height: 189
+        x: 900
+        y: 1134
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -505,10 +505,10 @@ TextureImporter:
       name: Plant05_growing_27
       rect:
         serializedVersion: 2
-        x: 540
-        y: 567
-        width: 90
-        height: 189
+        x: 1080
+        y: 1134
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -520,9 +520,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 378
-        width: 90
-        height: 189
+        y: 756
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -533,10 +533,10 @@ TextureImporter:
       name: Plant05_growing_29
       rect:
         serializedVersion: 2
-        x: 90
-        y: 378
-        width: 90
-        height: 189
+        x: 180
+        y: 756
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -547,10 +547,10 @@ TextureImporter:
       name: Plant05_growing_30
       rect:
         serializedVersion: 2
-        x: 180
-        y: 378
-        width: 90
-        height: 189
+        x: 360
+        y: 756
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -561,10 +561,10 @@ TextureImporter:
       name: Plant05_growing_31
       rect:
         serializedVersion: 2
-        x: 270
-        y: 378
-        width: 90
-        height: 189
+        x: 540
+        y: 756
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -575,10 +575,10 @@ TextureImporter:
       name: Plant05_growing_32
       rect:
         serializedVersion: 2
-        x: 360
-        y: 378
-        width: 90
-        height: 189
+        x: 720
+        y: 756
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -589,10 +589,10 @@ TextureImporter:
       name: Plant05_growing_33
       rect:
         serializedVersion: 2
-        x: 450
-        y: 378
-        width: 90
-        height: 189
+        x: 900
+        y: 756
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -603,10 +603,10 @@ TextureImporter:
       name: Plant05_growing_34
       rect:
         serializedVersion: 2
-        x: 540
-        y: 378
-        width: 90
-        height: 189
+        x: 1080
+        y: 756
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -618,9 +618,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 189
-        width: 90
-        height: 189
+        y: 378
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -631,10 +631,10 @@ TextureImporter:
       name: Plant05_growing_36
       rect:
         serializedVersion: 2
-        x: 90
-        y: 189
-        width: 90
-        height: 189
+        x: 180
+        y: 378
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -645,10 +645,10 @@ TextureImporter:
       name: Plant05_growing_37
       rect:
         serializedVersion: 2
-        x: 180
-        y: 189
-        width: 90
-        height: 189
+        x: 360
+        y: 378
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -659,10 +659,10 @@ TextureImporter:
       name: Plant05_growing_38
       rect:
         serializedVersion: 2
-        x: 270
-        y: 189
-        width: 90
-        height: 189
+        x: 540
+        y: 378
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -673,10 +673,10 @@ TextureImporter:
       name: Plant05_growing_39
       rect:
         serializedVersion: 2
-        x: 360
-        y: 189
-        width: 90
-        height: 189
+        x: 720
+        y: 378
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -687,10 +687,10 @@ TextureImporter:
       name: Plant05_growing_40
       rect:
         serializedVersion: 2
-        x: 450
-        y: 189
-        width: 90
-        height: 189
+        x: 900
+        y: 378
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -701,10 +701,10 @@ TextureImporter:
       name: Plant05_growing_41
       rect:
         serializedVersion: 2
-        x: 540
-        y: 189
-        width: 90
-        height: 189
+        x: 1080
+        y: 378
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -717,8 +717,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 90
-        height: 189
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -729,10 +729,10 @@ TextureImporter:
       name: Plant05_growing_43
       rect:
         serializedVersion: 2
-        x: 90
+        x: 180
         y: 0
-        width: 90
-        height: 189
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -743,10 +743,10 @@ TextureImporter:
       name: Plant05_growing_44
       rect:
         serializedVersion: 2
-        x: 180
+        x: 360
         y: 0
-        width: 90
-        height: 189
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -757,10 +757,10 @@ TextureImporter:
       name: Plant05_growing_45
       rect:
         serializedVersion: 2
-        x: 270
+        x: 540
         y: 0
-        width: 90
-        height: 189
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -771,10 +771,10 @@ TextureImporter:
       name: Plant05_growing_46
       rect:
         serializedVersion: 2
-        x: 360
+        x: 720
         y: 0
-        width: 90
-        height: 189
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -785,10 +785,10 @@ TextureImporter:
       name: Plant05_growing_47
       rect:
         serializedVersion: 2
-        x: 450
+        x: 900
         y: 0
-        width: 90
-        height: 189
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -799,10 +799,10 @@ TextureImporter:
       name: Plant05_growing_48
       rect:
         serializedVersion: 2
-        x: 540
+        x: 1080
         y: 0
-        width: 90
-        height: 189
+        width: 180
+        height: 378
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneObjectManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class SceneObjectManager : MonoBehaviour
 
     HungerGauge hungerGauge;
     EnergyGauge energyGauge;
+    Inventory inventory;
     NyxUI nyxUI;
 
     public GameObject TempFacility; //Prefab 추가시 수정할 부분
@@ -152,7 +154,7 @@ public class SceneObjectManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     void Start ()
@@ -161,6 +163,7 @@ public class SceneObjectManager : MonoBehaviour
         hungerGauge = GameObject.Find("HungerUI").GetComponent<HungerGauge>();
         energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
         nyxUI = GameObject.Find("NyxUI").GetComponent<NyxUI>();
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         UI.SetActive(false);
 
         for (int i = 0; i < maxSceneNum; i++)
@@ -169,6 +172,12 @@ public class SceneObjectManager : MonoBehaviour
             isSceneInit.Add(false);
             StageWalls.Add(Vector2.zero);
         }
+    }
+
+    //게임 초기화
+    public void ResetGame()
+    {
+        SceneManager.LoadScene("Persistent");
     }
 
     // 다른 맵에 있을때도 오브젝트의 타이머가 흘러가도록
@@ -302,7 +311,7 @@ public class SceneObjectManager : MonoBehaviour
             }
         }
 
-        hungerGauge.SetAmount(-20);
+        hungerGauge.SetAmount(-10);
         energyGauge.SetAmount(100);
 
         for (int i = 0; i < 3; i++)

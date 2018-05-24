@@ -5,6 +5,9 @@ using UnityEngine.Video;
 
 public class VideoController : MonoBehaviour
 {
+    public string NextScene;
+    public bool isResetGame = false;
+
     VideoPlayer videoPlayer;
     float notPlayingTime = 0;
 
@@ -18,7 +21,7 @@ public class VideoController : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Escape))
         {
-            GameStart();
+            ChangeScene();
         }
 
         if(videoPlayer.isPlaying == false)
@@ -28,12 +31,17 @@ public class VideoController : MonoBehaviour
 
         if(notPlayingTime > 1)
         {
-            GameStart();
+            ChangeScene();
         }
     }
 
-    void GameStart()
+    void ChangeScene()
     {
-        SceneChanger.instance.FadeAndLoadScene("Title");
+        if(isResetGame == true)
+        {
+            SceneObjectManager.instance.ResetGame();
+        }
+
+        SceneChanger.instance.FadeAndLoadScene(NextScene);
     }
 }

@@ -9,6 +9,8 @@ public class Title : MonoBehaviour
     Animator animaitor;
     GameObject BlackScreen;
 
+    GameObject mainCamera;
+
     int selectIndex = 0;
 
     bool isCursorActive = false;
@@ -21,6 +23,12 @@ public class Title : MonoBehaviour
         titleMenu = new GameObject[5] { GameObject.Find("NewStart"), GameObject.Find("Load"), GameObject.Find("Quit"), GameObject.Find("Setting"), GameObject.Find("People") };
         BlackScreen = GameObject.Find("Canvas").transform.Find("BlackScreen").gameObject;
         animaitor = GetComponent<Animator>();
+        mainCamera = GameObject.Find("Main Camera");
+
+        Vector3 cameraPos = mainCamera.transform.position;
+        cameraPos.x = 0;
+        mainCamera.transform.position = cameraPos;
+
         RefreshMenu();
     }
 	

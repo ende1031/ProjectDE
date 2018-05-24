@@ -174,12 +174,12 @@ public class ResearchWindow : MonoBehaviour
     void SetWindowItem()
     {
         //덩어리 3개
-        itemArray[0] = new ResearchItem(Inventory.Item.Mass, 3, "연구를 통해 닉스입자를 발견했다.\n연구 성과로 닉스입자 100개를 획득했다! 닉스입자는 화면 상단 UI에서 확인할 수 있다.");
+        itemArray[0] = new ResearchItem(Inventory.Item.Mass, 3, "연구를 통해 닉스입자를 발견했다.\n연구 성과로 닉스입자를 획득했다! 닉스입자는 화면 상단 UI에서 확인할 수 있다.");
         itemArray[0].SetResultItem(1, "Nyx");
         itemArray[0].AddNextResearch(1);
         //사과 2개
         itemArray[1] = new ResearchItem(Inventory.Item.Fruit, 2, "이번 연구는 먹을 수 있는 것을 발견했다는 점에 큰 의의가 있다. 구조가 오기 전 까지 무사히 이 행성에서 살아남을 수 있을 것 같다.");
-        itemArray[1].SetResultItem(1, "Hunger");
+        itemArray[1].SetResultItem(2, "FruitPlant", "Hunger");
         itemArray[1].AddNextResearch(2);
         //가시 3개
         itemArray[2] = new ResearchItem(Inventory.Item.Thorn, 5, "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너의 말을 들어보자.");
@@ -250,7 +250,8 @@ public class ResearchWindow : MonoBehaviour
 
     void SetResultContent()
     {
-        contentDictionary["Nyx"] = new ResultContent("[닉스 입자] 이 행성에만 존재하는 미지의 입자로 추청된다. 무언가를 제작하는데 사용할 수 있을 것 같다.", inventory.NyxSp);
+        contentDictionary["Nyx"] = new ResultContent("[닉스 입자] 이 행성에만 존재하는 미지의 입자로 추청된다. 무언가를 제작하는데 사용할 수 있을 것 같다.\n연구성과 : 닉스입자 +240", inventory.NyxSp);
+        contentDictionary["FruitPlant"] = new ResultContent("[괴식물의 열매] 인체에 해롭지 않아서 먹을 수 있다. 허기를 소량 회복시켜준다.", inventory.FruitSp);
         contentDictionary["Hunger"] = new ResultContent("[허기 회복] 먹을 수 있는 아이템을 먹으면 허기게이지를 회복시킬 수 있다. 게이지가 바닥나서 죽지 않게 조심하자.", inventory.FruitSp);
         contentDictionary["ThornPlant"] = new ResultContent("[가시 덩굴] 가시가 자라는 나무이다. 가시 덩굴에서 채집한 가시는 소형 덫을 만드는데 사용할 수 있다.", inventory.ThornSp);
         contentDictionary["Trap01"] = new ResultContent("[소형 덫] 소형 덫을 만들 수 있게 됐다.\n괴물의 둥지 근처에 설치하면 괴물의 심장을 얻을 수 있다.", inventory.Trap01Sp, Inventory.Item.Trap01);
@@ -382,7 +383,7 @@ public class ResearchWindow : MonoBehaviour
                 // 첫 연구 보상
                 if (selectedIndex == 0 && isFinish[0] == false)
                 {
-                    nyxUI.SetAmount(100);
+                    nyxUI.SetAmount(240);
                 }
 
                 if(isFinish[selectedIndex] == false)
