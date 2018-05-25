@@ -8,6 +8,7 @@ public class Title : MonoBehaviour
     GameObject[] titleMenu;
     Animator animaitor;
     GameObject BlackScreen;
+    AudioSource audio;
 
     GameObject mainCamera;
 
@@ -23,6 +24,7 @@ public class Title : MonoBehaviour
         titleMenu = new GameObject[5] { GameObject.Find("NewStart"), GameObject.Find("Load"), GameObject.Find("Quit"), GameObject.Find("Setting"), GameObject.Find("People") };
         BlackScreen = GameObject.Find("Canvas").transform.Find("BlackScreen").gameObject;
         animaitor = GetComponent<Animator>();
+        audio = GameObject.Find("TitleAudio").GetComponent<AudioSource>();
         mainCamera = GameObject.Find("Main Camera");
 
         Vector3 cameraPos = mainCamera.transform.position;
@@ -49,6 +51,7 @@ public class Title : MonoBehaviour
                         selectIndex--;
                     }
                     RefreshMenu();
+                    SoundManager.instance.PlaySE(3);
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
@@ -61,21 +64,25 @@ public class Title : MonoBehaviour
                         selectIndex++;
                     }
                     RefreshMenu();
+                    SoundManager.instance.PlaySE(3);
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow) && selectIndex <= 2)
                 {
                     selectIndex = 3;
                     RefreshMenu();
+                    SoundManager.instance.PlaySE(3);
                 }
                 else if (Input.GetKeyDown(KeyCode.LeftArrow) && selectIndex > 2)
                 {
                     selectIndex = 0;
                     RefreshMenu();
+                    SoundManager.instance.PlaySE(3);
                 }
 
                 if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.Return))
                 {
                     SelectMenu();
+                    SoundManager.instance.PlaySE(4);
                 }
             }
             else
@@ -114,6 +121,11 @@ public class Title : MonoBehaviour
                 tempColor.a = 0;
             }
             Cursor.GetComponent<SpriteRenderer>().color = tempColor;
+
+            if(audio.volume > 0)
+            {
+                audio.volume -= 0.2f * Time.deltaTime;
+            }
         }
     }
 

@@ -198,7 +198,7 @@ public class ResearchWindow : MonoBehaviour
         itemArray[5].SetResultItem(2, "BoardPlant", "NyxCollector01");
         itemArray[5].AddNextResearch(6);
         //심장 4개
-        itemArray[6] = new ResearchItem(Inventory.Item.Heart, 4, "모든 제작을 탈출포드에서 해야 된다는 것은 지나치게 비효율적이다. 괴식물의 심장을 이용해서 다른 제작 시설을 만들어보기로 했다.");
+        itemArray[6] = new ResearchItem(Inventory.Item.Heart, 3, "모든 제작을 탈출포드에서 해야 된다는 것은 지나치게 비효율적이다. 괴식물의 심장을 이용해서 다른 제작 시설을 만들어보기로 했다.");
         itemArray[6].SetResultItem(1, "tempFacility");
         itemArray[6].AddNextResearch(7);
         //막대 10개
@@ -330,21 +330,25 @@ public class ResearchWindow : MonoBehaviour
         {
             selectedIndex--;
             RefreshWindow();
+            SoundManager.instance.PlaySE(14);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) && selectedIndex < 15)
         {
             selectedIndex++;
             RefreshWindow();
+            SoundManager.instance.PlaySE(14);
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) && selectedIndex > 6)
         {
             selectedIndex -= 7;
             RefreshWindow();
+            SoundManager.instance.PlaySE(14);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) && selectedIndex < 9)
         {
             selectedIndex += 7;
             RefreshWindow();
+            SoundManager.instance.PlaySE(14);
         }
 
         ItemCursor.transform.position = Item[selectedIndex].transform.position;
@@ -459,6 +463,7 @@ public class ResearchWindow : MonoBehaviour
         RefreshWindow();
         ResearchBG.SetActive(true);
         animaitor.SetBool("isOpen", true);
+        SoundManager.instance.PlaySE(13);
     }
 
     public void CloseWindow()
@@ -470,6 +475,7 @@ public class ResearchWindow : MonoBehaviour
         openTimer = 0;
         MoveCursor();
         animaitor.SetBool("isOpen", false);
+        SoundManager.instance.PlaySE(15);
     }
 
     void OpenResultWindow()
@@ -504,6 +510,7 @@ public class ResearchWindow : MonoBehaviour
                 Content[i].SetActive(false);
             }
         }
+        SoundManager.instance.PlaySE(21);
     }
 
     void CloseResultWindow()
@@ -513,6 +520,7 @@ public class ResearchWindow : MonoBehaviour
         isResearchActive = true;
         isResultActive = false;
         //openTimer = 0;
+        SoundManager.instance.PlaySE(21);
     }
 
     public void DiscoverNewResearch(int num)
@@ -539,11 +547,20 @@ public class ResearchWindow : MonoBehaviour
                 inventory.DeleteItem(itemArray[selectedIndex].item);
                 itemArray[selectedIndex].InputItem();
                 RefreshWindow();
+                SoundManager.instance.PlaySE(16);
+            }
+            else
+            {
+                SoundManager.instance.PlaySE(17);
             }
         }
         else if(completeResearch == true)
         {
             OpenResultWindow();
+        }
+        else
+        {
+            SoundManager.instance.PlaySE(17);
         }
     }
 

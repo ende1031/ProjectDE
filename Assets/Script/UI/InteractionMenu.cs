@@ -198,6 +198,7 @@ public class InteractionMenu : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.C))
             {
                 SelectMenu();
+                SoundManager.instance.PlaySE(9);
             }
         }
         else if(popupWindow.GetPopupActive() == false && grinderWindow.GetUsingGrinder() == false)
@@ -214,10 +215,12 @@ public class InteractionMenu : MonoBehaviour
             {
                 moveDirection = Direction.Left;
                 isMove = true;
+                SoundManager.instance.PlaySE(7);
             }
             if (Input.GetKeyUp(KeyCode.RightArrow))
             {
                 moveDirection = Direction.Right;
+                SoundManager.instance.PlaySE(7);
                 isMove = true;
             }
         }
@@ -419,6 +422,7 @@ public class InteractionMenu : MonoBehaviour
         isCursorMoveActive = false;
         RefreshWindow();
         animaitor.SetBool("isOpen", true);
+        SoundManager.instance.PlaySE(6);
     }
 
     // 반드시 ClearMenu이후, OpenMenu 이전에 호출할 것.
@@ -446,6 +450,7 @@ public class InteractionMenu : MonoBehaviour
         }
         isWarningPopupActive = false;
         WarningPopup.SetActive(false);
+        SoundManager.instance.PlaySE(8);
     }
 
     void OpenWarningPopup()
@@ -473,6 +478,7 @@ public class InteractionMenu : MonoBehaviour
         isWarningPopupActive = true;
         IMenu_bg.SetActive(false);
         WarningPopup.SetActive(true);
+        SoundManager.instance.PlaySE(26);
     }
 
     void CloseWarningPopup()
@@ -481,6 +487,7 @@ public class InteractionMenu : MonoBehaviour
         isWarningPopupActive = false;
         IMenu_bg.SetActive(true);
         WarningPopup.SetActive(false);
+        SoundManager.instance.PlaySE(16);
     }
 
     public void ClearMenu()

@@ -34,6 +34,8 @@ public class Monologue : MonoBehaviour
 
     public void DisplayLog(string logText, bool quotes = true)
     {
+        SoundManager.instance.PlaySE(39);
+
         if (isLogueOn == false)
         {
             animaitor.SetBool("isLogueOn", true);

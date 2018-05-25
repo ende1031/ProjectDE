@@ -160,7 +160,7 @@ public class NyxCollector : MonoBehaviour
         {
             if (energyGauge.GetAmount() < 5)
             {
-                monologue.DisplayLog("에너지가 부족해서 수리할 수 없어.");
+                monologue.DisplayLog("에너지가 부족해서 수리할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
                 return;
             }
             energyGauge.SetAmount(-5);
@@ -170,6 +170,7 @@ public class NyxCollector : MonoBehaviour
                 animaitor.SetInteger("State", state);
             }
             particle.SetActive(true);
+            SoundManager.instance.PlaySE(32);
         }
     }
 
@@ -184,11 +185,13 @@ public class NyxCollector : MonoBehaviour
         {
             state = 1;
             particle.SetActive(true);
+            SoundManager.instance.PlaySE(31);
         }
         else
         {
             state = 0;
             particle.SetActive(false);
+            SoundManager.instance.PlaySE(30);
         }
         animaitor.SetInteger("State", state);
         interactionIcon.DeleteAllIcons();
@@ -200,7 +203,7 @@ public class NyxCollector : MonoBehaviour
     {
         if (energyGauge.GetAmount() < 5)
         {
-            monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.");
+            monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
             return;
         }
         energyGauge.SetAmount(-5);

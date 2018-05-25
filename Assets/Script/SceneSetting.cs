@@ -75,13 +75,10 @@ public class SceneSetting : MonoBehaviour
                 SceneObjectManager.instance.AddObject(n, -12, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
                 SceneObjectManager.instance.AddObject(n, -13, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
                 SceneObjectManager.instance.AddObject(n, -14, new SceneObjectManager.SceneObject("Plant", "ThornPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 11, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 12, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 13, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 14, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 1, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 2, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
-                SceneObjectManager.instance.AddObject(n, 3, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 16, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 17, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 18, new SceneObjectManager.SceneObject("Plant", "FruitPlant", 1));
+                SceneObjectManager.instance.AddObject(n, 6, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 8, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 9, new SceneObjectManager.SceneObject("Plant", "MassPlant", 1));
 

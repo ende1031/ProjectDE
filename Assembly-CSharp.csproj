@@ -69,6 +69,7 @@
      <Compile Include="Assets\Script\SceneChanger.cs" />
      <Compile Include="Assets\Script\SceneObjectManager.cs" />
      <Compile Include="Assets\Script\SceneSetting.cs" />
+     <Compile Include="Assets\Script\SoundManager.cs" />
      <Compile Include="Assets\Script\UI\EnergyGauge.cs" />
      <Compile Include="Assets\Script\UI\FloatingText.cs" />
      <Compile Include="Assets\Script\UI\GrinderWindow.cs" />

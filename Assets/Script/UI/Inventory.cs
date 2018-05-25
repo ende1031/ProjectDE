@@ -219,6 +219,7 @@ public class Inventory : MonoBehaviour
                     hungerGauge.SetAmount(10);
                 }
                 DeleteItem(Items[selectedIndex].name);
+                SoundManager.instance.PlaySE(40);
                 break;
 
             case InteractionMenu.MenuItem.Oxygen:
@@ -233,7 +234,7 @@ public class Inventory : MonoBehaviour
             case InteractionMenu.MenuItem.Install:
                 if(energyGauge.GetAmount() < 5)
                 {
-                    monologue.DisplayLog("에너지가 부족해서 설치할 수 없어.");
+                    monologue.DisplayLog("에너지가 부족해서 설치할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
                     break;
                 }
                 switch (Items[selectedIndex].name)
@@ -265,6 +266,7 @@ public class Inventory : MonoBehaviour
                             }
                             energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);
+                            SoundManager.instance.PlaySE(29);
                         }
                         break;
                     case Item.Trap01:
@@ -284,6 +286,7 @@ public class Inventory : MonoBehaviour
                             }
                             energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);
+                            SoundManager.instance.PlaySE(28);
                         }
                         break;
                     case Item.Bulb01:
@@ -295,6 +298,7 @@ public class Inventory : MonoBehaviour
                         {
                             energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);
+                            SoundManager.instance.PlaySE(29);
                         }
                         else
                         {
@@ -303,13 +307,13 @@ public class Inventory : MonoBehaviour
                         break;
                 }
                 openTimer = 1;
-                CloseInventory();
+                CloseInventory(false);
                 break;
 
             case InteractionMenu.MenuItem.Plant:
                 if (energyGauge.GetAmount() < 5)
                 {
-                    monologue.DisplayLog("에너지가 부족해서 심을 수 없어.");
+                    monologue.DisplayLog("에너지가 부족해서 심을 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
                     break;
                 }
                 if (SceneObjectManager.instance.ContainObject(sceneNum, Grid.instance.PlayerGrid()) == true)
@@ -448,10 +452,11 @@ public class Inventory : MonoBehaviour
             player.GetComponent<PlayerMove>().SetMovePossible(false);
             DisplayItem();
             openTimer = 0;
+            SoundManager.instance.PlaySE(34);
         }
     }
 
-    void CloseInventory()
+    void CloseInventory(bool playSE = true)
     {
         if (openTimer <= 0.1f)
         {
@@ -464,6 +469,10 @@ public class Inventory : MonoBehaviour
         if (isOpenedByGrinder == false)
         {
             player.GetComponent<PlayerMove>().SetMovePossible(true);
+        }
+        if (playSE == true)
+        {
+            SoundManager.instance.PlaySE(35);
         }
     }
 
@@ -484,6 +493,7 @@ public class Inventory : MonoBehaviour
             {
                 selectedIndex = 14;
             }
+            SoundManager.instance.PlaySE(36);
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
@@ -495,6 +505,7 @@ public class Inventory : MonoBehaviour
             {
                 selectedIndex = 0;
             }
+            SoundManager.instance.PlaySE(36);
         }
         
         Cursor.transform.position = itemSlot[selectedIndex].transform.position;
@@ -560,7 +571,8 @@ public class Inventory : MonoBehaviour
             }
             DisplayItem();
             reportUI.RefreshUI();
-            player.GetComponent<PlayerInteraction>().DisplayFT("+" + itemDictionary[itemName].ObjectName + " x" + num);
+            player.GetComponent<PlayerInteraction>().DisplayFT(itemDictionary[itemName].ObjectName + " +" + num, true, itemName);
+            SoundManager.instance.PlaySE(33);
             return true;
         }
         else
@@ -592,7 +604,7 @@ public class Inventory : MonoBehaviour
             reportUI.RefreshUI();
             if(isTest == false)
             {
-                player.GetComponent<PlayerInteraction>().DisplayFT("-" + itemDictionary[itemName].ObjectName + " x" + num);
+                player.GetComponent<PlayerInteraction>().DisplayFT(itemDictionary[itemName].ObjectName + " -" + num, true, itemName);
             }
             return true;
         }

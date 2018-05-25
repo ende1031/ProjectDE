@@ -61,7 +61,7 @@ public class Bulb : MonoBehaviour
     {
         if (energyGauge.GetAmount() < 5)
         {
-            monologue.DisplayLog("에너지가 부족해서 철거할 수 없어.");
+            monologue.DisplayLog("에너지가 부족해서 철거할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
             return;
         }
         energyGauge.SetAmount(-5);

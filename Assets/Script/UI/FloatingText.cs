@@ -8,8 +8,7 @@ public class FloatingText : MonoBehaviour
 
 	void Start ()
     {
-		
-	}
+    }
 	
 	void Update ()
     {

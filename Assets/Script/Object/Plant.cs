@@ -51,6 +51,20 @@ public class Plant : MonoBehaviour
         state = 2;
         animaitor.SetBool("isGathering", true);
         animaitor.SetInteger("State", state);
+
+
+        switch (plantName)
+        {
+            case "MassPlant":
+                SoundManager.instance.PlaySE(10);
+                break;
+            case "BoardPlant":
+                SoundManager.instance.PlaySE(12);
+                break;
+            default:
+                SoundManager.instance.PlaySE(11);
+                break;
+        }
     }
 
     public void GetItem()
@@ -110,7 +124,7 @@ public class Plant : MonoBehaviour
     {
         if (energyGauge.GetAmount() < 5)
         {
-            monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.");
+            monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
             return;
         }
         energyGauge.SetAmount(-5);
@@ -368,7 +382,7 @@ public class Plant : MonoBehaviour
                 {
                     if (energyGauge.GetAmount() < 5)
                     {
-                        monologue.DisplayLog("에너지가 부족해서 채집할 수 없어.");
+                        monologue.DisplayLog("에너지가 부족해서 채집할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
                         return;
                     }
                     GatherStart();

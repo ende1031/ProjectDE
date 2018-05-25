@@ -136,10 +136,10 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(itemName, 20, 200, "배터리", "괴물의 심장으로 만든 고밀도 배터리이다. 가공해서 형체는 많이 달라졌지만 들고 있으면 작은 움직임이 느껴진다.\n사용하면 에너지 게이지를 충전할 수 있다.", Inventory.Item.Heart, 1, Inventory.Item.Hose, 1));
                 break;
             case Inventory.Item.Facility01:
-                WindowItemList.Add(new WindowItem(itemName, 30, 700, "소형 워크벤치", "괴물의 조직을 이용해서 만든 워크벤치이다. 살아있지만 위험하지는 않다.\n각종 아이템을 제작할 수 있다.", Inventory.Item.Stick, 3, Inventory.Item.Board, 5, Inventory.Item.Heart, 1));
+                WindowItemList.Add(new WindowItem(itemName, 30, 300, "소형 워크벤치", "괴물의 조직을 이용해서 만든 워크벤치이다. 살아있지만 위험하지는 않다.\n각종 아이템을 제작할 수 있다.", Inventory.Item.Stick, 3, Inventory.Item.Board, 5, Inventory.Item.Heart, 1));
                 break;
             case Inventory.Item.Bulb01:
-                WindowItemList.Add(new WindowItem(itemName, 30, 1000, "간이 전구", "빛을 내서 괴물의 접근을 막는 시설이다.\n간이 전구의 양 옆 2칸 이내에는 다른 시설을 설치할 수 있다.", Inventory.Item.Stick, 3, Inventory.Item.Heart, 1, Inventory.Item.Hose, 5, Inventory.Item.Mass, 5));
+                WindowItemList.Add(new WindowItem(itemName, 30, 700, "간이 전구", "빛을 내서 괴물의 접근을 막는 시설이다.\n간이 전구의 양 옆 2칸 이내에는 다른 시설을 설치할 수 있다.", Inventory.Item.Stick, 3, Inventory.Item.Heart, 1, Inventory.Item.Hose, 5, Inventory.Item.Mass, 5));
                 break;
             case Inventory.Item.Food:
                 WindowItemList.Add(new WindowItem(itemName, 45, 70, "식량", "유전자 조작으로 만든 괴물종양을 가공해서 식품으로 만들었다.\n젠장 맛없다.\n사용하면 허기 게이지를 충전할 수 있다.", Inventory.Item.Tumor, 2));
@@ -160,7 +160,7 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(itemName, 20, 50, "종양 씨앗", "유전자 조작으로 만든 안전한 종양 씨앗이다.\n식물에 심으면 식용 종양을 얻을 수 있다.", Inventory.Item.Mass, 3));
                 break;
             case Inventory.Item.Grinder01:
-                WindowItemList.Add(new WindowItem(itemName, 30, 2000, "간이 분해기", "필요 없는 아이템을 분해해서 다른 아이템을 얻는데 사용하는 시설이다.", Inventory.Item.Sawtooth, 5, Inventory.Item.Hose, 2, Inventory.Item.Stick, 3, Inventory.Item.Heart, 1, Inventory.Item.Mass, 5));
+                WindowItemList.Add(new WindowItem(itemName, 30, 800, "간이 분해기", "필요 없는 아이템을 분해해서 다른 아이템을 얻는데 사용하는 시설이다.", Inventory.Item.Sawtooth, 5, Inventory.Item.Hose, 2, Inventory.Item.Stick, 3, Inventory.Item.Heart, 1, Inventory.Item.Mass, 5));
                 break;
             case Inventory.Item.NyxCollector01:
                 WindowItemList.Add(new WindowItem(itemName, 30, 10, "닉스입자 수집기", "닉스입자를 수집하는 시설이다.\n허공에 떠도는 검은 닉스입자를 수집해서 사용할 수 있게 만들어준다.", Inventory.Item.Stick, 3, Inventory.Item.Board, 3, Inventory.Item.Thorn, 2, Inventory.Item.Heart, 1));
@@ -228,6 +228,7 @@ public class PopupWindow : MonoBehaviour
         RefreshWindow();
         PopupBG.SetActive(true);
         animaitor.SetBool("isOpen", true);
+        SoundManager.instance.PlaySE(13);
     }
 
     public void CloseWindow()
@@ -242,6 +243,7 @@ public class PopupWindow : MonoBehaviour
         //RefreshWindow();
         //PopupBG.SetActive(false);
         animaitor.SetBool("isOpen", false);
+        SoundManager.instance.PlaySE(15);
     }
 
     public void ClearItemList()
@@ -285,6 +287,11 @@ public class PopupWindow : MonoBehaviour
             Facility.GetComponent<FacilityBalloon>().MakeItem(WindowItemList[selectedIndex].name, WindowItemList[selectedIndex].time);
 
             CloseWindow();
+            SoundManager.instance.PlaySE(18);
+        }
+        else
+        {
+            SoundManager.instance.PlaySE(17);
         }
 
     }
@@ -299,6 +306,7 @@ public class PopupWindow : MonoBehaviour
                 displayedSelectedIndex--;
             }
             RefreshWindow();
+            SoundManager.instance.PlaySE(14);
         }
         if (Input.GetKeyUp(KeyCode.DownArrow) && selectedIndex < WindowItemList.Count - 1)
         {
@@ -308,6 +316,7 @@ public class PopupWindow : MonoBehaviour
                 displayedSelectedIndex++;
             }
             RefreshWindow();
+            SoundManager.instance.PlaySE(14);
         }
 
         ScrollIndexCursor.transform.position = ScrollIndexItem[displayedSelectedIndex].transform.position;

@@ -195,10 +195,12 @@ public class Facility : MonoBehaviour
             if(state == 0)
             {
                 state = 1;
+                SoundManager.instance.PlaySE(31);
             }
             else
             {
                 state = 0;
+                SoundManager.instance.PlaySE(30);
             }
             animaitor.SetInteger("State", state);
             interactionIcon.DeleteAllIcons();
@@ -213,7 +215,7 @@ public class Facility : MonoBehaviour
         {
             if (energyGauge.GetAmount() < 5)
             {
-                monologue.DisplayLog("에너지가 부족해서 철거할 수 없어.");
+                monologue.DisplayLog("에너지가 부족해서 철거할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
                 return;
             }
             energyGauge.SetAmount(-5);
@@ -257,11 +259,12 @@ public class Facility : MonoBehaviour
         {
             if (energyGauge.GetAmount() < 5)
             {
-                monologue.DisplayLog("에너지가 부족해서 수리할 수 없어.");
+                monologue.DisplayLog("에너지가 부족해서 수리할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
                 return;
             }
             energyGauge.SetAmount(-5);
             state = 1;
+            SoundManager.instance.PlaySE(32);
             if (animaitor != null)
             {
                 animaitor.SetInteger("State", state);

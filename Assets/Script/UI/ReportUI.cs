@@ -190,6 +190,7 @@ public class ReportUI : MonoBehaviour
         {
             tutorialFinish = true;
         }
+        SoundManager.instance.PlaySE(25);
     }
 
     public void RefreshUI()

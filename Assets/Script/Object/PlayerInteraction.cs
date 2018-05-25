@@ -100,6 +100,7 @@ public class PlayerInteraction : MonoBehaviour
                         GetComponent<PlayerMove>().SetMovePossible(false);
                         SceneObjectManager.instance.SaveObject();
                         SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
+                        SoundManager.instance.PlaySE(37);
                     }
                     break;
 
@@ -171,26 +172,25 @@ public class PlayerInteraction : MonoBehaviour
         return isInteractionPossible;
     }
 
-    public void DisplayFT(string s, bool is1stLine = true)
+    public void DisplayFT(string s, bool displayItem = false, Inventory.Item item = 0)
     {
         Vector3 tempPos = transform.position;
         tempPos.x += 0.3f;
 
-        tempPos.y += (1.8f - GameObject.FindGameObjectsWithTag("FloatingText").Length * 0.2f);
-
-        //if (GameObject.Find("FloatingText(Clone)") != null)
-        //{
-        //    tempPos.y += 1.6f;
-        //}
-        //else
-        //{
-        //    tempPos.y += 1.8f;
-        //}
-        
-        
-
+        tempPos.y += (1.8f - GameObject.FindGameObjectsWithTag("FloatingText").Length * 0.25f);
         tempPos.z -= 0.5f;
         GameObject ft = Instantiate(FT, tempPos, Quaternion.identity);
-        ft.GetComponent<TextMesh>().text = s;
+
+        if (displayItem == false)
+        {
+            ft.GetComponent<TextMesh>().text = s;
+        }
+        else
+        {
+            ft.GetComponent<TextMesh>().text = "　　" + s;
+            GameObject itemSp = ft.transform.Find("Item").gameObject;
+            itemSp.SetActive(true);
+            itemSp.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[item].sprite;
+        }
     }
 }

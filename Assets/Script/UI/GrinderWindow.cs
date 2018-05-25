@@ -224,9 +224,14 @@ public class GrinderWindow : MonoBehaviour
                 {
                     if(selectNull == false)
                     {
+                        SoundManager.instance.PlaySE(16);
                         inventory.DeleteItem(selectedItem, selectedItemNum);
                         Facility.GetComponent<FacilityBalloon>().GrindItem(selectedItemNum * 3, resultNyxNum, resultItem[0], resultItemNum[0], resultItem[1], resultItemNum[1]);
                         CloseWindow();
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySE(17);
                     }
                 }
             }
@@ -257,11 +262,13 @@ public class GrinderWindow : MonoBehaviour
         {
             selectedItemNum++;
             RefreshWindow();
+            SoundManager.instance.PlaySE(20);
         }
         if (Input.GetKeyUp(KeyCode.DownArrow) && selectedItemNum > 1)
         {
             selectedItemNum--;
             RefreshWindow();
+            SoundManager.instance.PlaySE(20);
         }
     }
 
@@ -279,6 +286,7 @@ public class GrinderWindow : MonoBehaviour
         inventory.OpenInventory(true);
         RefreshWindow();
         isUsingGrinder = true;
+        SoundManager.instance.PlaySE(13);
     }
 
     public void CloseWindow()
@@ -289,6 +297,7 @@ public class GrinderWindow : MonoBehaviour
         openTimer = 0;
         animaitor.SetBool("isOpen", false);
         isUsingGrinder = false;
+        SoundManager.instance.PlaySE(15);
     }
 
     public bool GetUsingGrinder()
