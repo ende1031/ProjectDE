@@ -184,6 +184,7 @@ public class PlayerInteraction : MonoBehaviour
         if (displayItem == false)
         {
             ft.GetComponent<TextMesh>().text = s;
+            ft.GetComponent<TextMesh>().color = Color.green;
         }
         else
         {

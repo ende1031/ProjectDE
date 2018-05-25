@@ -22,6 +22,8 @@ public class PlayerMove : MonoBehaviour
     GameObject LeftWall;
     GameObject RightWall;
 
+    AudioSource stepSound;
+
     void Start ()
     {
         playerDir = Direction.Left;
@@ -31,6 +33,9 @@ public class PlayerMove : MonoBehaviour
 
         LeftWall = GameObject.Find("LeftWall");
         RightWall = GameObject.Find("RightWall");
+
+        stepSound = this.gameObject.AddComponent<AudioSource>();
+        stepSound.loop = true;
     }
 	
 	void Update ()
@@ -58,10 +63,18 @@ public class PlayerMove : MonoBehaviour
         if (moveVec.x == 0)
         {
             isMove = false;
+            if(stepSound.isPlaying == true)
+            {
+                StopStepSE();
+            }
         }
         else
         {
             isMove = true;
+            if (stepSound.isPlaying == false)
+            {
+                PlayStepSE();
+            }
         }
         animaitor.SetBool("isMove", isMove);
 
@@ -131,11 +144,23 @@ public class PlayerMove : MonoBehaviour
         if (possibility == false)
         {
             animaitor.SetBool("isMove", false);
+            StopStepSE();
         }
     }
 
     public bool GetMovePossible()
     {
         return isMovePossible;
+    }
+
+    void PlayStepSE()
+    {
+        stepSound.clip = SoundManager.instance.GetStepSound();
+        stepSound.Play();
+    }
+
+    void StopStepSE()
+    {
+        stepSound.Stop();
     }
 }

@@ -311,7 +311,7 @@ public class SceneObjectManager : MonoBehaviour
             }
         }
 
-        hungerGauge.SetAmount(-10);
+        hungerGauge.SetAmount(-10, true);
         energyGauge.SetAmount(100);
 
         RandomSpawn(new SceneObject("Plant", "MassPlant", 1));

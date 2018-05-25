@@ -72,6 +72,7 @@
      <Compile Include="Assets\Script\SoundManager.cs" />
      <Compile Include="Assets\Script\UI\EnergyGauge.cs" />
      <Compile Include="Assets\Script\UI\FloatingText.cs" />
+     <Compile Include="Assets\Script\UI\GameOver.cs" />
      <Compile Include="Assets\Script\UI\GrinderWindow.cs" />
      <Compile Include="Assets\Script\UI\HungerGauge.cs" />
      <Compile Include="Assets\Script\UI\InteractionIcon.cs" />

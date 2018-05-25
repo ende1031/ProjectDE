@@ -32,3 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/EndingMovie.unity
     guid: 25d23acf4c7994241b14bddfd7bb18b0
+  - enabled: 1
+    path: Assets/Scene/GameOver.unity
+    guid: dfcce9982bda7cf45a73d50aab22cc05

@@ -40,6 +40,11 @@ public class HungerGauge : MonoBehaviour
             }
         }
 
+        if(amountOfHunger <= 0)
+        {
+            GameOver();
+        }
+
         Reduce();
         RangeLimit();
         DisplayText();
@@ -67,9 +72,8 @@ public class HungerGauge : MonoBehaviour
         }
     }
 
-    public void SetAmount(float amount)
+    public void SetAmount(float amount, bool DoNotDie = false)
     {
-        amountOfHunger += amount;
         if (amount > 0)
         {
             GaugeLightReset();
@@ -78,7 +82,14 @@ public class HungerGauge : MonoBehaviour
         else
         {
             player.GetComponent<PlayerInteraction>().DisplayFT("허기 " + amount);
+
+            if(DoNotDie == true && amountOfHunger + amount <= 0)
+            {
+                amountOfHunger = 5;
+                return;
+            }
         }
+        amountOfHunger += amount;
     }
 
     void Reduce()
@@ -135,5 +146,11 @@ public class HungerGauge : MonoBehaviour
         Color tempColor = gaugeLight.GetComponent<Image>().color;
         tempColor.a = 1.0f;
         gaugeLight.GetComponent<Image>().color = tempColor;
+    }
+
+    void GameOver()
+    {
+        SceneObjectManager.instance.SetUIActive(false);
+        SceneChanger.instance.FadeAndLoadScene("GameOver");
     }
 }

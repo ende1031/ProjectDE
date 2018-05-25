@@ -32,4 +32,9 @@ public class SoundManager : MonoBehaviour
         Sound.clip = seClip[SE_Num];
         Sound.Play();
     }
+
+    public AudioClip GetStepSound()
+    {
+        return seClip[38];
+    }
 }
