@@ -15,7 +15,7 @@ public class ReportUI : MonoBehaviour
     Text Tip_Text;
 
     int day = 1;
-    int d_Day = 3;
+    int d_Day = 30;
 
     int questNum = 0;
     bool tutorialFinish = false;

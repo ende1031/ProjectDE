@@ -44,14 +44,14 @@ public class PlayerInteraction : MonoBehaviour
             inventory.GetItem(Inventory.Item.Sawtooth, 20);
             inventory.GetItem(Inventory.Item.Fruit, 20);
         }
-        /*
+        
         if (Input.GetKeyDown(KeyCode.W))
         {
-            inventory.GetItem(Inventory.Item.Facility01, 1);
+            inventory.GetItem(Inventory.Item.FruitSeed, 1);
             inventory.GetItem(Inventory.Item.Bulb01, 1);
             inventory.GetItem(Inventory.Item.NyxCollector01, 1);
             inventory.GetItem(Inventory.Item.Grinder01, 1);
-        }*/
+        }
     }
 
     void PlayerDirection()

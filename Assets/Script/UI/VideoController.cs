@@ -42,6 +42,7 @@ public class VideoController : MonoBehaviour
             SceneObjectManager.instance.ResetGame();
         }
 
-        SceneChanger.instance.FadeAndLoadScene(NextScene);
+        SceneObjectManager.instance.SetUIActive(true);
+        SceneChanger.instance.FadeAndLoadScene(NextScene, 7);
     }
 }

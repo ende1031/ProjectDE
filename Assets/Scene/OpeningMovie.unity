@@ -305,7 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215083aacc47e5545bf05b5c42f1254a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextScene: Title
+  NextScene: Stage01
+  isResetGame: 0
 --- !u!1 &1011255410
 GameObject:
   m_ObjectHideFlags: 0

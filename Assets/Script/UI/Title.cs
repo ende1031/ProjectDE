@@ -159,7 +159,7 @@ public class Title : MonoBehaviour
 
     public void GameStart()
     {
-        SceneObjectManager.instance.SetUIActive(true);
-        SceneChanger.instance.FadeAndLoadScene("Stage01", 7);
+        //SceneObjectManager.instance.SetUIActive(true);
+        SceneChanger.instance.FadeAndLoadScene("OpeningMovie");
     }
 }

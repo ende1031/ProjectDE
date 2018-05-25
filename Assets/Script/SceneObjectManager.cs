@@ -314,76 +314,78 @@ public class SceneObjectManager : MonoBehaviour
         hungerGauge.SetAmount(-10);
         energyGauge.SetAmount(100);
 
-        for (int i = 0; i < 3; i++)
-        {
-            RandomSpawn(new SceneObject("Plant", "MassPlant", 1));
-        }
+        RandomSpawn(new SceneObject("Plant", "MassPlant", 1));
+        RandomSpawn(new SceneObject("Plant", "MassPlant", 1));
+        RandomSpawn(new SceneObject("Plant", "MassPlant", 1));
     }
 
     // 방문한 적 있는 맵 중에서 랜덤으로 오브젝트 생성. 씬이동시에만 사용할 것.
     void RandomSpawn(SceneObject ob)
     {
+        //배열 초기화
         bool[] isSceneHasBlank = new bool[maxSceneNum];
         for (int i = 0; i < maxSceneNum; i++)
         {
             isSceneHasBlank[i] = true;
         }
 
-        while (true)
+        int blankCount = 0;
+
+        //빈칸 수 확인
+        for (int scene = 0; scene < maxSceneNum; scene++)
         {
-            //모든 씬이 다 꽉차있는지 확인
-            bool isAllSceneNoBlank = true;
-            for(int i =0; i< maxSceneNum; i++)
+            //안가본 씬은 스킵
+            if (isSceneInit[scene] == false)
             {
-                if(isSceneHasBlank[i] == true && isSceneInit[i] == true)
-                {
-                    isAllSceneNoBlank = false;
-                }
-            }
-            if(isAllSceneNoBlank == true)
-            {
-                print("오류코드 : 돌솥비빔밥"); // 방문한 적 있는 모든 스테이지에 빈칸 없음
-                break;
-            }
-
-            //랜덤으로 씬 선택. 꽉차있거나 가본적이 없으면 continue
-            int randomScene = Random.Range(0, maxSceneNum);
-            if (isSceneInit[randomScene] == false || isSceneHasBlank[randomScene] == false)
-            {
+                isSceneHasBlank[scene] = false;
                 continue;
             }
-
             //벽 정보 받아옴
-            int left = Grid.instance.PosToGrid(StageWalls[randomScene].x);
-            int right = Grid.instance.PosToGrid(StageWalls[randomScene].y);
+            int m_left = Grid.instance.PosToGrid(StageWalls[scene].x);
+            int m_right = Grid.instance.PosToGrid(StageWalls[scene].y);
 
-            //현재 씬에 빈칸이 있는지 확인
-            bool isblank = false;
-            for (int i = left + 1; i < right; i++)
+            int count = 0;
+            //빈칸 수 카운트
+            for (int i = m_left + 1; i < m_right; i++)
             {
-                if (SObjects[randomScene].ContainsKey(i) == false)
+                if (SObjects[scene].ContainsKey(i) == false)
                 {
-                    isblank = true;
+                    blankCount++;
+                    count++;
                 }
             }
-            if (isblank == false)
+            if (count == 0)
             {
-                isSceneHasBlank[randomScene] = false;
-                continue;
+                isSceneHasBlank[scene] = false;
             }
-
-            //랜덤으로 좌표 설정
-            int randomGrid = Random.Range(left + 1, right - 1);
-            while (SObjects[randomScene].ContainsKey(randomGrid) == true)
-            {
-                randomGrid = Random.Range(left + 1, right - 1);
-            }
-
-            //오브젝트 딕셔너리에 추가
-            SObjects[randomScene].Add(randomGrid, ob);
-            print("덩어리 랜덤 스폰 : " + randomScene + "씬, " + randomGrid + "블록");
-            break;
         }
+        
+        if(blankCount <= 3) //빈칸이 3칸보다 많을때만 덩어리 스폰 실행
+        {
+            return;
+        }
+
+        //랜덤으로 씬 선택
+        int randomScene = Random.Range(0, maxSceneNum);
+        while (isSceneHasBlank[randomScene] == false)
+        {
+            randomScene = Random.Range(0, maxSceneNum);
+        }
+
+        //벽 정보 받아옴
+        int left = Grid.instance.PosToGrid(StageWalls[randomScene].x);
+        int right = Grid.instance.PosToGrid(StageWalls[randomScene].y);
+
+        //랜덤으로 좌표 설정
+        int randomGrid = Random.Range(left + 1, right - 1);
+        while (SObjects[randomScene].ContainsKey(randomGrid) == true)
+        {
+            randomGrid = Random.Range(left + 1, right - 1);
+        }
+
+        //오브젝트 딕셔너리에 추가
+        SObjects[randomScene].Add(randomGrid, ob);
+        print("덩어리 랜덤 스폰 : " + randomScene + "씬, " + randomGrid + "블록");
     }
 
     //해당 좌표에 이미 다른 오브젝트가 있으면 false를 반환
