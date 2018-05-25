@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HungerGauge : MonoBehaviour
 {
+    GameObject player;
     Monologue monologue;
 
     public float amountOfHunger = 100;
@@ -32,7 +33,7 @@ public class HungerGauge : MonoBehaviour
     {
         if (monologue == null)
         {
-            GameObject player = GameObject.Find("Player");
+            player = GameObject.Find("Player");
             if (player != null)
             {
                 monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
@@ -72,6 +73,11 @@ public class HungerGauge : MonoBehaviour
         if (amount > 0)
         {
             GaugeLightReset();
+            player.GetComponent<PlayerInteraction>().DisplayFT("허기 +" + amount);
+        }
+        else
+        {
+            player.GetComponent<PlayerInteraction>().DisplayFT("허기 " + amount);
         }
     }
 

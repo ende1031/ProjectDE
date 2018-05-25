@@ -12,7 +12,7 @@ public class Plant : MonoBehaviour
     InteractionIcon interactionIcon;
     InteractionMenu interactionMenu;
     Monologue monologue;
-    GameObject Player;
+    GameObject player;
     EnergyGauge energyGauge;
     int sceneNum;
 
@@ -35,8 +35,8 @@ public class Plant : MonoBehaviour
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
         interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
-        Player = GameObject.Find("Player");
-        monologue = Player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+        player = GameObject.Find("Player");
+        monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
         energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
 
         animaitor = GetComponent<Animator>();
@@ -372,7 +372,7 @@ public class Plant : MonoBehaviour
                         return;
                     }
                     GatherStart();
-                    Player.GetComponent<PlayerInteraction>().GatherPlant(GatherAnimationType);
+                    player.GetComponent<PlayerInteraction>().GatherPlant(GatherAnimationType);
                 }
                 else
                 {

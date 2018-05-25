@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    Inventory inventory;
+    public GameObject FT;
 
+    Inventory inventory;
     Animator animaitor;
     bool isGather = false;
 
@@ -168,5 +169,28 @@ public class PlayerInteraction : MonoBehaviour
     public bool GetInteractionPossible()
     {
         return isInteractionPossible;
+    }
+
+    public void DisplayFT(string s, bool is1stLine = true)
+    {
+        Vector3 tempPos = transform.position;
+        tempPos.x += 0.3f;
+
+        tempPos.y += (1.8f - GameObject.FindGameObjectsWithTag("FloatingText").Length * 0.2f);
+
+        //if (GameObject.Find("FloatingText(Clone)") != null)
+        //{
+        //    tempPos.y += 1.6f;
+        //}
+        //else
+        //{
+        //    tempPos.y += 1.8f;
+        //}
+        
+        
+
+        tempPos.z -= 0.5f;
+        GameObject ft = Instantiate(FT, tempPos, Quaternion.identity);
+        ft.GetComponent<TextMesh>().text = s;
     }
 }

@@ -560,6 +560,7 @@ public class Inventory : MonoBehaviour
             }
             DisplayItem();
             reportUI.RefreshUI();
+            player.GetComponent<PlayerInteraction>().DisplayFT("+" + itemDictionary[itemName].ObjectName + " x" + num);
             return true;
         }
         else
@@ -569,7 +570,7 @@ public class Inventory : MonoBehaviour
     }
 
     //인벤토리에 없는 아이템을 소모하려 하면 false를 반환
-    public bool DeleteItem(Item itemName, int num = 1)
+    public bool DeleteItem(Item itemName, int num = 1, bool isTest = false)
     {
         int? temp = isContains(itemName);
 
@@ -589,6 +590,10 @@ public class Inventory : MonoBehaviour
             }
             DisplayItem();
             reportUI.RefreshUI();
+            if(isTest == false)
+            {
+                player.GetComponent<PlayerInteraction>().DisplayFT("-" + itemDictionary[itemName].ObjectName + " x" + num);
+            }
             return true;
         }
         else
@@ -691,7 +696,7 @@ public class Inventory : MonoBehaviour
             }
             else if(temp[i] == true)
             {
-                DeleteItem(iName[i], num[i]);
+                DeleteItem(iName[i], num[i], true);
             }
         }
 

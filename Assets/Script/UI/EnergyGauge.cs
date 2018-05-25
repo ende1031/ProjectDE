@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EnergyGauge : MonoBehaviour
 {
+    GameObject player;
     Monologue monologue;
 
     GameObject gauge;
@@ -27,7 +28,7 @@ public class EnergyGauge : MonoBehaviour
     {
         if (monologue == null)
         {
-            GameObject player = GameObject.Find("Player");
+            player = GameObject.Find("Player");
             if (player != null)
             {
                 monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
@@ -93,6 +94,14 @@ public class EnergyGauge : MonoBehaviour
         if (amount > 0)
         {
             GaugeLightReset();
+            if (amount != 100)
+            {
+                player.GetComponent<PlayerInteraction>().DisplayFT("에너지 +" + amount);
+            }
+        }
+        else
+        {
+            player.GetComponent<PlayerInteraction>().DisplayFT("에너지 " + amount);
         }
     }
 

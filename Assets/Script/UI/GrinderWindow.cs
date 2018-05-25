@@ -71,23 +71,27 @@ public class GrinderWindow : MonoBehaviour
         GrinderItemDictionary[Inventory.Item.Battery] = new GrinderItemInfo(60, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.Stick] = new GrinderItemInfo(70, Inventory.Item.Mass, 1, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.Board] = new GrinderItemInfo(10, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Hose] = new GrinderItemInfo(55, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Mass] = new GrinderItemInfo(37, Inventory.Item.Water, 1);
+        GrinderItemDictionary[Inventory.Item.Hose] = new GrinderItemInfo(55, Inventory.Item.Board, 1);
+        GrinderItemDictionary[Inventory.Item.Mass] = new GrinderItemInfo(10);
         GrinderItemDictionary[Inventory.Item.Thorn] = new GrinderItemInfo(85, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Facility01] = new GrinderItemInfo(41, Inventory.Item.Mass, 1, Inventory.Item.Stick, 1);
+        GrinderItemDictionary[Inventory.Item.Facility01] = new GrinderItemInfo(41, Inventory.Item.Board, 1, Inventory.Item.Stick, 1);
         GrinderItemDictionary[Inventory.Item.Trap01] = new GrinderItemInfo(10, Inventory.Item.Thorn, 1);
         GrinderItemDictionary[Inventory.Item.Heart] = new GrinderItemInfo(80, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Bulb01] = new GrinderItemInfo(200, Inventory.Item.Stick, 1, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Bulb01] = new GrinderItemInfo(200, Inventory.Item.Stick, 1, Inventory.Item.Hose, 1);
         GrinderItemDictionary[Inventory.Item.StickSeed] = new GrinderItemInfo(50, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.BoardSeed] = new GrinderItemInfo(6, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.ThornSeed] = new GrinderItemInfo(77, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.Tumor] = new GrinderItemInfo(800, Inventory.Item.Water, 1);
         GrinderItemDictionary[Inventory.Item.TumorSeed] = new GrinderItemInfo(99, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Grinder01] = new GrinderItemInfo(55, Inventory.Item.Mass, 1, Inventory.Item.Stick, 1);
+        GrinderItemDictionary[Inventory.Item.Grinder01] = new GrinderItemInfo(55, Inventory.Item.Sawtooth, 1, Inventory.Item.Stick, 1);
         GrinderItemDictionary[Inventory.Item.SuppliedBattery] = new GrinderItemInfo(111, Inventory.Item.Mass, 1);
         GrinderItemDictionary[Inventory.Item.SuppliedFood] = new GrinderItemInfo(155);
-        GrinderItemDictionary[Inventory.Item.Water] = new GrinderItemInfo(13, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.NyxCollector01] = new GrinderItemInfo(31, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Water] = new GrinderItemInfo(13);
+        GrinderItemDictionary[Inventory.Item.NyxCollector01] = new GrinderItemInfo(31, Inventory.Item.Stick, 1, Inventory.Item.Board, 1);
+        GrinderItemDictionary[Inventory.Item.Nyx] = new GrinderItemInfo(1);
+        GrinderItemDictionary[Inventory.Item.Fruit] = new GrinderItemInfo(10, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.FruitSeed] = new GrinderItemInfo(24, Inventory.Item.Mass, 1);
+        GrinderItemDictionary[Inventory.Item.Sawtooth] = new GrinderItemInfo(10, Inventory.Item.Thorn, 1);
     }
 
     void Start ()

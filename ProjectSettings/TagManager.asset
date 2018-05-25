@@ -10,6 +10,7 @@ TagManager:
   - Bulb
   - Nest
   - NyxCollector
+  - FloatingText
   layers:
   - Default
   - TransparentFX
