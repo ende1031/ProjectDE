@@ -155,7 +155,7 @@ public class PlayerMove : MonoBehaviour
 
     void PlayStepSE()
     {
-        stepSound.clip = SoundManager.instance.GetStepSound();
+        stepSound.clip = SoundManager.instance.GetSoundClip(38);
         stepSound.Play();
     }
 

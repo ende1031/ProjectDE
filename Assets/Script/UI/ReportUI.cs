@@ -15,7 +15,7 @@ public class ReportUI : MonoBehaviour
     Text Tip_Text;
 
     int day = 1;
-    int d_Day = 30;
+    int d_Day = 50;
 
     int questNum = 0;
     bool tutorialFinish = false;
@@ -129,9 +129,9 @@ public class ReportUI : MonoBehaviour
         ReportItemList.Add(new ReportItem("'간이 전구'를 제작하자.", Inventory.Item.Bulb01, 1));
         ReportItemList[17].SetComment("간이 전구는 탈출포드에서 멀리 떨어진 곳에 설치하자.");
 
-        ReportItemList.Add(new ReportItem("탈출포드에서 '판자' 연구를 완료하자.", 8));
-        ReportItemList.Add(new ReportItem("'간이 분해기'를 제작하자.", Inventory.Item.Grinder01, 1));
-        ReportItemList[19].SetComment("이제 필요 없는 아이템은 분해기에서 분해하면 되겠군.");
+        //ReportItemList.Add(new ReportItem("탈출포드에서 '판자' 연구를 완료하자.", 8));
+        //ReportItemList.Add(new ReportItem("'간이 분해기'를 제작하자.", Inventory.Item.Grinder01, 1));
+        //ReportItemList[19].SetComment("이제 필요 없는 아이템은 분해기에서 분해하면 되겠군.");
     }
 
     void Update ()

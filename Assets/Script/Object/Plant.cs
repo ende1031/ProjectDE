@@ -56,6 +56,7 @@ public class Plant : MonoBehaviour
         switch (plantName)
         {
             case "MassPlant":
+            case "Trap01":
                 SoundManager.instance.PlaySE(10);
                 break;
             case "BoardPlant":

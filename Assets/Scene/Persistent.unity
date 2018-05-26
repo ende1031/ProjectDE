@@ -8199,7 +8199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfHunger: 100
-  reduceSpeed: 0.2
+  reduceSpeed: 0.15
 --- !u!1 &774512302
 GameObject:
   m_ObjectHideFlags: 0

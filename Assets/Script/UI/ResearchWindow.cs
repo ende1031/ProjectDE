@@ -212,7 +212,7 @@ public class ResearchWindow : MonoBehaviour
         itemArray[8].AddNextResearch(10);
         //덩어리 20개
         itemArray[9] = new ResearchItem(Inventory.Item.Mass, 20, "괴식물의 유전자를 조작해서 먹을 수 있는 안전한 조직을 만들어냈다. 자라는 중인 식물에 심어보자.");
-        itemArray[9].SetResultItem(2, "TumorSeed", "SeedingTumor", "Food");
+        itemArray[9].SetResultItem(3, "TumorSeed", "SeedingTumor", "Food");
         itemArray[9].AddNextResearch(9);
         //막대 20개
         itemArray[10] = new ResearchItem(Inventory.Item.Stick, 20, "집게발 대나무의 유전자를 조작해서 모종을 만들 수 있게 됐다. 괴식물의 모종을 만들면 원하는 위치에 심을 수 있다.");

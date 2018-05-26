@@ -14,6 +14,8 @@ public class Monologue : MonoBehaviour
 
     float displayTimer = 0;
 
+    AudioSource monologueSound;
+
     void Start ()
     {
         animaitor = GetComponent<Animator>();
@@ -21,6 +23,9 @@ public class Monologue : MonoBehaviour
         MonologueText.GetComponent<TextMesh>().text = string.Empty;
 
         DisplayText = string.Empty;
+
+        monologueSound = this.gameObject.AddComponent<AudioSource>();
+        monologueSound.loop = false;
     }
 	
 	void Update ()
@@ -34,7 +39,7 @@ public class Monologue : MonoBehaviour
 
     public void DisplayLog(string logText, bool quotes = true)
     {
-        SoundManager.instance.PlaySE(39);
+        PlayMonologueSE();
 
         if (isLogueOn == false)
         {
@@ -71,5 +76,11 @@ public class Monologue : MonoBehaviour
             isLogueOn = false;
             animaitor.SetBool("isLogueOn", false);
         }
+    }
+
+    void PlayMonologueSE()
+    {
+        monologueSound.clip = SoundManager.instance.GetSoundClip(39);
+        monologueSound.Play();
     }
 }
