@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Portal : MonoBehaviour
+public class Portal : SceneObject
 {
     public string sceneName;
     public int AfterMoveGrid; //맵이동 후 플레이어의 좌표
 
-    InteractionIcon interactionIcon;
+    //InteractionIcon interactionIcon;
 
     float LoadTimer = 0;
 
     void Start ()
     {
-        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
+        LoadMenuUIAndSeneNum();
+        //interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
     }
 	
 	void Update ()
@@ -32,13 +33,13 @@ public class Portal : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Portal);
-        }
-    }
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        interactionIcon.DeleteIcon(InteractionIcon.Icon.Portal);
+    //    }
+    //}
 
     public bool isPortalReady()
     {

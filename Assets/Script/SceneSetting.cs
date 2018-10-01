@@ -66,7 +66,7 @@ public class SceneSetting : MonoBehaviour
         switch(n)
         {
             case 0:
-                SceneObjectManager.instance.AddObject(n, -9, new SceneObjectManager.SceneObject("Portal", "Stage01_B_1F", 13));
+                SceneObjectManager.instance.AddObject(n, -1, new SceneObjectManager.SceneObject("Portal", "Stage01_B_1F", 13));
                 SceneObjectManager.instance.AddObject(n, 23, new SceneObjectManager.SceneObject("Portal", "Stage01_A_1F", 25));
                 SceneObjectManager.instance.AddObject(n, 5, new SceneObjectManager.SceneObject("Facility", "EscapePod"));
                 //SceneObjectManager.instance.AddObject(n, 6, new SceneObjectManager.SceneObject("Facility", "Grinder01"));
@@ -108,7 +108,7 @@ public class SceneSetting : MonoBehaviour
                 break;
 
             case 3:
-                SceneObjectManager.instance.AddObject(n, 13, new SceneObjectManager.SceneObject("Portal", "Stage01", -9));
+                SceneObjectManager.instance.AddObject(n, 13, new SceneObjectManager.SceneObject("Portal", "Stage01", -1));
                 SceneObjectManager.instance.AddObject(n, 5, new SceneObjectManager.SceneObject("Plant", "BoardPlant", 1));
                 SceneObjectManager.instance.AddObject(n, 7, new SceneObjectManager.SceneObject("Plant", "BoardPlant", 1));
                 break;

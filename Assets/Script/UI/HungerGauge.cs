@@ -77,17 +77,16 @@ public class HungerGauge : MonoBehaviour
         if (amount > 0)
         {
             GaugeLightReset();
-            player.GetComponent<PlayerInteraction>().DisplayFT("허기 +" + amount);
+            player.GetComponent<PlayerInteraction>().DisplayFT("허기 +" + amount, Color.yellow);
         }
         else
         {
-            player.GetComponent<PlayerInteraction>().DisplayFT("허기 " + amount);
-
-            if(DoNotDie == true && amountOfHunger + amount <= 0)
+            if(DoNotDie == true && amountOfHunger + amount <= 5)
             {
                 amountOfHunger = 5;
                 return;
             }
+            player.GetComponent<PlayerInteraction>().DisplayFT("허기 " + amount, Color.yellow);
         }
         amountOfHunger += amount;
     }

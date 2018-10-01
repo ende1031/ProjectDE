@@ -13,9 +13,10 @@ public class ReportUI : MonoBehaviour
     Text D_Day_Text;
     Text ToDo_Text;
     Text Tip_Text;
+    GameObject BackLight;
 
     int day = 1;
-    int d_Day = 50;
+    int d_Day = 30;
 
     int questNum = 0;
     bool tutorialFinish = false;
@@ -78,6 +79,7 @@ public class ReportUI : MonoBehaviour
         D_Day_Text = transform.Find("D_Day").gameObject.GetComponent<Text>();
         ToDo_Text = transform.Find("ToDo").gameObject.GetComponent<Text>();
         Tip_Text = transform.Find("Tip").gameObject.GetComponent<Text>();
+        BackLight = transform.Find("BackLight").gameObject;
 
         SetReportItemList();
 
@@ -189,6 +191,10 @@ public class ReportUI : MonoBehaviour
         if(questNum >= ReportItemList.Count)
         {
             tutorialFinish = true;
+        }
+        else
+        {
+            BackLight.SetActive(true);
         }
         SoundManager.instance.PlaySE(25);
     }

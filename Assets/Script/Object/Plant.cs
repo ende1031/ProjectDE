@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plant : MonoBehaviour
+public class Plant : SceneObject
 {
-    public string ObjectName;
-    [TextArea]
-    public string ObjectExplanation;
+    //public string ObjectName;
+    //[TextArea]
+    //public string ObjectExplanation;
 
-    Inventory inventory;
-    InteractionIcon interactionIcon;
-    InteractionMenu interactionMenu;
-    Monologue monologue;
+    //Inventory inventory;
+    //InteractionIcon interactionIcon;
+    //InteractionMenu interactionMenu;
+    //Monologue monologue;
+    //EnergyGauge energyGauge;
+    //int sceneNum;
+
     GameObject player;
-    EnergyGauge energyGauge;
-    int sceneNum;
-
     Animator animaitor;
 
     public bool isGatherPossible;
@@ -31,14 +31,15 @@ public class Plant : MonoBehaviour
 
     void Start ()
     {
-        sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
-        interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
-        player = GameObject.Find("Player");
-        monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
-        energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
+        LoadMenuUIAndSeneNum();
+        //sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+        //inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        //interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
+        //interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
+        //monologue = player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+        //energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
 
+        player = GameObject.Find("Player");
         animaitor = GetComponent<Animator>();
 
         animaitor.SetInteger("State", state);
@@ -121,48 +122,56 @@ public class Plant : MonoBehaviour
         isTumor = false;
     }
 
-    public void RemoveObject()
-    {
-        if (energyGauge.GetAmount() < 5)
-        {
-            monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
-            return;
-        }
-        energyGauge.SetAmount(-5);
-        interactionIcon.DeleteAllIcons();
-        SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
-    }
+    //public void RemoveObject()
+    //{
+    //    if (energyGauge.GetAmount() < 5)
+    //    {
+    //        monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
+    //        return;
+    //    }
+    //    energyGauge.SetAmount(-5);
+    //    interactionIcon.DeleteAllIcons();
+    //    SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
+    //}
 
     void Examine()
     {
-        switch(plantName)
+        if(plantName == "Trap01" && state == 1)
         {
-            case "StickPlant":
-                monologue.DisplayLog("집게발 모양의 대나무이다.\n다행히 공격적이지는 않아서 채집하기 쉬울 것 같다.");
-                break;
-            case "MassPlant":
-                monologue.DisplayLog("괴물의 조직? 아니면 배설물?\n정체는 알 수 없지만 어딘가에 쓸 수는 있을 것 같다.");
-                break;
-            case "BoardPlant":
-                monologue.DisplayLog("이 식물은 재생속도가 비정상적으로 빠르다.\n애초에 더이상 이 행성에 정상적인 것은 존재하지 않는다.");
-                break;
-            case "ThornPlant":
-                monologue.DisplayLog("선인장의 변종으로 예상했지만 아니었다.\n이 식물의 가시 성분은 식물조직보다는 동물의 뿔에 가깝다.");
-                break;
-            case "Trap01":
-                if(state == 1)
-                {
-                    monologue.DisplayLog("덫에 무언가가 잡힌 것 같다!\n아이템 획득을 눌러서 확인해보자.");
-                }
-                else
-                {
-                    monologue.DisplayLog("괴식물의 가시로 만든 덫이다.\n괴식물의 둥지 근처에 설치하면 무언가 잡힐지도 모른다.");
-                }
-                break;
-            case "FruitPlant":
-                monologue.DisplayLog("이 식물의 열매는 먹을 수 있을 것 같다.");
-                break;
+            monologue.DisplayLog("덫에 무언가가 잡힌 것 같다!\n아이템 획득을 눌러서 확인해보자.");
+            return;
         }
+
+        monologue.DisplayLog(ExamineText);
+
+        //switch (plantName)
+        //{
+        //    case "StickPlant":
+        //        monologue.DisplayLog("집게발 모양의 대나무이다.\n다행히 공격적이지는 않아서 채집하기 쉬울 것 같다.");
+        //        break;
+        //    case "MassPlant":
+        //        monologue.DisplayLog("괴물의 조직? 아니면 배설물?\n정체는 알 수 없지만 어딘가에 쓸 수는 있을 것 같다.");
+        //        break;
+        //    case "BoardPlant":
+        //        monologue.DisplayLog("이 식물은 재생속도가 비정상적으로 빠르다.\n애초에 더이상 이 행성에 정상적인 것은 존재하지 않는다.");
+        //        break;
+        //    case "ThornPlant":
+        //        monologue.DisplayLog("선인장의 변종으로 예상했지만 아니었다.\n이 식물의 가시 성분은 식물조직보다는 동물의 뿔에 가깝다.");
+        //        break;
+        //    case "Trap01":
+        //        if(state == 1)
+        //        {
+        //            monologue.DisplayLog("덫에 무언가가 잡힌 것 같다!\n아이템 획득을 눌러서 확인해보자.");
+        //        }
+        //        else
+        //        {
+        //            monologue.DisplayLog("괴식물의 가시로 만든 덫이다.\n괴식물의 둥지 근처에 설치하면 무언가 잡힐지도 모른다.");
+        //        }
+        //        break;
+        //    case "FruitPlant":
+        //        monologue.DisplayLog("이 식물의 열매는 먹을 수 있을 것 같다.");
+        //        break;
+        //}
     }
 
     public bool InventoryCheck()
@@ -216,6 +225,7 @@ public class Plant : MonoBehaviour
         if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
         {
             state = 4;
+            growthTimer = 0;
             inventory.DeleteItem(Inventory.Item.TumorSeed);
             animaitor.SetInteger("State", state);
         }
@@ -323,21 +333,21 @@ public class Plant : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
-        {
-            interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
-        }
-    }
+    //void OnTriggerStay2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
+    //    {
+    //        interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
+    //    }
+    //}
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
-        {
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
-        }
-    }
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
+    //    {
+    //        interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
+    //    }
+    //}
 
     public void OpenMenu()
     {
@@ -360,7 +370,7 @@ public class Plant : MonoBehaviour
 
         float w = GetComponent<SpriteRenderer>().sprite.rect.width;
         float h = GetComponent<SpriteRenderer>().sprite.rect.height;
-        interactionMenu.OpenMenu(this.gameObject, "Plant", GetComponent<SpriteRenderer>().sprite, w, h);
+        interactionMenu.OpenMenu(this.gameObject, MenuTargetType, GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
     public void SelectMenu(InteractionMenu.MenuItem m)

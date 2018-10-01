@@ -39,7 +39,7 @@ public class Monologue : MonoBehaviour
 
     public void DisplayLog(string logText, bool quotes = true)
     {
-        PlayMonologueSE();
+        //PlayMonologueSE();
 
         if (isLogueOn == false)
         {

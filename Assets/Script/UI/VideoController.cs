@@ -40,6 +40,7 @@ public class VideoController : MonoBehaviour
         if(isResetGame == true)
         {
             SceneObjectManager.instance.ResetGame();
+            return;
         }
 
         SceneObjectManager.instance.SetUIActive(true);

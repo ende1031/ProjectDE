@@ -182,8 +182,8 @@ public class ResearchWindow : MonoBehaviour
         itemArray[1].SetResultItem(2, "FruitPlant", "Hunger");
         itemArray[1].AddNextResearch(2);
         //가시 3개
-        itemArray[2] = new ResearchItem(Inventory.Item.Thorn, 5, "연구 결과로 알게 된 사실에 따르면 놀랍게도 이 식물의 초기 설정은 선인장이었다고 한다.\n어쩌다 이렇게 변했는지 담당 디자이너의 말을 들어보자.");
-        itemArray[2].SetResultItem(3, "ThornPlant", "Trap01", "capture");
+        itemArray[2] = new ResearchItem(Inventory.Item.Thorn, 5, "선인장의 변종으로 예상했으나 가시의 성분은 식물의 조직보다는 동물의 뼈나 뿔에 가깝다는걸 알게 됐다.");
+        itemArray[2].SetResultItem(3, "ThornPlant", "Trap01", "Capture");
         itemArray[2].AddNextResearch(3);
         //심장 1개
         itemArray[3] = new ResearchItem(Inventory.Item.Heart, 1, "분명 이 행성에도 살아있는 생명체가 존재한다. 하지만 조사하기 위해 감수해야 하는 위험이 너무 크다.");
@@ -199,7 +199,7 @@ public class ResearchWindow : MonoBehaviour
         itemArray[5].AddNextResearch(6);
         //심장 4개
         itemArray[6] = new ResearchItem(Inventory.Item.Heart, 3, "모든 제작을 탈출포드에서 해야 된다는 것은 지나치게 비효율적이다. 괴식물의 심장을 이용해서 다른 제작 시설을 만들어보기로 했다.");
-        itemArray[6].SetResultItem(1, "tempFacility");
+        itemArray[6].SetResultItem(1, "TempFacility");
         itemArray[6].AddNextResearch(7);
         //막대 10개
         itemArray[7] = new ResearchItem(Inventory.Item.Stick, 10, "괴물은 빛을 싫어한다. 빛을 내는 시설을 만들 수 있으면 다른 시설들을 안전하게 지킬 수 있을 것이다.");
@@ -234,12 +234,12 @@ public class ResearchWindow : MonoBehaviour
         itemArray[13].SetResultItem(1, "FruitSeed");
         itemArray[13].AddNextResearch(13);
         //호스 30개
-        itemArray[14] = new ResearchItem(Inventory.Item.Hose, 30, "집으로 돌아가고 싶다. 참치마요가 먹고싶다. 빨리 구조대가 왔으면 좋겠다.\n연구는 순조롭다. 이 행정의 진실에 근접했다고 확언할 수 있다.");
+        itemArray[14] = new ResearchItem(Inventory.Item.Hose, 30, "집으로 돌아가고 싶다. 참치마요가 먹고싶다. 빨리 구조대가 왔으면 좋겠다. 연구는 순조롭다. 이 행정의 진실에 근접했다고 확언할 수 있다.");
         itemArray[14].SetResultItem(1, "Earth0");
         itemArray[14].AddNextResearch(15);
         //톱날 30개
         itemArray[15] = new ResearchItem(Inventory.Item.Sawtooth, 30, "마지막 연구를 끝냈다. 이 행성은 멸망 이후 독자적인 생태계를 만들어가고 있다. 이렇게 된 원인은 바로 ··· ···");
-        itemArray[15].SetResultItem(3, "Earth1", "Earth2", "Earth3");
+        itemArray[15].SetResultItem(2, "Earth1", "Earth2");
         itemArray[15].AddNextResearch(15);
 
         //for(int i = 15; i >= 0; i--)
@@ -252,31 +252,30 @@ public class ResearchWindow : MonoBehaviour
     {
         contentDictionary["Nyx"] = new ResultContent("[닉스 입자] 이 행성에만 존재하는 미지의 입자로 추청된다. 무언가를 제작하는데 사용할 수 있을 것 같다.\n연구성과 : 닉스입자 +240", inventory.NyxSp);
         contentDictionary["FruitPlant"] = new ResultContent("[괴식물의 열매] 인체에 해롭지 않아서 먹을 수 있다. 허기를 소량 회복시켜준다.", inventory.FruitSp);
-        contentDictionary["Hunger"] = new ResultContent("[허기 회복] 먹을 수 있는 아이템을 먹으면 허기게이지를 회복시킬 수 있다. 게이지가 바닥나서 죽지 않게 조심하자.", inventory.FruitSp);
+        contentDictionary["Hunger"] = new ResultContent("[허기 회복] 먹을 수 있는 아이템을 먹으면 허기게이지를 회복시킬 수 있다. 게이지가 바닥나서 죽지 않게 조심하자.", inventory.HungerSp);
         contentDictionary["ThornPlant"] = new ResultContent("[가시 덩굴] 가시가 자라는 나무이다. 가시 덩굴에서 채집한 가시는 소형 덫을 만드는데 사용할 수 있다.", inventory.ThornSp);
         contentDictionary["Trap01"] = new ResultContent("[소형 덫] 소형 덫을 만들 수 있게 됐다.\n괴물의 둥지 근처에 설치하면 괴물의 심장을 얻을 수 있다.", inventory.Trap01Sp, Inventory.Item.Trap01);
-        contentDictionary["capture"] = new ResultContent("[포획] 괴물의 둥지 근처에 덫을 설치하면 괴물을 잡을 수 있다. 설치 후 날짜가 지나면 괴물이 잡힌다.", inventory.Trap01Sp);
+        contentDictionary["Capture"] = new ResultContent("[포획] 괴물의 둥지 근처에 덫을 설치하면 괴물을 잡을 수 있다. 설치 후 날짜가 지나면 괴물이 잡힌다.", inventory.CaptureSp);
         contentDictionary["Heart"] = new ResultContent("[심장] 작은 괴물의 심장이다. 계속해서 에너지를 발생시키고 있다. 시설을 만드는데 사용할 수 있다.", inventory.HeartSp);
         contentDictionary["StickPlant"] = new ResultContent("[집게발 대나무] 대나무를 닮은 괴식물이다. 집게발 대나무는 하루에 한번씩 채집할 수 있다.", inventory.StickSp);
         contentDictionary["BoardPlant"] = new ResultContent("[판자 식물] 판자를 닮은 괴식물이다. 현실 시간으로 1분에 한번씩 채집할 수 있다. 판자는 제작에 사용된다.", inventory.BoardSp);
         contentDictionary["NyxCollector01"] = new ResultContent("[닉스입자 수집기] 닉스입자 연구가 끝나서 닉스입자 수집기를 만들 수 있게 됐다.", inventory.NyxCollector01Sp, Inventory.Item.NyxCollector01);
-        contentDictionary["tempFacility"] = new ResultContent("[소형 워크벤치] 소형 워크벤치를 만들 수 있게 됐다.", inventory.Facility01Sp, Inventory.Item.Facility01);
+        contentDictionary["TempFacility"] = new ResultContent("[소형 워크벤치] 소형 워크벤치를 만들 수 있게 됐다.", inventory.Facility01Sp, Inventory.Item.Facility01);
         contentDictionary["Hose"] = new ResultContent("[호스] 호스를 만들 수 있게 됐다.\n호스는 간이 전구같은 시설을 만드는데 사용된다.", inventory.HoseSp, Inventory.Item.Hose);
         contentDictionary["Bulb01"] = new ResultContent("[간이 전구] 간이 전구를 만들 수 있게 됐다. 간이 전구 근처에는 다른 시설을 설치할 수 있다.", inventory.Bulb01Sp, Inventory.Item.Bulb01);
         contentDictionary["Sawtooth"] = new ResultContent("[톱날] 톱날을 만들 수 있게 됐다.\n톱날은 분해기를 만드는데 사용된다.", inventory.SawtoothSp, Inventory.Item.Sawtooth);
         contentDictionary["Grinder01"] = new ResultContent("[간이 분해기] 간이 분해기를 만들 수 있게 됐다. 불필요한 아이템을 분해해서 닉스입자와 다른 아이템을 얻을 수 있다.", inventory.Grinder01Sp, Inventory.Item.Grinder01);
         contentDictionary["TumorSeed"] = new ResultContent("[종양 씨앗] 종양 씨앗을 만들 수 있게 됐다. 자라는 중인 식물에 심으면 먹을 수 있는 종양이 생긴다.", inventory.TumorSeedSp, Inventory.Item.TumorSeed);
-        contentDictionary["SeedingTumor"] = new ResultContent("[종양 심기] 자라는중인 특정 식물에는 종양을 심을 수 있다. 집게발 대나무, 판자 식물, 가시 덩굴에 심을 수 있다.", inventory.TumorSp);
+        contentDictionary["SeedingTumor"] = new ResultContent("[종양 심기] 자라는중인 특정 식물에는 종양을 심을 수 있다. 집게발 대나무, 판자 식물, 가시 덩굴에 심을 수 있다.", inventory.SeedingPlantSp);
         contentDictionary["Food"] = new ResultContent("[식량] 식량을 만들 수 있게 됐다. 식량은 한번에 많은 양의 게이지를 회복시켜준다.", inventory.FoodSp, Inventory.Item.Food);
         contentDictionary["StickSeed"] = new ResultContent("[집게발 대나무 모종] 집게발 대나무 모종을 만들 수 있게 됐다.", inventory.StickSeedSp, Inventory.Item.StickSeed);
-        contentDictionary["SeedingPlant"] = new ResultContent("[모종 심기] 원하는 위치에 모종을 심으면 괴식물이 자란다.", inventory.StickSeedSp);
+        contentDictionary["SeedingPlant"] = new ResultContent("[모종 심기] 원하는 위치에 모종을 심으면 괴식물이 자란다.", inventory.SeedingPlantSp);
         contentDictionary["BoardSeed"] = new ResultContent("[판자 식물 모종] 판자 식물 모종을 만들 수 있게 됐다.", inventory.BoardSeedSp, Inventory.Item.BoardSeed);
         contentDictionary["ThornSeed"] = new ResultContent("[가시 덩굴 모종] 가시 덩굴 모종을 만들 수 있게 됐다.", inventory.ThornSeedSp, Inventory.Item.ThornSeed);
         contentDictionary["FruitSeed"] = new ResultContent("[열매 나무 모종] 열매 나무 모종을 만들 수 있게 됐다.", inventory.FruitSeedSp, Inventory.Item.FruitSeed);
-        contentDictionary["Earth0"] = new ResultContent("[파괴된 행성] 이 행성에 대한 연구는 순조롭게 진행되고 있다. 다음 연구가 마지막 연구일 것이다.", inventory.NyxSp);
-        contentDictionary["Earth1"] = new ResultContent("[행성의 생태계] 빛을 싫어하는 미지의 생명체에 대한 생태계 연구 보고서. 본부에 귀환해서 발표하면 좋은 평가를 받을 것 같다.", inventory.NyxSp);
-        contentDictionary["Earth2"] = new ResultContent("[멸망한 고대 문명] 이 행성에 존재했던 고대문명에 대한 연구 보고서. 이 사실이 알려지면 큰 파장을 불러올 것으로 예상된다.", inventory.NyxSp);
-        contentDictionary["Earth3"] = new ResultContent("[행성의 진실] 연구를 통해 이 행성의 진실을 알게 됐다. 하지만 페이지가 부족하여 이 곳에는 쓰지 않겠다.", inventory.NyxSp);
+        contentDictionary["Earth0"] = new ResultContent("[파괴된 행성] 이 행성에 대한 연구는 순조롭게 진행되고 있다. 다음 연구가 마지막 연구일 것이다.", inventory.Earth0Sp);
+        contentDictionary["Earth1"] = new ResultContent("[행성의 생태계] 빛을 싫어하는 미지의 생명체에 대한 생태계 연구 보고서. 본부에 귀환해서 발표하면 좋은 평가를 받을 것 같다.", inventory.Earth1Sp);
+        contentDictionary["Earth2"] = new ResultContent("[멸망한 고대 문명] 이 행성에 존재했던 고대문명에 대한 연구 보고서. 이 사실이 알려지면 큰 파장을 불러올 것으로 예상된다.", inventory.Earth2Sp);
     }
 
     void Update ()

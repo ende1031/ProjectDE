@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NyxCollector : MonoBehaviour
+public class NyxCollector : SceneObject
 {
-    public string ObjectName;
-    [TextArea]
-    public string ObjectExplanation;
+    //public string ObjectName;
+    //[TextArea]
+    //public string ObjectExplanation;
 
-    InteractionIcon interactionIcon;
-    InteractionMenu interactionMenu;
-    Inventory inventory;
-    int sceneNum;
-    Monologue monologue;
-    EnergyGauge energyGauge;
+    //InteractionIcon interactionIcon;
+    //InteractionMenu interactionMenu;
+    //Inventory inventory;
+    //int sceneNum;
+    //Monologue monologue;
+    //EnergyGauge energyGauge;
+
     NyxUI nyxUI;
     Animator animaitor;
     GameObject particle;
@@ -26,12 +27,14 @@ public class NyxCollector : MonoBehaviour
 
     void Start ()
     {
-        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
-        sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
-        monologue = GameObject.Find("Player").transform.Find("Monologue").gameObject.GetComponent<Monologue>();
-        energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
+        LoadMenuUIAndSeneNum();
+        //interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
+        //inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        //interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
+        //sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+        //monologue = GameObject.Find("Player").transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+        //energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
+
         nyxUI = GameObject.Find("NyxUI").GetComponent<NyxUI>();
         particle = transform.Find("Particle").gameObject;
 
@@ -114,14 +117,14 @@ public class NyxCollector : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
-        {
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
-        }
-    }
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
+    //    {
+    //        interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
+    //        interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
+    //    }
+    //}
 
     bool RuinCheck()
     {
@@ -199,22 +202,22 @@ public class NyxCollector : MonoBehaviour
         offTimer = 0;
     }
 
-    public void RemoveObject()
-    {
-        if (energyGauge.GetAmount() < 5)
-        {
-            monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
-            return;
-        }
-        energyGauge.SetAmount(-5);
-        interactionIcon.DeleteAllIcons();
-        SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
-    }
+    //public void RemoveObject()
+    //{
+    //    if (energyGauge.GetAmount() < 5)
+    //    {
+    //        monologue.DisplayLog("에너지가 부족해서 제거할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
+    //        return;
+    //    }
+    //    energyGauge.SetAmount(-5);
+    //    interactionIcon.DeleteAllIcons();
+    //    SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
+    //}
 
-    void Examine()
-    {
-        monologue.DisplayLog("닉스입자를 수집하는 시설이다.\n검은 입자들이 빨려들어가는게 보인다.");
-    }
+    //void Examine()
+    //{
+    //    monologue.DisplayLog("닉스입자를 수집하는 시설이다.\n검은 입자들이 빨려들어가는게 보인다.");
+    //}
 
     public void OpenMenu()
     {
@@ -235,7 +238,7 @@ public class NyxCollector : MonoBehaviour
 
         float w = GetComponent<SpriteRenderer>().sprite.rect.width;
         float h = GetComponent<SpriteRenderer>().sprite.rect.height;
-        interactionMenu.OpenMenu(this.gameObject, "NyxCollector", GetComponent<SpriteRenderer>().sprite, w, h);
+        interactionMenu.OpenMenu(this.gameObject, MenuTargetType, GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
     public void SelectMenu(InteractionMenu.MenuItem m)

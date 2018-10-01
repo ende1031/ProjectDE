@@ -103,6 +103,13 @@ public class Inventory : MonoBehaviour
     public Sprite FruitSeedSp;
     public Sprite SawtoothSp;
 
+    public Sprite CaptureSp;
+    public Sprite Earth0Sp;
+    public Sprite Earth1Sp;
+    public Sprite Earth2Sp;
+    public Sprite HungerSp;
+    public Sprite SeedingPlantSp;
+
     public bool isInventoryActive = false;
     int selectedIndex = 0;
 
@@ -340,9 +347,10 @@ public class Inventory : MonoBehaviour
                     }
                     energyGauge.SetAmount(-5);
                     DeleteItem(Items[selectedIndex].name);
+                    SoundManager.instance.PlaySE(41);
                 }
                 openTimer = 1;
-                CloseInventory();
+                CloseInventory(false);
                 break;
 
             case InteractionMenu.MenuItem.Dump:
@@ -571,7 +579,7 @@ public class Inventory : MonoBehaviour
             }
             DisplayItem();
             reportUI.RefreshUI();
-            player.GetComponent<PlayerInteraction>().DisplayFT(itemDictionary[itemName].ObjectName + " +" + num, true, itemName);
+            player.GetComponent<PlayerInteraction>().DisplayFT(itemDictionary[itemName].ObjectName + " +" + num, Color.white, true, itemName);
             SoundManager.instance.PlaySE(33);
             return true;
         }
@@ -604,7 +612,7 @@ public class Inventory : MonoBehaviour
             reportUI.RefreshUI();
             if(isTest == false)
             {
-                player.GetComponent<PlayerInteraction>().DisplayFT(itemDictionary[itemName].ObjectName + " -" + num, true, itemName);
+                player.GetComponent<PlayerInteraction>().DisplayFT(itemDictionary[itemName].ObjectName + " -" + num, Color.white, true, itemName);
             }
             return true;
         }

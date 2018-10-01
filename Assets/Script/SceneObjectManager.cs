@@ -367,9 +367,15 @@ public class SceneObjectManager : MonoBehaviour
 
         //랜덤으로 씬 선택
         int randomScene = Random.Range(0, maxSceneNum);
+        int temp = 0;
         while (isSceneHasBlank[randomScene] == false)
         {
             randomScene = Random.Range(0, maxSceneNum);
+            temp++;
+            if(temp > 10)
+            {
+                return;
+            }
         }
 
         //벽 정보 받아옴
@@ -378,9 +384,15 @@ public class SceneObjectManager : MonoBehaviour
 
         //랜덤으로 좌표 설정
         int randomGrid = Random.Range(left + 1, right - 1);
+        temp = 0;
         while (SObjects[randomScene].ContainsKey(randomGrid) == true)
         {
             randomGrid = Random.Range(left + 1, right - 1);
+            temp++;
+            if (temp > 20)
+            {
+                return;
+            }
         }
 
         //오브젝트 딕셔너리에 추가

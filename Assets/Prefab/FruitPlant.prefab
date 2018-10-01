@@ -59,7 +59,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.9, y: 1.89}
+    oldSize: {x: 1.8, y: 3.78}
     newSize: {x: 2.56, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -77,7 +77,7 @@ Animator:
   m_GameObject: {fileID: 1098878794222228}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 7805393f51df61447b617a0393cf3071, type: 2}
+  m_Controller: {fileID: 22100000, guid: b547fa4cc0786904b8afce5a7d099abb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -96,10 +96,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff61b05634f0334b9311f980c12973c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectName: "\uC5F4\uB9E4 \uB098\uBB34"
+  ObjectName: "\uC9D1\uAC8C\uBC1C \uB300\uB098\uBB34"
   ObjectExplanation: "\uC774 \uC5F4\uB9E4\uB294 \uBA39\uC744 \uC218 \uC788\uC744 \uAC83
     \uAC19\uB2E4.\r\n\uAC8C\uC784\uC2DC\uAC04\uC73C\uB85C \uD558\uB8E8\uC5D0 \uD55C
     \uBC88 \uCC44\uC9D1\uD560 \uC218 \uC788\uB2E4."
+  ExamineText: "\uC774 \uC2DD\uBB3C\uC758 \uC5F4\uB9E4\uB294 \uBA39\uC744 \uC218 \uC788\uC744
+    \uAC83 \uAC19\uB2E4.\n\uD5C8\uAE30\uB97C \uB2EC\uB798\uAE30 \uC704\uD574 \uCC44\uC9D1\uD574
+    \uB450\uC790."
+  MenuTargetType: Plant
   isGatherPossible: 0
   plantName: FruitPlant
   GatherAnimationType: 4
@@ -140,7 +144,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4c1caf2e39caa7e4dae140a7ea8b7c2a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ddbdf0e646cf5a438adff31ca53dc9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

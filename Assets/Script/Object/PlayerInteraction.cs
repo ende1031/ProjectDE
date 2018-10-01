@@ -35,23 +35,31 @@ public class PlayerInteraction : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventory.GetItem(Inventory.Item.Mass, 20);
-            inventory.GetItem(Inventory.Item.Stick, 20);
-            inventory.GetItem(Inventory.Item.Board, 20);
-            inventory.GetItem(Inventory.Item.Thorn, 20);
-            inventory.GetItem(Inventory.Item.Hose, 20);
-            inventory.GetItem(Inventory.Item.TumorSeed, 20);
-            inventory.GetItem(Inventory.Item.Heart, 20);
-            inventory.GetItem(Inventory.Item.Sawtooth, 20);
-            inventory.GetItem(Inventory.Item.Fruit, 20);
+            inventory.GetItem(Inventory.Item.Mass, 10);
+            inventory.GetItem(Inventory.Item.Fruit, 10);
+            inventory.GetItem(Inventory.Item.Stick, 10);
+            inventory.GetItem(Inventory.Item.Board, 10);
+            inventory.GetItem(Inventory.Item.Thorn, 10);
+            inventory.GetItem(Inventory.Item.TumorSeed, 10);
+            inventory.GetItem(Inventory.Item.Heart, 10);
+            inventory.GetItem(Inventory.Item.Hose, 10);
+            inventory.GetItem(Inventory.Item.Sawtooth, 10);
         }
         
         if (Input.GetKeyDown(KeyCode.W))
         {
-            inventory.GetItem(Inventory.Item.FruitSeed, 1);
+            inventory.GetItem(Inventory.Item.Facility01, 1);
             inventory.GetItem(Inventory.Item.Bulb01, 1);
             inventory.GetItem(Inventory.Item.NyxCollector01, 1);
             inventory.GetItem(Inventory.Item.Grinder01, 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            inventory.GetItem(Inventory.Item.FruitSeed, 1);
+            inventory.GetItem(Inventory.Item.StickSeed, 1);
+            inventory.GetItem(Inventory.Item.ThornSeed, 1);
+            inventory.GetItem(Inventory.Item.BoardSeed, 1);
         }
     }
 
@@ -172,7 +180,7 @@ public class PlayerInteraction : MonoBehaviour
         return isInteractionPossible;
     }
 
-    public void DisplayFT(string s, bool displayItem = false, Inventory.Item item = 0)
+    public void DisplayFT(string s, Color c, bool displayItem = false, Inventory.Item item = 0)
     {
         Vector3 tempPos = transform.position;
         tempPos.x += 0.3f;
@@ -181,10 +189,11 @@ public class PlayerInteraction : MonoBehaviour
         tempPos.z -= 0.5f;
         GameObject ft = Instantiate(FT, tempPos, Quaternion.identity);
 
+        ft.GetComponent<TextMesh>().color = c;
+
         if (displayItem == false)
         {
             ft.GetComponent<TextMesh>().text = s;
-            ft.GetComponent<TextMesh>().color = Color.green;
         }
         else
         {

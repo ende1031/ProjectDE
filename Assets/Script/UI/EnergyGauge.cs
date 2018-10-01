@@ -96,12 +96,12 @@ public class EnergyGauge : MonoBehaviour
             GaugeLightReset();
             if (amount != 100)
             {
-                player.GetComponent<PlayerInteraction>().DisplayFT("에너지 +" + amount);
+                player.GetComponent<PlayerInteraction>().DisplayFT("에너지 +" + amount, Color.green);
             }
         }
         else
         {
-            player.GetComponent<PlayerInteraction>().DisplayFT("에너지 " + amount);
+            player.GetComponent<PlayerInteraction>().DisplayFT("에너지 " + amount, Color.green);
         }
     }
 

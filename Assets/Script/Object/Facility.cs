@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Facility : MonoBehaviour
+public class Facility : SceneObject
 {
-    public string ObjectName;
-    [TextArea]
-    public string ObjectExplanation;
+    //public string ObjectName;
+    //[TextArea]
+    //public string ObjectExplanation;
 
     public string facilityName = "TempFacility";
 
     GrinderWindow grinderWindow;
-    InteractionIcon interactionIcon;
-    InteractionMenu interactionMenu;
-    Monologue monologue;
-    Inventory inventory;
+    
     PopupWindow popupWindow;
     ResearchWindow researchWindow;
     Animator animaitor;
     GameObject Player;
-    EnergyGauge energyGauge;
     ReportUI reportUI;
-    int sceneNum;
+    //InteractionIcon interactionIcon;
+    //InteractionMenu interactionMenu;
+    //Monologue monologue;
+    //Inventory inventory;
+    //EnergyGauge energyGauge;
+    //int sceneNum;
 
     public bool isLoadByManager = false;
 
@@ -32,16 +33,18 @@ public class Facility : MonoBehaviour
 
     void Start ()
     {
+        LoadMenuUIAndSeneNum();
+        //interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
+        //interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
+        //inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        //sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+        //monologue = Player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
+        //energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
+
         grinderWindow = GameObject.Find("GrinderWindow").GetComponent<GrinderWindow>();
-        interactionIcon = GameObject.Find("InteractionIcon").GetComponent<InteractionIcon>();
-        interactionMenu = GameObject.Find("InteractionMenu").GetComponent<InteractionMenu>();
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         popupWindow = GameObject.Find("PopupWindow").GetComponent<PopupWindow>();
         researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
-        sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
         Player = GameObject.Find("Player");
-        monologue = Player.transform.Find("Monologue").gameObject.GetComponent<Monologue>();
-        energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
         reportUI = GameObject.Find("ReportUI").GetComponent<ReportUI>();
 
         animaitor = GetComponent<Animator>();
@@ -107,14 +110,14 @@ public class Facility : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
-        {
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
-            interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
-        }
-    }
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
+    //    {
+    //        interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
+    //        interactionIcon.DeleteIcon(InteractionIcon.Icon.OnOff);
+    //    }
+    //}
 
     public void OpenProductionWindow()
     {
@@ -279,18 +282,19 @@ public class Facility : MonoBehaviour
             monologue.DisplayLog("괴물의 습격을 받은 것 같다.\n에너지를 소모해서 수리하도록 하자.");
             return;
         }
-        switch(facilityName)
-        {
-            case "EscapePod":
-                monologue.DisplayLog("내가 타고 온 탈출포드이다.\n다행히 손상이 심한 것 같지는 않다.\n아이템 연구나 제작을 할 수 있다.");
-                break;
-            case "TempFacility":
-                monologue.DisplayLog("급하게 만든 간이 워크벤치이다.\n재료와 닉스입자를 소모해서 아이템을 제작할 수 있다.");
-                break;
-            case "Grinder01":
-                monologue.DisplayLog("아이템을 분해할 수 있는 분해기이다.\n분해를 통해 재료아이템을 얻을 수 있다.");
-                break;
-        }
+        monologue.DisplayLog(ExamineText);
+        //switch(facilityName)
+        //{
+        //    case "EscapePod":
+        //        monologue.DisplayLog("내가 타고 온 탈출포드이다.\n다행히 손상이 심한 것 같지는 않다.\n아이템 연구나 제작을 할 수 있다.");
+        //        break;
+        //    case "TempFacility":
+        //        monologue.DisplayLog("급하게 만든 간이 워크벤치이다.\n재료와 닉스입자를 소모해서 아이템을 제작할 수 있다.");
+        //        break;
+        //    case "Grinder01":
+        //        monologue.DisplayLog("아이템을 분해할 수 있는 분해기이다.\n분해를 통해 재료아이템을 얻을 수 있다.");
+        //        break;
+        //}
     }
 
     public void OpenMenu()
@@ -340,11 +344,11 @@ public class Facility : MonoBehaviour
         {
             float w = GetComponent<SpriteRenderer>().sprite.rect.width;
             float h = GetComponent<SpriteRenderer>().sprite.rect.height;
-            interactionMenu.OpenMenu(this.gameObject, "Facility", GetComponent<SpriteRenderer>().sprite, w, h);
+            interactionMenu.OpenMenu(this.gameObject, MenuTargetType, GetComponent<SpriteRenderer>().sprite, w, h);
         }
         else
         {
-            interactionMenu.OpenMenu(this.gameObject, "Facility", transform.Find("render").GetComponent<SpriteRenderer>().sprite, 341 * 0.6f, 382 * 0.6f);
+            interactionMenu.OpenMenu(this.gameObject, MenuTargetType, transform.Find("render").GetComponent<SpriteRenderer>().sprite, 341 * 0.6f, 382 * 0.6f);
         }
     }
 
