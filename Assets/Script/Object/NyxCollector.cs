@@ -61,6 +61,10 @@ public class NyxCollector : SceneObject
         }
         if (state == 0 || state == 4)
         {
+            if(particle == null)
+            {
+                particle = transform.Find("Particle").gameObject;
+            }
             particle.SetActive(false);
         }
         if (animaitor != null)
@@ -93,6 +97,11 @@ public class NyxCollector : SceneObject
         //    }
         //    isLoadByManager = false;
         //}
+
+        if (state == 0 || state == 4)
+        {
+            particle.SetActive(false);
+        }
 
         if (RuinCheck() == true)
         {

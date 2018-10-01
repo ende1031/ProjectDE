@@ -722,4 +722,28 @@ public class Inventory : MonoBehaviour
 
         return result;
     }
+
+    public List<InventoryItem_Save> GetInventoryItemList()
+    {
+        List<InventoryItem_Save> temp = new List<InventoryItem_Save>();
+
+        for (int i = 0; i < Items.Count; i++)
+        {
+            temp.Add(new InventoryItem_Save(Items[i].name, Items[i].count));
+        }
+
+        return temp;
+    }
+
+    public void LoadItemList(List<InventoryItem_Save> list)
+    {
+        DeleteAllItems();
+
+        for(int i = 0; i < list.Count; i++)
+        {
+            Items.Add(new ItemInfo(list[i].item, list[i].count));
+        }
+        
+        DisplayItem();
+    }
 }

@@ -134,6 +134,7 @@ public class Title : MonoBehaviour
         switch(selectIndex)
         {
             case 0:
+            case 1:
                 animaitor.SetBool("isStart", true);
                 BlackScreen.SetActive(true);
                 isSelect = true;
@@ -172,6 +173,17 @@ public class Title : MonoBehaviour
     public void GameStart()
     {
         //SceneObjectManager.instance.SetUIActive(true);
-        SceneChanger.instance.FadeAndLoadScene("OpeningMovie");
+        switch (selectIndex)
+        {
+            case 0:
+                SceneObjectManager.instance.isNewGame = true;
+                SceneChanger.instance.FadeAndLoadScene("OpeningMovie");
+                break;
+            case 1:
+                SceneObjectManager.instance.isNewGame = false;
+                SceneObjectManager.instance.SetUIActive(true);
+                SceneChanger.instance.FadeAndLoadScene("Stage01", 5);
+                break;
+        }
     }
 }

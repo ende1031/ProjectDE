@@ -7,17 +7,19 @@ public class SceneObjectManager : MonoBehaviour
 {
     public static SceneObjectManager instance = null;
 
-    static int maxSceneNum = 4; //게임 플레이에 들어가는 씬의 수
+    public static int maxSceneNum = 4; //게임 플레이에 들어가는 씬의 수
 
     List<Dictionary<int, ObjectInfo>> SObjects = new List<Dictionary<int, ObjectInfo>>();
     public List<bool> isSceneInit = new List<bool>();
     public List<Vector2> StageWalls = new List<Vector2>();
     //Dictionary<string, GameObject> objectDictionary = new Dictionary<string, GameObject>();
 
+    public bool isNewGame = false;
+
     GameObject UI;
     HungerGauge hungerGauge;
     EnergyGauge energyGauge;
-    Inventory inventory;
+    //Inventory inventory;
     NyxUI nyxUI;
     /*
     public GameObject TempFacility; //Prefab
@@ -53,11 +55,12 @@ public class SceneObjectManager : MonoBehaviour
     */
     public class ObjectInfo
     {
-        public ObjectInfo(string t, string n, int st = 1)
+        public ObjectInfo(string t, string n, int st = 1, float ti = 0)
         {
             type = t;
             name = n;
             state = st;
+            timer = ti;
         }
 
         public GameObject inGameObject;
@@ -209,7 +212,7 @@ public class SceneObjectManager : MonoBehaviour
         hungerGauge = GameObject.Find("HungerUI").GetComponent<HungerGauge>();
         energyGauge = GameObject.Find("EnergyUI").GetComponent<EnergyGauge>();
         nyxUI = GameObject.Find("NyxUI").GetComponent<NyxUI>();
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        //inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         UI.SetActive(false);
 
         for (int i = 0; i < maxSceneNum; i++)
@@ -472,7 +475,12 @@ public class SceneObjectManager : MonoBehaviour
         }
         
         SObjects[sceneNum].Add(grid, ob);
-        InstantiateObject(grid, ob);
+
+        int thisSceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
+        if(thisSceneNum == sceneNum)
+        {
+            InstantiateObject(grid, ob);
+        }
         return true;
     }
 
@@ -535,11 +543,58 @@ public class SceneObjectManager : MonoBehaviour
         return false;
     }
 
+    public void RemoveAllObject()
+    {
+        for (int i = 0; i < maxSceneNum; i++)
+        {
+            foreach (KeyValuePair<int, ObjectInfo> pair in SObjects[i])
+            {
+                if (pair.Value.inGameObject != null)
+                {
+                    Destroy(pair.Value.inGameObject);
+                }
+            }
+        }
+        SObjects.Clear();
+
+        for (int i = 0; i < maxSceneNum; i++)
+        {
+            SObjects.Add(new Dictionary<int, ObjectInfo>());
+        }
+    }
+
     public void SetUIActive(bool a)
     {
         if (UI != null)
         {
             UI.SetActive(a);
         }
+    }
+
+    public List<SceneObject_Save> GetSceneObjectList()
+    {
+        List<SceneObject_Save> temp = new List<SceneObject_Save>();
+
+        for (int i = 0; i < maxSceneNum; i++)
+        {
+            foreach (KeyValuePair<int, ObjectInfo> pair in SObjects[i])
+            {
+                temp.Add(new SceneObject_Save(i, pair.Key, pair.Value.type, pair.Value.name, pair.Value.state, pair.Value.timer));
+            }
+        }
+
+        return temp;
+    }
+
+    public void LoadSceneObject(List<SceneObject_Save> list)
+    {
+        RemoveAllObject();
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            AddObject(list[i].sceneNum, list[i].key, new ObjectInfo(list[i].type, list[i].name, list[i].state, list[i].timer));
+        }
+
+        ReloadObject(0);
     }
 }

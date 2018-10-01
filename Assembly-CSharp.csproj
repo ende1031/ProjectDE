@@ -67,6 +67,7 @@
      <Compile Include="Assets\Script\Object\Portal.cs" />
      <Compile Include="Assets\Script\Object\SceneObject.cs" />
      <Compile Include="Assets\Script\Object\StageParticle.cs" />
+     <Compile Include="Assets\Script\SaveAndLoad.cs" />
      <Compile Include="Assets\Script\SceneChanger.cs" />
      <Compile Include="Assets\Script\SceneObjectManager.cs" />
      <Compile Include="Assets\Script\SceneSetting.cs" />

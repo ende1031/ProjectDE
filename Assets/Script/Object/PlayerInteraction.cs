@@ -61,6 +61,21 @@ public class PlayerInteraction : MonoBehaviour
             inventory.GetItem(Inventory.Item.ThornSeed, 1);
             inventory.GetItem(Inventory.Item.BoardSeed, 1);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneObjectManager.instance.ResetGame();
+        }
+
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    SaveAndLoad.instance.SaveGame();
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    SaveAndLoad.instance.LoadGame();
+        //}
     }
 
     void PlayerDirection()

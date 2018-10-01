@@ -1026,6 +1026,7 @@ GameObject:
   - component: {fileID: 75649607}
   - component: {fileID: 75649604}
   - component: {fileID: 75649608}
+  - component: {fileID: 75649609}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1046,7 +1047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeCanvasGroup: {fileID: 1948142579}
   fadeDuration: 0.33
-  startingSceneName: OpeningLogo
+  startingSceneName: Title
   playerGrid: 5
 --- !u!4 &75649605
 Transform:
@@ -1083,23 +1084,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c323be5dbdb5a4ab8dbb27d759dcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TempFacility: {fileID: 1059498077444446, guid: 732f88bd91e611241aa4beeb8e55f1e2,
-    type: 2}
-  EscapePod: {fileID: 1724880846875220, guid: 6f54b14597c45464fac855f7de8aaf93, type: 2}
-  StickPlant: {fileID: 1962487321500588, guid: 2168df4ebe7306c4fb664ba8e3f9fb3b, type: 2}
-  BoardPlant: {fileID: 1713309569161114, guid: 808a858534c1ac2439e0925dcdffc967, type: 2}
-  MassPlant: {fileID: 1973922401690096, guid: 66b814dee91cd054b97b5993d8474763, type: 2}
-  ThornPlant: {fileID: 1549453647226052, guid: ea87fe77882e2eb40bee0bd6e7597135, type: 2}
-  FruitPlant: {fileID: 1098878794222228, guid: 67ee1f6b48b34da44b21e67a44bdaf2d, type: 2}
-  Portal: {fileID: 1768756399868750, guid: b0a0c9869ade5d74384781159a06efb6, type: 2}
-  Trap01: {fileID: 1720078919906398, guid: 19fbe4929e63cf240ad69bc8e88e0e65, type: 2}
-  Bulb01: {fileID: 1774011462199366, guid: cbff9c6b7547bb548a2a6b96c1324eb5, type: 2}
-  Nest01: {fileID: 1435307980773974, guid: 8423024b86c172c4db6ee6433d973a67, type: 2}
-  Grinder01: {fileID: 1171010268747114, guid: e284fc9ccf8d65543a8889a863d4be18, type: 2}
-  NyxCollector01: {fileID: 1472310793765806, guid: ebde7f43fc4e3284687274c7870c1253,
-    type: 2}
   isSceneInit: 
   StageWalls: []
+  isNewGame: 0
 --- !u!114 &75649608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1154,6 +1141,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7a64462e20a76084d85814a988accd7c, type: 3}
   - {fileID: 8300000, guid: 4889dc0fee560d846a8bd6f56b86cc1c, type: 3}
   - {fileID: 8300000, guid: d5df79e2dfe1762478f00414bea75973, type: 3}
+--- !u!114 &75649609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 75649603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb216e506e62b44fbaba17ea0406c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &90487703
 GameObject:
   m_ObjectHideFlags: 0
@@ -21325,6 +21323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec854908959143a4aaa778e0c52df9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  day: 1
+  questNum: 0
 --- !u!1 &2134511762
 GameObject:
   m_ObjectHideFlags: 0

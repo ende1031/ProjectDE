@@ -203,6 +203,7 @@ public class Facility : SceneObject
         reportUI.AddDay();
         SceneObjectManager.instance.SaveObject();
         SceneObjectManager.instance.SleepAfter();
+        SaveAndLoad.instance.SaveGame(); //Json
         SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
     }
 

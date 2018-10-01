@@ -15,10 +15,11 @@ public class ReportUI : MonoBehaviour
     Text Tip_Text;
     GameObject BackLight;
 
-    int day = 1;
-    int d_Day = 30;
+    public int day = 1; //저장할것
+    //int d_Day = 30;
+    int max_day = 30;
 
-    int questNum = 0;
+    public int questNum = 0; //저장할것
     bool tutorialFinish = false;
 
     List<ReportItem> ReportItemList = new List<ReportItem>();
@@ -202,7 +203,7 @@ public class ReportUI : MonoBehaviour
     public void RefreshUI()
     {
         Day_Text.text = day + "일째";
-        D_Day_Text.text = "구조까지 " + d_Day + "일 남음";
+        D_Day_Text.text = "구조까지 " + (max_day - day + 1) + "일 남음";
 
         if (tutorialFinish == true)
         {
@@ -226,10 +227,10 @@ public class ReportUI : MonoBehaviour
     public void AddDay()
     {
         day++;
-        d_Day--;
+        //d_Day--;
         RefreshUI();
 
-        if(d_Day <= 0)
+        if (max_day - day + 1 <= 0)
         {
             Ending();
         }

@@ -87,8 +87,8 @@ public class ResearchWindow : MonoBehaviour
 
         public Inventory.Item item;
         public int maxNum;
-        public int putNum;
-        public bool isKnown;
+        public int putNum; //저장할것
+        public bool isKnown; //저장할것
         public string expText;
         public int resultNum;
         public string[] resultItem = new string[3];
@@ -571,5 +571,35 @@ public class ResearchWindow : MonoBehaviour
         }
 
         return isFinish[num];
+    }
+
+    public List<ResearchItem_Save> GetResearchList()
+    {
+        List<ResearchItem_Save> temp = new List<ResearchItem_Save>();
+
+        for (int i = 0; i < itemArray.Length; i++)
+        {
+            temp.Add(new ResearchItem_Save(itemArray[i].putNum, itemArray[i].isKnown));
+        }
+
+        return temp;
+    }
+
+    public void LoadResearch(List<ResearchItem_Save> list)
+    {    
+        for (int i = 0; i < itemArray.Length; i++)
+        {
+            itemArray[i].isKnown = list[i].isKnown;
+            itemArray[i].putNum = list[i].putNum;
+
+            if (itemArray[i].putNum >= itemArray[i].maxNum)
+            {
+                isFinish[i] = true;
+            }
+        }
+
+        RefreshWindow();
+        //CloseWindow();
+        //CloseResultWindow();
     }
 }
