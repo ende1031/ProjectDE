@@ -10,7 +10,9 @@ public class SceneObject : MonoBehaviour
     [TextArea]
     public string ExamineText; //메뉴에서 조사하기를 누르면 나오는 대사
     public string MenuTargetType; //인터렉션 메뉴에서 구분을 위해 사용하는 타입
-    public int state = 1;
+    public int state = 1; //Portal의 경우 맵이동 후 플레이어의 좌표
+    public float objectTimer = 0; //Plant, Facility, NyxCollector
+    public string TargetSceneName;
 
     protected InteractionIcon interactionIcon;
     protected InteractionMenu interactionMenu;
@@ -52,7 +54,12 @@ public class SceneObject : MonoBehaviour
         }
     }
 
-    public void Examine()
+    public virtual void Init()
+    {
+
+    }
+
+    public virtual void Examine()
     {
         monologue.DisplayLog(ExamineText);
     }
@@ -62,7 +69,22 @@ public class SceneObject : MonoBehaviour
 
     }
 
-    public void RemoveObject()
+    public virtual void Repair()
+    {
+        
+    }
+
+    public virtual void Gather()
+    {
+
+    }
+
+    public virtual void SetTumor()
+    {
+
+    }
+
+    public virtual void RemoveObject()
     {
         if (energyGauge.GetAmount() < 5)
         {
@@ -96,6 +118,18 @@ public class SceneObject : MonoBehaviour
                 break;
             case InteractionMenu.MenuItem.Examine:
                 Examine();
+                break;
+            case InteractionMenu.MenuItem.Off:
+                OnOff();
+                break;
+            case InteractionMenu.MenuItem.Repair:
+                Repair();
+                break;
+            case InteractionMenu.MenuItem.Gather:
+                Gather();
+                break;
+            case InteractionMenu.MenuItem.Tumor:
+                SetTumor();
                 break;
         }
     }

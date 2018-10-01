@@ -77,4 +77,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7241701df7d134ba7d4fc6afa42107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Stage02
+  ObjectName: Stage02
+  ObjectExplanation: 
+  ExamineText: 
+  MenuTargetType: 
+  state: 0
+  objectTimer: 0
+  TargetSceneName: Stage02

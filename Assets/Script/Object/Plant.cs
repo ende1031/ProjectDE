@@ -24,10 +24,10 @@ public class Plant : SceneObject
     public int GatherAnimationType = 1;
 
     public float growthTime; //성장하는데 걸리는 시간(초)
-    public float growthTimer = 0;
     public bool isTumor = false;
 
-    public bool isLoadByManager = false;
+    //public float growthTimer = 0;
+    //public bool isLoadByManager = false;
 
     //state 0:자라는 중(덫설치후 대기중), 1:채집가능(덫잡힘), 2:채집후, 3:덫설치중, 4:종양심음, 5:종양채집가능
 
@@ -136,7 +136,7 @@ public class Plant : SceneObject
     //    SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
     //}
 
-    void Examine()
+    public override void Examine()
     {
         if(plantName == "Trap01" && state == 1)
         {
@@ -222,60 +222,81 @@ public class Plant : SceneObject
         return temp;
     }
 
-    public void SetTumor()
+    public override void SetTumor()
     {
-        if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
+        if(plantName != "StickPlant" && plantName != "BoardPlant" && plantName != "ThornPlant")
         {
-            state = 4;
-            growthTimer = 0;
-            inventory.DeleteItem(Inventory.Item.TumorSeed);
-            animaitor.SetInteger("State", state);
+            monologue.DisplayLog("종양을 심을 수 없는 식물이다.");
+            return;
         }
-        else
+
+        if(state != 2)
         {
-            monologue.DisplayLog("식물이 다 자라서 종양을 설치할 수 없게 돼버렸군.\n일단 채집을 한 후에 다시 시도해보자.");
+            monologue.DisplayLog("식물의 상태가 종양을 심을 수 없는 상태군.\n수확 후 식물이 기력을 잃은 상태일때 다시 시도해보자.");
+            return;
         }
-    }
 
-    //애니메이션 이벤트에서 사용하는 함수
-    public void SetGatherPossibleFalse()
-    {
-        isGatherPossible = false;
-    }
-
-    //애니메이션 이벤트에서 사용하는 함수
-    public void SetGatherPossibleTrue()
-    {
-        isGatherPossible = true;
-    }
-
-    //애니메이션 이벤트에서 사용하는 함수
-    public void SetTrapOn()
-    {
-        state = 0;
+        state = 4;
+        objectTimer = 0;
+        inventory.DeleteItem(Inventory.Item.TumorSeed);
         animaitor.SetInteger("State", state);
+
+        //if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
+        //{
+        //    state = 4;
+        //    growthTimer = 0;
+        //    inventory.DeleteItem(Inventory.Item.TumorSeed);
+        //    animaitor.SetInteger("State", state);
+        //}
+        //else
+        //{
+        //    monologue.DisplayLog("식물이 다 자라서 종양을 설치할 수 없게 돼버렸군.\n일단 채집을 한 후에 다시 시도해보자.");
+        //}
+    }
+
+    public override void Init()
+    {
+        if(animaitor == null)
+        {
+            animaitor = GetComponent<Animator>();
+        }
+
+        if (objectTimer >= growthTime)
+        {
+            objectTimer = 0;
+            if (state == 4)
+            {
+                state = 5;
+            }
+            else
+            {
+                state = 1;
+            }
+            animaitor.SetInteger("State", state);
+            animaitor.SetBool("isGrowSkip", true);
+        }
     }
 
     void Update ()
     {
-        if (isLoadByManager == true)
-        {
-            if (growthTimer >= growthTime)
-            {
-                growthTimer = 0;
-                if (state == 4)
-                {
-                    state = 5;
-                }
-                else
-                {
-                    state = 1;
-                }
-                animaitor.SetInteger("State", state);
-                animaitor.SetBool("isGrowSkip", true);
-            }
-            isLoadByManager = false;
-        }
+        //if (isLoadByManager == true)
+        //{
+        //    if (growthTimer >= growthTime)
+        //    {
+        //        growthTimer = 0;
+        //        if (state == 4)
+        //        {
+        //            state = 5;
+        //        }
+        //        else
+        //        {
+        //            state = 1;
+        //        }
+        //        animaitor.SetInteger("State", state);
+        //        animaitor.SetBool("isGrowSkip", true);
+        //    }
+        //    isLoadByManager = false;
+        //}
 
         if (plantName != "MassPlant")
         {
@@ -302,7 +323,7 @@ public class Plant : SceneObject
                         {
                             if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Nest", "Nest01") == true)
                             {
-                                growthTimer += Time.deltaTime;
+                                objectTimer += Time.deltaTime;
                             }
                         }
                     }
@@ -310,12 +331,12 @@ public class Plant : SceneObject
             }
             else
             {
-                growthTimer += Time.deltaTime;
+                objectTimer += Time.deltaTime;
             }
             
-            if (growthTimer >= growthTime)
+            if (objectTimer >= growthTime)
             {
-                growthTimer = 0;
+                objectTimer = 0;
                 if(state == 4)
                 {
                     state = 5;
@@ -329,9 +350,9 @@ public class Plant : SceneObject
             }
         }
 
-        if ((state == 1 || state == 5) && growthTimer != 0)
+        if ((state == 1 || state == 5) && objectTimer != 0)
         {
-            growthTimer = 0;
+            objectTimer = 0;
         }
     }
 
@@ -350,6 +371,35 @@ public class Plant : SceneObject
     //        interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
     //    }
     //}
+
+    public override void Gather()
+    {
+        if (isGatherPossible == false)
+        {
+            if (plantName == "Trap01")
+            {
+                monologue.DisplayLog("아직 덫에 아무 것도 잡히지 않았다.");
+            }
+            else
+            {
+                monologue.DisplayLog("아직 채집할 수 없어.\n조금 더 자란 다음에 채집하는게 좋겠군.");
+            }
+        }
+        else if (InventoryCheck() == true)
+        {
+            if (energyGauge.GetAmount() < 5)
+            {
+                monologue.DisplayLog("에너지가 부족해서 채집할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
+                return;
+            }
+            GatherStart();
+            player.GetComponent<PlayerInteraction>().GatherPlant(GatherAnimationType);
+        }
+        else
+        {
+            monologue.DisplayLog("인벤토리 공간이 부족하군.\n채집하기 전에 필요없는 아이템을 버리는게 좋겠어.");
+        }
+    }
 
     public override void OpenMenu()
     {
@@ -375,46 +425,40 @@ public class Plant : SceneObject
         interactionMenu.OpenMenu(this.gameObject, MenuTargetType, GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
-    public override void SelectMenu(InteractionMenu.MenuItem m)
+    //public override void SelectMenu(InteractionMenu.MenuItem m)
+    //{
+    //    switch (m)
+    //    {
+    //        case InteractionMenu.MenuItem.Gather:
+    //            Gather();
+    //            break;
+    //        case InteractionMenu.MenuItem.Tumor:
+    //            SetTumor();
+    //            break;
+    //        case InteractionMenu.MenuItem.Remove:
+    //            RemoveObject();
+    //            break;
+    //        case InteractionMenu.MenuItem.Examine:
+    //            Examine();
+    //            break;
+    //    }
+    //}
+
+    //이하 애니메이션 이벤트에서 사용하는 메소드들
+
+    public void SetGatherPossibleFalse()
     {
-        switch (m)
-        {
-            case InteractionMenu.MenuItem.Gather:
-                if (isGatherPossible == false)
-                {
-                    if (plantName == "Trap01")
-                    {
-                        monologue.DisplayLog("아직 덫에 아무 것도 잡히지 않았다.");
-                    }
-                    else
-                    {
-                        monologue.DisplayLog("아직 채집할 수 없어.\n조금 더 자란 다음에 채집하는게 좋겠군.");
-                    }
-                }
-                else if (InventoryCheck() == true)
-                {
-                    if (energyGauge.GetAmount() < 5)
-                    {
-                        monologue.DisplayLog("에너지가 부족해서 채집할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
-                        return;
-                    }
-                    GatherStart();
-                    player.GetComponent<PlayerInteraction>().GatherPlant(GatherAnimationType);
-                }
-                else
-                {
-                    monologue.DisplayLog("인벤토리 공간이 부족하군.\n채집하기 전에 필요없는 아이템을 버리는게 좋겠어.");
-                }
-                break;
-            case InteractionMenu.MenuItem.Tumor:
-                SetTumor();
-                break;
-            case InteractionMenu.MenuItem.Remove:
-                RemoveObject();
-                break;
-            case InteractionMenu.MenuItem.Examine:
-                Examine();
-                break;
-        }
+        isGatherPossible = false;
+    }
+
+    public void SetGatherPossibleTrue()
+    {
+        isGatherPossible = true;
+    }
+
+    public void SetTrapOn()
+    {
+        state = 0;
+        animaitor.SetInteger("State", state);
     }
 }

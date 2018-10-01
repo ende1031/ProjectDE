@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
     };
 
     GameObject[] itemSlot = new GameObject[15];
-    List<ItemInfo> Items = new List<ItemInfo>();
+    List<ItemInfo> Items = new List<ItemInfo>(); //저장할 것!
     GameObject Cursor;
     GameObject Arrow;
     GameObject[] GetEffect = new GameObject[15];
@@ -124,10 +124,10 @@ public class Inventory : MonoBehaviour
 
     void SetDictionary() //아이템 추가시 수정할 부분
     {
-        itemDictionary[Item.Food] = new ItemName(FoodSp, "식량", "유전자 조작으로 만든 종양을 가공해서 먹을 수 있게 만들었다.\n사용하면 허기 게이지가 50%만큼 회복된다.");
+        itemDictionary[Item.Food] = new ItemName(Resources.Load<Sprite>("Sprite/Object/Item/Item_Food"), "식량", "유전자 조작으로 만든 종양을 가공해서 먹을 수 있게 만들었다.\n사용하면 허기 게이지가 50%만큼 회복된다.");
         itemDictionary[Item.Oxygen] = new ItemName(OxygenSp, "산소", "숨쉬는데 필요한 산소이다.\n사용하면 산소 게이지가 70%만큼 회복된다.");
         itemDictionary[Item.Battery] = new ItemName(BatterySp, "배터리", "괴물의 심장을 가공해서 만든 배터리이다.\n사용하면 에너지 게이지가 35%만큼 회복된다.");
-        itemDictionary[Item.Stick] = new ItemName(StickSp, "막대", "집게발 대나무에서 채집한 막대이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
+        itemDictionary[Item.Stick] = new ItemName(Resources.Load<Sprite>("Sprite/Object/Item/Item_Stick"), "막대", "집게발 대나무에서 채집한 막대이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
         itemDictionary[Item.Board] = new ItemName(BoardSp, "판자", "판자 식물에서 채집한 판자이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
         itemDictionary[Item.Hose] = new ItemName(HoseSp, "호스", "막대와 판자를 합쳐서 만들어낸 아이템이다.");
         itemDictionary[Item.Mass] = new ItemName(MassSp, "괴상한 덩어리", "괴물의 조직으로 추정되는 덩어리이다.\n무언가를 만드는 데 사용할 수 있을 것 같다.");
@@ -140,7 +140,7 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.BoardSeed] = new ItemName(BoardSeedSp, "판자 식물 모종", "원하는 곳에 심으면 판자 식물이 자란다.\n자라는 속도가 빨라서 연속으로 채집할 수 있다.");
         itemDictionary[Item.ThornSeed] = new ItemName(ThornSeedSp, "가시 덩굴 모종", "원하는 곳에 심으면 가시 덩굴이 자란다.\n현실 시간으로 1분에 한번 채집할 수 있다.");
         itemDictionary[Item.Tumor] = new ItemName(TumorSp, "종양", "사용하면 허기 게이지가 10%만큼 회복된다.\n가공해서 식량으로 만들어 먹는 편이 효율적이다.");
-        itemDictionary[Item.TumorSeed] = new ItemName(TumorSeedSp, "종양 씨앗", "식물에 심으면 식용으로 쓸 수 있는 종양이 자란다.\n다 자란 식물에는 심을 수 없다.");
+        itemDictionary[Item.TumorSeed] = new ItemName(TumorSeedSp, "종양 씨앗", "식물에 심으면 식용으로 쓸 수 있는 종양이 자란다.\n수확 후 기력을 잃은 식물에만 심을 수 있다.");
         itemDictionary[Item.Grinder01] = new ItemName(Grinder01Sp, "간이 분해기", "필요 없는 아이템을 분해해서 다른 아이템을 만드는 시설이다.\n탈출포드나 전구 근처에 설치할 수 있다.");
         itemDictionary[Item.SuppliedBattery] = new ItemName(SuppliedBatterySp, "보급용 배터리", "탈출포드에 들어있던 비상용 배터리이다.\n사용하면 에너지 게이지가 35%만큼 회복된다.");
         itemDictionary[Item.SuppliedFood] = new ItemName(SuppliedFoodSp, "보급용 식량", "탈출포드에 들어있던 비상용 식량이다.\n사용하면 허기 게이지가 50%만큼 회복된다.");
@@ -261,15 +261,15 @@ public class Inventory : MonoBehaviour
                         {
                             if(Items[selectedIndex].name == Item.Facility01)
                             {
-                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "TempFacility"));
+                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo("Facility", "TempFacility"));
                             }
                             else if (Items[selectedIndex].name == Item.Grinder01)
                             {
-                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Facility", "Grinder01"));
+                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo("Facility", "Grinder01"));
                             }
                             else if (Items[selectedIndex].name == Item.NyxCollector01)
                             {
-                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("NyxCollector", "NyxCollector01"));
+                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo("NyxCollector", "NyxCollector01"));
                             }
                             energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);
@@ -289,7 +289,7 @@ public class Inventory : MonoBehaviour
                         {
                             if (Items[selectedIndex].name == Item.Trap01)
                             {
-                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "Trap01", 3));
+                                SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo("Plant", "Trap01", 3));
                             }
                             energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);
@@ -301,7 +301,7 @@ public class Inventory : MonoBehaviour
                         {
                             monologue.DisplayLog("근처에 이미 다른 광원이 있군.\n근처에 탈출포드나 전구가 없는 곳에 설치하자.");
                         }
-                        else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Bulb", "Bulb01")) == true)
+                        else if (SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo("Bulb", "Bulb01")) == true)
                         {
                             energyGauge.SetAmount(-5);
                             DeleteItem(Items[selectedIndex].name);
@@ -331,19 +331,19 @@ public class Inventory : MonoBehaviour
                 {
                     if (Items[selectedIndex].name == Item.StickSeed)
                     {
-                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "StickPlant", 0));
+                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo("Plant", "StickPlant", 0));
                     }
                     else if (Items[selectedIndex].name == Item.BoardSeed)
                     {
-                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "BoardPlant", 0));
+                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo("Plant", "BoardPlant", 0));
                     }
                     else if (Items[selectedIndex].name == Item.ThornSeed)
                     {
-                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "ThornPlant", 0));
+                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo("Plant", "ThornPlant", 0));
                     }
                     else if (Items[selectedIndex].name == Item.FruitSeed)
                     {
-                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.SceneObject("Plant", "FruitPlant", 0));
+                        SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo("Plant", "FruitPlant", 0));
                     }
                     energyGauge.SetAmount(-5);
                     DeleteItem(Items[selectedIndex].name);

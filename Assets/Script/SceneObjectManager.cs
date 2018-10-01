@@ -6,14 +6,21 @@ using UnityEngine.SceneManagement;
 public class SceneObjectManager : MonoBehaviour
 {
     public static SceneObjectManager instance = null;
-    GameObject UI;
 
+    static int maxSceneNum = 4; //게임 플레이에 들어가는 씬의 수
+
+    List<Dictionary<int, ObjectInfo>> SObjects = new List<Dictionary<int, ObjectInfo>>();
+    public List<bool> isSceneInit = new List<bool>();
+    public List<Vector2> StageWalls = new List<Vector2>();
+    //Dictionary<string, GameObject> objectDictionary = new Dictionary<string, GameObject>();
+
+    GameObject UI;
     HungerGauge hungerGauge;
     EnergyGauge energyGauge;
     Inventory inventory;
     NyxUI nyxUI;
-
-    public GameObject TempFacility; //Prefab 추가시 수정할 부분
+    /*
+    public GameObject TempFacility; //Prefab
     public GameObject EscapePod;
     public GameObject StickPlant;
     public GameObject BoardPlant;
@@ -26,121 +33,160 @@ public class SceneObjectManager : MonoBehaviour
     public GameObject Nest01;
     public GameObject Grinder01;
     public GameObject NyxCollector01;
-
-    public class SceneObject
+    
+    void SetObjectDictionary()
     {
-        public SceneObject(string t, string n, int temp = 1) //temp : 이동후좌표(포탈), 상태(식물, 시설)
+        objectDictionary["TempFacility"] = TempFacility;
+        objectDictionary["EscapePod"] = EscapePod;
+        objectDictionary["StickPlant"] = StickPlant;
+        objectDictionary["BoardPlant"] = BoardPlant;
+        objectDictionary["MassPlant"] = MassPlant;
+        objectDictionary["ThornPlant"] = ThornPlant;
+        objectDictionary["FruitPlant"] = FruitPlant;
+        objectDictionary["Portal"] = Portal;
+        objectDictionary["Trap01"] = Trap01;
+        objectDictionary["Bulb01"] = Bulb01;
+        objectDictionary["Nest01"] = Nest01;
+        objectDictionary["Grinder01"] = Grinder01;
+        objectDictionary["NyxCollector01"] = NyxCollector01;
+    }
+    */
+    public class ObjectInfo
+    {
+        public ObjectInfo(string t, string n, int st = 1)
         {
             type = t;
             name = n;
-            portalAfterMoveGrid = temp;
-            state = temp;
+            state = st;
         }
 
         public GameObject inGameObject;
-        public string type; //"plant", "Facility" 등
-        public string name; //"TempFacility", "EscapePod", "StickPlant" 등. Portal의 경우 이동하려는 씬의 이름
-        
-        public float timer; //growthTimer(괴식물), progressTimer(시설)
-        public int portalAfterMoveGrid;
+        public string type;
+        public string name; //Portal의 경우 이동하려는 씬의 이름
+        public float timer;
         public int state;
+
         public Inventory.Item facilityMakeItem;
         public Inventory.Item[] facilityGrinderItem = new Inventory.Item[2];
         public int[] facilityGrinderItemNum = new int[2];
         public float facilityTimeToMake;
-        public bool isMakeByGrinder;
     }
 
-    static int maxSceneNum = 4; //씬 추가시 늘려줘야 됨
-
-    List<Dictionary<int, SceneObject>> SObjects = new List<Dictionary<int, SceneObject>>();
-    public List<bool> isSceneInit = new List<bool>();
-    public List<Vector2> StageWalls = new List<Vector2>();
-
-    void InstantiateObject(int grid, SceneObject ob)
+    void InstantiateObject(int grid, ObjectInfo ob)
     {
         Vector3 tempPos = Grid.instance.GridToPos(grid);
         tempPos.z = 0.1f;
 
-        if (ob.type == "Plant") //Prefab 추가시 수정할 부분
+        //=========================================================
+
+        if (ob.type == "Portal")
         {
-            switch (ob.name)
-            {
-                case "StickPlant":
-                    ob.inGameObject = Instantiate(StickPlant, tempPos, Quaternion.identity);
-                    break;
-                case "MassPlant":
-                    ob.inGameObject = Instantiate(MassPlant, tempPos, Quaternion.identity);
-                    break;
-                case "BoardPlant":
-                    ob.inGameObject = Instantiate(BoardPlant, tempPos, Quaternion.identity);
-                    break;
-                case "ThornPlant":
-                    ob.inGameObject = Instantiate(ThornPlant, tempPos, Quaternion.identity);
-                    break;
-                case "Trap01":
-                    ob.inGameObject = Instantiate(Trap01, tempPos, Quaternion.identity);
-                    break;
-                case "FruitPlant":
-                    ob.inGameObject = Instantiate(FruitPlant, tempPos, Quaternion.identity);
-                    break;
-                default:
-                    ob.inGameObject = Instantiate(StickPlant, tempPos, Quaternion.identity);
-                    break;
-            }
-            ob.inGameObject.GetComponent<Plant>().state = ob.state;
-            ob.inGameObject.GetComponent<Plant>().growthTimer = ob.timer;
-            ob.inGameObject.GetComponent<Plant>().isLoadByManager = true;
+            ob.inGameObject = Instantiate(Resources.Load("Prefab/Portal") as GameObject, tempPos, Quaternion.identity);
         }
-        else if (ob.type == "Facility")
+        else
         {
-            switch (ob.name)
-            {
-                case "TempFacility":
-                    ob.inGameObject = Instantiate(TempFacility, tempPos, Quaternion.identity);
-                    break;
-                case "Grinder01":
-                    ob.inGameObject = Instantiate(Grinder01, tempPos, Quaternion.identity);
-                    break;
-                case "EscapePod":
-                    tempPos.z = 0.2f; //크기가 커서 겹쳐보일 수 있음
-                    ob.inGameObject = Instantiate(EscapePod, tempPos, Quaternion.identity);
-                    break;
-                default:
-                    ob.inGameObject = Instantiate(TempFacility, tempPos, Quaternion.identity);
-                    break;
-            }
-            ob.inGameObject.GetComponent<Facility>().state = ob.state;
+            ob.inGameObject = Instantiate(Resources.Load("Prefab/" + ob.name) as GameObject, tempPos, Quaternion.identity);
+        }
+
+        if(ob.name == "EscapePod")
+        {
+            tempPos.z = 0.2f; //크기가 커서 겹쳐보일 수 있음
+        }
+        ob.inGameObject.GetComponent<SceneObject>().TargetSceneName = ob.name;
+        ob.inGameObject.GetComponent<SceneObject>().state = ob.state;
+        ob.inGameObject.GetComponent<SceneObject>().objectTimer = ob.timer;
+
+        if (ob.type == "Facility")
+        {
             ob.inGameObject.GetComponent<FacilityBalloon>().makeItem = ob.facilityMakeItem;
-            ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer = ob.timer;
             ob.inGameObject.GetComponent<FacilityBalloon>().timeToMake = ob.facilityTimeToMake;
-            ob.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder = ob.isMakeByGrinder;
             ob.inGameObject.GetComponent<FacilityBalloon>().grinderItem = ob.facilityGrinderItem;
             ob.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum = ob.facilityGrinderItemNum;
-            ob.inGameObject.GetComponent<Facility>().isLoadByManager = true;
-            ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
         }
-        else if (ob.type == "Portal")
-        {
-            ob.inGameObject = Instantiate(Portal, tempPos, Quaternion.identity);
-            ob.inGameObject.GetComponent<Portal>().sceneName = ob.name;
-            ob.inGameObject.GetComponent<Portal>().AfterMoveGrid = ob.portalAfterMoveGrid;
-        }
-        else if (ob.type == "Bulb")
-        {
-            ob.inGameObject = Instantiate(Bulb01, tempPos, Quaternion.identity);
-        }
-        else if (ob.type == "Nest")
-        {
-            ob.inGameObject = Instantiate(Nest01, tempPos, Quaternion.identity);
-        }
-        else if (ob.type == "NyxCollector")
-        {
-            ob.inGameObject = Instantiate(NyxCollector01, tempPos, Quaternion.identity);
-            ob.inGameObject.GetComponent<NyxCollector>().state = ob.state;
-            ob.inGameObject.GetComponent<NyxCollector>().collectTimer = ob.timer;
-            ob.inGameObject.GetComponent<NyxCollector>().isLoadByManager = true;
-        }
+        
+        ob.inGameObject.GetComponent<SceneObject>().Init();
+
+        //=========================================================
+        
+        //if (ob.type == "Plant") //Prefab 추가시 수정할 부분
+        //{
+        //    switch (ob.name)
+        //    {
+        //        case "StickPlant":
+        //            ob.inGameObject = Instantiate(StickPlant, tempPos, Quaternion.identity);
+        //            break;
+        //        case "MassPlant":
+        //            ob.inGameObject = Instantiate(MassPlant, tempPos, Quaternion.identity);
+        //            break;
+        //        case "BoardPlant":
+        //            ob.inGameObject = Instantiate(BoardPlant, tempPos, Quaternion.identity);
+        //            break;
+        //        case "ThornPlant":
+        //            ob.inGameObject = Instantiate(ThornPlant, tempPos, Quaternion.identity);
+        //            break;
+        //        case "Trap01":
+        //            ob.inGameObject = Instantiate(Trap01, tempPos, Quaternion.identity);
+        //            break;
+        //        case "FruitPlant":
+        //            ob.inGameObject = Instantiate(FruitPlant, tempPos, Quaternion.identity);
+        //            break;
+        //        default:
+        //            ob.inGameObject = Instantiate(StickPlant, tempPos, Quaternion.identity);
+        //            break;
+        //    }
+        //    ob.inGameObject.GetComponent<Plant>().state = ob.state;
+        //    ob.inGameObject.GetComponent<Plant>().objectTimer = ob.timer;
+        //    ob.inGameObject.GetComponent<Plant>().isLoadByManager = true;
+        //}
+        //else if (ob.type == "Facility")
+        //{
+        //    switch (ob.name)
+        //    {
+        //        case "TempFacility":
+        //            ob.inGameObject = Instantiate(TempFacility, tempPos, Quaternion.identity);
+        //            break;
+        //        case "Grinder01":
+        //            ob.inGameObject = Instantiate(Grinder01, tempPos, Quaternion.identity);
+        //            break;
+        //        case "EscapePod":
+        //            tempPos.z = 0.2f; //크기가 커서 겹쳐보일 수 있음
+        //            ob.inGameObject = Instantiate(EscapePod, tempPos, Quaternion.identity);
+        //            break;
+        //        default:
+        //            ob.inGameObject = Instantiate(TempFacility, tempPos, Quaternion.identity);
+        //            break;
+        //    }
+        //    ob.inGameObject.GetComponent<Facility>().state = ob.state;
+        //    ob.inGameObject.GetComponent<FacilityBalloon>().makeItem = ob.facilityMakeItem;
+        //    ob.inGameObject.GetComponent<FacilityBalloon>().progressTimer = ob.timer;
+        //    ob.inGameObject.GetComponent<FacilityBalloon>().timeToMake = ob.facilityTimeToMake;
+        //    ob.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder = ob.isMakeByGrinder;
+        //    ob.inGameObject.GetComponent<FacilityBalloon>().grinderItem = ob.facilityGrinderItem;
+        //    ob.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum = ob.facilityGrinderItemNum;
+        //    ob.inGameObject.GetComponent<Facility>().isLoadByManager = true;
+        //    ob.inGameObject.GetComponent<FacilityBalloon>().isLoadByManager = true;
+        //}
+        //else if (ob.type == "Portal")
+        //{
+        //    ob.inGameObject = Instantiate(Portal, tempPos, Quaternion.identity);
+        //    ob.inGameObject.GetComponent<Portal>().ObjectName = ob.name;
+        //    ob.inGameObject.GetComponent<Portal>().state = ob.state;
+        //}
+        //else if (ob.type == "Bulb")
+        //{
+        //    ob.inGameObject = Instantiate(Bulb01, tempPos, Quaternion.identity);
+        //}
+        //else if (ob.type == "Nest")
+        //{
+        //    ob.inGameObject = Instantiate(Nest01, tempPos, Quaternion.identity);
+        //}
+        //else if (ob.type == "NyxCollector")
+        //{
+        //    ob.inGameObject = Instantiate(NyxCollector01, tempPos, Quaternion.identity);
+        //    ob.inGameObject.GetComponent<NyxCollector>().state = ob.state;
+        //    ob.inGameObject.GetComponent<NyxCollector>().objectTimer = ob.timer;
+        //    ob.inGameObject.GetComponent<NyxCollector>().isLoadByManager = true;
+        //}
     }
 
     void Awake()
@@ -168,10 +214,12 @@ public class SceneObjectManager : MonoBehaviour
 
         for (int i = 0; i < maxSceneNum; i++)
         {
-            SObjects.Add(new Dictionary<int, SceneObject>());
+            SObjects.Add(new Dictionary<int, ObjectInfo>());
             isSceneInit.Add(false);
             StageWalls.Add(Vector2.zero);
         }
+
+        //SetObjectDictionary();
     }
 
     //게임 초기화
@@ -185,7 +233,7 @@ public class SceneObjectManager : MonoBehaviour
     {
         for (int i = 0; i < maxSceneNum; i++)
         {
-            foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
+            foreach (KeyValuePair<int, ObjectInfo> pair in SObjects[i])
             {
                 if (pair.Value.type == "Plant")
                 {
@@ -240,30 +288,45 @@ public class SceneObjectManager : MonoBehaviour
     {
         for (int i = 0; i < maxSceneNum; i++)
         {
-            foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
+            foreach (KeyValuePair<int, ObjectInfo> pair in SObjects[i])
             {
                 if (pair.Value.inGameObject != null)
                 {
-                    if (pair.Value.type == "Plant")
+                    //============================================
+
+                    pair.Value.state = pair.Value.inGameObject.GetComponent<SceneObject>().state;
+                    pair.Value.timer = pair.Value.inGameObject.GetComponent<SceneObject>().objectTimer;
+
+                    if (pair.Value.type == "Facility")
                     {
-                        pair.Value.state = pair.Value.inGameObject.GetComponent<Plant>().state;
-                        pair.Value.timer = pair.Value.inGameObject.GetComponent<Plant>().growthTimer;
-                    }
-                    else if (pair.Value.type == "Facility")
-                    {
-                        pair.Value.state = pair.Value.inGameObject.GetComponent<Facility>().state;
-                        pair.Value.timer = pair.Value.inGameObject.GetComponent<FacilityBalloon>().progressTimer;
                         pair.Value.facilityTimeToMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().timeToMake;
                         pair.Value.facilityMakeItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().makeItem;
-                        pair.Value.isMakeByGrinder = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder;
                         pair.Value.facilityGrinderItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItem;
                         pair.Value.facilityGrinderItemNum = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum;
                     }
-                    else if (pair.Value.type == "NyxCollector")
-                    {
-                        pair.Value.state = pair.Value.inGameObject.GetComponent<NyxCollector>().state;
-                        pair.Value.timer = pair.Value.inGameObject.GetComponent<NyxCollector>().collectTimer;
-                    }
+
+                    //============================================
+
+                    //if (pair.Value.type == "Plant")
+                    //{
+                    //    pair.Value.state = pair.Value.inGameObject.GetComponent<Plant>().state;
+                    //    pair.Value.timer = pair.Value.inGameObject.GetComponent<Plant>().objectTimer;
+                    //}
+                    //else if (pair.Value.type == "Facility")
+                    //{
+                    //    pair.Value.state = pair.Value.inGameObject.GetComponent<Facility>().state;
+                    //    pair.Value.timer = pair.Value.inGameObject.GetComponent<Facility>().objectTimer;
+                    //    pair.Value.facilityTimeToMake = pair.Value.inGameObject.GetComponent<FacilityBalloon>().timeToMake;
+                    //    pair.Value.facilityMakeItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().makeItem;
+                    //    pair.Value.isMakeByGrinder = pair.Value.inGameObject.GetComponent<FacilityBalloon>().isMakeByGrinder;
+                    //    pair.Value.facilityGrinderItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItem;
+                    //    pair.Value.facilityGrinderItemNum = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum;
+                    //}
+                    //else if (pair.Value.type == "NyxCollector")
+                    //{
+                    //    pair.Value.state = pair.Value.inGameObject.GetComponent<NyxCollector>().state;
+                    //    pair.Value.timer = pair.Value.inGameObject.GetComponent<NyxCollector>().objectTimer;
+                    //}
                 }
             }
         }
@@ -274,7 +337,7 @@ public class SceneObjectManager : MonoBehaviour
     {
         for (int i = 0; i < maxSceneNum; i++)
         {
-            foreach (KeyValuePair<int, SceneObject> pair in SObjects[i])
+            foreach (KeyValuePair<int, ObjectInfo> pair in SObjects[i])
             {
                 if (pair.Value.type == "Plant")
                 {
@@ -314,13 +377,13 @@ public class SceneObjectManager : MonoBehaviour
         hungerGauge.SetAmount(-10, true);
         energyGauge.SetAmount(100);
 
-        RandomSpawn(new SceneObject("Plant", "MassPlant", 1));
-        RandomSpawn(new SceneObject("Plant", "MassPlant", 1));
-        RandomSpawn(new SceneObject("Plant", "MassPlant", 1));
+        RandomSpawn(new ObjectInfo("Plant", "MassPlant", 1));
+        RandomSpawn(new ObjectInfo("Plant", "MassPlant", 1));
+        RandomSpawn(new ObjectInfo("Plant", "MassPlant", 1));
     }
 
     // 방문한 적 있는 맵 중에서 랜덤으로 오브젝트 생성. 씬이동시에만 사용할 것.
-    void RandomSpawn(SceneObject ob)
+    void RandomSpawn(ObjectInfo ob)
     {
         //배열 초기화
         bool[] isSceneHasBlank = new bool[maxSceneNum];
@@ -401,7 +464,7 @@ public class SceneObjectManager : MonoBehaviour
     }
 
     //해당 좌표에 이미 다른 오브젝트가 있으면 false를 반환
-    public bool AddObject(int sceneNum, int grid, SceneObject ob)
+    public bool AddObject(int sceneNum, int grid, ObjectInfo ob)
     {
         if (SObjects[sceneNum].ContainsKey(grid) == true)
         {
@@ -434,7 +497,7 @@ public class SceneObjectManager : MonoBehaviour
     }
 
     //시설을 지우고 잔해를 넣는 등
-    public void ChangeObject(int sceneNum, int grid, SceneObject ob)
+    public void ChangeObject(int sceneNum, int grid, ObjectInfo ob)
     {
         DeleteObject(sceneNum, grid);
         AddObject(sceneNum, grid, ob);
@@ -443,7 +506,7 @@ public class SceneObjectManager : MonoBehaviour
     //맵이동시 삭제되는 오브젝트를 다시 불러옴
     public void ReloadObject(int sceneNum)
     {
-        foreach (KeyValuePair<int, SceneObject> pair in SObjects[sceneNum])
+        foreach (KeyValuePair<int, ObjectInfo> pair in SObjects[sceneNum])
         {
             if (pair.Value.inGameObject == null)
             {

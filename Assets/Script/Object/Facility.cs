@@ -24,8 +24,8 @@ public class Facility : SceneObject
     //EnergyGauge energyGauge;
     //int sceneNum;
     //public int state = 1;
+    //public bool isLoadByManager = false;
 
-    public bool isLoadByManager = false;
     float offTimer = 0;
     float sleepTimer = 0;
 
@@ -53,27 +53,47 @@ public class Facility : SceneObject
             animaitor.SetInteger("State", state);
         }
     }
-	
-	void Update ()
+
+    public override void Init()
     {
-        if (isLoadByManager == true)
+        if (state != 0)
         {
-            if (state != 0)
+            if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01") == false)
             {
-                if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01") == false)
+                if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
                 {
-                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
-                    {
-                        Ruin();
-                    }
+                    Ruin();
                 }
             }
-            if (animaitor != null)
-            {
-                animaitor.SetInteger("State", state);
-            }
-            isLoadByManager = false;
         }
+        if (animaitor != null)
+        {
+            animaitor.SetInteger("State", state);
+        }
+
+        GetComponent<FacilityBalloon>().isInit = true;
+    }
+
+    void Update ()
+    {
+        //if (isLoadByManager == true)
+        //{
+        //    if (state != 0)
+        //    {
+        //        if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01") == false)
+        //        {
+        //            if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
+        //            {
+        //                Ruin();
+        //            }
+        //        }
+        //    }
+        //    if (animaitor != null)
+        //    {
+        //        animaitor.SetInteger("State", state);
+        //    }
+        //    isLoadByManager = false;
+        //}
 
         if (RuinCheck() == true)
         {
@@ -100,14 +120,13 @@ public class Facility : SceneObject
 
     public override void DisplayIcon()
     {
-        if (state != 0)
-        {
-            interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
-        }
-        else if(facilityName != "EscapePod")
+        if (state == 0 && facilityName != "EscapePod")
         {
             interactionIcon.AddIcon(InteractionIcon.Icon.OnOff);
+            return;
         }
+
+        interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
     }
 
     //void OnTriggerExit2D(Collider2D other)
@@ -167,15 +186,24 @@ public class Facility : SceneObject
         grinderWindow.OpenWindow(this.gameObject);
     }
 
-    public void Sleep()
+    void Sleep()
     {
-        if (facilityName == "EscapePod")
+        if (facilityName != "EscapePod")
         {
-            reportUI.AddDay();
-            SceneObjectManager.instance.SaveObject();
-            SceneObjectManager.instance.SleepAfter();
-            SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
+            return;
         }
+
+        if (sleepTimer < 0.5f)
+        {
+            monologue.DisplayLog("지금은 졸리지 않아.\n일어난지 얼마 안됐는데 벌써 잘 수는 없지.");
+            return;
+        }
+
+        Player.GetComponent<PlayerMove>().SetMovePossible(false);
+        reportUI.AddDay();
+        SceneObjectManager.instance.SaveObject();
+        SceneObjectManager.instance.SleepAfter();
+        SceneChanger.instance.FadeAndLoadScene(SceneChanger.instance.GetSceneName(), Grid.instance.PlayerGrid());
     }
 
     public void Research()
@@ -212,7 +240,7 @@ public class Facility : SceneObject
         }
     }
 
-    public void RemoveObject()
+    public override void RemoveObject()
     {
         if (facilityName != "EscapePod")
         {
@@ -256,26 +284,28 @@ public class Facility : SceneObject
         }
     }
 
-    void Repair()
+    public override void Repair()
     {
-        if(state == 4)
+        if (state != 4)
         {
-            if (energyGauge.GetAmount() < 5)
-            {
-                monologue.DisplayLog("에너지가 부족해서 수리할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
-                return;
-            }
-            energyGauge.SetAmount(-5);
-            state = 1;
-            SoundManager.instance.PlaySE(32);
-            if (animaitor != null)
-            {
-                animaitor.SetInteger("State", state);
-            }
+            return;
+        }
+        if (energyGauge.GetAmount() < 5)
+        {
+            monologue.DisplayLog("에너지가 부족해서 수리할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
+            return;
+        }
+
+        energyGauge.SetAmount(-5);
+        state = 1;
+        SoundManager.instance.PlaySE(32);
+        if (animaitor != null)
+        {
+            animaitor.SetInteger("State", state);
         }
     }
 
-    void Examine()
+    public override void Examine()
     {
         if(state == 4)
         {
@@ -352,6 +382,16 @@ public class Facility : SceneObject
         }
     }
 
+    public override void Gather()
+    {
+        if (GetComponent<FacilityBalloon>().InventoryCheck() == false)
+        {
+            monologue.DisplayLog("인벤토리 공간이 부족하군.\n아이템을 획득하려면 인벤토리에 빈 공간이 필요해.");
+            return;
+        }
+        GetComponent<FacilityBalloon>().GetItem();
+    }
+
     public override void SelectMenu(InteractionMenu.MenuItem m)
     {
         switch (m)
@@ -363,15 +403,7 @@ public class Facility : SceneObject
                 OpenGrinderWindow();
                 break;
             case InteractionMenu.MenuItem.Gather:
-                if (GetComponent<FacilityBalloon>().InventoryCheck() == true)
-                {
-                    GetComponent<FacilityBalloon>().GetItem();
-                }
-                else
-                {
-                    monologue.DisplayLog("인벤토리 공간이 부족하군.\n아이템을 획득하려면 인벤토리에 빈 공간이 필요해.");
-                    return;
-                }
+                Gather();
                 break;
             case InteractionMenu.MenuItem.Cancle:
                 GetComponent<FacilityBalloon>().Dump();
@@ -380,15 +412,7 @@ public class Facility : SceneObject
                 Research();
                 break;
             case InteractionMenu.MenuItem.Sleep:
-                if (sleepTimer >= 0.5f)
-                {
-                    Player.GetComponent<PlayerMove>().SetMovePossible(false);
-                    Sleep();
-                }
-                else
-                {
-                    monologue.DisplayLog("지금은 졸리지 않아.\n일어난지 얼마 안됐는데 벌써 잘 수는 없지.");
-                }
+                Sleep();
                 break;
             case InteractionMenu.MenuItem.Off:
                 OnOff();

@@ -20,9 +20,9 @@ public class NyxCollector : SceneObject
     Animator animaitor;
     GameObject particle;
 
-    public float collectTimer = 0;
+    //public float collectTimer = 0;
+    //public bool isLoadByManager = false;
 
-    public bool isLoadByManager = false;
     float offTimer = 0;
 
     //state 0:꺼짐, 1:평상시, 4:죽음
@@ -46,31 +46,53 @@ public class NyxCollector : SceneObject
             animaitor.SetInteger("State", state);
         }
     }
-	
-	void Update ()
+
+    public override void Init()
     {
-        if (isLoadByManager == true)
+        if (state != 0)
         {
-            if (state != 0)
+            if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01") == false)
             {
-                if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01") == false)
+                if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
                 {
-                    if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
-                    {
-                        Ruin();
-                    }
+                    Ruin();
                 }
             }
-            if(state == 0 || state == 4)
-            {
-                particle.SetActive(false);
-            }
-            if (animaitor != null)
-            {
-                animaitor.SetInteger("State", state);
-            }
-            isLoadByManager = false;
         }
+        if (state == 0 || state == 4)
+        {
+            particle.SetActive(false);
+        }
+        if (animaitor != null)
+        {
+            animaitor.SetInteger("State", state);
+        }
+    }
+
+    void Update ()
+    {
+        //if (isLoadByManager == true)
+        //{
+        //    if (state != 0)
+        //    {
+        //        if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Bulb", "Bulb01") == false)
+        //        {
+        //            if (SceneObjectManager.instance.RangeSearch(sceneNum, Grid.instance.PosToGrid(transform.position.x), 2, "Facility", "EscapePod") == false)
+        //            {
+        //                Ruin();
+        //            }
+        //        }
+        //    }
+        //    if (state == 0 || state == 4)
+        //    {
+        //        particle.SetActive(false);
+        //    }
+        //    if (animaitor != null)
+        //    {
+        //        animaitor.SetInteger("State", state);
+        //    }
+        //    isLoadByManager = false;
+        //}
 
         if (RuinCheck() == true)
         {
@@ -90,12 +112,12 @@ public class NyxCollector : SceneObject
 
     void CollectNyx()
     {
-        collectTimer += Time.deltaTime;
+        objectTimer += Time.deltaTime;
 
-        if(collectTimer >= 1.0f)
+        if(objectTimer >= 1.0f)
         {
             nyxUI.SetAmount(1);
-            collectTimer = 0;
+            objectTimer = 0;
         }
     }
 
@@ -159,24 +181,26 @@ public class NyxCollector : SceneObject
         particle.SetActive(false);
     }
 
-    void Repair()
+    public override void Repair()
     {
-        if (state == 4)
+        if (state != 4)
         {
-            if (energyGauge.GetAmount() < 5)
-            {
-                monologue.DisplayLog("에너지가 부족해서 수리할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
-                return;
-            }
-            energyGauge.SetAmount(-5);
-            state = 1;
-            if (animaitor != null)
-            {
-                animaitor.SetInteger("State", state);
-            }
-            particle.SetActive(true);
-            SoundManager.instance.PlaySE(32);
+            return;
         }
+        if (energyGauge.GetAmount() < 5)
+        {
+            monologue.DisplayLog("에너지가 부족해서 수리할 수 없어.\n탈출포드로 돌아가서 잠을 자도록 하자.");
+            return;
+        }
+
+        energyGauge.SetAmount(-5);
+        state = 1;
+        if (animaitor != null)
+        {
+            animaitor.SetInteger("State", state);
+        }
+        particle.SetActive(true);
+        SoundManager.instance.PlaySE(32);
     }
 
     public override void OnOff()
@@ -243,22 +267,22 @@ public class NyxCollector : SceneObject
         interactionMenu.OpenMenu(this.gameObject, MenuTargetType, GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
-    public override void SelectMenu(InteractionMenu.MenuItem m)
-    {
-        switch (m)
-        {
-            case InteractionMenu.MenuItem.Off:
-                OnOff();
-                break;
-            case InteractionMenu.MenuItem.Remove:
-                RemoveObject();
-                break;
-            case InteractionMenu.MenuItem.Repair:
-                Repair();
-                break;
-            case InteractionMenu.MenuItem.Examine:
-                Examine();
-                break;
-        }
-    }
+    //public override void SelectMenu(InteractionMenu.MenuItem m)
+    //{
+    //    switch (m)
+    //    {
+    //        case InteractionMenu.MenuItem.Off:
+    //            OnOff();
+    //            break;
+    //        case InteractionMenu.MenuItem.Remove:
+    //            RemoveObject();
+    //            break;
+    //        case InteractionMenu.MenuItem.Repair:
+    //            Repair();
+    //            break;
+    //        case InteractionMenu.MenuItem.Examine:
+    //            Examine();
+    //            break;
+    //    }
+    //}
 }

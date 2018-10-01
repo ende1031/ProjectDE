@@ -467,7 +467,7 @@ public class InteractionMenu : MonoBehaviour
                 WarningText.text = "작동을 중지 하시겠습니까?\n시설에 넣어 둔 아이템은 사라집니다.";
                 break;
             case MenuItem.Sleep:
-                WarningText.text = "전원이 켜져있는 시설은\n잠자는 동안 괴물의 공격을 받게 됩니다.";
+                WarningText.text = "전원이 켜져있는 시설은\n잠자는 동안 괴물의 공격을 받아 파괴 되며\n제작중인 아이템은 사라집니다.";
                 break;
             default:
                 WarningText.text = "정말 실행하시겠습니까?\n실행하시면 되돌릴 수 없습니다.";

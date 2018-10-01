@@ -22,7 +22,7 @@ public class FacilityBalloon : MonoBehaviour
 
     float progress;
     public float timeToMake; //초
-    public float progressTimer;
+    //public float progressTimer;
 
     public Inventory.Item makeItem = 0; // 만드는 아이템
 
@@ -30,9 +30,11 @@ public class FacilityBalloon : MonoBehaviour
     public int[] grinderItemNum = new int[2] { 0, 0 };
     public int grinderNyxNum = 0;
 
-    public bool isLoadByManager = false;
+    public bool isGrinder = false;
 
-    public bool isMakeByGrinder = false;
+    public bool isInit = false;
+
+    //public bool isMakeByGrinder = false;
 
     void Start ()
     {
@@ -54,7 +56,7 @@ public class FacilityBalloon : MonoBehaviour
 
     void Update ()
     {
-        if(isLoadByManager == true)
+        if(isInit == true)
         {
             if (GetComponent<Facility>().state == 2)
             {
@@ -67,7 +69,7 @@ public class FacilityBalloon : MonoBehaviour
                 Item.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
                 Item2.GetComponent<SpriteRenderer>().size = new Vector2(2.4f, 2.4f);
             }
-            if(isMakeByGrinder == false)
+            if (isGrinder == false)
             {
                 Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem].sprite;
                 Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem].sprite;
@@ -77,7 +79,7 @@ public class FacilityBalloon : MonoBehaviour
                 DisplayGrinderItems();
             }
 
-            isLoadByManager = false;
+            isInit = false;
         }
 
         if (GetComponent<Facility>().state == 2)
@@ -97,7 +99,7 @@ public class FacilityBalloon : MonoBehaviour
 
     public void MakeItem(Inventory.Item itemName, int time)
     {
-        isMakeByGrinder = false;
+        isGrinder = false;
 
         Balloon.SetActive(true);
         makeItem = itemName;
@@ -105,7 +107,7 @@ public class FacilityBalloon : MonoBehaviour
         Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName].sprite;
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         timeToMake = time;
-        progressTimer = timeToMake;
+        GetComponent<Facility>().objectTimer = timeToMake;
         GetComponent<Facility>().state = 2;
         if (animaitor != null)
         {
@@ -115,7 +117,7 @@ public class FacilityBalloon : MonoBehaviour
 
     public void GrindItem(int time, int nyx, Inventory.Item itemName1 = 0, int num1 = 0, Inventory.Item itemName2 = 0, int num2 = 0)
     {
-        isMakeByGrinder = true;
+        isGrinder = true;
 
         Balloon.SetActive(true);
 
@@ -126,7 +128,7 @@ public class FacilityBalloon : MonoBehaviour
 
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         timeToMake = time;
-        progressTimer = timeToMake;
+        GetComponent<Facility>().objectTimer = timeToMake;
         GetComponent<Facility>().state = 2;
         if (animaitor != null)
         {
@@ -199,7 +201,7 @@ public class FacilityBalloon : MonoBehaviour
     public bool InventoryCheck()
     {
         bool temp = true;
-        if (isMakeByGrinder == false)
+        if (isGrinder == false)
         {
             temp = !inventory.isFull(1, makeItem);
         }
@@ -229,7 +231,7 @@ public class FacilityBalloon : MonoBehaviour
 
     public void GetItem()
     {
-        if (isMakeByGrinder == false)
+        if (isGrinder == false)
         {
             inventory.GetItem(makeItem);
         }
@@ -270,14 +272,14 @@ public class FacilityBalloon : MonoBehaviour
 
     void Display()
     {
-        float temp = (int)(progressTimer % 60);
+        float temp = (int)(GetComponent<Facility>().objectTimer % 60);
         if (temp < 10)
         {
-            TimeText.GetComponent<TextMesh>().text = (int)(progressTimer / 60.0f) + ":0" + temp;
+            TimeText.GetComponent<TextMesh>().text = (int)(GetComponent<Facility>().objectTimer / 60.0f) + ":0" + temp;
         }
         else
         {
-            TimeText.GetComponent<TextMesh>().text = (int)(progressTimer / 60.0f) + ":" + temp;
+            TimeText.GetComponent<TextMesh>().text = (int)(GetComponent<Facility>().objectTimer / 60.0f) + ":" + temp;
         }
 
         if (GetComponent<Facility>().state == 3)
@@ -294,17 +296,17 @@ public class FacilityBalloon : MonoBehaviour
 
     void Timer()
     {
-        if(progressTimer > 0)
+        if(GetComponent<Facility>().objectTimer > 0)
         {
-            progressTimer -= Time.deltaTime;
+            GetComponent<Facility>().objectTimer -= Time.deltaTime;
         }
-        if(progressTimer < 0)
+        if(GetComponent<Facility>().objectTimer < 0)
         {
-            progressTimer = 0;
+            GetComponent<Facility>().objectTimer = 0;
         }
-        progress = 1.0f - (progressTimer / timeToMake);
+        progress = 1.0f - (GetComponent<Facility>().objectTimer / timeToMake);
 
-        if (progressTimer <= 0)
+        if (GetComponent<Facility>().objectTimer <= 0)
         {
             progress = 1.0f;
             MakeFinish();

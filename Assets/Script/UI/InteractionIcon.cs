@@ -5,32 +5,32 @@ using UnityEngine.UI;
 
 public class InteractionIcon : MonoBehaviour
 {
-    public enum Icon //아이콘 추가시 수정할 부분
+    public enum Icon //icon
     {
-        Gather,
-        Make,
-        Sleep,
-        Portal,
-        Dump,
+        Interaction,
         OnOff,
-        Research,
-        Remove,
-        Tumor,
-        Interaction
+        Portal
+        //Gather,
+        //Make,
+        //Sleep,
+        //Dump,
+        //Research,
+        //Remove,
+        //Tumor
     };
 
     Inventory inventory;
 
-    GameObject GatherIcon; //아이콘 추가시 수정할 부분
-    GameObject MakeIcon;
-    GameObject SleepIcon;
-    GameObject PortalIcon;
-    GameObject DumpIcon;
+    GameObject MenuIcon; //icon
     GameObject OnOffIcon;
-    GameObject ResearchIcon;
-    GameObject RemoveIcon;
-    GameObject TumorIcon;
-    GameObject MenuIcon;
+    GameObject PortalIcon;
+    //GameObject GatherIcon;
+    //GameObject MakeIcon;
+    //GameObject SleepIcon;
+    //GameObject DumpIcon;
+    //GameObject ResearchIcon;
+    //GameObject RemoveIcon;
+    //GameObject TumorIcon;
 
     List<Icon> displayedIconList = new List<Icon>();
     Dictionary<Icon, GameObject> iconDictionary = new Dictionary<Icon, GameObject>();
@@ -51,44 +51,44 @@ public class InteractionIcon : MonoBehaviour
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         IconBG = transform.Find("IconBG").gameObject;
 
-        GatherIcon = transform.Find("Gather").gameObject; //아이콘 추가시 수정할 부분
-        MakeIcon = transform.Find("Make").gameObject;
-        SleepIcon = transform.Find("Sleep").gameObject;
+        MenuIcon = transform.Find("Interaction").gameObject; //icon
         PortalIcon = transform.Find("Portal").gameObject;
-        DumpIcon = transform.Find("Dump").gameObject;
         OnOffIcon = transform.Find("OnOff").gameObject;
-        ResearchIcon = transform.Find("Research").gameObject;
-        RemoveIcon = transform.Find("Remove").gameObject;
-        TumorIcon = transform.Find("Tumor").gameObject;
-        MenuIcon = transform.Find("Interaction").gameObject;
+        //GatherIcon = transform.Find("Gather").gameObject;
+        //MakeIcon = transform.Find("Make").gameObject;
+        //SleepIcon = transform.Find("Sleep").gameObject;
+        //DumpIcon = transform.Find("Dump").gameObject;
+        //ResearchIcon = transform.Find("Research").gameObject;
+        //RemoveIcon = transform.Find("Remove").gameObject;
+        //TumorIcon = transform.Find("Tumor").gameObject;
 
-        if (GatherIcon != null)
+        if (MenuIcon != null)
         {
-            iconDictionary[Icon.Gather] = GatherIcon; //아이콘 추가시 수정할 부분
-            iconDictionary[Icon.Make] = MakeIcon;
-            iconDictionary[Icon.Sleep] = SleepIcon;
-            iconDictionary[Icon.Portal] = PortalIcon;
-            iconDictionary[Icon.Dump] = DumpIcon;
+            iconDictionary[Icon.Interaction] = MenuIcon; //icon
             iconDictionary[Icon.OnOff] = OnOffIcon;
-            iconDictionary[Icon.Research] = ResearchIcon;
-            iconDictionary[Icon.Remove] = RemoveIcon;
-            iconDictionary[Icon.Tumor] = TumorIcon;
-            iconDictionary[Icon.Interaction] = MenuIcon;
+            iconDictionary[Icon.Portal] = PortalIcon;
+            //iconDictionary[Icon.Gather] = GatherIcon;
+            //iconDictionary[Icon.Make] = MakeIcon;
+            //iconDictionary[Icon.Sleep] = SleepIcon;
+            //iconDictionary[Icon.Dump] = DumpIcon;
+            //iconDictionary[Icon.Research] = ResearchIcon;
+            //iconDictionary[Icon.Remove] = RemoveIcon;
+            //iconDictionary[Icon.Tumor] = TumorIcon;
         }
     }
 
     void HideAllIcons()
     {
-        GatherIcon.SetActive(false); //아이콘 추가시 수정할 부분
-        MakeIcon.SetActive(false);
-        SleepIcon.SetActive(false);
+        MenuIcon.SetActive(false); //icon
         PortalIcon.SetActive(false);
-        DumpIcon.SetActive(false);
         OnOffIcon.SetActive(false);
-        ResearchIcon.SetActive(false);
-        RemoveIcon.SetActive(false);
-        TumorIcon.SetActive(false);
-        MenuIcon.SetActive(false);
+        //GatherIcon.SetActive(false);
+        //MakeIcon.SetActive(false);
+        //SleepIcon.SetActive(false);
+        //DumpIcon.SetActive(false);
+        //ResearchIcon.SetActive(false);
+        //RemoveIcon.SetActive(false);
+        //TumorIcon.SetActive(false);
     }
 
     void Update ()
@@ -150,16 +150,30 @@ public class InteractionIcon : MonoBehaviour
     {
         HideAllIcons();
 
-        if (displayedIconList.Count > 0)
+
+        if (displayedIconList.Count <= 0)
         {
-            for(int i = 0; i < displayedIconList.Count; i++ )
-            {
-                iconDictionary[displayedIconList[i]].SetActive(true);
-                Vector3 temp = transform.position;
-                temp.x = temp.x + (-iconSpace * (displayedIconList.Count - 1) + iconSpace * 2 * i);
-                iconDictionary[displayedIconList[i]].transform.position = temp;
-            }
+            return;
         }
+
+        for (int i = 0; i < displayedIconList.Count; i++)
+        {
+            iconDictionary[displayedIconList[i]].SetActive(true);
+            Vector3 temp = transform.position;
+            temp.x = temp.x + (-iconSpace * (displayedIconList.Count - 1) + iconSpace * 2 * i);
+            iconDictionary[displayedIconList[i]].transform.position = temp;
+        }
+
+        //if (displayedIconList.Count > 0)
+        //{
+        //    for(int i = 0; i < displayedIconList.Count; i++ )
+        //    {
+        //        iconDictionary[displayedIconList[i]].SetActive(true);
+        //        Vector3 temp = transform.position;
+        //        temp.x = temp.x + (-iconSpace * (displayedIconList.Count - 1) + iconSpace * 2 * i);
+        //        iconDictionary[displayedIconList[i]].transform.position = temp;
+        //    }
+        //}
     }
 
     void IconBGAlpha()

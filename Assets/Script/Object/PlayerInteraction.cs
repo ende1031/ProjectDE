@@ -88,10 +88,10 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     GetComponent<PlayerMove>().SetMovePossible(false);
                     SceneObjectManager.instance.SaveObject();
-                    SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
+                    SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().TargetSceneName, target.GetComponent<Portal>().state);
                     SoundManager.instance.PlaySE(37);
-                    return;
                 }
+                return;
             }
 
             if (target.gameObject.tag == "Facility" || target.gameObject.tag == "NyxCollector")
