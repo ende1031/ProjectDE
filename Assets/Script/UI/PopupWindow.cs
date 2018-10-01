@@ -9,7 +9,7 @@ public class PopupWindow : MonoBehaviour
     GameObject Player;
     NyxUI nyxUI;
 
-    GameObject Facility; //제작창을 띄운 시설의 정보
+    GameObject Facility;
 
     GameObject PopupBG;
     GameObject[] ScrollIndexItem = new GameObject[5];

@@ -19,7 +19,7 @@ public class SceneObject_Save
     public int sceneNum;
     public int key;
     public string type;
-    public string name; //Portal의 경우 이동하려는 씬의 이름
+    public string name;
     public float timer;
     public int state;
 }
@@ -53,20 +53,10 @@ public class ResearchItem_Save
 [System.Serializable]
 public class SaveObject
 {
-    /*
-    public SaveObject(float h, int d, int q, List<SceneObject_Save> ob, List<InventoryItem_Save> i, List<ResearchItem_Save> re)
-    {
-        hunger = h;
-        day = d;
-        questNum = q;
-        objList = ob;
-        itemList = i;
-        researchList = re;
-    }*/
-
     public float hunger;
     public int day;
     public int questNum;
+    public int nyx;
     public List<SceneObject_Save> objList;
     public List<InventoryItem_Save> itemList;
     public List<ResearchItem_Save> researchList;
@@ -78,6 +68,7 @@ public class SaveAndLoad : MonoBehaviour
     ReportUI reportUI;
     Inventory inventory;
     ResearchWindow researchWindow;
+    NyxUI nyxUI;
 
     public static SaveAndLoad instance = null;
 
@@ -93,20 +84,13 @@ public class SaveAndLoad : MonoBehaviour
         }
     }
 
-    //void Start()
-    //{
-    //    hungerGauge = GameObject.Find("HungerUI").GetComponent<HungerGauge>();
-    //    reportUI = GameObject.Find("ReportUI").GetComponent<ReportUI>();
-    //    inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-    //    researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
-    //}
-
     void LoadUI()
     {
         hungerGauge = GameObject.Find("HungerUI").GetComponent<HungerGauge>();
         reportUI = GameObject.Find("ReportUI").GetComponent<ReportUI>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         researchWindow = GameObject.Find("ResearchWindow").GetComponent<ResearchWindow>();
+        nyxUI = GameObject.Find("NyxUI").GetComponent<NyxUI>();
     }
 
     public void SaveGame()
@@ -117,6 +101,7 @@ public class SaveAndLoad : MonoBehaviour
         sObj.hunger = hungerGauge.amountOfHunger;
         sObj.day = reportUI.day;
         sObj.questNum = reportUI.questNum;
+        sObj.nyx = nyxUI.GetAmount();
         sObj.itemList = inventory.GetInventoryItemList();
         sObj.objList = SceneObjectManager.instance.GetSceneObjectList();
         sObj.researchList = researchWindow.GetResearchList();
@@ -143,6 +128,7 @@ public class SaveAndLoad : MonoBehaviour
         var loadData = JsonUtility.FromJson<SaveObject>(fromJson);
 
         hungerGauge.amountOfHunger = loadData.hunger;
+        nyxUI.amountOfNyx = loadData.nyx;
 
         reportUI.day = loadData.day;
         reportUI.questNum = loadData.questNum;

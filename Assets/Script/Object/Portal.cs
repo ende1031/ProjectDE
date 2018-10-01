@@ -5,8 +5,7 @@ using UnityEngine;
 public class Portal : SceneObject
 {
     //public string sceneName;
-    //public int AfterMoveGrid; //맵이동 후 플레이어의 좌표
-
+    //public int AfterMoveGrid;
     //InteractionIcon interactionIcon;
 
     float LoadTimer = 0;

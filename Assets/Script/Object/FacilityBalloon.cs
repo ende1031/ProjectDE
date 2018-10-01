@@ -21,17 +21,16 @@ public class FacilityBalloon : MonoBehaviour
     public Sprite yellowBalloon;
 
     float progress;
-    public float timeToMake; //초
+    public float timeToMake;
     //public float progressTimer;
 
-    public Inventory.Item makeItem = 0; // 만드는 아이템
+    public Inventory.Item makeItem = 0;
 
     public Inventory.Item[] grinderItem = new Inventory.Item[2] { 0, 0 };
     public int[] grinderItemNum = new int[2] { 0, 0 };
     public int grinderNyxNum = 0;
 
     public bool isGrinder = false;
-
     public bool isInit = false;
 
     //public bool isMakeByGrinder = false;

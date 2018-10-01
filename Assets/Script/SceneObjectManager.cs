@@ -79,9 +79,7 @@ public class SceneObjectManager : MonoBehaviour
     {
         Vector3 tempPos = Grid.instance.GridToPos(grid);
         tempPos.z = 0.1f;
-
-        //=========================================================
-
+        
         if (ob.type == "Portal")
         {
             ob.inGameObject = Instantiate(Resources.Load("Prefab/Portal") as GameObject, tempPos, Quaternion.identity);
@@ -93,7 +91,7 @@ public class SceneObjectManager : MonoBehaviour
 
         if(ob.name == "EscapePod")
         {
-            tempPos.z = 0.2f; //크기가 커서 겹쳐보일 수 있음
+            tempPos.z = 0.2f; //위치 보정
         }
         ob.inGameObject.GetComponent<SceneObject>().TargetSceneName = ob.name;
         ob.inGameObject.GetComponent<SceneObject>().state = ob.state;
@@ -108,8 +106,6 @@ public class SceneObjectManager : MonoBehaviour
         }
         
         ob.inGameObject.GetComponent<SceneObject>().Init();
-
-        //=========================================================
         
         //if (ob.type == "Plant") //Prefab 추가시 수정할 부분
         //{
@@ -295,8 +291,6 @@ public class SceneObjectManager : MonoBehaviour
             {
                 if (pair.Value.inGameObject != null)
                 {
-                    //============================================
-
                     pair.Value.state = pair.Value.inGameObject.GetComponent<SceneObject>().state;
                     pair.Value.timer = pair.Value.inGameObject.GetComponent<SceneObject>().objectTimer;
 
@@ -307,8 +301,6 @@ public class SceneObjectManager : MonoBehaviour
                         pair.Value.facilityGrinderItem = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItem;
                         pair.Value.facilityGrinderItemNum = pair.Value.inGameObject.GetComponent<FacilityBalloon>().grinderItemNum;
                     }
-
-                    //============================================
 
                     //if (pair.Value.type == "Plant")
                     //{

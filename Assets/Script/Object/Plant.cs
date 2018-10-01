@@ -23,12 +23,11 @@ public class Plant : SceneObject
     public string plantName = "StickPlant";
     public int GatherAnimationType = 1;
 
-    public float growthTime; //성장하는데 걸리는 시간(초)
+    public float growthTime;
     public bool isTumor = false;
 
     //public float growthTimer = 0;
     //public bool isLoadByManager = false;
-
     //state 0:자라는 중(덫설치후 대기중), 1:채집가능(덫잡힘), 2:채집후, 3:덫설치중, 4:종양심음, 5:종양채집가능
 
     void Start ()
@@ -96,7 +95,6 @@ public class Plant : SceneObject
                     inventory.GetItem(Inventory.Item.Thorn, 3);
                     break;
                 case "Trap01":
-                    //inventory.GetItem(Inventory.Item.Hose, 1);
                     inventory.GetItem(Inventory.Item.Heart, 1);
                     SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                     break;
@@ -196,7 +194,6 @@ public class Plant : SceneObject
                     temp = !inventory.isFull(1, Inventory.Item.Thorn, 3);
                     break;
                 case "Trap01":
-                    //temp = !inventory.isFull(2, Inventory.Item.Hose, 1, Inventory.Item.Heart, 1);
                     temp = !inventory.isFull(1, Inventory.Item.Heart, 1);
                     break;
                 case "FruitPlant":
@@ -445,17 +442,14 @@ public class Plant : SceneObject
     //}
 
     //이하 애니메이션 이벤트에서 사용하는 메소드들
-
     public void SetGatherPossibleFalse()
     {
         isGatherPossible = false;
     }
-
     public void SetGatherPossibleTrue()
     {
         isGatherPossible = true;
     }
-
     public void SetTrapOn()
     {
         state = 0;

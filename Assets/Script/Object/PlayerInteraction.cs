@@ -31,51 +31,10 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
 
-        //테스트용 코드
-        
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            inventory.GetItem(Inventory.Item.Mass, 10);
-            inventory.GetItem(Inventory.Item.Fruit, 10);
-            inventory.GetItem(Inventory.Item.Stick, 10);
-            inventory.GetItem(Inventory.Item.Board, 10);
-            inventory.GetItem(Inventory.Item.Thorn, 10);
-            inventory.GetItem(Inventory.Item.TumorSeed, 10);
-            inventory.GetItem(Inventory.Item.Heart, 10);
-            inventory.GetItem(Inventory.Item.Hose, 10);
-            inventory.GetItem(Inventory.Item.Sawtooth, 10);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            inventory.GetItem(Inventory.Item.Facility01, 1);
-            inventory.GetItem(Inventory.Item.Bulb01, 1);
-            inventory.GetItem(Inventory.Item.NyxCollector01, 1);
-            inventory.GetItem(Inventory.Item.Grinder01, 1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            inventory.GetItem(Inventory.Item.FruitSeed, 1);
-            inventory.GetItem(Inventory.Item.StickSeed, 1);
-            inventory.GetItem(Inventory.Item.ThornSeed, 1);
-            inventory.GetItem(Inventory.Item.BoardSeed, 1);
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneObjectManager.instance.ResetGame();
         }
-
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    SaveAndLoad.instance.SaveGame();
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    SaveAndLoad.instance.LoadGame();
-        //}
     }
 
     void PlayerDirection()

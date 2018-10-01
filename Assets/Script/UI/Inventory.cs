@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
 
     public enum Item
     {
-        Food, //아이템 추가시 수정할 부분
+        Food, //
         Oxygen,
         Battery,
         Stick,
@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
     };
 
     GameObject[] itemSlot = new GameObject[15];
-    List<ItemInfo> Items = new List<ItemInfo>(); //저장할 것!
+    List<ItemInfo> Items = new List<ItemInfo>();
     GameObject Cursor;
     GameObject Arrow;
     GameObject[] GetEffect = new GameObject[15];
@@ -75,7 +75,7 @@ public class Inventory : MonoBehaviour
     GrinderWindow grinderWindow;
     ReportUI reportUI;
 
-    public Sprite FoodSp; //아이템 추가시 수정할 부분
+    public Sprite FoodSp; //
     public Sprite OxygenSp;
     public Sprite BatterySp;
     public Sprite StickSp;
@@ -152,7 +152,7 @@ public class Inventory : MonoBehaviour
         itemDictionary[Item.Sawtooth] = new ItemName(SawtoothSp, "톱날", "가시와 판자를 합쳐서 만들어낸 아이템이다.");
     }
 
-    public void OpenMenu() //아이템 추가시 수정할 부분
+    public void OpenMenu() //
     {
         if (Items.Count <= selectedIndex)
         {
@@ -199,7 +199,7 @@ public class Inventory : MonoBehaviour
         interactionMenu.OpenMenu(this.gameObject, "Inventory", itemDictionary[Items[selectedIndex].name].sprite);
     }
 
-    public void SelectMenu(InteractionMenu.MenuItem m) //아이템 추가시 수정할 부분
+    public void SelectMenu(InteractionMenu.MenuItem m) //
     {
         openTimer = 0;
         isInventoryActive = true;

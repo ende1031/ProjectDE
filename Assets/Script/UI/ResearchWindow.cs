@@ -87,8 +87,8 @@ public class ResearchWindow : MonoBehaviour
 
         public Inventory.Item item;
         public int maxNum;
-        public int putNum; //저장할것
-        public bool isKnown; //저장할것
+        public int putNum;
+        public bool isKnown;
         public string expText;
         public int resultNum;
         public string[] resultItem = new string[3];

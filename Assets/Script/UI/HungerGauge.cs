@@ -8,7 +8,7 @@ public class HungerGauge : MonoBehaviour
     GameObject player;
     Monologue monologue;
 
-    public float amountOfHunger = 100; //저장할것
+    public float amountOfHunger = 100;
     public float reduceSpeed = 1;
 
     GameObject gauge;

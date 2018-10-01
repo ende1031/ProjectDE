@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InteractionMenu : MonoBehaviour
 {
-    public enum MenuItem //메뉴 추가시 수정할 부분
+    public enum MenuItem //
     {
         Battery,
         Cancle,
@@ -32,7 +32,7 @@ public class InteractionMenu : MonoBehaviour
         Right
     };
 
-    public Sprite BatterySp; //메뉴 추가시 수정할 부분
+    public Sprite BatterySp; //
     public Sprite CancleSp;
     public Sprite DumpSp;
     public Sprite FoodSp;
@@ -127,7 +127,7 @@ public class InteractionMenu : MonoBehaviour
         SetDictionary();
     }
 
-    void SetDictionary() //메뉴 추가시 수정할 부분
+    void SetDictionary() //
     {
         MenuDictionary[MenuItem.Battery] = new MenuItemInfo(BatterySp, "배터리 사용");
         MenuDictionary[MenuItem.Cancle] = new MenuItemInfo(CancleSp, "작동 취소");
