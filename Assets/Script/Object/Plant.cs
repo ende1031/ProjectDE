@@ -14,6 +14,7 @@ public class Plant : SceneObject
     //Monologue monologue;
     //EnergyGauge energyGauge;
     //int sceneNum;
+    //public int state;
 
     GameObject player;
     Animator animaitor;
@@ -21,13 +22,14 @@ public class Plant : SceneObject
     public bool isGatherPossible;
     public string plantName = "StickPlant";
     public int GatherAnimationType = 1;
-    public int state; //0:자라는 중(덫설치후 대기중), 1:채집가능(덫잡힘), 2:채집후, 3:덫설치중, 4:종양심음, 5:종양채집가능
 
     public float growthTime; //성장하는데 걸리는 시간(초)
     public float growthTimer = 0;
     public bool isTumor = false;
 
     public bool isLoadByManager = false;
+
+    //state 0:자라는 중(덫설치후 대기중), 1:채집가능(덫잡힘), 2:채집후, 3:덫설치중, 4:종양심음, 5:종양채집가능
 
     void Start ()
     {
@@ -349,7 +351,7 @@ public class Plant : SceneObject
     //    }
     //}
 
-    public void OpenMenu()
+    public override void OpenMenu()
     {
         interactionMenu.ClearMenu();
         interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
@@ -373,7 +375,7 @@ public class Plant : SceneObject
         interactionMenu.OpenMenu(this.gameObject, MenuTargetType, GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
-    public void SelectMenu(InteractionMenu.MenuItem m)
+    public override void SelectMenu(InteractionMenu.MenuItem m)
     {
         switch (m)
         {

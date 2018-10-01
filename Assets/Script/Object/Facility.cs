@@ -23,13 +23,13 @@ public class Facility : SceneObject
     //Inventory inventory;
     //EnergyGauge energyGauge;
     //int sceneNum;
+    //public int state = 1;
 
     public bool isLoadByManager = false;
-
-    public int state = 1; // 0:꺼짐, 1:평상시, 2:제작중, 3:제작끝, 4:죽음
-
     float offTimer = 0;
     float sleepTimer = 0;
+
+    // state 0:꺼짐, 1:평상시, 2:제작중, 3:제작끝, 4:죽음
 
     void Start ()
     {
@@ -90,15 +90,15 @@ public class Facility : SceneObject
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
-        {
-            DisplayIcon();
-        }
-    }
+    //void OnTriggerStay2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
+    //    {
+    //        DisplayIcon();
+    //    }
+    //}
 
-    public void DisplayIcon()
+    public override void DisplayIcon()
     {
         if (state != 0)
         {
@@ -186,7 +186,7 @@ public class Facility : SceneObject
         }
     }
 
-    public void OnOff()
+    public override void OnOff()
     {
         if(offTimer < 0.3f)
         {
@@ -297,7 +297,7 @@ public class Facility : SceneObject
         //}
     }
 
-    public void OpenMenu()
+    public override void OpenMenu()
     {
         interactionMenu.ClearMenu();
         interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
@@ -352,7 +352,7 @@ public class Facility : SceneObject
         }
     }
 
-    public void SelectMenu(InteractionMenu.MenuItem m)
+    public override void SelectMenu(InteractionMenu.MenuItem m)
     {
         switch (m)
         {

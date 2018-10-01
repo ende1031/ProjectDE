@@ -25,12 +25,17 @@ public class Portal : SceneObject
         }
 	}
 
-    void OnTriggerStay2D(Collider2D other)
+    //void OnTriggerStay2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        interactionIcon.AddIcon(InteractionIcon.Icon.Portal);
+    //    }
+    //}
+
+    public override void DisplayIcon()
     {
-        if (other.gameObject.tag == "Player")
-        {
-            interactionIcon.AddIcon(InteractionIcon.Icon.Portal);
-        }
+        interactionIcon.AddIcon(InteractionIcon.Icon.Portal);
     }
 
     //void OnTriggerExit2D(Collider2D other)

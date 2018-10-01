@@ -10,6 +10,7 @@ public class SceneObject : MonoBehaviour
     [TextArea]
     public string ExamineText; //메뉴에서 조사하기를 누르면 나오는 대사
     public string MenuTargetType; //인터렉션 메뉴에서 구분을 위해 사용하는 타입
+    public int state = 1;
 
     protected InteractionIcon interactionIcon;
     protected InteractionMenu interactionMenu;
@@ -28,18 +29,17 @@ public class SceneObject : MonoBehaviour
         sceneNum = GameObject.Find("SceneSettingObject").GetComponent<SceneSetting>().sceneNum;
     }
 
+    public virtual void DisplayIcon()
+    {
+        interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
+    }
+
     protected void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
         {
-            //interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
             DisplayIcon();
         }
-    }
-
-    public void DisplayIcon()
-    {
-        interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
     }
 
     protected void OnTriggerExit2D(Collider2D other)
@@ -57,6 +57,11 @@ public class SceneObject : MonoBehaviour
         monologue.DisplayLog(ExamineText);
     }
 
+    public virtual void OnOff()
+    {
+
+    }
+
     public void RemoveObject()
     {
         if (energyGauge.GetAmount() < 5)
@@ -69,7 +74,7 @@ public class SceneObject : MonoBehaviour
         SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
     }
 
-    public void OpenMenu()
+    public virtual void OpenMenu()
     {
         interactionMenu.ClearMenu();
         interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
@@ -82,7 +87,7 @@ public class SceneObject : MonoBehaviour
         interactionMenu.OpenMenu(this.gameObject, MenuTargetType, GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
-    public void SelectMenu(InteractionMenu.MenuItem m)
+    public virtual void SelectMenu(InteractionMenu.MenuItem m)
     {
         switch (m)
         {

@@ -82,55 +82,78 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.C))
         {
-            switch(target.gameObject.tag)
+            if (target.gameObject.tag == "Portal")
             {
-                case "Plant":
-                    if (isGather == false)
-                    {
-                        target.GetComponent<Plant>().OpenMenu();
-                    }
-                    break;
-
-                case "Facility":
-                    if (target.GetComponent<Facility>().state == 0)
-                    {
-                        target.GetComponent<Facility>().OnOff();
-                    }
-                    else
-                    {
-                        target.GetComponent<Facility>().OpenMenu();
-                    }
-                    break;
-
-                case "Portal":
-                    if (target.GetComponent<Portal>().isPortalReady() == true)
-                    {
-                        GetComponent<PlayerMove>().SetMovePossible(false);
-                        SceneObjectManager.instance.SaveObject();
-                        SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
-                        SoundManager.instance.PlaySE(37);
-                    }
-                    break;
-
-                case "Bulb":
-                    target.GetComponent<Bulb>().OpenMenu();
-                    break;
-
-                case "Nest":
-                    target.GetComponent<Nest>().OpenMenu();
-                    break;
-
-                case "NyxCollector":
-                    if (target.GetComponent<NyxCollector>().state == 0)
-                    {
-                        target.GetComponent<NyxCollector>().OnOff();
-                    }
-                    else
-                    {
-                        target.GetComponent<NyxCollector>().OpenMenu();
-                    }
-                    break;
+                if (target.GetComponent<Portal>().isPortalReady() == true)
+                {
+                    GetComponent<PlayerMove>().SetMovePossible(false);
+                    SceneObjectManager.instance.SaveObject();
+                    SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
+                    SoundManager.instance.PlaySE(37);
+                    return;
+                }
             }
+
+            if (target.gameObject.tag == "Facility" || target.gameObject.tag == "NyxCollector")
+            {
+                if (target.GetComponent<SceneObject>().state == 0)
+                {
+                    target.GetComponent<SceneObject>().OnOff();
+                    return;
+                }
+            }
+
+            target.GetComponent<SceneObject>().OpenMenu();
+
+            //switch (target.gameObject.tag)
+            //{
+            //    case "Plant":
+            //        if (isGather == false)
+            //        {
+            //            target.GetComponent<Plant>().OpenMenu();
+            //        }
+            //        break;
+
+            //    case "Facility":
+            //        if (target.GetComponent<Facility>().state == 0)
+            //        {
+            //            target.GetComponent<Facility>().OnOff();
+            //        }
+            //        else
+            //        {
+            //            target.GetComponent<Facility>().OpenMenu();
+            //        }
+            //        break;
+
+            //    case "Portal":
+            //        if (target.GetComponent<Portal>().isPortalReady() == true)
+            //        {
+            //            GetComponent<PlayerMove>().SetMovePossible(false);
+            //            SceneObjectManager.instance.SaveObject();
+            //            SceneChanger.instance.FadeAndLoadScene(target.GetComponent<Portal>().sceneName, target.GetComponent<Portal>().AfterMoveGrid);
+            //            SoundManager.instance.PlaySE(37);
+            //        }
+            //        break;
+
+            //    case "Bulb":
+            //        target.GetComponent<Bulb>().OpenMenu();
+            //        break;
+
+            //    case "Nest":
+            //        target.GetComponent<Nest>().OpenMenu();
+            //        break;
+
+            //    case "NyxCollector":
+            //        if (target.GetComponent<NyxCollector>().state == 0)
+            //        {
+            //            target.GetComponent<NyxCollector>().OnOff();
+            //        }
+            //        else
+            //        {
+            //            target.GetComponent<NyxCollector>().OpenMenu();
+            //        }
+            //        break;
+            //}
         }
     }
 

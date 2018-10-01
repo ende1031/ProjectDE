@@ -35,7 +35,7 @@ public class Bulb : SceneObject
     //    }
     //}
 
-    //public void DisplayIcon()
+    //public override void DisplayIcon()
     //{
     //    interactionIcon.AddIcon(InteractionIcon.Icon.Interaction);
     //}
@@ -69,7 +69,7 @@ public class Bulb : SceneObject
     //{
     //    interactionMenu.ClearMenu();
     //    interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
-        
+
     //    interactionMenu.AddMenu(InteractionMenu.MenuItem.Examine);
     //    interactionMenu.AddMenu(InteractionMenu.MenuItem.Remove);
 

@@ -14,6 +14,7 @@ public class NyxCollector : SceneObject
     //int sceneNum;
     //Monologue monologue;
     //EnergyGauge energyGauge;
+    //public int state = 1; 
 
     NyxUI nyxUI;
     Animator animaitor;
@@ -22,8 +23,9 @@ public class NyxCollector : SceneObject
     public float collectTimer = 0;
 
     public bool isLoadByManager = false;
-    public int state = 1; // 0:꺼짐, 1:평상시, 4:죽음
     float offTimer = 0;
+
+    //state 0:꺼짐, 1:평상시, 4:죽음
 
     void Start ()
     {
@@ -97,15 +99,15 @@ public class NyxCollector : SceneObject
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
-        {
-            DisplayIcon();
-        }
-    }
+    //void OnTriggerStay2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Player" && inventory.isInventoryActive == false)
+    //    {
+    //        DisplayIcon();
+    //    }
+    //}
 
-    public void DisplayIcon()
+    public override void DisplayIcon()
     {
         if (state != 0)
         {
@@ -177,7 +179,7 @@ public class NyxCollector : SceneObject
         }
     }
 
-    public void OnOff()
+    public override void OnOff()
     {
         if (offTimer < 0.3f)
         {
@@ -219,7 +221,7 @@ public class NyxCollector : SceneObject
     //    monologue.DisplayLog("닉스입자를 수집하는 시설이다.\n검은 입자들이 빨려들어가는게 보인다.");
     //}
 
-    public void OpenMenu()
+    public override void OpenMenu()
     {
         interactionMenu.ClearMenu();
         interactionMenu.SetNameAndExp(ObjectName, ObjectExplanation);
@@ -241,7 +243,7 @@ public class NyxCollector : SceneObject
         interactionMenu.OpenMenu(this.gameObject, MenuTargetType, GetComponent<SpriteRenderer>().sprite, w, h);
     }
 
-    public void SelectMenu(InteractionMenu.MenuItem m)
+    public override void SelectMenu(InteractionMenu.MenuItem m)
     {
         switch (m)
         {
