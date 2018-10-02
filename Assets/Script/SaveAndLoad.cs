@@ -107,8 +107,6 @@ public class SaveAndLoad : MonoBehaviour
         sObj.researchList = researchWindow.GetResearchList();
 
         string toJson = JsonUtility.ToJson(sObj);
-        print(toJson);
-
         File.WriteAllText(Application.dataPath + "/Save/SaveData.json", toJson);
     }
 

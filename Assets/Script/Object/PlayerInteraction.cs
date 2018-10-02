@@ -31,9 +31,32 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
 
+        //테스트용 치트키
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            inventory.GetItem(Inventory.Item.Mass, 5);
+            inventory.GetItem(Inventory.Item.Stick, 5);
+            inventory.GetItem(Inventory.Item.Board, 5);
+            inventory.GetItem(Inventory.Item.Thorn, 5);
+            inventory.GetItem(Inventory.Item.Hose, 5);
+            inventory.GetItem(Inventory.Item.TumorSeed, 5);
+            inventory.GetItem(Inventory.Item.Heart, 5);
+            inventory.GetItem(Inventory.Item.Sawtooth, 5);
+            inventory.GetItem(Inventory.Item.Fruit, 5);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            inventory.GetItem(Inventory.Item.Facility01, 1);
+            inventory.GetItem(Inventory.Item.Bulb01, 1);
+            inventory.GetItem(Inventory.Item.NyxCollector01, 1);
+            inventory.GetItem(Inventory.Item.Grinder01, 1);
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneObjectManager.instance.ResetGame();
+            if (GetComponent<PlayerMove>().GetMovePossible() == true)
+            {
+                SceneObjectManager.instance.ResetGame();
+            }
         }
     }
 

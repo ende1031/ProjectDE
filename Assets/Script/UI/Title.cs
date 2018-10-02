@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class Title : MonoBehaviour
 {
@@ -134,7 +135,19 @@ public class Title : MonoBehaviour
         switch(selectIndex)
         {
             case 0:
+                if (File.Exists(Application.dataPath + "/Save/NewGameData.json") == false)
+                {
+                    return;
+                }
+                animaitor.SetBool("isStart", true);
+                BlackScreen.SetActive(true);
+                isSelect = true;
+                break;
             case 1:
+                if (File.Exists(Application.dataPath + "/Save/SaveData.json") == false)
+                {
+                    return;
+                }
                 animaitor.SetBool("isStart", true);
                 BlackScreen.SetActive(true);
                 isSelect = true;

@@ -88,11 +88,7 @@ public class SceneObjectManager : MonoBehaviour
         {
             ob.inGameObject = Instantiate(Resources.Load("Prefab/" + ob.name) as GameObject, tempPos, Quaternion.identity);
         }
-
-        if(ob.name == "EscapePod")
-        {
-            tempPos.z = 0.2f; //위치 보정
-        }
+        
         ob.inGameObject.GetComponent<SceneObject>().TargetSceneName = ob.name;
         ob.inGameObject.GetComponent<SceneObject>().state = ob.state;
         ob.inGameObject.GetComponent<SceneObject>().objectTimer = ob.timer;

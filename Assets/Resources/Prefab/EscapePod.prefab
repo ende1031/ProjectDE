@@ -178,7 +178,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1724880846875220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 0, z: 0.2}
+  m_LocalPosition: {x: 3.5, y: 0, z: 0}
   m_LocalScale: {x: 0.7214258, y: 0.7214258, z: 0.7214258}
   m_Children:
   - {fileID: 4623047897504064}
@@ -220,7 +220,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969957011226248}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.29, y: 0, z: 0}
+  m_LocalPosition: {x: -0.29, y: 0, z: 0.2}
   m_LocalScale: {x: 1.386144, y: 1.386144, z: 1.386144}
   m_Children: []
   m_Father: {fileID: 4127953981418184}
@@ -425,13 +425,12 @@ MonoBehaviour:
   blueBalloon: {fileID: 21300000, guid: ef68274861d9dd14d981a64e1c269660, type: 3}
   yellowBalloon: {fileID: 21300000, guid: 76001d4d48687b74aacceb544ab66d14, type: 3}
   timeToMake: 15
-  progressTimer: 0
   makeItem: 3
   grinderItem: 000000000000000000000000
   grinderItemNum: 000000000000000000000000
   grinderNyxNum: 0
-  isLoadByManager: 0
-  isMakeByGrinder: 0
+  isGrinder: 0
+  isInit: 0
 --- !u!114 &114853761771251232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,16 +443,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectName: "\uD0C8\uCD9C \uD3EC\uB4DC"
-  ObjectExplanation: "\uBE44\uC0C1 \uD0C8\uCD9C\uC6A9 \uD3EC\uB4DC\uC774\uB2E4. \uC544\uC774\uD15C
-    \uC5F0\uAD6C\uB97C \uC704\uD55C \uAE30\uB2A5\uC744 \uAC16\uCD94\uACE0 \uC788\uB2E4.\n\uAC04\uB2E8\uD55C
-    \uC544\uC774\uD15C \uC81C\uC791\uB3C4 \uAC00\uB2A5\uD558\uB2E4."
+  ObjectExplanation: "\uBE44\uC0C1 \uD0C8\uCD9C\uC6A9 \uD3EC\uB4DC\uC774\uB2E4. \uC5F0\uAD6C\uC640
+    \uC81C\uC791\uC744 \uC704\uD55C \uAE30\uB2A5\uC744 \uAC16\uCD94\uACE0 \uC788\uB2E4.\r\n\uC7A0\uC790\uAE30\uB97C
+    \uD558\uBA74 \uC815\uBCF4\uAC00 \uC138\uC774\uBE0C\uB370\uC774\uD130\uC5D0 \uC800\uC7A5\uB41C\uB2E4."
   ExamineText: "\uB0B4\uAC00 \uD0C0\uACE0 \uC628 \uD0C8\uCD9C\uD3EC\uB4DC\uC774\uB2E4.\n\uB2E4\uD589\uD788
     \uC190\uC0C1\uC774 \uC2EC\uD55C \uAC83 \uAC19\uC9C0\uB294 \uC54A\uB2E4.\n\uC544\uC774\uD15C
     \uC5F0\uAD6C\uB098 \uC81C\uC791\uC744 \uD560 \uC218 \uC788\uB2E4."
   MenuTargetType: Facility
-  facilityName: EscapePod
-  isLoadByManager: 0
   state: 1
+  objectTimer: 0
+  TargetSceneName: 
+  facilityName: EscapePod
 --- !u!212 &212216681147967330
 SpriteRenderer:
   m_ObjectHideFlags: 1
