@@ -40,7 +40,7 @@ public class SceneChanger : MonoBehaviour
         playerGrid = moveAfterGrid;
         if (isFading == false)
         {
-            StartCoroutine(FadeAndSwitchScenes(sceneName));
+            StartCoroutine(FadeAndSwitchScenes(sceneName)); //로딩화면 띄우고 씬 전환 코루틴
         }
     }
 

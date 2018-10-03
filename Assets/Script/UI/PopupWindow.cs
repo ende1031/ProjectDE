@@ -157,7 +157,7 @@ public class PopupWindow : MonoBehaviour
                 WindowItemList.Add(new WindowItem(itemName, 50, 40, "산소", "폐허가 된 지구에서 숨을 쉬기 위해서는 정제를 통해 산소를 얻는 방법 밖에는 없다.\n산소가 다 떨어지면 나는 어떻게 될까?\n사용하면 산소 게이지를 충전할 수 있다.", "Item_Water", 3));
                 break;
             case "Item_TumorSeed":
-                WindowItemList.Add(new WindowItem(itemName, 10, 30, "종양 씨앗", "유전자 조작으로 만든 안전한 종양 씨앗이다.\n식물에 심으면 식용 종양을 얻을 수 있다.", "Item_Mass", 1));
+                WindowItemList.Add(new WindowItem(itemName, 10, 30, "종양 씨앗", "유전자 조작으로 만든 안전한 종양 씨앗이다.\n수확 후 나약해진 식물에 심으면 식용 종양을 얻을 수 있다.", "Item_Mass", 1));
                 break;
             case "Item_Grinder01":
                 WindowItemList.Add(new WindowItem(itemName, 30, 500, "간이 분해기", "필요 없는 아이템을 분해해서 다른 아이템을 얻는데 사용하는 시설이다.", "Item_Sawtooth", 2, "Item_Hose", 1, "Item_Stick", 3, "Item_Heart", 1, "Item_Mass", 2));

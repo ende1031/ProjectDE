@@ -147,7 +147,7 @@ public class Inventory : MonoBehaviour
     {
         if(itemDictionary[fileName] == null)
         {
-            return "error";
+            return "알 수 없는 아이템";
         }
 
         return itemDictionary[fileName].name;
@@ -157,7 +157,7 @@ public class Inventory : MonoBehaviour
     {
         if (itemDictionary[fileName] == null)
         {
-            return "error";
+            return "정의되지 않은 아이템입니다.";
         }
 
         return itemDictionary[fileName].explanation;
@@ -181,7 +181,7 @@ public class Inventory : MonoBehaviour
         itemDictionary["Item_BoardSeed"] = new Iteminformation("판자 식물 모종", "원하는 곳에 심으면 판자 식물이 자란다.\n자라는 속도가 빨라서 연속으로 채집할 수 있다.", "Plant", "BoardPlant");
         itemDictionary["Item_ThornSeed"] = new Iteminformation("가시 덩굴 모종", "원하는 곳에 심으면 가시 덩굴이 자란다.\n현실 시간으로 1분에 한번 채집할 수 있다.", "Plant", "ThornPlant");
         itemDictionary["Item_Tumor"] = new Iteminformation("종양", "사용하면 허기 게이지가 10%만큼 회복된다.\n가공해서 식량으로 만들어 먹는 편이 효율적이다.", 10);
-        itemDictionary["Item_TumorSeed"] = new Iteminformation("종양 씨앗", "식물에 심으면 식용으로 쓸 수 있는 종양이 자란다.\n수확 후 기력을 잃은 식물에만 심을 수 있다.");
+        itemDictionary["Item_TumorSeed"] = new Iteminformation("종양 씨앗", "나약해진 식물에 심으면 식용으로 쓸 수 있는 종양이 자란다.\n수확 후 나약해진 식물에 상호작용하여 심을 수 있다.");
         itemDictionary["Item_Grinder01"] = new Iteminformation("간이 분해기", "필요 없는 아이템을 분해해서 다른 아이템을 만드는 시설이다.\n탈출포드나 전구 근처에 설치할 수 있다.", "Facility", "Grinder01");
         itemDictionary["Item_SuppliedBattery"] = new Iteminformation("보급용 배터리", "탈출포드에 들어있던 비상용 배터리이다.\n사용하면 에너지 게이지가 35%만큼 회복된다.");
         itemDictionary["Item_SuppliedFood"] = new Iteminformation("보급용 식량", "탈출포드에 들어있던 비상용 식량이다.\n사용하면 허기 게이지가 50%만큼 회복된다.", 50);

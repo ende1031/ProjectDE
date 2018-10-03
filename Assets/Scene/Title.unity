@@ -2673,7 +2673,7 @@ GameObject:
   - component: {fileID: 2085314006}
   - component: {fileID: 2085314005}
   m_Layer: 0
-  m_Name: Setting
+  m_Name: Video
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2699,7 +2699,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2085314003}
-  m_Text: "\uD658\uACBD\uC124\uC815"
+  m_Text: "\uC18C\uAC1C\uC601\uC0C1"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

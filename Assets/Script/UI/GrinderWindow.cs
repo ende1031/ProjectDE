@@ -168,11 +168,6 @@ public class GrinderWindow : MonoBehaviour
             c--;
         }
 
-        for(int i =0; i< resultItemCount; i++)
-        {
-
-        }
-
         for(int i = 0; i < resultItemCount; i++)
         {
             ResultItem[i].GetComponent<Image>().sprite = inventory.GetItemSprite(resultItem[i]);
@@ -185,9 +180,10 @@ public class GrinderWindow : MonoBehaviour
             {
                 ResultItemNum[i].GetComponent<Text>().text = "0" + resultItemNum[i];
             }
-            ResultNyxNum.GetComponent<Text>().text = resultNyxNum.ToString();
         }
-        if(isSelectingNumber == true)
+        ResultNyxNum.GetComponent<Text>().text = resultNyxNum.ToString();
+
+        if (isSelectingNumber == true)
         {
             ButtonText.text = "C : 분해 시작";
             PickItem.SetActive(false);

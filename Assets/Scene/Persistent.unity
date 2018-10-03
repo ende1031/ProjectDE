@@ -1616,41 +1616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad7ca4f39342e24eb7f654a60de7438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FoodSp: {fileID: 21300000, guid: 78b52d80ff70df3468fd5e1dfb099467, type: 3}
-  OxygenSp: {fileID: 21300000, guid: bf363e182709e5a43b1367a1fea72f90, type: 3}
-  BatterySp: {fileID: 21300000, guid: 1372aff47e3a6344a8be734aa5dd5e85, type: 3}
-  StickSp: {fileID: 21300000, guid: 777eba49c0851db45aa21ad09e264d4a, type: 3}
-  BoardSp: {fileID: 21300000, guid: 278e6d22e140bfe41b9bb32faa66d196, type: 3}
-  HoseSp: {fileID: 21300000, guid: 0c2014a7fc54bcb4295c982382234ca6, type: 3}
-  MassSp: {fileID: 21300000, guid: 93ba6e72f925039419bfe54e260949b3, type: 3}
-  ThornSp: {fileID: 21300000, guid: 4402973014267024ba89c616109c66b0, type: 3}
-  Facility01Sp: {fileID: 21300000, guid: 2a937262ddedec84aae829ffe6b89cd1, type: 3}
-  Trap01Sp: {fileID: 21300000, guid: 68e988d3276d4f143863eac049af96d3, type: 3}
-  HeartSp: {fileID: 21300000, guid: df66a5687c4c6eb47b189fff433633c1, type: 3}
-  Bulb01Sp: {fileID: 21300000, guid: a983efb82f714a449889aef6484ab534, type: 3}
-  StickSeedSp: {fileID: 21300000, guid: c859196195c207d49bab5fa66f1f32eb, type: 3}
-  BoardSeedSp: {fileID: 21300000, guid: 884ce33a4363c87488e5ada3cd09b988, type: 3}
-  ThornSeedSp: {fileID: 21300000, guid: 81bd00f60f684544b8ed0cef6bd289f3, type: 3}
-  TumorSp: {fileID: 21300000, guid: 17399aaa48e1fb54f80a7329c13c7b43, type: 3}
-  TumorSeedSp: {fileID: 21300000, guid: 7012c90063d79d245a02af4b366c383a, type: 3}
-  EscapePodSp: {fileID: 21300000, guid: f1909993d44816443965297c87c59fdd, type: 3}
-  Grinder01Sp: {fileID: 21300000, guid: e9ff72ee881e3ea47974a0b267036d9c, type: 3}
-  SuppliedBatterySp: {fileID: 21300000, guid: 457c3f0f7cec45f43adac07c32ca0ba0, type: 3}
-  SuppliedFoodSp: {fileID: 21300000, guid: 12fdd3632bcdc8e45990fb1e76491b73, type: 3}
-  WaterSp: {fileID: 21300000, guid: 73cd8011db5a0874ba9fa88dd855ae89, type: 3}
-  NyxCollector01Sp: {fileID: 21300000, guid: 429b864cec830c6489295b1377ead4e7, type: 3}
-  NyxSp: {fileID: 21300000, guid: f0234ec3134a2ae44b7bcb3c4dc0bd98, type: 3}
-  FruitSp: {fileID: 21300000, guid: bd300b7e68325214e96cc922e97d489d, type: 3}
-  FruitSeedSp: {fileID: 21300000, guid: 41d71c869d63e134ab1cbd75e4edd130, type: 3}
-  SawtoothSp: {fileID: 21300000, guid: e2e46c10cf2b9194189c546795c8b36d, type: 3}
-  CaptureSp: {fileID: 21300000, guid: 3d6e3f603a0604d45b630d7f2acabda2, type: 3}
-  Earth0Sp: {fileID: 21300000, guid: c7bcc3e29ed24d94db8d050402f0ae41, type: 3}
-  Earth1Sp: {fileID: 21300000, guid: b16688d16593f024c814d6a005785b18, type: 3}
-  Earth2Sp: {fileID: 21300000, guid: 72a8f10552c069a4ab0050329b9d2350, type: 3}
-  HungerSp: {fileID: 21300000, guid: d0e385ec291ccd34db3e3e0cd939c466, type: 3}
-  SeedingPlantSp: {fileID: 21300000, guid: 7450f4720ede67c4386002233d647387, type: 3}
+  discoveredItemList: []
   isInventoryActive: 0
-  discoveredItemList: 
 --- !u!114 &128048174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6584,6 +6551,92 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 546807715}
+--- !u!1 &553484338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 553484339}
+  - component: {fileID: 553484341}
+  - component: {fileID: 553484340}
+  - component: {fileID: 553484342}
+  m_Layer: 5
+  m_Name: Loading
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &553484339
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 553484338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1948142578}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 190, y: 190}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &553484340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 553484338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6666667}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 2a69aaeba86b1a74a8b572acf1e8040f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &553484341
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 553484338}
+--- !u!95 &553484342
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 553484338}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e2c9734308c819e4caf805fa2eb02e50, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &560311684
 GameObject:
   m_ObjectHideFlags: 0
@@ -11482,23 +11535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a8edac44fa525479a1b8aea571f7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BatterySp: {fileID: 21300000, guid: ca54ef2502d41ae469fef4e2427989e9, type: 3}
-  CancleSp: {fileID: 21300000, guid: efd1eef2e133c3442a75cb347915b637, type: 3}
-  DumpSp: {fileID: 21300000, guid: 4ed5d10a5d899764dbce99c25b447938, type: 3}
-  FoodSp: {fileID: 21300000, guid: ec01408d5e757eb48a1f7682a564a406, type: 3}
-  GatherSp: {fileID: 21300000, guid: 6f1fc91b3294e934e866462f1fbeb9da, type: 3}
-  InstallSp: {fileID: 21300000, guid: fa60a8184238cd5408963199ca7b41ed, type: 3}
-  MakeSp: {fileID: 21300000, guid: f914602531337a942be06bb6e2bcf08f, type: 3}
-  OffSp: {fileID: 21300000, guid: 54fb4775b62366247886c6442e2b6be2, type: 3}
-  OxygenSp: {fileID: 21300000, guid: e6c514265468f7440b723ab78dbc3de1, type: 3}
-  PlantSp: {fileID: 21300000, guid: 80c13db519b17b94587a4ec73323b89d, type: 3}
-  RemoveSp: {fileID: 21300000, guid: ccce98ec5dd75894cae36aa15fe8bddb, type: 3}
-  ResearchSp: {fileID: 21300000, guid: 02804e0d4917c5249bc8694a77d6c8dd, type: 3}
-  SleepSp: {fileID: 21300000, guid: aef6bea1dcf2bf04084916290a988223, type: 3}
-  TumorSp: {fileID: 21300000, guid: a10c48b6f0bc1f442a454df0d8269bfe, type: 3}
-  GrindSp: {fileID: 21300000, guid: f31d89de63636844f902fbd4f7fa6585, type: 3}
-  RepairSp: {fileID: 21300000, guid: 534bb91b594e7554897044eb28c011c1, type: 3}
-  ExamineSp: {fileID: 21300000, guid: f052e53b79ca1ac42863d34d1ce2b6c8, type: 3}
 --- !u!1 &1136096715
 GameObject:
   m_ObjectHideFlags: 0
@@ -19744,7 +19780,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 553484339}
   m_Father: {fileID: 1979751051}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

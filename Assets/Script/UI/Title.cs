@@ -22,7 +22,7 @@ public class Title : MonoBehaviour
     void Start ()
     {
         Cursor = GameObject.Find("Cursor");
-        titleMenu = new GameObject[5] { GameObject.Find("NewStart"), GameObject.Find("Load"), GameObject.Find("Quit"), GameObject.Find("Setting"), GameObject.Find("People") };
+        titleMenu = new GameObject[5] { GameObject.Find("NewStart"), GameObject.Find("Load"), GameObject.Find("Quit"), GameObject.Find("Video"), GameObject.Find("People") };
         BlackScreen = GameObject.Find("Canvas").transform.Find("BlackScreen").gameObject;
         animaitor = GetComponent<Animator>();
         audio = GameObject.Find("TitleAudio").GetComponent<AudioSource>();
