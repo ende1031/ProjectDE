@@ -31,7 +31,7 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
 
-        //테스트용 치트키
+        //======테스트용 치트키(삭제 예정) =============================
         if (Input.GetKeyDown(KeyCode.Q))
         {
             inventory.GetItem("Item_Mass", 5);

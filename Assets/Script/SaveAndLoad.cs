@@ -171,15 +171,4 @@ public class SaveAndLoad : MonoBehaviour
 
         return UTF8Encoding.UTF8.GetString(resultArray);
     }
-
-    //public void StartDataEncrypt()
-    //{
-    //    string temp = File.ReadAllText(Application.dataPath + "/Save/NewGameData.json");
-
-    //    string encryptString = Encrypt(temp);
-    //    File.WriteAllText(Application.dataPath + "/Save/NewGameData_Encrypt.json", encryptString);
-
-    //    string decryptString = Decrypt(encryptString);
-    //    File.WriteAllText(Application.dataPath + "/Save/NewGameData_Decrypt.json", decryptString);
-    //}
 }
