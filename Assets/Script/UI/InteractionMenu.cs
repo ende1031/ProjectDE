@@ -32,23 +32,23 @@ public class InteractionMenu : MonoBehaviour
         Right
     };
 
-    public Sprite BatterySp; //
-    public Sprite CancleSp;
-    public Sprite DumpSp;
-    public Sprite FoodSp;
-    public Sprite GatherSp;
-    public Sprite InstallSp;
-    public Sprite MakeSp;
-    public Sprite OffSp;
-    public Sprite OxygenSp;
-    public Sprite PlantSp;
-    public Sprite RemoveSp;
-    public Sprite ResearchSp;
-    public Sprite SleepSp;
-    public Sprite TumorSp;
-    public Sprite GrindSp;
-    public Sprite RepairSp;
-    public Sprite ExamineSp;
+    //public Sprite BatterySp; //
+    //public Sprite CancleSp;
+    //public Sprite DumpSp;
+    //public Sprite FoodSp;
+    //public Sprite GatherSp;
+    //public Sprite InstallSp;
+    //public Sprite MakeSp;
+    //public Sprite OffSp;
+    //public Sprite OxygenSp;
+    //public Sprite PlantSp;
+    //public Sprite RemoveSp;
+    //public Sprite ResearchSp;
+    //public Sprite SleepSp;
+    //public Sprite TumorSp;
+    //public Sprite GrindSp;
+    //public Sprite RepairSp;
+    //public Sprite ExamineSp;
 
     public class MenuItemInfo
     {
@@ -127,25 +127,32 @@ public class InteractionMenu : MonoBehaviour
         SetDictionary();
     }
 
+    public Sprite GetMenuIconSprite(string fileName)
+    {
+        string path = "Sprite/UI/InteractionMenu/Icons/";
+
+        return Resources.Load<Sprite>(path + fileName);
+    }
+
     void SetDictionary() //
     {
-        MenuDictionary[MenuItem.Battery] = new MenuItemInfo(BatterySp, "배터리 사용");
-        MenuDictionary[MenuItem.Cancle] = new MenuItemInfo(CancleSp, "작동 취소");
-        MenuDictionary[MenuItem.Dump] = new MenuItemInfo(DumpSp, "버리기");
-        MenuDictionary[MenuItem.Food] = new MenuItemInfo(FoodSp, "식품 섭취");
-        MenuDictionary[MenuItem.Gather] = new MenuItemInfo(GatherSp, "아이템 획득");
-        MenuDictionary[MenuItem.Install] = new MenuItemInfo(InstallSp, "설치하기");
-        MenuDictionary[MenuItem.Make] = new MenuItemInfo(MakeSp, "아이템 제작");
-        MenuDictionary[MenuItem.Off] = new MenuItemInfo(OffSp, "전원 끄기");
-        MenuDictionary[MenuItem.Oxygen] = new MenuItemInfo(OxygenSp, "산소 충전");
-        MenuDictionary[MenuItem.Plant] = new MenuItemInfo(PlantSp, "식물 심기");
-        MenuDictionary[MenuItem.Remove] = new MenuItemInfo(RemoveSp, "제거하기");
-        MenuDictionary[MenuItem.Research] = new MenuItemInfo(ResearchSp, "연구하기");
-        MenuDictionary[MenuItem.Sleep] = new MenuItemInfo(SleepSp, "잠자기");
-        MenuDictionary[MenuItem.Tumor] = new MenuItemInfo(TumorSp, "종양 심기");
-        MenuDictionary[MenuItem.Grind] = new MenuItemInfo(GrindSp, "아이템 분해");
-        MenuDictionary[MenuItem.Repair] = new MenuItemInfo(RepairSp, "수리하기");
-        MenuDictionary[MenuItem.Examine] = new MenuItemInfo(ExamineSp, "살펴보기");
+        MenuDictionary[MenuItem.Battery] = new MenuItemInfo(GetMenuIconSprite("IMenu_Battery"), "배터리 사용");
+        MenuDictionary[MenuItem.Cancle] = new MenuItemInfo(GetMenuIconSprite("IMenu_Cancle"), "작동 취소");
+        MenuDictionary[MenuItem.Dump] = new MenuItemInfo(GetMenuIconSprite("IMenu_Dump"), "버리기");
+        MenuDictionary[MenuItem.Food] = new MenuItemInfo(GetMenuIconSprite("IMenu_Food"), "식품 섭취");
+        MenuDictionary[MenuItem.Gather] = new MenuItemInfo(GetMenuIconSprite("IMenu_Gather"), "아이템 획득");
+        MenuDictionary[MenuItem.Install] = new MenuItemInfo(GetMenuIconSprite("IMenu_Install"), "설치하기");
+        MenuDictionary[MenuItem.Make] = new MenuItemInfo(GetMenuIconSprite("IMenu_Make"), "아이템 제작");
+        MenuDictionary[MenuItem.Off] = new MenuItemInfo(GetMenuIconSprite("IMenu_Off"), "전원 끄기");
+        MenuDictionary[MenuItem.Oxygen] = new MenuItemInfo(GetMenuIconSprite("Imenu_Oxygen"), "산소 충전");
+        MenuDictionary[MenuItem.Plant] = new MenuItemInfo(GetMenuIconSprite("IMenu_Plant"), "식물 심기");
+        MenuDictionary[MenuItem.Remove] = new MenuItemInfo(GetMenuIconSprite("IMenu_Remove"), "제거하기");
+        MenuDictionary[MenuItem.Research] = new MenuItemInfo(GetMenuIconSprite("IMenu_Research"), "연구하기");
+        MenuDictionary[MenuItem.Sleep] = new MenuItemInfo(GetMenuIconSprite("IMenu_Sleep"), "잠자기");
+        MenuDictionary[MenuItem.Tumor] = new MenuItemInfo(GetMenuIconSprite("IMenu_Tumor"), "종양 심기");
+        MenuDictionary[MenuItem.Grind] = new MenuItemInfo(GetMenuIconSprite("IMenu_Grind"), "아이템 분해");
+        MenuDictionary[MenuItem.Repair] = new MenuItemInfo(GetMenuIconSprite("IMenu_Repair"), "수리하기");
+        MenuDictionary[MenuItem.Examine] = new MenuItemInfo(GetMenuIconSprite("IMenu_Examine"), "살펴보기");
     }
 
     void Update ()

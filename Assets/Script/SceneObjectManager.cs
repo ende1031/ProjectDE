@@ -69,8 +69,8 @@ public class SceneObjectManager : MonoBehaviour
         public float timer;
         public int state;
 
-        public Inventory.Item facilityMakeItem;
-        public Inventory.Item[] facilityGrinderItem = new Inventory.Item[2];
+        public string facilityMakeItem;
+        public string[] facilityGrinderItem = new string[2];
         public int[] facilityGrinderItemNum = new int[2];
         public float facilityTimeToMake;
     }

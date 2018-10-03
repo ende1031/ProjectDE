@@ -7,7 +7,7 @@ public class GrinderWindow : MonoBehaviour
 {
     public class GrinderItemInfo
     {
-        public GrinderItemInfo(int nxN, Inventory.Item r1 = 0, int n1 = 0, Inventory.Item r2 = 0, int n2 = 0)
+        public GrinderItemInfo(int nxN, string r1 = "null", int n1 = 0, string r2 = "null", int n2 = 0)
         {
             nyxNum = nxN;
             result[0] = r1;
@@ -27,7 +27,7 @@ public class GrinderWindow : MonoBehaviour
         }
 
         public int resultCount;
-        public Inventory.Item[] result = new Inventory.Item[2];
+        public string[] result = new string[2];
         public int[] num = new int[2];
         public int nyxNum;
     }
@@ -52,9 +52,9 @@ public class GrinderWindow : MonoBehaviour
     bool isUsingGrinder = false;
     float openTimer = 0;
 
-    Inventory.Item selectedItem;
+    string selectedItem;
     int selectedItemNum = 1;
-    Inventory.Item[] resultItem = new Inventory.Item[2];
+    string[] resultItem = new string[2];
     int[] resultItemNum = new int[2] { 0, 0};
     int resultNyxNum = 0;
     int resultItemCount = 0;
@@ -62,36 +62,36 @@ public class GrinderWindow : MonoBehaviour
 
     bool isSelectingNumber = false;
 
-    Dictionary<Inventory.Item, GrinderItemInfo> GrinderItemDictionary = new Dictionary<Inventory.Item, GrinderItemInfo>();
+    Dictionary<string, GrinderItemInfo> GrinderItemDictionary = new Dictionary<string, GrinderItemInfo>();
 
     void SetDictionary() //아이템 추가시 수정할 부분
     {
-        GrinderItemDictionary[Inventory.Item.Food] = new GrinderItemInfo(20, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Oxygen] = new GrinderItemInfo(50, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Battery] = new GrinderItemInfo(60, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Stick] = new GrinderItemInfo(70, Inventory.Item.Mass, 1, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.Board] = new GrinderItemInfo(10, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Hose] = new GrinderItemInfo(55, Inventory.Item.Board, 1);
-        GrinderItemDictionary[Inventory.Item.Mass] = new GrinderItemInfo(10);
-        GrinderItemDictionary[Inventory.Item.Thorn] = new GrinderItemInfo(85, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Facility01] = new GrinderItemInfo(41, Inventory.Item.Board, 1, Inventory.Item.Stick, 1);
-        GrinderItemDictionary[Inventory.Item.Trap01] = new GrinderItemInfo(10, Inventory.Item.Thorn, 1);
-        GrinderItemDictionary[Inventory.Item.Heart] = new GrinderItemInfo(80, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Bulb01] = new GrinderItemInfo(200, Inventory.Item.Stick, 1, Inventory.Item.Hose, 1);
-        GrinderItemDictionary[Inventory.Item.StickSeed] = new GrinderItemInfo(50, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.BoardSeed] = new GrinderItemInfo(6, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.ThornSeed] = new GrinderItemInfo(77, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Tumor] = new GrinderItemInfo(800, Inventory.Item.Water, 1);
-        GrinderItemDictionary[Inventory.Item.TumorSeed] = new GrinderItemInfo(99, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Grinder01] = new GrinderItemInfo(55, Inventory.Item.Sawtooth, 1, Inventory.Item.Stick, 1);
-        GrinderItemDictionary[Inventory.Item.SuppliedBattery] = new GrinderItemInfo(111, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.SuppliedFood] = new GrinderItemInfo(155);
-        GrinderItemDictionary[Inventory.Item.Water] = new GrinderItemInfo(13);
-        GrinderItemDictionary[Inventory.Item.NyxCollector01] = new GrinderItemInfo(31, Inventory.Item.Stick, 1, Inventory.Item.Board, 1);
-        GrinderItemDictionary[Inventory.Item.Nyx] = new GrinderItemInfo(1);
-        GrinderItemDictionary[Inventory.Item.Fruit] = new GrinderItemInfo(10, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.FruitSeed] = new GrinderItemInfo(24, Inventory.Item.Mass, 1);
-        GrinderItemDictionary[Inventory.Item.Sawtooth] = new GrinderItemInfo(10, Inventory.Item.Thorn, 1);
+        GrinderItemDictionary["Item_Food"] = new GrinderItemInfo(20, "Item_Water", 1);
+        GrinderItemDictionary["Item_Oxygen"] = new GrinderItemInfo(50, "Item_Water", 1);
+        GrinderItemDictionary["Item_Battery"] = new GrinderItemInfo(60, "Item_Mass", 1);
+        GrinderItemDictionary["Item_Stick"] = new GrinderItemInfo(70, "Item_Mass", 1, "Item_Water", 1);
+        GrinderItemDictionary["Item_Board"] = new GrinderItemInfo(10, "Item_Mass", 1);
+        GrinderItemDictionary["Item_Hose"] = new GrinderItemInfo(55, "Item_Board", 1);
+        GrinderItemDictionary["Item_Mass"] = new GrinderItemInfo(10);
+        GrinderItemDictionary["Item_Thorn"] = new GrinderItemInfo(85, "Item_Mass", 1);
+        GrinderItemDictionary["Item_Facility01"] = new GrinderItemInfo(41, "Item_Board", 1, "Item_Stick", 1);
+        GrinderItemDictionary["Item_Trap01"] = new GrinderItemInfo(10, "Item_Thorn", 1);
+        GrinderItemDictionary["Item_Heart"] = new GrinderItemInfo(80, "Item_Mass", 1);
+        GrinderItemDictionary["Item_Bulb"] = new GrinderItemInfo(200, "Item_Stick", 1, "Item_Hose", 1);
+        GrinderItemDictionary["Item_StickSeed"] = new GrinderItemInfo(50, "Item_Mass", 1);
+        GrinderItemDictionary["Item_BoardSeed"] = new GrinderItemInfo(6, "Item_Mass", 1);
+        GrinderItemDictionary["Item_ThornSeed"] = new GrinderItemInfo(77, "Item_Mass", 1);
+        GrinderItemDictionary["Item_Tumor"] = new GrinderItemInfo(800, "Item_Water", 1);
+        GrinderItemDictionary["Item_TumorSeed"] = new GrinderItemInfo(99, "Item_Mass", 1);
+        GrinderItemDictionary["Item_Grinder01"] = new GrinderItemInfo(55, "Item_Sawtooth", 1, "Item_Stick", 1);
+        GrinderItemDictionary["Item_SuppliedBattery"] = new GrinderItemInfo(111, "Item_Mass", 1);
+        GrinderItemDictionary["Item_SuppliedFood"] = new GrinderItemInfo(155);
+        GrinderItemDictionary["Item_Water"] = new GrinderItemInfo(13);
+        GrinderItemDictionary["Item_NyxCollector01"] = new GrinderItemInfo(31, "Item_Stick", 1, "Item_Board", 1);
+        GrinderItemDictionary["Item_Nyx"] = new GrinderItemInfo(1);
+        GrinderItemDictionary["Item_Fruit"] = new GrinderItemInfo(10, "Item_Mass", 1);
+        GrinderItemDictionary["Item_FruitSeed"] = new GrinderItemInfo(24, "Item_Mass", 1);
+        GrinderItemDictionary["Item_Sawtooth"] = new GrinderItemInfo(10, "Item_Thorn", 1);
     }
 
     void Start ()
@@ -132,7 +132,7 @@ public class GrinderWindow : MonoBehaviour
         {
             BigItem.SetActive(true);
             ResultNyxNum.SetActive(true);
-            BigItem.GetComponent<Image>().sprite = inventory.itemDictionary[selectedItem].sprite;
+            BigItem.GetComponent<Image>().sprite = inventory.GetItemSprite(selectedItem);
 
             resultItemCount = GrinderItemDictionary[selectedItem].resultCount;
             for(int i = 0; i < 2; i++)
@@ -175,7 +175,8 @@ public class GrinderWindow : MonoBehaviour
 
         for(int i = 0; i < resultItemCount; i++)
         {
-            ResultItem[i].GetComponent<Image>().sprite = inventory.itemDictionary[resultItem[i]].sprite;
+            ResultItem[i].GetComponent<Image>().sprite = inventory.GetItemSprite(resultItem[i]);
+
             if (resultItemNum[i] >= 10)
             {
                 ResultItemNum[i].GetComponent<Text>().text = resultItemNum[i].ToString();
@@ -238,7 +239,7 @@ public class GrinderWindow : MonoBehaviour
         }
     }
 
-    public void SelectItem(bool isNull, Inventory.Item it = 0)
+    public void SelectItem(bool isNull, string it = "")
     {
         selectNull = isNull;
         selectedItem = it;
@@ -248,7 +249,7 @@ public class GrinderWindow : MonoBehaviour
         RefreshWindow();
     }
 
-    public void InventoryMove(bool isNull, Inventory.Item it = 0)
+    public void InventoryMove(bool isNull, string it = "")
     {
         selectNull = isNull;
         selectedItem = it;

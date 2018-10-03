@@ -78,10 +78,10 @@ public class Plant : SceneObject
             switch (plantName)
             {
                 case "StickPlant":
-                    inventory.GetItem(Inventory.Item.Stick, 2);
+                    inventory.GetItem("Item_Stick", 2);
                     break;
                 case "MassPlant":
-                    inventory.GetItem(Inventory.Item.Mass, 1);
+                    inventory.GetItem("Item_Mass", 1);
                     if (Grid.instance.PosToGrid(transform.position.x) == Grid.instance.PlayerGrid())
                     {
                         interactionIcon.DeleteIcon(InteractionIcon.Icon.Interaction);
@@ -89,17 +89,17 @@ public class Plant : SceneObject
                     SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                     break;
                 case "BoardPlant":
-                    inventory.GetItem(Inventory.Item.Board, 1);
+                    inventory.GetItem("Item_Board", 2);
                     break;
                 case "ThornPlant":
-                    inventory.GetItem(Inventory.Item.Thorn, 3);
+                    inventory.GetItem("Item_Thorn", 3);
                     break;
                 case "Trap01":
-                    inventory.GetItem(Inventory.Item.Heart, 1);
+                    inventory.GetItem("Item_Heart", 1);
                     SceneObjectManager.instance.DeleteObject(sceneNum, Grid.instance.PosToGrid(transform.position.x));
                     break;
                 case "FruitPlant":
-                    inventory.GetItem(Inventory.Item.Fruit, 1);
+                    inventory.GetItem("Item_Fruit", 1);
                     break;
             }
         }
@@ -108,13 +108,13 @@ public class Plant : SceneObject
             switch (plantName)
             {
                 case "StickPlant":
-                    inventory.GetItem(Inventory.Item.Tumor, 2);
+                    inventory.GetItem("Item_Tumor", 2);
                     break;
                 case "BoardPlant":
-                    inventory.GetItem(Inventory.Item.Tumor, 2);
+                    inventory.GetItem("Item_Tumor", 2);
                     break;
                 case "ThornPlant":
-                    inventory.GetItem(Inventory.Item.Tumor, 6);
+                    inventory.GetItem("Item_Tumor", 6);
                     break;
             }
         }
@@ -182,22 +182,22 @@ public class Plant : SceneObject
             switch (plantName)
             {
                 case "StickPlant":
-                    temp = !inventory.isFull(1, Inventory.Item.Stick, 2);
+                    temp = !inventory.isFull(1, "Item_Stick", 2);
                     break;
                 case "MassPlant":
-                    temp = !inventory.isFull(1, Inventory.Item.Mass, 1);
+                    temp = !inventory.isFull(1, "Item_Mass", 1);
                     break;
                 case "BoardPlant":
-                    temp = !inventory.isFull(1, Inventory.Item.Board, 1);
+                    temp = !inventory.isFull(1, "Item_Board", 2);
                     break;
                 case "ThornPlant":
-                    temp = !inventory.isFull(1, Inventory.Item.Thorn, 3);
+                    temp = !inventory.isFull(1, "Item_Thorn", 3);
                     break;
                 case "Trap01":
-                    temp = !inventory.isFull(1, Inventory.Item.Heart, 1);
+                    temp = !inventory.isFull(1, "Item_Heart", 1);
                     break;
                 case "FruitPlant":
-                    temp = !inventory.isFull(1, Inventory.Item.Fruit, 1);
+                    temp = !inventory.isFull(1, "Item_Fruit", 1);
                     break;
             }
         }
@@ -206,13 +206,13 @@ public class Plant : SceneObject
             switch (plantName)
             {
                 case "StickPlant":
-                    temp = !inventory.isFull(1, Inventory.Item.Tumor, 2);
+                    temp = !inventory.isFull(1, "Item_Tumor", 2);
                     break;
                 case "BoardPlant":
-                    temp = !inventory.isFull(1, Inventory.Item.Tumor, 2);
+                    temp = !inventory.isFull(1, "Item_Tumor", 2);
                     break;
                 case "ThornPlant":
-                    temp = !inventory.isFull(1, Inventory.Item.Tumor, 6);
+                    temp = !inventory.isFull(1, "Item_Tumor", 6);
                     break;
             }
         }
@@ -235,7 +235,7 @@ public class Plant : SceneObject
 
         state = 4;
         objectTimer = 0;
-        inventory.DeleteItem(Inventory.Item.TumorSeed);
+        inventory.DeleteItem("Item_TumorSeed");
         animaitor.SetInteger("State", state);
 
         //if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
@@ -408,7 +408,7 @@ public class Plant : SceneObject
         {
             if (state == 2 && (plantName == "StickPlant" || plantName == "BoardPlant" || plantName == "ThornPlant"))
             {
-                if (inventory.HasItem(Inventory.Item.TumorSeed) == true)
+                if (inventory.HasItem("Item_TumorSeed") == true)
                 {
                     interactionMenu.AddMenu(InteractionMenu.MenuItem.Tumor);
                 }

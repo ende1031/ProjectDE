@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.IO;
+using System.Text;
+using System.Security.Cryptography;
 
 [System.Serializable]
 public class SceneObject_Save
@@ -27,13 +30,13 @@ public class SceneObject_Save
 [System.Serializable]
 public class InventoryItem_Save
 {
-    public InventoryItem_Save(Inventory.Item i, int c)
+    public InventoryItem_Save(string i, int c)
     {
         item = i;
         count = c;
     }
 
-    public Inventory.Item item;
+    public string item;
     public int count;
 }
 
@@ -72,6 +75,8 @@ public class SaveAndLoad : MonoBehaviour
 
     public static SaveAndLoad instance = null;
 
+    string key = "iwillsurviveonthisplanet56789012";
+
     void Awake()
     {
         if (instance == null)
@@ -107,7 +112,7 @@ public class SaveAndLoad : MonoBehaviour
         sObj.researchList = researchWindow.GetResearchList();
 
         string toJson = JsonUtility.ToJson(sObj);
-        File.WriteAllText(Application.dataPath + "/Save/SaveData.json", toJson);
+        File.WriteAllText(Application.dataPath + "/Save/SaveData.json", Encrypt(toJson));
     }
 
     public void LoadGame(bool isNewGame = false)
@@ -123,7 +128,7 @@ public class SaveAndLoad : MonoBehaviour
         {
             fromJson = File.ReadAllText(Application.dataPath + "/Save/SaveData.json");
         }
-        var loadData = JsonUtility.FromJson<SaveObject>(fromJson);
+        var loadData = JsonUtility.FromJson<SaveObject>(Decrypt(fromJson));
 
         hungerGauge.amountOfHunger = loadData.hunger;
         nyxUI.amountOfNyx = loadData.nyx;
@@ -136,4 +141,45 @@ public class SaveAndLoad : MonoBehaviour
         researchWindow.LoadResearch(loadData.researchList);
         SceneObjectManager.instance.LoadSceneObject(loadData.objList);
     }
+
+    string Encrypt(string text)
+    {
+        byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);
+        byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(text);
+
+        RijndaelManaged aes = new RijndaelManaged();
+        aes.Key = keyArray;
+        aes.Mode = CipherMode.ECB;
+        aes.Padding = PaddingMode.PKCS7;
+        ICryptoTransform cTransform = aes.CreateEncryptor();
+        byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+
+        return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+    }
+
+    string Decrypt(string text)
+    {
+        byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);
+        byte[] toEncryptArray = Convert.FromBase64String(text);
+
+        RijndaelManaged aes = new RijndaelManaged();
+        aes.Key = keyArray;
+        aes.Mode = CipherMode.ECB;
+        aes.Padding = PaddingMode.PKCS7;
+        ICryptoTransform cTransform = aes.CreateDecryptor();
+        byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+
+        return UTF8Encoding.UTF8.GetString(resultArray);
+    }
+
+    //public void StartDataEncrypt()
+    //{
+    //    string temp = File.ReadAllText(Application.dataPath + "/Save/NewGameData.json");
+
+    //    string encryptString = Encrypt(temp);
+    //    File.WriteAllText(Application.dataPath + "/Save/NewGameData_Encrypt.json", encryptString);
+
+    //    string decryptString = Decrypt(encryptString);
+    //    File.WriteAllText(Application.dataPath + "/Save/NewGameData_Decrypt.json", decryptString);
+    //}
 }

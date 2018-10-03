@@ -24,9 +24,8 @@ public class FacilityBalloon : MonoBehaviour
     public float timeToMake;
     //public float progressTimer;
 
-    public Inventory.Item makeItem = 0;
-
-    public Inventory.Item[] grinderItem = new Inventory.Item[2] { 0, 0 };
+    public string makeItem = "";
+    public string[] grinderItem = new string[2] { "", "" };
     public int[] grinderItemNum = new int[2] { 0, 0 };
     public int grinderNyxNum = 0;
 
@@ -70,8 +69,8 @@ public class FacilityBalloon : MonoBehaviour
             }
             if (isGrinder == false)
             {
-                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem].sprite;
-                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[makeItem].sprite;
+                Item.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(makeItem);
+                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(makeItem);
             }
             else
             {
@@ -96,14 +95,14 @@ public class FacilityBalloon : MonoBehaviour
 
     }
 
-    public void MakeItem(Inventory.Item itemName, int time)
+    public void MakeItem(string itemName, int time)
     {
         isGrinder = false;
 
         Balloon.SetActive(true);
         makeItem = itemName;
-        Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName].sprite;
-        Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[itemName].sprite;
+        Item.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(itemName); ;
+        Item_back.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(itemName);
         Balloon.GetComponent<SpriteRenderer>().sprite = blueBalloon;
         timeToMake = time;
         GetComponent<Facility>().objectTimer = timeToMake;
@@ -114,14 +113,14 @@ public class FacilityBalloon : MonoBehaviour
         }
     }
 
-    public void GrindItem(int time, int nyx, Inventory.Item itemName1 = 0, int num1 = 0, Inventory.Item itemName2 = 0, int num2 = 0)
+    public void GrindItem(int time, int nyx, string itemName1 = "", int num1 = 0, string itemName2 = "", int num2 = 0)
     {
         isGrinder = true;
 
         Balloon.SetActive(true);
 
         grinderNyxNum = nyx;
-        grinderItem = new Inventory.Item[2] { itemName1, itemName2 };
+        grinderItem = new string[2] { itemName1, itemName2 };
         grinderItemNum = new int[2] { num1, num2 };
         DisplayGrinderItems();
 
@@ -162,22 +161,22 @@ public class FacilityBalloon : MonoBehaviour
                 temp.z += 0.01f;
                 Item_back.transform.position = temp;
 
-                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
-                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
+                Item.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(grinderItem[0]);
+                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(grinderItem[0]);
                 Item2.SetActive(true);
                 Item2_back.SetActive(true);
-                Item2.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]].sprite;
-                Item2_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[1]].sprite;
+                Item2.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(grinderItem[1]);
+                Item2_back.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(grinderItem[1]);
                 break;
             case 1:
-                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
-                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[grinderItem[0]].sprite;
+                Item.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(grinderItem[0]);
+                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite(grinderItem[0]);
                 Item2.SetActive(false);
                 Item2_back.SetActive(false);
                 break;
             case 0:
-                Item.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[Inventory.Item.Nyx].sprite;
-                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[Inventory.Item.Nyx].sprite;
+                Item.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite("Item_Nyx");
+                Item_back.GetComponent<SpriteRenderer>().sprite = inventory.GetItemSprite("Item_Nyx");
                 Item2.SetActive(false);
                 Item2_back.SetActive(false);
                 break;

@@ -143,39 +143,21 @@ public class Facility : SceneObject
         switch (facilityName)
         {
             case "TempFacility":
-                popupWindow.ClearItemList();
-                popupWindow.AddItem(Inventory.Item.Hose);
-                popupWindow.AddItem(Inventory.Item.Sawtooth);
-                popupWindow.AddItem(Inventory.Item.Facility01);
-                popupWindow.AddItem(Inventory.Item.Trap01);
-                popupWindow.AddItem(Inventory.Item.Battery);
-                popupWindow.AddItem(Inventory.Item.TumorSeed);
-                popupWindow.AddItem(Inventory.Item.Bulb01);
-                popupWindow.AddItem(Inventory.Item.StickSeed);
-                popupWindow.AddItem(Inventory.Item.BoardSeed);
-                popupWindow.AddItem(Inventory.Item.ThornSeed);
-                popupWindow.AddItem(Inventory.Item.FruitSeed);
-                popupWindow.AddItem(Inventory.Item.Grinder01);
-                popupWindow.AddItem(Inventory.Item.NyxCollector01);
-                popupWindow.OpenWindow(this.gameObject);
-                break;
             case "EscapePod":
                 popupWindow.ClearItemList();
-                popupWindow.AddItem(Inventory.Item.Hose);
-                popupWindow.AddItem(Inventory.Item.Sawtooth);
-                popupWindow.AddItem(Inventory.Item.Food);
-                popupWindow.AddItem(Inventory.Item.Oxygen);
-                popupWindow.AddItem(Inventory.Item.Facility01);
-                popupWindow.AddItem(Inventory.Item.Trap01);
-                popupWindow.AddItem(Inventory.Item.Battery);
-                popupWindow.AddItem(Inventory.Item.TumorSeed);
-                popupWindow.AddItem(Inventory.Item.Bulb01);
-                popupWindow.AddItem(Inventory.Item.StickSeed);
-                popupWindow.AddItem(Inventory.Item.BoardSeed);
-                popupWindow.AddItem(Inventory.Item.ThornSeed);
-                popupWindow.AddItem(Inventory.Item.FruitSeed);
-                popupWindow.AddItem(Inventory.Item.Grinder01);
-                popupWindow.AddItem(Inventory.Item.NyxCollector01);
+                popupWindow.AddItem("Item_Hose");
+                popupWindow.AddItem("Item_Sawtooth");
+                popupWindow.AddItem("Item_Food");
+                popupWindow.AddItem("Item_Facility01");
+                popupWindow.AddItem("Item_Grinder01");
+                popupWindow.AddItem("Item_Bulb");
+                popupWindow.AddItem("Item_NyxCollector01");
+                popupWindow.AddItem("Item_Trap01");
+                popupWindow.AddItem("Item_TumorSeed");
+                popupWindow.AddItem("Item_StickSeed");
+                popupWindow.AddItem("Item_BoardSeed");
+                popupWindow.AddItem("Item_ThornSeed");
+                popupWindow.AddItem("Item_FruitSeed");
                 popupWindow.OpenWindow(this.gameObject);
                 break;
         }

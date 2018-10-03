@@ -34,22 +34,22 @@ public class PlayerInteraction : MonoBehaviour
         //테스트용 치트키
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventory.GetItem(Inventory.Item.Mass, 5);
-            inventory.GetItem(Inventory.Item.Stick, 5);
-            inventory.GetItem(Inventory.Item.Board, 5);
-            inventory.GetItem(Inventory.Item.Thorn, 5);
-            inventory.GetItem(Inventory.Item.Hose, 5);
-            inventory.GetItem(Inventory.Item.TumorSeed, 5);
-            inventory.GetItem(Inventory.Item.Heart, 5);
-            inventory.GetItem(Inventory.Item.Sawtooth, 5);
-            inventory.GetItem(Inventory.Item.Fruit, 5);
+            inventory.GetItem("Item_Mass", 5);
+            inventory.GetItem("Item_Stick", 5);
+            inventory.GetItem("Item_Board", 5);
+            inventory.GetItem("Item_Thorn", 5);
+            inventory.GetItem("Item_Hose", 5);
+            inventory.GetItem("Item_TumorSeed", 5);
+            inventory.GetItem("Item_Heart", 5);
+            inventory.GetItem("Item_Sawtooth", 5);
+            inventory.GetItem("Item_Fruit", 5);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            inventory.GetItem(Inventory.Item.Facility01, 1);
-            inventory.GetItem(Inventory.Item.Bulb01, 1);
-            inventory.GetItem(Inventory.Item.NyxCollector01, 1);
-            inventory.GetItem(Inventory.Item.Grinder01, 1);
+            inventory.GetItem("Item_Facility01", 1);
+            inventory.GetItem("Item_Bulb", 1);
+            inventory.GetItem("Item_NyxCollector01", 1);
+            inventory.GetItem("Item_Grinder01", 1);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -200,7 +200,7 @@ public class PlayerInteraction : MonoBehaviour
         return isInteractionPossible;
     }
 
-    public void DisplayFT(string s, Color c, bool displayItem = false, Inventory.Item item = 0)
+    public void DisplayFT(string s, Color c, bool displayItem = false, Sprite itemSP = null)
     {
         Vector3 tempPos = transform.position;
         tempPos.x += 0.3f;
@@ -220,7 +220,7 @@ public class PlayerInteraction : MonoBehaviour
             ft.GetComponent<TextMesh>().text = "　　" + s;
             GameObject itemSp = ft.transform.Find("Item").gameObject;
             itemSp.SetActive(true);
-            itemSp.GetComponent<SpriteRenderer>().sprite = inventory.itemDictionary[item].sprite;
+            itemSp.GetComponent<SpriteRenderer>().sprite = itemSP;
         }
     }
 }
