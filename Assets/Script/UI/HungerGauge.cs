@@ -15,6 +15,7 @@ public class HungerGauge : MonoBehaviour
     GameObject percent;
     GameObject gaugeLight;
     GameObject infoBG;
+    GameObject Warning;
 
     float infoPos = 560.0f;
     float infoPos2 = 1.23f;
@@ -27,6 +28,7 @@ public class HungerGauge : MonoBehaviour
         gaugeLight = transform.Find("Hunger_Light").gameObject;
         infoBG = transform.Find("Hunger_Info").gameObject;
         percent = infoBG.transform.Find("Hunger_Percent").gameObject;
+        Warning = transform.Find("Hunger_Warning").gameObject;
     }
 	
 	void Update ()
@@ -65,10 +67,13 @@ public class HungerGauge : MonoBehaviour
                 monologue.DisplayLog("배가 고프군. 뭔가 먹어야겠어.");
                 messageTimer = 20.0f;
             }
+
+            Warning.SetActive(true);
         }
         else
         {
             messageTimer = 0;
+            Warning.SetActive(false);
         }
     }
 

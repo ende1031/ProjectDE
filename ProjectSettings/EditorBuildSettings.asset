@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scene/Title.unity
     guid: a560b69aea2c0184887443d52531170a
   - enabled: 1
+    path: Assets/Scene/PromotionMovie.unity
+    guid: ba4fd958b99e3bf4ba678460cbf21a67
+  - enabled: 1
     path: Assets/Scene/Stage01.unity
     guid: bbc1f3905eccc304587d64afccb2223f
   - enabled: 1

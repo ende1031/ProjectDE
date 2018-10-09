@@ -9,6 +9,9 @@ public class Title : MonoBehaviour
     GameObject[] titleMenu;
     Animator animaitor;
     GameObject BlackScreen;
+    GameObject Maker;
+    Animator MakerAnimaitor;
+
     AudioSource audio;
 
     GameObject mainCamera;
@@ -19,11 +22,15 @@ public class Title : MonoBehaviour
     float Timer = 0;
     bool isSelect = false;
 
+    bool isMakerShowing = false;
+
     void Start ()
     {
         Cursor = GameObject.Find("Cursor");
         titleMenu = new GameObject[5] { GameObject.Find("NewStart"), GameObject.Find("Load"), GameObject.Find("Quit"), GameObject.Find("Video"), GameObject.Find("People") };
         BlackScreen = GameObject.Find("Canvas").transform.Find("BlackScreen").gameObject;
+        Maker = GameObject.Find("Canvas").transform.Find("Maker").gameObject;
+        MakerAnimaitor = Maker.GetComponent<Animator>();
         animaitor = GetComponent<Animator>();
         audio = GameObject.Find("TitleAudio").GetComponent<AudioSource>();
         mainCamera = GameObject.Find("Main Camera");
@@ -37,97 +44,127 @@ public class Title : MonoBehaviour
 	
 	void Update ()
     {
-        if (isSelect == false)
+        if(isMakerShowing == true)
         {
-            if (isCursorActive == true)
+            if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape))
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    if (selectIndex == 0)
-                    {
-                        selectIndex = 4;
-                    }
-                    else
-                    {
-                        selectIndex--;
-                    }
-                    RefreshMenu();
-                    SoundManager.instance.PlaySE(3);
-                }
-                else if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    if (selectIndex == 4)
-                    {
-                        selectIndex = 0;
-                    }
-                    else
-                    {
-                        selectIndex++;
-                    }
-                    RefreshMenu();
-                    SoundManager.instance.PlaySE(3);
-                }
-                else if (Input.GetKeyDown(KeyCode.RightArrow) && selectIndex <= 2)
-                {
-                    selectIndex = 3;
-                    RefreshMenu();
-                    SoundManager.instance.PlaySE(3);
-                }
-                else if (Input.GetKeyDown(KeyCode.LeftArrow) && selectIndex > 2)
-                {
-                    selectIndex = 0;
-                    RefreshMenu();
-                    SoundManager.instance.PlaySE(3);
-                }
+                MakerAnimaitor.SetBool("isOff", true);
+                isMakerShowing = false;
+                AlphaReset();
+                isSelect = false;
+                isCursorActive = false;
+                SoundManager.instance.PlaySE(4);
+            }
+            AlphaDown();
+            return;
+        }
 
-                if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.Return))
-                {
-                    SelectMenu();
-                    SoundManager.instance.PlaySE(4);
-                }
+        if (isSelect == true)
+        {
+            AlphaDown();
+            return;
+        }
+
+        if (isCursorActive == false)
+        {
+            Timer += Time.deltaTime;
+            if (Timer > 0.5f)
+            {
+                isCursorActive = true;
+                Timer = 0;
+            }
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (selectIndex == 0)
+            {
+                selectIndex = 4;
             }
             else
             {
-                Timer += Time.deltaTime;
-                if (Timer > 0.5f)
-                {
-                    isCursorActive = true;
-                }
+                selectIndex--;
             }
+            RefreshMenu();
+            SoundManager.instance.PlaySE(3);
         }
-        else
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Color tempColor;
-            for (int i = 0; i < 5; i++)
+            if (selectIndex == 4)
             {
-                tempColor = titleMenu[i].GetComponent<TextMesh>().color;
-                if (tempColor.a > 0.1f)
-                {
-                    tempColor.a -= Time.deltaTime * 3;
-                }
-                else
-                {
-                    tempColor.a = 0;
-                }
-                titleMenu[i].GetComponent<TextMesh>().color = tempColor;
+                selectIndex = 0;
             }
+            else
+            {
+                selectIndex++;
+            }
+            RefreshMenu();
+            SoundManager.instance.PlaySE(3);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && selectIndex <= 2)
+        {
+            selectIndex = 3;
+            RefreshMenu();
+            SoundManager.instance.PlaySE(3);
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && selectIndex > 2)
+        {
+            selectIndex = 0;
+            RefreshMenu();
+            SoundManager.instance.PlaySE(3);
+        }
 
-            tempColor = Cursor.GetComponent<SpriteRenderer>().color;
+        if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.Return))
+        {
+            SelectMenu();
+            SoundManager.instance.PlaySE(4);
+        }
+    }
+
+    void AlphaDown()
+    {
+        Color tempColor;
+        for (int i = 0; i < 5; i++)
+        {
+            tempColor = titleMenu[i].GetComponent<TextMesh>().color;
             if (tempColor.a > 0.1f)
             {
-                tempColor.a -= Time.deltaTime * 5;
+                tempColor.a -= Time.deltaTime * 3;
             }
             else
             {
                 tempColor.a = 0;
             }
-            Cursor.GetComponent<SpriteRenderer>().color = tempColor;
+            titleMenu[i].GetComponent<TextMesh>().color = tempColor;
+        }
 
-            if(audio.volume > 0)
+        tempColor = Cursor.GetComponent<SpriteRenderer>().color;
+        if (tempColor.a > 0.1f)
+        {
+            tempColor.a -= Time.deltaTime * 5;
+        }
+        else
+        {
+            tempColor.a = 0;
+        }
+        Cursor.GetComponent<SpriteRenderer>().color = tempColor;
+
+        if(isMakerShowing == false)
+        {
+            if (audio.volume > 0)
             {
                 audio.volume -= 0.2f * Time.deltaTime;
             }
         }
+    }
+
+    void AlphaReset()
+    {
+        Color tempColor = Cursor.GetComponent<SpriteRenderer>().color;
+        tempColor.a = 1;
+        Cursor.GetComponent<SpriteRenderer>().color = tempColor;
+        RefreshMenu();
     }
 
     void SelectMenu()
@@ -156,6 +193,18 @@ public class Title : MonoBehaviour
             case 2:
                 isSelect = true;
                 Application.Quit();
+                break;
+
+            case 3:
+                isSelect = true;
+                SceneChanger.instance.FadeAndLoadScene("PromotionMovie");
+                break;
+
+            case 4:
+                isSelect = true;
+                isMakerShowing = true;
+                isCursorActive = false;
+                Maker.SetActive(true);
                 break;
         }
     }
