@@ -51,13 +51,13 @@ public class PlayerInteraction : MonoBehaviour
             inventory.GetItem("Item_NyxCollector01", 1);
             inventory.GetItem("Item_Grinder01", 1);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GetComponent<PlayerMove>().GetMovePossible() == true)
-            {
-                SceneObjectManager.instance.ResetGame();
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (GetComponent<PlayerMove>().GetMovePossible() == true)
+        //    {
+        //        SceneObjectManager.instance.ResetGame();
+        //    }
+        //}
     }
 
     void PlayerDirection()

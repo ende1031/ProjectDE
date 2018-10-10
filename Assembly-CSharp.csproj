@@ -73,6 +73,7 @@
      <Compile Include="Assets\Script\SceneSetting.cs" />
      <Compile Include="Assets\Script\SoundManager.cs" />
      <Compile Include="Assets\Script\UI\EnergyGauge.cs" />
+     <Compile Include="Assets\Script\UI\ESCMenu.cs" />
      <Compile Include="Assets\Script\UI\FloatingText.cs" />
      <Compile Include="Assets\Script\UI\GameOver.cs" />
      <Compile Include="Assets\Script\UI\GrinderWindow.cs" />

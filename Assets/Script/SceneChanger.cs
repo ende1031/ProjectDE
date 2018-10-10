@@ -40,6 +40,8 @@ public class SceneChanger : MonoBehaviour
         playerGrid = moveAfterGrid;
         if (isFading == false)
         {
+            fadeCanvasGroup.gameObject.SetActive(false);
+            fadeCanvasGroup.gameObject.SetActive(true);
             StartCoroutine(FadeAndSwitchScenes(sceneName)); //로딩화면 띄우고 씬 전환 코루틴
         }
     }
