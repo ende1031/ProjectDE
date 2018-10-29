@@ -321,7 +321,7 @@ public class Inventory : MonoBehaviour
                             SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo(itemDictionary[selectedItem].installType, itemDictionary[selectedItem].installName));
                             energyGauge.SetAmount(-5);
                             DeleteItem(selectedItem);
-                            SoundManager.instance.PlaySE(28);
+                            SoundManager.instance.PlaySE(29);
                         }
                         break;
                     case "Item_Trap01":
@@ -330,7 +330,7 @@ public class Inventory : MonoBehaviour
                             SceneObjectManager.instance.AddObject(sceneNum, Grid.instance.PlayerGrid(), new SceneObjectManager.ObjectInfo(itemDictionary[selectedItem].installType, itemDictionary[selectedItem].installName, 3));
                             energyGauge.SetAmount(-5);
                             DeleteItem(selectedItem);
-                            SoundManager.instance.PlaySE(29);
+                            SoundManager.instance.PlaySE(28);
                         }
                         break;
                     //case Item.Facility01:

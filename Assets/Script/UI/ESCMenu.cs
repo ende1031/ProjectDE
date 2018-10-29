@@ -71,6 +71,7 @@ public class ESCMenu : MonoBehaviour
         }
         player.GetComponent<PlayerMove>().SetMovePossible(false);
         Menu.SetActive(true);
+        selectedIndex = 0;
         isMenuOpen = true;
         timer = 0;
         SoundManager.instance.PlaySE(13);

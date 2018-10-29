@@ -55,7 +55,7 @@ public class PlayerInteraction : MonoBehaviour
         //{
         //    if (GetComponent<PlayerMove>().GetMovePossible() == true)
         //    {
-        //        SceneObjectManager.instance.ResetGame();
+        //        SceneObjectManager.instance.ResetGame();kf
         //    }
         //}
     }
